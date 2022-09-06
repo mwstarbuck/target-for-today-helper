@@ -12,7 +12,7 @@ export const TABLE_2_1 = [
     id: 2,
     campaign: 2,
     timePeriod: '5/1943 - 11/1943',
-    aircraft: ['B-17F', 'B-24D, YB-40'],
+    aircraft: ['B-17F', 'B-24D', 'YB-40'],
     base: '8th Airforce (England)',
     missions: 25,
     altMissions: null
