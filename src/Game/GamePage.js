@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { rollDice } from '../Utilities/Utilities';
 import { TABLE_2_1 } from '../Data/Tables';
-import { tab } from '@testing-library/user-event/dist/tab';
 
 const GamePage = () => {
   const [showRoller, setShowRoller] = useState(false);
@@ -13,16 +12,16 @@ const GamePage = () => {
     setCampaign(campaign);
   }
   console.log(campaign);
-  return <><h1>Target for Today Helper</h1>
+  return <><h1 style={{ opacity: 0.7 }}>Target for Today Helper</h1>
 
-    {!showRoller && <button onClick={() => setShowRoller(!showRoller)}>Start Game</button>}
-    {showRoller && <button onClick={handleRoll}>Roll for campaign</button>}
+    {!showRoller && <button style={{ fontFamily: 'Courier', opacity: 0.7 }} onClick={() => setShowRoller(!showRoller)}>Start Game</button>}
+    {showRoller && <button style={{ fontFamily: 'Courier' }} onClick={handleRoll}>Roll for campaign</button>}
 
-    {campaign && <> <h3>{campaign.campaign}</h3>
-      <h4>Period: {campaign.timePeriod}</h4>
-      <h4>Aircraft: {campaign.aircraft}</h4>
-      <h5>Basing: {campaign.base}</h5>
-      <h5>Missions: {campaign.missions}</h5> </>}
+    {campaign ? <span style={{ opacity: 0.7 }}> <h3>CAMPAIGN #: {campaign.campaign}</h3>
+      <h4>PERIOD: {campaign.timePeriod}</h4>
+      <h4>AIRCRAFT: {campaign.aircraft}</h4>
+      <h5>BASING: {campaign.base}</h5>
+      <h5>MISSIONS: {campaign.missions}</h5> </span> : <diz style={{ width: '100%', height: '100%' }}></diz>}
   </>
 }
 
