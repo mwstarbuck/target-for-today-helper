@@ -5,6 +5,7 @@ import { TABLE_2_1 } from '../Data/Tables';
 const GamePage = () => {
   const [showRoller, setShowRoller] = useState(false);
   const [campaign, setCampaign] = useState(null);
+  const [step, setStep] = useState(0);
 
   const handleRoll = () => {
     const result = rollDice(6);
