@@ -12,6 +12,7 @@ const GamePage = () => {
     const campaign = (TABLE_2_1.find(c => c.id === result));
     setCampaign(campaign);
   }
+  console.log(step)
   return <><h1 style={{ opacity: 0.7 }}>Target for Today Helper</h1>
 
     {!showRoller && <button style={{ fontFamily: 'Courier', opacity: 0.7 }} onClick={() => setShowRoller(!showRoller)}>Start Game</button>}
@@ -22,7 +23,7 @@ const GamePage = () => {
       <h4>AIRCRAFT: {campaign.aircraft}</h4>
       <h5>BASING: <span style={{ textDecoration: 'underline' }}>{campaign.base}</span></h5>
       <h5>MISSIONS: {campaign.missions}</h5>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={() => setStep(step + 1)}>Next Step</button><button>Cancel/Go Back</button></div></span>}
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={() => setStep(step + 1)}>Next Step</button><button onClick={() => setStep(step - 1)}>Cancel/Go Back</button></div></span>}
   </>
 }
 

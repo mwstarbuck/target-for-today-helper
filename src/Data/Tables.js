@@ -55,3 +55,111 @@ export const TABLE_2_1 = [
   },
 
 ]
+
+export const TABLE_2_2 = [
+  {
+    value: 1,
+    target: 'Abbeville',
+    type: 'Airfield',
+  },
+  {
+    value: 3,
+    target: 'Amiens',
+    type: 'Airfield',
+  },
+  {
+    value: 6,
+    target: 'Antwerp',
+    type: 'Industry',
+  },
+  {
+    value: 13,
+    target: 'Bremen',
+    type: 'Aircraft',
+  },
+  {
+    value: 18,
+    target: 'Brest',
+    type: 'U-Boats',
+  },
+  {
+    value: 19,
+    target: 'Cherbourg',
+    type: 'Airfield',
+  },
+  {
+    value: 20,
+    target: 'Emden',
+    type: 'Industry',
+  },
+  {
+    value: 26,
+    target: 'Hamm',
+    type: 'Marshalling Yards',
+  },
+  {
+    value: 27,
+    target: 'Kiel',
+    type: 'U-Boats',
+  },
+  {
+    value: 31,
+    target: 'La Pallice',
+    type: 'U-Boats',
+  },
+  {
+    value: 39,
+    target: 'Lille',
+    type: 'Industry',
+  },
+  {
+    value: 54,
+    target: 'Lorient',
+    type: 'U-Boats',
+  },
+  {
+    value: 55,
+    target: 'Meaulte',
+    type: 'Airfield',
+  },
+  {
+    value: 58,
+    target: 'Paris',
+    type: 'Industry',
+  },
+  {
+    value: 64,
+    target: 'Romilly-sur-Seine',
+    type: 'Airfield',
+  },
+  {
+    value: 68,
+    target: 'Rotterdam',
+    type: 'Shipyards',
+  },
+  {
+    value: 79,
+    target: 'Rouen',
+    type: 'Marshalling Yards',
+  },
+  {
+    value: 93,
+    target: 'Saint-Nazaire',
+    type: 'U-Boats',
+  },
+  {
+    value: 94,
+    target: 'Saint-Omer',
+    type: 'Airfield',
+  },
+  {
+    value: 97,
+    target: 'Vegesack',
+    type: 'U-Boats',
+  },
+  {
+    value: 100,
+    target: 'Wilhelmshaven',
+    type: 'U-Boats',
+  }
+]
