@@ -19,3 +19,49 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+.card {
+  overflow: hidden;
+  box-shadow: 0 2px 20px lightgray;
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 200ms ease-in;
+  width: 50%;
+  opacity: 0.6;
+}
+
+.card__image {
+  height: 12rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card__title {
+  padding: 1rem;
+}
+
+.card__text {
+  padding: 0 1rem;
+}
+
+.card__button {
+  padding: 1rem;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 1rem 10rem;
+  border: 2px solid gray;
+  background-color: transparent;
+  color: gray;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  transition: background 200ms ease-in, color 200ms ease-in;
+}
+
+.card__button:hover {
+  background-color: gray;
+  color: white;
+}
