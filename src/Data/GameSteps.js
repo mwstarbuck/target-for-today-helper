@@ -100,3 +100,28 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
 ]
+
+const TAKEOFF_PROCEDURE = [
+    {
+    id: 12,
+    section: 'Takeoff Procedure',
+    heading: 'Weather over base',
+    instruction: 'Roll on Table 3-1',
+    reference: 'Table 3-1 (1D10)',
+    additionalInfo: ['If based in England, -2 modifier if mission flown in Jan, Feb or Dec and -1 modifier if mission flown in Mar, Apr, Oct or Nov', 'If based in Italy, +1 modifier if mission flown in May or Oct; +2 modifier if flown in Jun or Sep; +3 modifier if flown in Jul or Aug'],
+    hasAction: false,
+    // action: 'roll',
+    // actionText: ''
+  },
+  {
+    id: 13,
+    section: 'Takeoff Procedure',
+    heading: 'Take-Off',
+    instruction: 'Roll on Table 3-2',
+    reference: 'Table 3-2 (1D10) & Table 3-3 if possible engine malfunction',
+    additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    hasAction: false,
+    // action: 'roll',
+    // actionText: ''
+  },
+]
