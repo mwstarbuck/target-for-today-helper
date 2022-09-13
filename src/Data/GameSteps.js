@@ -1,3 +1,4 @@
+import { rollDice } from "../Utilities/Utilities"
 export const PRE_MISSION_STEPS = [
   {
     id: 1,
@@ -26,7 +27,10 @@ export const PRE_MISSION_STEPS = [
     instruction: 'Select bombing target depending on the campaign in tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook.',
     reference: 'tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook',
     additionalInfo: null,
-    hasAction: false,
+    hasAction: true,
+    action: () => rollDice(10),
+    actionText: 'Roll for Target',
+    modifiers: ['weather', 'engine']
   },
   {
     id: 4,
@@ -50,7 +54,7 @@ export const PRE_MISSION_STEPS = [
     id: 6,
     section: 'pre-mission',
     heading: 'Determine Fighter Escort',
-    instruction: 'Determine mission’s fighter escort on Table 2-13',
+    instruction: 'Determine mission\'s fighter escort on Table 2-13',
     reference: 'Table 2-13',
     additionalInfo: null,
     hasAction: false,
@@ -102,7 +106,7 @@ export const PRE_MISSION_STEPS = [
 ]
 
 const TAKEOFF_PROCEDURE = [
-    {
+  {
     id: 12,
     section: 'Takeoff Procedure',
     heading: 'Weather over base',

@@ -20,8 +20,9 @@ const PreMissionInfo = (props) => {
         reference={gameStep?.reference}
         additionalInfo={gameStep?.additionalInfo}
         hasAction={gameStep?.hasAction}
-        action={action}
-        actionText={gameStep?.actionText} />
+        action={gameStep?.action}
+        actionText={gameStep?.actionText}
+        modifiers={gameStep?.modifiers} />
     </span>
   </>
 }

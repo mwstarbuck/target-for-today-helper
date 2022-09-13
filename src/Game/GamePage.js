@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { rollDice } from '../Utilities/Utilities';
 import { TABLE_2_1 } from '../Data/Tables';
 import PreMissionInfo from './PreMissionInfo';
@@ -8,7 +8,8 @@ const GamePage = () => {
   const [showRoller, setShowRoller] = useState(false);
   const [campaign, setCampaign] = useState(null);
   const [step, setStep] = useState(0);
-
+  let weather = 69;
+  
   const nextStep = () => {
     setStep(step + 1);
   }
@@ -30,7 +31,7 @@ const GamePage = () => {
   return <><h1 style={{ opacity: 0.6 }}>Target for Today Helper</h1>
 
     {step === 0 && <button style={{ fontFamily: 'Courier', opacity: 0.7 }} onClick={nextStep}>Start Game</button>}
-    {step > 0 && <PreMissionInfo step={step} action={handleRoll} />}
+    {step > 0 && <PreMissionInfo step={step} /*action={handleRoll}*/ />}
     {step === 1 && campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {campaign.campaign}</h3>
       <h4>PERIOD: {campaign.timePeriod}</h4>
       <h4>AIRCRAFT: {campaign.aircraft}</h4>
