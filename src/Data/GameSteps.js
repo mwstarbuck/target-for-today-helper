@@ -1,4 +1,5 @@
-import { rollDice } from "../Utilities/Utilities"
+import { campaignRoll, rollDice, getResult } from "../Utilities/Utilities"
+import { TABLE_2_2 } from "./Tables"
 export const PRE_MISSION_STEPS = [
   {
     id: 1,
@@ -8,7 +9,7 @@ export const PRE_MISSION_STEPS = [
     reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
     additionalInfo: null,
     hasAction: true,
-    action: 'roll',
+    action: (setter) => campaignRoll(setter),
     actionText: 'Roll for Campaign'
   },
   {
@@ -28,9 +29,9 @@ export const PRE_MISSION_STEPS = [
     reference: 'tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook',
     additionalInfo: null,
     hasAction: true,
-    action: () => rollDice(10),
+    action: () => getResult(39, TABLE_2_2, 'd100'),
     actionText: 'Roll for Target',
-    modifiers: ['weather', 'engine']
+    // modifiers: ['weather', 'engine']
   },
   {
     id: 4,

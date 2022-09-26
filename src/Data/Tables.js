@@ -58,57 +58,57 @@ export const TABLE_2_1 = [
 
 export const TABLE_2_2 = [
   {
-    value: 1,
+    value: [1],
     target: 'Abbeville',
     type: 'Airfield',
   },
   {
-    value: 3,
+    value: [2, 3],
     target: 'Amiens',
     type: 'Airfield',
   },
   {
-    value: 6,
+    value: [4, 5, 6],
     target: 'Antwerp',
     type: 'Industry',
   },
   {
-    value: 13,
+    value: [7, 8, 9, 10, 11, 12, 13],
     target: 'Bremen',
     type: 'Aircraft',
   },
   {
-    value: 18,
+    value: [14, 15, 16, 17, 18],
     target: 'Brest',
     type: 'U-Boats',
   },
   {
-    value: 19,
+    value: [19],
     target: 'Cherbourg',
     type: 'Airfield',
   },
   {
-    value: 20,
+    value: [20],
     target: 'Emden',
     type: 'Industry',
   },
   {
-    value: 26,
+    value: [21, 22, 23, 24, 25, 26],
     target: 'Hamm',
     type: 'Marshalling Yards',
   },
   {
-    value: 27,
+    value: [27],
     target: 'Kiel',
     type: 'U-Boats',
   },
   {
-    value: 31,
+    value: [28, 29, 30, 31],
     target: 'La Pallice',
     type: 'U-Boats',
   },
   {
-    value: 39,
+    value: [32, 33, 34, 35, 36, 37, 38, 39],
     target: 'Lille',
     type: 'Industry',
   },

@@ -6,11 +6,11 @@ import b17 from '../Images/b17.jpeg';
 let engine = -1;
 let weather = 3;
 const modEnum = {
-  'weather': weather,
+  'weather': weather, //ctx.weather
   'engine': engine
 }
 
-const add = (action, modifiers) => {
+const add = (action, modifiers, table, ctx) => {
   let roll = action();
   console.log('roll:', roll);
   let result = modifiers?.forEach(m => roll += modEnum[m])
@@ -21,7 +21,7 @@ const add = (action, modifiers) => {
 const Card = (props) => {
   // console.log(props.modifiers?.forEach(m => modEnum[m]));
   return <div className='card'>
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div /*style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}*/>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
       <h2 style={{ marginBottom: -5 }}>{props.title}</h2>
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>

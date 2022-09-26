@@ -14,7 +14,7 @@ const PreMissionInfo = (props) => {
     }
   }, [step])
   return <>
-    <span style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Card title={gameStep?.heading}
         description={gameStep?.instruction}
         reference={gameStep?.reference}
@@ -23,7 +23,7 @@ const PreMissionInfo = (props) => {
         action={gameStep?.action}
         actionText={gameStep?.actionText}
         modifiers={gameStep?.modifiers} />
-    </span>
+    </div>
   </>
 }
 
