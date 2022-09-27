@@ -1,14 +1,15 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-const Context = createContext(null);
+export const GameContext = createContext();
 
-const GameContext = () => {
+const GameContextProvider = ({children}) => {
   const [campaign, setCampaign] = useState(null)
 
-  return <Context.Provider value={Context}>
-
-  </Context.Provider>
-
+  return <GameContext.Provider value={[
+    campaign,
+    setCampaign
+  ]}>
+  {children}
+  </GameContext.Provider>
 }
-
-export default GameContext;
+export default GameContextProvider;
