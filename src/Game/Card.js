@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import b17 from '../Images/b17.jpeg';
 import { actionEnum, contextEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
+import Select from 'react-select';
+import './GamePage.css'
 
 
 //#region test
@@ -13,25 +15,53 @@ const modEnum = {
   'engine': engine
 }
 
-
-
-const add = (action, modifiers, table, ctx) => {
-  let roll = action();
-  console.log('roll:', roll);
-  let result = modifiers?.forEach(m => roll += modEnum[m])
-  console.log('result:', roll)
-}
+// const add = (action, modifiers, table, ctx) => {
+//   let roll = action();
+//   console.log('roll:', roll);
+//   let result = modifiers?.forEach(m => roll += modEnum[m])
+//   console.log('result:', roll)
+// }
 //#endregion
 
 const Card = (props) => {
   const ctx = useContext(GameContext);
+  const [advance, setAdvance] = useState(false);
 
   const contextEnum = {
     'setCampaign': ctx.setCampaign,
   }
-  // console.log(props.modifiers?.forEach(m => modEnum[m]));
+
+  const action = actionEnum[props.action];
+  const stepInfo = {
+    maxValue: props.maxValue,
+    modifiers: props.modifiers,
+    diceType: props.diceType,
+    table: props.table,
+    setter: contextEnum[props.setter]
+  }
+
+  const cardAction = <>
+    {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(stepInfo)} className='card__button'>{props.actionText}</button>}
+    {/* {props.hasAction && props.actionType === 'select' &&
+    <Select options={options}></Select>} */}
+  </>
+
+  const nextStep = () => {
+    ctx.setStep(ctx.step + 1);
+    // setAdvance(!advance);
+  }
+  const lastStep = () => {
+    if (ctx.step > 0) {
+      if (ctx.step === 1) {
+        ctx.setCampaign(null);
+      }
+      ctx.setStep(ctx.step - 1);
+      // setAdvance(!advance);
+    }
+  }
+
   return <div className='card'>
-    <div /*style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}*/>
+    <div>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
       <h2 style={{ marginBottom: -5 }}>{props.title}</h2>
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
@@ -43,7 +73,14 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {props.hasAction && <button onClick={() => actionEnum[props.action](props.maxValue, props.modifiers, props.diceType, props.table, contextEnum[props.setter]) /*add(props.action, props.modifiers)*/} className='card__button'>{props.actionText}</button>}
+      {props.hasAction && !advance && <button onClick={() => {
+        action(stepInfo);
+        setAdvance(!advance);
+      }} className='card__button'>{props.actionText}</button>}
+      {advance && <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+        <button onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
+      </span>}
     </div>
   </div>
 }

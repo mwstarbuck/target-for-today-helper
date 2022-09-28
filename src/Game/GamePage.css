@@ -1,4 +1,4 @@
-.card {
+/* .card {
   overflow: hidden;
   box-shadow: 0 2px 20px lightgray;
   border-radius: 0.2rem;
@@ -42,7 +42,7 @@
 .card__button:hover {
   background-color: gray;
   color: white;
-}
+} */
 
 .column {
   float: left;
@@ -56,4 +56,42 @@
   content: "";
   display: table;
   clear: both;
+}
+
+.card__advance {
+  padding: 0.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
+  border: 2px solid gray;
+  background-color: transparent;
+  color: gray;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  transition: background 200ms ease-in, color 200ms ease-in;
+}
+
+.card__advance:hover {
+  background-color: green;
+  color: white;
+}
+
+.card__goback {
+  padding: 0.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
+  border: 2px solid gray;
+  background-color: transparent;
+  color: gray;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  transition: background 200ms ease-in, color 200ms ease-in;
+}
+
+.card__goback:hover {
+  background-color: red;
+  color: white;
 }

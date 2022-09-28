@@ -21,7 +21,7 @@ export const TABLE_2_1 = [
     id: 3,
     campaign: 3,
     timePeriod: '12/1943 - 5/1944, *6/1944 - 11/1944',
-    aircraft: ['B-17F', 'B-17 G', 'B-24D', 'B-24J', 'YB-40'],
+    aircraft: ['B-17F', 'B-17G', 'B-24D', 'B-24J', 'YB-40'],
     base: '8th Airforce (England)',
     missions: 25,
     altMissions: 30
@@ -163,3 +163,8 @@ export const TABLE_2_2 = [
     type: 'U-Boats',
   }
 ]
+
+export const tableEnum = {
+  'table_2_1': TABLE_2_1,
+  'table_2_2': TABLE_2_2
+}
