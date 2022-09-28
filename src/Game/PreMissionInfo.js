@@ -22,7 +22,11 @@ const PreMissionInfo = (props) => {
         hasAction={gameStep?.hasAction}
         action={gameStep?.action}
         actionText={gameStep?.actionText}
-        modifiers={gameStep?.modifiers} />
+        modifiers={gameStep?.modifiers}
+        maxValue={gameStep?.maxValue}
+        diceType={gameStep?.diceType}
+        table={gameStep?.table}
+        setter={gameStep?.setter} />
     </div>
   </>
 }

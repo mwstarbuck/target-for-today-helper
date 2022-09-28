@@ -1,5 +1,8 @@
+
 import { campaignRoll, rollDice, getResult } from "../Utilities/Utilities"
-import { TABLE_2_2 } from "./Tables"
+import { TABLE_2_1, TABLE_2_2 } from "./Tables"
+import GameContext from "../Game/GameContext"
+
 export const PRE_MISSION_STEPS = [
   {
     id: 1,
@@ -9,8 +12,12 @@ export const PRE_MISSION_STEPS = [
     reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
     additionalInfo: null,
     hasAction: true,
-    action: (setter) => campaignRoll(setter),
-    actionText: 'Roll for Campaign'
+    action: 'processResult',
+    actionText: 'Roll for Campaign',
+    diceType: 'd6',
+    maxValue: 6,
+    table: 'table_2_1',
+    setter: 'setCampaign'
   },
   {
     id: 2,
@@ -20,6 +27,7 @@ export const PRE_MISSION_STEPS = [
     reference: 'Table 2-9 in the Game Tables Booklet',
     additionalInfo: ['If you choose the B-24J and you must choose the "B-24J Nose Turret Type" on Table 2-9 in the Game Tables Booklet', 'If you choose the B-17G there are options for the radio room gun. (See the optional rules section for the B-17G)'],
     hasAction: false,
+
   },
   {
     id: 3,

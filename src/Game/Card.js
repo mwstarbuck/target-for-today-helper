@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import b17 from '../Images/b17.jpeg';
+import { actionEnum, contextEnum } from '../Utilities/Utilities';
+import GameContext from './GameContext';
+
 
 //#region test
 // TODO: use result to match table entry
@@ -10,6 +13,8 @@ const modEnum = {
   'engine': engine
 }
 
+
+
 const add = (action, modifiers, table, ctx) => {
   let roll = action();
   console.log('roll:', roll);
@@ -19,6 +24,11 @@ const add = (action, modifiers, table, ctx) => {
 //#endregion
 
 const Card = (props) => {
+  const ctx = useContext(GameContext);
+
+  const contextEnum = {
+    'setCampaign': ctx.setCampaign,
+  }
   // console.log(props.modifiers?.forEach(m => modEnum[m]));
   return <div className='card'>
     <div /*style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}*/>
@@ -33,7 +43,7 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {props.hasAction && <button onClick={() => add(props.action, props.modifiers)} className='card__button'>{props.actionText}</button>}
+      {props.hasAction && <button onClick={() => actionEnum[props.action](props.maxValue, props.modifiers, props.diceType, props.table, contextEnum[props.setter]) /*add(props.action, props.modifiers)*/} className='card__button'>{props.actionText}</button>}
     </div>
   </div>
 }

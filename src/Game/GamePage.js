@@ -1,13 +1,14 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { rollDice } from '../Utilities/Utilities';
 import { TABLE_2_1 } from '../Data/Tables';
 import PreMissionInfo from './PreMissionInfo';
 import { PRE_MISSION_STEPS } from '../Data/GameSteps';
-// import './GamePage.css';
+import { actionEnum } from '../Utilities/Utilities';
+import { GameContext } from './GameContext';
 
 const GamePage = () => {
+  const ctx = useContext(GameContext);
   const [showRoller, setShowRoller] = useState(false);
-  const [campaign, setCampaign] = useState(null);
   const [step, setStep] = useState(0);
   let weather = 69;
 
@@ -17,7 +18,7 @@ const GamePage = () => {
   const lastStep = () => {
     if (step > 0) {
       if (step === 1) {
-        setCampaign(null);
+        ctx.setCampaign(null);
       }
       setStep(step - 1);
     }
@@ -26,9 +27,10 @@ const GamePage = () => {
   const handleRoll = () => {
     const result = rollDice(6);
     const campaign = (TABLE_2_1.find(c => c.id === result));
-    setCampaign(campaign);
+    // setCampaign(campaign);
+    ctx.setCampaign(campaign);
   }
-  console.log(step)
+  console.log(ctx.campaign)
   return <>
     <h1 style={{ opacity: 0.6 }}>Target for Today Helper</h1>
 
@@ -36,27 +38,19 @@ const GamePage = () => {
     {step > 0 && <div className='row'>
       <div className='column'>
         Campaign Info
-        {step >= 1 && campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {campaign.campaign}</h3>
-          <h4>PERIOD: {campaign.timePeriod}</h4>
-          <h4>AIRCRAFT: {campaign.aircraft}</h4>
-          <h5>BASING: <span>{campaign.base}</span></h5>
-          <h5>MISSIONS: {campaign.missions}</h5> </span>}
+        {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
+          <h4>PERIOD: {ctx.campaign?.timePeriod}</h4>
+          <h4>AIRCRAFT: {ctx.campaign?.aircraft}</h4>
+          <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
+          <h5>MISSIONS: {ctx.campaign?.missions}</h5> </span>}
       </div>
       <div className='column'>
-        {step === 1 && <button onClick={() => { handleRoll(); nextStep(); }}>Roll for Campaign</button>}
-        {step > 1 && <PreMissionInfo
+        {/* {step === 1 && <button onClick={() => { actionEnum['campaignRoll'](ctx.setCampaign); nextStep(); }}>Roll for Campaign</button>} */}
+        {step >= 1 && <PreMissionInfo
           step={step} />}
         {step > 1 && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={nextStep}>Next Step</button><button onClick={lastStep}>Cancel/Go Back</button></div>}
       </div>
       <div className='column'>Bomber Card</div>
-      {/* {step > 0 && <PreMissionInfo step={step} />} */}
-      {/* {step === 1 && campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {campaign.campaign}</h3> */}
-      {/* <h4>PERIOD: {campaign.timePeriod}</h4> */}
-      {/* <h4>AIRCRAFT: {campaign.aircraft}</h4> */}
-      {/* <h5>BASING: <span>{campaign.base}</span></h5> */}
-      {/* <h5>MISSIONS: {campaign.missions}</h5> </span>} */}
-      {/* <br /> */}
-      {/* {step > 0 && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={nextStep}>Next Step</button><button onClick={lastStep}>Cancel/Go Back</button></div>} */}
     </div>}
   </>
 }
