@@ -22,6 +22,7 @@ const modEnum = {
 //   console.log('result:', roll)
 // }
 //#endregion
+const options = [{ value: 'poop', label: 'poop' }, { value: 'pee', label: 'pee' }]
 
 const Card = (props) => {
   const ctx = useContext(GameContext);
@@ -29,6 +30,7 @@ const Card = (props) => {
 
   const contextEnum = {
     'setCampaign': ctx.setCampaign,
+    'setStep': ctx.setStep
   }
 
   const action = actionEnum[props.action];
@@ -48,7 +50,7 @@ const Card = (props) => {
 
   const nextStep = () => {
     ctx.setStep(ctx.step + 1);
-    // setAdvance(!advance);
+    setAdvance(false);
   }
   const lastStep = () => {
     if (ctx.step > 0) {
@@ -56,8 +58,13 @@ const Card = (props) => {
         ctx.setCampaign(null);
       }
       ctx.setStep(ctx.step - 1);
-      // setAdvance(!advance);
+      setAdvance(false);
     }
+  }
+  const onSelect = (selection) => {
+    // console.log(value);
+    ctx.setBomber(selection.value);
+    setAdvance(true);
   }
 
   return <div className='card'>
@@ -73,14 +80,36 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {props.hasAction && !advance && <button onClick={() => {
-        action(stepInfo);
-        setAdvance(!advance);
-      }} className='card__button'>{props.actionText}</button>}
-      {advance && <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+      {!props.isIncrement && props.actionType === 'roll' && <>
+        <button onClick={() => {
+          action(stepInfo);
+          setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        </div>
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'select' &&
+        <><div className='selector'>
+          <Select menuPlacement='top'
+            options={ctx.campaign.aircraft}
+            onChange={onSelect} />
+        </div>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+          </div>
+        </>
+      }
+      {/* {props.isIncrement && <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
         <button onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
-      </span>}
+      </span>} */}
     </div>
   </div>
 }

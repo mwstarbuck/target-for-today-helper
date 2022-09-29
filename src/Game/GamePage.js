@@ -10,7 +10,6 @@ const GamePage = () => {
   const ctx = useContext(GameContext);
   const [showRoller, setShowRoller] = useState(false);
   // const [step, setStep] = useState(0);
-  let weather = 69;
   const step = ctx.step;
 
   const nextStep = () => {
@@ -39,8 +38,8 @@ const GamePage = () => {
       <div className='column'>
         Campaign Info
         {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
-          <h4>PERIOD: {ctx.campaign?.timePeriod}</h4>
-          <h4>AIRCRAFT: {ctx.campaign?.aircraft}</h4>
+          <h4>PERIOD: {ctx?.period}</h4>
+          <h4>AIRCRAFT: {ctx?.bomber}</h4>
           <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
           <h5>MISSIONS: {ctx.campaign?.missions}</h5> </span>}
       </div>

@@ -3,7 +3,7 @@ import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
-  const { step, action } = props;
+  const { step, isIncrement } = props;
   const [gameStep, setGameStep] = React.useState(null)
 
   React.useEffect(() => {
@@ -22,11 +22,13 @@ const PreMissionInfo = (props) => {
         hasAction={gameStep?.hasAction}
         action={gameStep?.action}
         actionText={gameStep?.actionText}
+        actionType={gameStep?.actionType}
         modifiers={gameStep?.modifiers}
         maxValue={gameStep?.maxValue}
         diceType={gameStep?.diceType}
         table={gameStep?.table}
-        setter={gameStep?.setter} />
+        setter={gameStep?.setter}
+        isIncrement={gameStep?.isIncrement} />
     </div>
   </>
 }

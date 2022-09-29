@@ -6,6 +6,8 @@ export const GameContextProvider = ({ children }) => {
   const [step, setStep] = useState(0);
   const [campaign, setCampaign] = useState();
   const [bomber, setBomber] = useState();
+  const [noseTurret, setNoseTurret] = useState();
+  const [period, setPeriod] = useState();
 
   return (
     <GameContext.Provider value={{
@@ -14,7 +16,11 @@ export const GameContextProvider = ({ children }) => {
       campaign,
       setCampaign,
       bomber,
-      setBomber
+      setBomber,
+      period,
+      setPeriod,
+      noseTurret, 
+      setNoseTurret
     }}
     >
       {children}

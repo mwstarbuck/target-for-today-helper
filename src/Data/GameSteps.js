@@ -7,7 +7,7 @@ export const PRE_MISSION_STEPS = [
   {
     id: 1,
     section: 'pre-mission',
-    heading: 'Campaign Selection',
+    heading: 'Campaign Roll',
     instruction: 'Decide what campaign time frame you wish to fly your mission or start your tour of duty in. You can start your tour of duty on any date you wish. Table 2-1 is found in the Target Listings and Gazetteer Handbook.',
     reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
     additionalInfo: null,
@@ -21,7 +21,7 @@ export const PRE_MISSION_STEPS = [
     setter: 'setCampaign'
   },
   {
-    id: 1.5,
+    id: 2,
     section: 'pre-mission',
     heading: 'Select Bomber',
     instruction: 'Select your bomber from the dropdown Menu.',
@@ -30,6 +30,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: true,
     actionType: 'select',
     action: 'submit',
+    options: 'aircraft',
     actionText: 'Select bomber.',
     diceType: null,
     maxValue: null,
@@ -37,17 +38,34 @@ export const PRE_MISSION_STEPS = [
     setter: 'setBomber'
   },
   {
-    id: 2,
+    id: 3,
     section: 'pre-mission',
-    heading: 'Campaign Selection',
-    instruction: 'Lay out the game components. Decide which type of bomber you wish to fly and then select the appropriate Crew Placement Sheet and Mission Log Sheet for that bomber.',
-    reference: 'Table 2-9 in the Game Tables Booklet',
+    heading: 'B-24J Nose Turret Type',
+    instruction: 'Roll to Determin Nose Turret Type for the B-24J.',
+    reference: 'Table 2-9, Target Listings and Gazetteer Handbook',
+    additionalInfo: null,
+    hasAction: true,
+    actionType: 'roll',
+    action: 'submit',
+    options: 'noseTurret',
+    actionText: 'Roll for Nose Turret.',
+    diceType: 'd6', 
+    maxValue: 6,
+    table: 'table_2_9',
+    setter: 'setBomber'
+  },
+  {
+    id: 3,
+    section: 'pre-mission',
+    heading: 'Select Time Period',
+    instruction: 'Select the time period to start your mission or campaign from the dropdown Menu.',
+    reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
     additionalInfo: ['If you choose the B-24J and you must choose the "B-24J Nose Turret Type" on Table 2-9 in the Game Tables Booklet', 'If you choose the B-17G there are options for the radio room gun. (See the optional rules section for the B-17G)'],
     hasAction: false,
 
   },
   {
-    id: 3,
+    id: 4,
     section: 'pre-mission',
     heading: 'Select Bombing target',
     instruction: 'Select bombing target depending on the campaign in tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook.',

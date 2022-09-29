@@ -75,6 +75,7 @@ const processResult = (stepInfo) => {
 export const actionEnum = {
   'getResult': getResult,
   // 'campaignRoll': campaignRoll,
-  'processResult': processResult
+  'processResult': processResult,
+  
 }
 
