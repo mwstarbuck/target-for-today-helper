@@ -29,7 +29,6 @@ const GamePage = () => {
     const campaign = (TABLE_2_1.find(c => c.id === result));
     ctx.setCampaign(campaign);
   }
-  console.log(ctx?.noseTurret)
   return <>
     <h1 style={{ opacity: 0.6 }}>Target for Today Helper</h1>
 
@@ -38,8 +37,8 @@ const GamePage = () => {
       <div className='column'>
         Campaign Info
         {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
-          <h4>PERIOD: {ctx?.period}</h4>
-          <h4>AIRCRAFT: {ctx?.bomber}{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</h4>
+          <h4>PERIOD: {ctx?.timePeriod}</h4>
+          <h4>AIRCRAFT: {ctx?.bomber}{ctx.noseTurret ? <span style={{ fontSize: 12 }}>{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</span> : null}</h4>
           <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
           <h5>MISSIONS: {ctx.campaign?.missions}</h5> </span>}
       </div>

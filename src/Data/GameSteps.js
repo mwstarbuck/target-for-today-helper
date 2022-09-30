@@ -19,7 +19,8 @@ export const PRE_MISSION_STEPS = [
     maxValue: 6,
     table: 'table_2_1',
     options: null,
-    setter: 'setCampaign'
+    setter: 'setCampaign',
+    contingencyStep: false,
   },
   {
     id: 2,
@@ -36,7 +37,8 @@ export const PRE_MISSION_STEPS = [
     maxValue: null,
     table: 'table_2_1',
     options: 'aircraft',
-    setter: 'setBomber'
+    setter: 'setBomber',
+    contingencyStep: false,
   },
   {
     id: 3,
@@ -53,7 +55,10 @@ export const PRE_MISSION_STEPS = [
     diceType: 'd6-simple',
     maxValue: 6,
     table: 'table_2_9',
-    setter: 'setNoseTurret'
+    setter: 'setNoseTurret',
+    contingencyStep: true,
+    contingencyValue: 'bomber',
+    contingentUpon: 'B-24J'
   },
   {
     id: 4,
@@ -61,7 +66,7 @@ export const PRE_MISSION_STEPS = [
     heading: 'Select Time Period',
     instruction: 'Select the time period to start your mission or campaign from the dropdown Menu.',
     reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
-    additionalInfo: ['If you choose the B-24J and you must choose the "B-24J Nose Turret Type" on Table 2-9 in the Game Tables Booklet', 'If you choose the B-17G there are options for the radio room gun. (See the optional rules section for the B-17G)'],
+    additionalInfo: [],
     hasAction: true,
     actionType: 'select',
     action: 'submit',
@@ -70,11 +75,12 @@ export const PRE_MISSION_STEPS = [
     maxValue: null,
     table: 'table_2_1',
     options: 'timePeriod',
-    setter: 'setTimePeriod'
-
+    setter: 'setTimePeriod',
+    contingencyStep: false,
+    skipBack: 2
   },
   {
-    id: 4,
+    id: 5,
     section: 'pre-mission',
     heading: 'Select Bombing target',
     instruction: 'Select bombing target depending on the campaign in tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook.',
@@ -83,10 +89,11 @@ export const PRE_MISSION_STEPS = [
     hasAction: true,
     action: () => getResult(39, TABLE_2_2, 'd100'),
     actionText: 'Roll for Target',
+
     // modifiers: ['weather', 'engine']
   },
   {
-    id: 4,
+    id: 6,
     section: 'pre-mission',
     heading: 'Determine Zones',
     instruction: 'Find the number of zones in the alphabetized Air Force Flight Log Gazetteer - Tables 2-8A (8th Air Force) and 2-8B (15th Air Force).',
@@ -95,7 +102,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 5,
+    id: 7,
     section: 'pre-mission',
     heading: 'Determine Formation Position',
     instruction: 'Determine formation position for your bomber on Table 2-10A and Table 2-10B',
@@ -104,7 +111,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 6,
+    id: 8,
     section: 'pre-mission',
     heading: 'Determine Fighter Escort',
     instruction: 'Determine mission\'s fighter escort on Table 2-13',
@@ -113,7 +120,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 7,
+    id: 9,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Create crew members and place them on the crew placement board.',
@@ -122,7 +129,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 8,
+    id: 10,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Place the fire extinguishers in their box next to the bomber on the Crew Placement Sheet. Place the appropriate turret gunnery markers nearby.',
@@ -131,7 +138,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 9,
+    id: 11,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Place the large bomber counter in the middle of the Battle Board combat area.',
@@ -140,7 +147,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
   },
   {
-    id: 10,
+    id: 12,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Lastly, place the small bomber counter on the Strategic Movement Track in Zone 1 facing toward the Designated Target Zone number.',

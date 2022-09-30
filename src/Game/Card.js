@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import b17 from '../Images/b17.jpeg';
 import { actionEnum, contextEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
@@ -27,10 +27,13 @@ const options = [{ value: 'poop', label: 'poop' }, { value: 'pee', label: 'pee' 
 const Card = (props) => {
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
+  const [selectValue, setSelectValue] = useState(null);
+  const selectRef = useRef();
 
   const contextEnum = {
     'setCampaign': ctx.setCampaign,
     'setStep': ctx.setStep,
+    'setBomber': ctx.setBomber,
     'setTimePeriod': ctx.setTimePeriod,
     'setNoseTurret': ctx.setNoseTurret
   }
@@ -60,19 +63,32 @@ const Card = (props) => {
   const nextStep = () => {
     ctx.setStep(ctx.step + 1);
     setAdvance(false);
+    setSelectValue(null);
   }
   const lastStep = () => {
     if (ctx.step > 0) {
       if (ctx.step === 1) {
         ctx.setCampaign(null);
       }
-      ctx.setStep(ctx.step - 1);
-      setAdvance(false);
+      if (ctx.gameStep.skipBack) {
+        ctx.setStep(ctx.step - ctx.gameStep.skipBack);
+        contextEnum[props.setter](null);
+        setAdvance(false);
+        setSelectValue(null);
+      }
+      else {
+        contextEnum[props.setter](null);
+        ctx.setStep(ctx.step - 1);
+        setAdvance(false);
+        setSelectValue(null);
+      }
+
     }
   }
   const onSelect = (selection) => {
-    // console.log(value);
-    ctx.setBomber(selection.value);
+    const setter = contextEnum[props.setter]
+    setSelectValue(selection);
+    setter(selection.value);
     setAdvance(true);
   }
 
@@ -105,9 +121,11 @@ const Card = (props) => {
       }
       {!props.isIncrement && props.actionType === 'select' &&
         <><div className='selector'>
-          <Select menuPlacement='top'
+          <Select ref={selectRef} menuPlacement='top'
             options={stepOptions}
-            onChange={onSelect} />
+            onChange={onSelect}
+            value={selectValue}
+          />
         </div>
           <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
