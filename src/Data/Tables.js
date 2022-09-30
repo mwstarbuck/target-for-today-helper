@@ -221,7 +221,17 @@ export const TABLE_2_2 = [
   }
 ]
 
+export const TABLE_2_9 = [
+  { id: 2, label: 'Consolidated Type Nose Turret' },
+  { id: 1, label: 'Consolidated Type Nose Turret' },
+  { id: 3, label: 'Emerson Type Nose Turret' },
+  { id: 4, label: 'Emerson Type Nose Turret' },
+  { id: 5, label: 'Emerson Type Nose Turret' },
+  { id: 6, label: 'Emerson Type Nose Turret' },
+]
 export const tableEnum = {
   'table_2_1': TABLE_2_1,
-  'table_2_2': TABLE_2_2
+  'table_2_2': TABLE_2_2,
+  'table_2_9': TABLE_2_9
 }
+

@@ -7,7 +7,7 @@ export const GameContextProvider = ({ children }) => {
   const [campaign, setCampaign] = useState();
   const [bomber, setBomber] = useState();
   const [noseTurret, setNoseTurret] = useState();
-  const [period, setPeriod] = useState();
+  const [timePeriod, setTimePeriod] = useState();
 
   return (
     <GameContext.Provider value={{
@@ -17,9 +17,9 @@ export const GameContextProvider = ({ children }) => {
       setCampaign,
       bomber,
       setBomber,
-      period,
-      setPeriod,
-      noseTurret, 
+      timePeriod,
+      setTimePeriod,
+      noseTurret,
       setNoseTurret
     }}
     >

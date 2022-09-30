@@ -30,7 +30,14 @@ const Card = (props) => {
 
   const contextEnum = {
     'setCampaign': ctx.setCampaign,
-    'setStep': ctx.setStep
+    'setStep': ctx.setStep,
+    'setTimePeriod': ctx.setTimePeriod,
+    'setNoseTurret': ctx.setNoseTurret
+  }
+
+  const optionsEnum = {
+    'aircraft': ctx?.campaign?.aircraft,
+    'timePeriod': ctx?.campaign?.timePeriod
   }
 
   const action = actionEnum[props.action];
@@ -41,6 +48,8 @@ const Card = (props) => {
     table: props.table,
     setter: contextEnum[props.setter]
   }
+
+  const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
     {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(stepInfo)} className='card__button'>{props.actionText}</button>}
@@ -97,7 +106,7 @@ const Card = (props) => {
       {!props.isIncrement && props.actionType === 'select' &&
         <><div className='selector'>
           <Select menuPlacement='top'
-            options={ctx.campaign.aircraft}
+            options={stepOptions}
             onChange={onSelect} />
         </div>
           <div>

@@ -18,6 +18,7 @@ export const PRE_MISSION_STEPS = [
     diceType: 'd6',
     maxValue: 6,
     table: 'table_2_1',
+    options: null,
     setter: 'setCampaign'
   },
   {
@@ -30,11 +31,11 @@ export const PRE_MISSION_STEPS = [
     hasAction: true,
     actionType: 'select',
     action: 'submit',
-    options: 'aircraft',
     actionText: 'Select bomber.',
     diceType: null,
     maxValue: null,
     table: 'table_2_1',
+    options: 'aircraft',
     setter: 'setBomber'
   },
   {
@@ -46,22 +47,30 @@ export const PRE_MISSION_STEPS = [
     additionalInfo: null,
     hasAction: true,
     actionType: 'roll',
-    action: 'submit',
-    options: 'noseTurret',
-    actionText: 'Roll for Nose Turret.',
-    diceType: 'd6', 
+    action: 'processResult',
+    options: null,
+    actionText: 'Roll for Nose Turret',
+    diceType: 'd6-simple',
     maxValue: 6,
     table: 'table_2_9',
-    setter: 'setBomber'
+    setter: 'setNoseTurret'
   },
   {
-    id: 3,
+    id: 4,
     section: 'pre-mission',
     heading: 'Select Time Period',
     instruction: 'Select the time period to start your mission or campaign from the dropdown Menu.',
     reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
     additionalInfo: ['If you choose the B-24J and you must choose the "B-24J Nose Turret Type" on Table 2-9 in the Game Tables Booklet', 'If you choose the B-17G there are options for the radio room gun. (See the optional rules section for the B-17G)'],
-    hasAction: false,
+    hasAction: true,
+    actionType: 'select',
+    action: 'submit',
+    actionText: 'Select Time Period',
+    diceType: null,
+    maxValue: null,
+    table: 'table_2_1',
+    options: 'timePeriod',
+    setter: 'setTimePeriod'
 
   },
   {

@@ -42,13 +42,15 @@ const setResult = (result, setter) => {
   setter(result);
 }
 export const getResult = (roll, diceType, table) => {
-  // const roll = rollDice(max)
-  // const modPackage = processModifiers(modifiers);
+
   const theTable = tableEnum[table];
   switch (diceType) {
 
     case 'd6':
       return theTable.find(x => x.id === roll);
+      break;
+    case 'd6-simple':
+      return theTable.find(x => x.id === roll).label;
       break;
     case 'd100':
       return theTable.find(x => x.value.includes(roll));
@@ -76,6 +78,6 @@ export const actionEnum = {
   'getResult': getResult,
   // 'campaignRoll': campaignRoll,
   'processResult': processResult,
-  
+
 }
 

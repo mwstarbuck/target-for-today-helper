@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import GameContext from './GameContext';
 import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
+  const ctx = useContext(GameContext);
   const { step, isIncrement } = props;
   const [gameStep, setGameStep] = React.useState(null)
 
   React.useEffect(() => {
     if (step > 0) {
-      const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
-      console.log(nextStep);
-      setGameStep(nextStep);
+      if (step === 3) {
+        if (ctx.bomber === 'B-24J') {
+          const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
+          setGameStep(nextStep);
+        }
+        else {
+          ctx.setStep(ctx.step + 1)
+        }
+      }
+      else {
+        const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
+        console.log(nextStep);
+        setGameStep(nextStep);
+      }
     }
   }, [step])
   return <>
@@ -28,7 +41,7 @@ const PreMissionInfo = (props) => {
         diceType={gameStep?.diceType}
         table={gameStep?.table}
         setter={gameStep?.setter}
-        isIncrement={gameStep?.isIncrement} />
+        options={gameStep?.options} />
     </div>
   </>
 }
