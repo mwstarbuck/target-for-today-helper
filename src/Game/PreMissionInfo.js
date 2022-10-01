@@ -18,7 +18,7 @@ const PreMissionInfo = (props) => {
       const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
       if (nextStep?.contingencyStep === true) {
         const value = contingencyEnum[nextStep?.contingencyValue];
-        console.log(value, nextStep?.contingentUpon);
+        // console.log(value, nextStep?.contingentUpon);
         if (contingencyEnum[nextStep?.contingencyValue] === nextStep?.contingentUpon) {
           ctx.setGameStep(nextStep);
         }

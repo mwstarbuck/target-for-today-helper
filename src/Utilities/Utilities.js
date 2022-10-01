@@ -11,7 +11,7 @@ const modEnum = {
 
 export const rollDice = (max) => {
   const result = Math.floor(Math.random() * max + 1);
-  console.log(result);
+  // console.log(result);
   return result;
 }
 
@@ -74,10 +74,109 @@ const processResult = (stepInfo) => {
   setResult(result, stepInfo.setter);
 }
 
+const rollCrew = () => {
+  const crew = [];
+
+  const crewEnum = {
+    0: 'Pilot',
+    1: 'Copilot',
+    2: 'Bombardier',
+    3: 'Navigator',
+    4: 'Engineer',
+    5: 'Radio Operator',
+    6: 'Pt Waist Gunner',
+    7: "Stb. Waist Gunner",
+    8: "Ball Gunner",
+    9: 'Tail Gunner'
+  };
+
+  for (let i = 0; i < 4; i++) {
+    let roll = rollDice(100) - 1;
+    const last = tableEnum['last_name'][roll];
+
+    roll = rollDice(100) - 1;
+    const first = tableEnum['first_name'][roll];
+
+    let ageRoll1 = rollDice(6);
+    let ageRoll2;
+    ageRoll2 = rollDice(6);
+
+    const rollSum = ageRoll1 + ageRoll2;
+    console.log('ageRoll1: ', ageRoll1, 'ageRoll2: ', ageRoll2, 'sum: ', rollSum)
+    let tempAge;
+    if (rollSum === 11) {
+      console.log('altAgeRoll');
+      tempAge = (rollDice(6) < 4 ? 27 : 28);
+    }
+    else
+      tempAge = tableEnum['co_age'].find(a => a.value === rollSum).age;
+    const coAge = tempAge;
+
+    roll = rollDice(100);
+    let tempState;
+    if (roll === 100) {
+      console.log('altStateRoll')
+      tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
+    }
+    else
+      tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
+    const homeState = tempState;
+    const member = {
+      position: crewEnum[i],
+      name: `${last}, ${first}`,
+      age: coAge,
+      state: homeState
+    }
+    crew.push(member);
+  }
+
+  for (let i = 4; i < 10; i++) {
+    let roll = rollDice(100) - 1;
+    const last = tableEnum['last_name'][roll];
+
+    roll = rollDice(100) - 1;
+    const first = tableEnum['first_name'][roll];
+
+    let ageRoll1 = rollDice(6);
+    let ageRoll2;
+    ageRoll2 = rollDice(6);
+
+    const rollSum = ageRoll1 + ageRoll2;
+    console.log('ageRoll1: ', ageRoll1, 'ageRoll2: ', ageRoll2, 'sum: ', rollSum)
+    let tempAge;
+    if (rollSum === 11) {
+      console.log('altAgeRoll');
+      tempAge = (rollDice(6) < 4 ? 27 : 28);
+    }
+    else
+      tempAge = tableEnum['nco_age'].find(a => a.value === rollSum).age;
+    const coAge = tempAge;
+
+    roll = rollDice(100);
+    let tempState;
+    if (roll === 100) {
+      console.log('altStateRoll')
+      tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
+    }
+    else
+      tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
+    const homeState = tempState;
+    const member = {
+      position: crewEnum[i],
+      name: `${last}, ${first}`,
+      age: coAge,
+      state: homeState
+    }
+    crew.push(member);
+  }
+  console.log(crew);
+}
+
 export const actionEnum = {
   'getResult': getResult,
   // 'campaignRoll': campaignRoll,
   'processResult': processResult,
+  'rollCrew': rollCrew
 
 }
 

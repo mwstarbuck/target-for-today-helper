@@ -1,4 +1,4 @@
-const lastName = [
+const LAST_NAME = [
   'SMITH',
   'STEWART',
   'JOHNSON',
@@ -100,7 +100,7 @@ const lastName = [
   'DIAZ',
   'HAYES',
 ]
-const FirstNames = [
+const FIRST_NAME = [
   'Robert',
   'Warren',
   'John',
@@ -203,7 +203,7 @@ const FirstNames = [
   'Oscar',
 ]
 
-const OfficerAge = [  //2d6
+const OFFICER_AGE = [  //2d6
   { value: 2, age: 20 },
   { value: 3, age: 25 },
   { value: 4, age: 21 },
@@ -217,7 +217,7 @@ const OfficerAge = [  //2d6
   { value: 12, age: 29 },
 ]
 
-const NCOAge = [ //2d6
+const NCO_AGE = [ //2d6
   { value: 2, age: 20 }, //Roll Again 1 - 3(18) 4 - 6(19)
   { value: 3, age: 25 }, //Roll Again 1-2 (27) 3-4 (28) 5-6 (29)
   { value: 4, age: 21 }, //Roll Again 1 - 3(30) 4 - 6(31)
@@ -231,7 +231,7 @@ const NCOAge = [ //2d6
   { value: 12, age: 29 }, //Roll Again 1-2 (34) 3-4 (35) 5-6 (36
 ]
 
-const HomeState = [
+const HOME_STATE = [
   { value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], state: 'NY' },
   { value: [11, 12, 13, 14, 15, 16, 17], state: 'PA' },
   { value: [18, 19, 20, 21, 22, 23], state: 'IL' },
@@ -250,36 +250,36 @@ const HomeState = [
   { value: [63, 64], state: 'KY' },
   { value: [65, 66], state: 'AL' },
   { value: [67, 68], state: 'MN' },
-  { value: [], state: 'VA' },
-  { value: [], state: 'IA' },
-  { value: [], state: 'LA' },
-  { value: [], state: 'OK' },
-  { value: [], state: 'MS' },
-  { value: [], state: 'WV' },
-  { value: [], state: 'AR' },
-  { value: [], state: 'SC' },
-  { value: [], state: 'FL' },
-  { value: [], state: 'MD' },
-  { value: [], state: 'KS' },
-  { value: [], state: 'WA' },
-  { value: [], state: 'CT' },
-  { value: [], state: 'NE' },
-  { value: [], state: 'CO' },
-  { value: [], state: 'OR' },
-  { value: [], state: 'ME' },
-  { value: [], state: 'RI' },
-  { value: [], state: 'DC' },
-  { value: [], state: 'SD' },
-  { value: [], state: 'ND' },
-  { value: [], state: 'MT' },
-  { value: [], state: 'UT' },
-  { value: [], state: 'NM' },
-  { value: [], state: 'ID' },
-  { value: [], state: 'AZ' },
-  { value: [], state: 'NH' },
-  { value: [], state: 'VT' },
-  { value: [], state: 'DE' },
-  { value: [], state: 'WY' },
-  { value: [], state: 'NV' },
-  { value: [], state: 'See comment' }, //Roll 1d6 1-3) Hawaii Territory 4) Alaska Territory 5-6) roll 1d10+1d10 again on the table above
+  { value: [69], state: 'VA' },
+  { value: [70], state: 'IA' },
+  { value: [71], state: 'LA' },
+  { value: [72], state: 'OK' },
+  { value: [73], state: 'MS' },
+  { value: [74], state: 'WV' },
+  { value: [75], state: 'AR' },
+  { value: [76], state: 'SC' },
+  { value: [77], state: 'FL' },
+  { value: [78], state: 'MD' },
+  { value: [79], state: 'KS' },
+  { value: [80], state: 'WA' },
+  { value: [81], state: 'CT' },
+  { value: [82], state: 'NE' },
+  { value: [83], state: 'CO' },
+  { value: [84], state: 'OR' },
+  { value: [85], state: 'ME' },
+  { value: [86], state: 'RI' },
+  { value: [87], state: 'DC' },
+  { value: [88], state: 'SD' },
+  { value: [89], state: 'ND' },
+  { value: [90], state: 'MT' },
+  { value: [91], state: 'UT' },
+  { value: [92], state: 'NM' },
+  { value: [93], state: 'ID' },
+  { value: [94], state: 'AZ' },
+  { value: [95], state: 'NH' },
+  { value: [96], state: 'VT' },
+  { value: [97], state: 'DE' },
+  { value: [98], state: 'WY' },
+  { value: [99], state: 'NV' },
+  { value: [100], state: 'See comment' }, //Roll 1d6 1-3) Hawaii Territory 4) Alaska Territory 5-6) roll 1d10+1d10 again on the table above
 ]
