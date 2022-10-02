@@ -535,6 +535,58 @@ const TARGET_TYPE = [
 
 ]
 
+const COMBAT_BOX_CELL = [
+  { value: 1, label: 'High' },
+  { value: 2, label: 'Middle' },
+  { value: 3, label: 'Low' }
+]
+
+const BOMBER_POSITION = [
+  {
+    value: [2, 3, 4, 5],
+    middle: 1,
+    high: 7,
+    low: 13
+  },
+  {
+    value: [6],
+    middle: 12,
+    high: 8,
+    low: 14
+  },
+  {
+    value: [7],
+    middle: 3,
+    high: 9,
+    low: 15
+  },
+  {
+    value: [8],
+    middle: 4,
+    high: 10,
+    low: 16
+  },
+  {
+    value: [9],
+    middle: 5,
+    high: 12,
+    low: 17
+  },
+  {
+    value: [10],
+    middle: 6,
+    high: 'roll again',
+    low: 'roll again'
+  },
+  {
+    value: [11, 12],
+    middle: 'roll again',
+    high: 11,
+    low: 18
+  },
+
+]
+
 export const tableEnum = {
   'table_2_1': TABLE_2_1,
   'table_2_2': TABLE_2_2,
@@ -544,6 +596,8 @@ export const tableEnum = {
   'co_age': CO_AGE,
   'nco_age': NCO_AGE,
   'home_state': HOME_STATE,
-  'target_type': TARGET_TYPE
+  'target_type': TARGET_TYPE,
+  'combat_box_cell': COMBAT_BOX_CELL,
+  'bomber_position': BOMBER_POSITION
 }
 

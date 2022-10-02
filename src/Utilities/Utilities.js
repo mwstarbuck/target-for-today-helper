@@ -169,6 +169,26 @@ const rollCrew = (setter) => {
   setter(crew);
 }
 
+const getFormation = (setter) => {
+  let roll =  rollDice(3);
+  const cellTable = tableEnum('combat_box_cell')
+  const cell = cellTable.find(c => c.value === roll).label
+
+  roll = rollDice(11) + 1;
+  let position;
+  const positionTable = tableEnum('bomber_position');
+  switch (cell) {
+    case 'High':
+      position = positionTable.find(p => p.includes(roll).high);
+      
+      break;
+  
+    default:
+      break;
+  }
+
+}
+
 export const actionEnum = {
   'getResult': getResult,
   // 'campaignRoll': campaignRoll,
