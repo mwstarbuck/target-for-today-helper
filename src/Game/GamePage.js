@@ -40,7 +40,13 @@ const GamePage = () => {
           <h4>PERIOD: {ctx?.timePeriod}</h4>
           <h4>AIRCRAFT: {ctx?.bomber}{ctx.noseTurret ? <span style={{ fontSize: 12 }}>{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</span> : null}</h4>
           <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
-          <h5>MISSIONS: {ctx.campaign?.missions}</h5> </span>}
+          <h5>MISSIONS: {ctx.campaign?.missions}</h5>
+          <h5>TARGET: {ctx?.target}</h5>
+          <h5>TARGET TYPE: {ctx?.targetType}</h5> </span>
+
+        }
+        {ctx?.crew && ctx.crew.map((c, i) => <p style={{ fontSize: 10 }} key={i}>{`${c.position}: 
+          ${c.name}, Age: ${c.age}, State: ${c.state}, Status: ${c.status}`}</p>)}
       </div>
       <div className='column'>
         {/* {step === 1 && <button onClick={() => { actionEnum['campaignRoll'](ctx.setCampaign); nextStep(); }}>Roll for Campaign</button>} */}

@@ -28,12 +28,6 @@ const processModifiers = (modifiers) => {
   return { modifier: mod, log: modList }
 }
 
-// export const campaignRoll = (setter) => {
-//   const result = rollDice(6);
-//   const campaign = (TABLE_2_1.find(c => c.id === result));
-//   setter(campaign);
-// }
-
 const modifyRoll = (roll, modifier) => {
   return roll + modifier;
 }
@@ -74,7 +68,7 @@ const processResult = (stepInfo) => {
   setResult(result, stepInfo.setter);
 }
 
-const rollCrew = () => {
+const rollCrew = (setter) => {
   const crew = [];
 
   const crewEnum = {
@@ -125,7 +119,8 @@ const rollCrew = () => {
       position: crewEnum[i],
       name: `${last}, ${first}`,
       age: coAge,
-      state: homeState
+      state: homeState,
+      status: 'Good'
     }
     crew.push(member);
   }
@@ -165,11 +160,13 @@ const rollCrew = () => {
       position: crewEnum[i],
       name: `${last}, ${first}`,
       age: coAge,
-      state: homeState
+      state: homeState,
+      status: 'Good'
     }
     crew.push(member);
   }
   console.log(crew);
+  setter(crew);
 }
 
 export const actionEnum = {

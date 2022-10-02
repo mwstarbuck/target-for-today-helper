@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import b17 from '../Images/b17.jpeg';
 import { actionEnum, contextEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
+import { tableEnum } from "../Data/Tables";
 import Select from 'react-select';
 import './GamePage.css'
 
@@ -28,6 +29,8 @@ const Card = (props) => {
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
+
   const selectRef = useRef();
 
   const contextEnum = {
@@ -35,23 +38,43 @@ const Card = (props) => {
     'setStep': ctx.setStep,
     'setBomber': ctx.setBomber,
     'setTimePeriod': ctx.setTimePeriod,
-    'setNoseTurret': ctx.setNoseTurret
+    'setNoseTurret': ctx.setNoseTurret,
+    'setCrew': ctx.setCrew,
+    'setTargetType': ctx.setTargetType,
+    'setTarget': ctx.setTarget,
   }
 
   const optionsEnum = {
     'aircraft': ctx?.campaign?.aircraft,
-    'timePeriod': ctx?.campaign?.timePeriod
+    'timePeriod': ctx?.campaign?.timePeriod,
+    'target_type': tableEnum['target_type']
   }
 
   const action = actionEnum[props.action];
-  const stepInfo = {
-    maxValue: props.maxValue,
-    modifiers: props.modifiers,
-    diceType: props.diceType,
-    table: props.table,
-    setter: contextEnum[props.setter]
+  // const stepInfo = {
+  //   maxValue: props.maxValue,
+  //   modifiers: props.modifiers,
+  //   diceType: props.diceType,
+  //   table: props.table,
+  //   setter: contextEnum[props.setter]
+  // }
+  let methodInfo;
+  switch (props.action) {
+    case 'processResult':
+      methodInfo = {
+        maxValue: props.maxValue,
+        modifiers: props.modifiers,
+        diceType: props.diceType,
+        table: props.table,
+        setter: contextEnum[props.setter]
+      }
+      break;
+    case 'rollCrew':
+      methodInfo = contextEnum[props.setter]
+    default:
+      break;
   }
-
+  const stepInfo = methodInfo;
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
@@ -92,6 +115,18 @@ const Card = (props) => {
     setAdvance(true);
   }
 
+  const onInput = (e) => {
+    const input = e.target.value;
+    setInputValue(input);
+    console.log(input);
+  }
+
+  const onSubmit = () => {
+    const setter = contextEnum[props.setter]
+    setter(inputValue);
+    setAdvance(true);
+  }
+
   return <div className='card'>
     <div>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
@@ -126,6 +161,22 @@ const Card = (props) => {
             onChange={onSelect}
             value={selectValue}
           />
+        </div>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+          </div>
+        </>
+      }
+      {props.actionType === 'input' &&
+        <><div className='input'>
+          <input onChange={onInput} />
+          <button onClick={() => {
+            onSubmit();
+          }}
+            className='card__button'>
+            {props.actionText}
+          </button>
         </div>
           <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
