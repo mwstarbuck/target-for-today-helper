@@ -1,4 +1,3 @@
-import { tab } from "@testing-library/user-event/dist/tab";
 import { tableEnum } from "../Data/Tables";
 
 let engine = -1;
@@ -11,7 +10,7 @@ const modEnum = {
 
 export const rollDice = (max) => {
   const result = Math.floor(Math.random() * max + 1);
-  console.log(result);
+  // console.log(result);
   return result;
 }
 
@@ -28,12 +27,6 @@ const processModifiers = (modifiers) => {
   return { modifier: mod, log: modList }
 }
 
-// export const campaignRoll = (setter) => {
-//   const result = rollDice(6);
-//   const campaign = (TABLE_2_1.find(c => c.id === result));
-//   setter(campaign);
-// }
-
 const modifyRoll = (roll, modifier) => {
   return roll + modifier;
 }
@@ -42,17 +35,16 @@ const setResult = (result, setter) => {
   setter(result);
 }
 export const getResult = (roll, diceType, table) => {
-  // const roll = rollDice(max)
-  // const modPackage = processModifiers(modifiers);
+
   const theTable = tableEnum[table];
   switch (diceType) {
 
     case 'd6':
       return theTable.find(x => x.id === roll);
-      break;
+    case 'd6-simple':
+      return theTable.find(x => x.id === roll).label;
     case 'd100':
       return theTable.find(x => x.value.includes(roll));
-      break;
     default:
       break;
   }
@@ -72,9 +64,167 @@ const processResult = (stepInfo) => {
   setResult(result, stepInfo.setter);
 }
 
+const rollCrew = (setter) => {
+  const crew = [];
+
+  const crewEnum = {
+    0: 'Pilot',
+    1: 'Copilot',
+    2: 'Bombardier',
+    3: 'Navigator',
+    4: 'Engineer',
+    5: 'Radio Operator',
+    6: 'Pt Waist Gunner',
+    7: "Stb. Waist Gunner",
+    8: "Ball Gunner",
+    9: 'Tail Gunner'
+  };
+
+  for (let i = 0; i < 4; i++) {
+    let roll = rollDice(100) - 1;
+    const last = tableEnum['last_name'][roll];
+
+    roll = rollDice(100) - 1;
+    const first = tableEnum['first_name'][roll];
+
+    let ageRoll1 = rollDice(6);
+    let ageRoll2;
+    ageRoll2 = rollDice(6);
+
+    const rollSum = ageRoll1 + ageRoll2;
+    let tempAge;
+    if (rollSum === 11) {
+      tempAge = (rollDice(6) < 4 ? 27 : 28);
+    }
+    else
+      tempAge = tableEnum['co_age'].find(a => a.value === rollSum).age;
+    const coAge = tempAge;
+
+    roll = rollDice(100);
+    let tempState;
+    if (roll === 100) {
+      tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
+    }
+    else
+      tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
+    const homeState = tempState;
+    const member = {
+      position: crewEnum[i],
+      name: `${last}, ${first}`,
+      age: coAge,
+      state: homeState,
+      status: 'Good'
+    }
+    crew.push(member);
+  }
+
+  for (let i = 4; i < 10; i++) {
+    let roll = rollDice(100) - 1;
+    const last = tableEnum['last_name'][roll];
+
+    roll = rollDice(100) - 1;
+    const first = tableEnum['first_name'][roll];
+
+    let ageRoll1 = rollDice(6);
+    let ageRoll2;
+    ageRoll2 = rollDice(6);
+
+    const rollSum = ageRoll1 + ageRoll2;
+    let tempAge;
+    if (rollSum === 11) {
+      tempAge = (rollDice(6) < 4 ? 27 : 28);
+    }
+    else
+      tempAge = tableEnum['nco_age'].find(a => a.value === rollSum).age;
+    const coAge = tempAge;
+
+    roll = rollDice(100);
+    let tempState;
+    if (roll === 100) {
+      tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
+    }
+    else
+      tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
+    const homeState = tempState;
+    const member = {
+      position: crewEnum[i],
+      name: `${last}, ${first}`,
+      age: coAge,
+      state: homeState,
+      status: 'Good'
+    }
+    crew.push(member);
+  }
+  setter(crew);
+}
+
+const getBomberPosition = (setters) => {
+  let roll = rollDice(3);
+  const setCell = setters.setCell
+  const cellTable = tableEnum['combat_box_cell'];
+  const cell = cellTable.find(c => c.value === roll).label;
+  let modifier;
+  if (cell === 'Low')
+    modifier = 1;
+  if (cell === 'Middle')
+    modifier = -1;
+  else
+    modifier = 0;
+  setCell({ cell: cell, modifier: modifier });
+  console.log({ cell: cell, modifier: modifier })
+
+  roll = rollDice(36);
+  let number;
+  const setBomberNumber = setters.setBomberNumber;
+  const numberTable = tableEnum['bomber_number'];
+  switch (cell) {
+    case 'High':
+      number = numberTable.find(p => p.value.includes(roll)).high;
+      while (number === 'roll again') {
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).high;
+      }
+      if (number === 7)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else if (number === 11)
+        setBomberNumber(`${number} (Tail End Charlie)`);
+      else
+        setBomberNumber(number);
+      break;
+    case 'Low':
+      number = numberTable.find(p => p.value.includes(roll)).low;
+      while (number === 'roll again') {
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).low;
+      }
+      if (number === 13)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else if (number === 18)
+        setBomberNumber(`${number} (Tail End Charlie)`);
+      else
+        setBomberNumber(number);
+      break;
+    case 'Middle':
+      number = numberTable.find(p => p.value.includes(roll)).middle;
+      while (number === 'roll again') {
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).middle;
+      }
+      if (number === 1)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else
+        setBomberNumber(number);
+      break;
+    default:
+      break;
+  }
+}
+
 export const actionEnum = {
   'getResult': getResult,
-  // 'campaignRoll': campaignRoll,
-  'processResult': processResult
+  'processResult': processResult,
+  'rollCrew': rollCrew,
+  'getBomberPosition': getBomberPosition
+
 }
 

@@ -95,3 +95,29 @@
   background-color: red;
   color: white;
 }
+
+.selector {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 1rem;
+}
+
+.card__gobackaction {
+  /* padding: 1rem; */
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 20rem;
+  border: 2px solid gray;
+  background-color: transparent;
+  color: gray;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  transition: background 200ms ease-in, color 200ms ease-in;
+  float: left;
+}
+
+.card__gobackaction:hover {
+  background-color: red;
+  color: white;
+}

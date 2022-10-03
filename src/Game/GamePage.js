@@ -10,7 +10,6 @@ const GamePage = () => {
   const ctx = useContext(GameContext);
   const [showRoller, setShowRoller] = useState(false);
   // const [step, setStep] = useState(0);
-  let weather = 69;
   const step = ctx.step;
 
   const nextStep = () => {
@@ -30,7 +29,6 @@ const GamePage = () => {
     const campaign = (TABLE_2_1.find(c => c.id === result));
     ctx.setCampaign(campaign);
   }
-  console.log(ctx.campaign)
   return <>
     <h1 style={{ opacity: 0.6 }}>Target for Today Helper</h1>
 
@@ -39,10 +37,19 @@ const GamePage = () => {
       <div className='column'>
         Campaign Info
         {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
-          <h4>PERIOD: {ctx.campaign?.timePeriod}</h4>
-          <h4>AIRCRAFT: {ctx.campaign?.aircraft}</h4>
+          <h4>PERIOD: {ctx?.timePeriod}</h4>
+          <h4>AIRCRAFT: {ctx?.bomber}{ctx.noseTurret ? <span style={{ fontSize: 12 }}>{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</span> : null}</h4>
           <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
-          <h5>MISSIONS: {ctx.campaign?.missions}</h5> </span>}
+          <h5>MISSIONS: {ctx.campaign?.missions}</h5>
+          <h5>TARGET: {ctx?.target}</h5>
+          <h5>TARGET TYPE: {ctx?.targetType}</h5>
+          <h5>Formation Position: {ctx?.cell.cell}, {ctx?.bomberNumber}</h5>
+          <h5>modifier: modifier on table 5-2: {ctx?.cell.modifier}</h5> 
+        </span>
+
+        }
+        {ctx?.crew && ctx.crew.map((c, i) => <p style={{ fontSize: 10 }} key={i}>{`${c.position}: 
+          ${c.name}, Age: ${c.age}, State: ${c.state}, Status: ${c.status}`}</p>)}
       </div>
       <div className='column'>
         {/* {step === 1 && <button onClick={() => { actionEnum['campaignRoll'](ctx.setCampaign); nextStep(); }}>Roll for Campaign</button>} */}
