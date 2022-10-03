@@ -19,7 +19,7 @@ export const PRE_MISSION_STEPS = [
     maxValue: 6,
     table: 'table_2_1',
     options: null,
-    setter: 'setCampaign',
+    setter: { setterA: 'setCampaign' },//'setCampaign',
     contingencyStep: false,
   },
   {
@@ -37,7 +37,7 @@ export const PRE_MISSION_STEPS = [
     maxValue: null,
     table: 'table_2_1',
     options: 'aircraft',
-    setter: 'setBomber',
+    setter: { setterA: 'setBomber' },
     contingencyStep: false,
   },
   {
@@ -55,7 +55,7 @@ export const PRE_MISSION_STEPS = [
     diceType: 'd6-simple',
     maxValue: 6,
     table: 'table_2_9',
-    setter: 'setNoseTurret',
+    setter: { setterA: 'setNoseTurret' },
     contingencyStep: true,
     contingencyValue: 'bomber',
     contingentUpon: 'B-24J'
@@ -75,7 +75,7 @@ export const PRE_MISSION_STEPS = [
     maxValue: null,
     table: 'table_2_1',
     options: 'timePeriod',
-    setter: 'setTimePeriod',
+    setter: { setterA: 'setTimePeriod' },
     contingencyStep: false,
     skipBack: 2
   },
@@ -90,7 +90,7 @@ export const PRE_MISSION_STEPS = [
     actionType: 'roll',
     action: 'rollCrew',
     actionText: 'Roll for Crew',
-    setter: 'setCrew',
+    setter: { setterA: 'setCrew' },
     contingencyStep: false,
   },
   {
@@ -105,7 +105,7 @@ export const PRE_MISSION_STEPS = [
     action: 'submit',
     actionText: 'Select Target Type',
     options: 'target_type',
-    setter: 'setTargetType',
+    setter: { setterA: 'setTargetType' },
     contingencyStep: false,
 
     // modifiers: ['weather', 'engine']
@@ -122,13 +122,33 @@ export const PRE_MISSION_STEPS = [
     action: 'submit',
     actionText: 'Select Target City',
     // options: 'target_type',
-    setter: 'setTarget',
+    setter: { setterA: 'setTarget' },
     contingencyStep: false,
 
     // modifiers: ['weather', 'engine']
   },
   {
     id: 8,
+    section: 'pre-mission',
+    heading: 'Bomber Position in Formation',
+    instruction: 'Input bombing target (City) depending on the campaign in tables 2-2 through 2-7M depending on selected campaign.',
+    reference: 'Tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook',
+    additionalInfo: null,
+    hasAction: true,
+    actionType: 'roll',
+    action: 'getBomberPosition',
+    actionText: 'Bomber Positon Roll',
+    // options: 'target_type',
+    setter: {
+      setterA: 'setCell',
+      setterB: 'setBomberNumber'
+    },
+    contingencyStep: false,
+
+    // modifiers: ['weather', 'engine']
+  },
+  {
+    id: 9,
     section: 'pre-mission',
     heading: 'Determine Zones',
     instruction: 'Find the number of zones in the alphabetized Air Force Flight Log Gazetteer - Tables 2-8A (8th Air Force) and 2-8B (15th Air Force).',

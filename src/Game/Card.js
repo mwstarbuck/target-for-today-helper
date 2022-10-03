@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import b17 from '../Images/b17.jpeg';
-import { actionEnum, contextEnum } from '../Utilities/Utilities';
+import { actionEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
 import { tableEnum } from "../Data/Tables";
 import Select from 'react-select';
@@ -23,7 +23,6 @@ const modEnum = {
 //   console.log('result:', roll)
 // }
 //#endregion
-const options = [{ value: 'poop', label: 'poop' }, { value: 'pee', label: 'pee' }]
 
 const Card = (props) => {
   const ctx = useContext(GameContext);
@@ -42,6 +41,8 @@ const Card = (props) => {
     'setCrew': ctx.setCrew,
     'setTargetType': ctx.setTargetType,
     'setTarget': ctx.setTarget,
+    'setCell': ctx.setCell,
+    'setBomberNumber': ctx.setBomberNumber
   }
 
   const optionsEnum = {
@@ -66,19 +67,27 @@ const Card = (props) => {
         modifiers: props.modifiers,
         diceType: props.diceType,
         table: props.table,
-        setter: contextEnum[props.setter]
+        setter: contextEnum[props.setter.setterA]
       }
       break;
     case 'rollCrew':
-      methodInfo = contextEnum[props.setter]
+      methodInfo = contextEnum[props.setter.setterA]
+      break;
+    case 'getBomberPosition':
+      methodInfo = {
+        setCell: contextEnum[props.setter.setterA],
+        setBomberNumber: contextEnum[props.setter.setterB]
+      }
+      break;
     default:
       break;
   }
-  const stepInfo = methodInfo;
+  const params = methodInfo;
+  console.log(params);
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
-    {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(stepInfo)} className='card__button'>{props.actionText}</button>}
+    {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(params)} className='card__button'>{props.actionText}</button>}
     {/* {props.hasAction && props.actionType === 'select' &&
     <Select options={options}></Select>} */}
   </>
@@ -109,7 +118,7 @@ const Card = (props) => {
     }
   }
   const onSelect = (selection) => {
-    const setter = contextEnum[props.setter]
+    const setter = contextEnum[props.setter.setterA]
     setSelectValue(selection);
     setter(selection.value);
     setAdvance(true);
@@ -122,7 +131,7 @@ const Card = (props) => {
   }
 
   const onSubmit = () => {
-    const setter = contextEnum[props.setter]
+    const setter = contextEnum[props.setter.setterA]
     setter(inputValue);
     setAdvance(true);
   }
@@ -142,7 +151,7 @@ const Card = (props) => {
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
       {!props.isIncrement && props.actionType === 'roll' && <>
         <button onClick={() => {
-          action(stepInfo);
+          action(params);
           setAdvance(true);
         }}
           className='card__button'>

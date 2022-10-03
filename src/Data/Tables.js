@@ -541,7 +541,7 @@ const COMBAT_BOX_CELL = [
   { value: 3, label: 'Low' }
 ]
 
-const BOMBER_POSITION = [
+const BOMBER_NUMBER = [
   {
     value: [2, 3, 4, 5],
     middle: 1,
@@ -598,6 +598,6 @@ export const tableEnum = {
   'home_state': HOME_STATE,
   'target_type': TARGET_TYPE,
   'combat_box_cell': COMBAT_BOX_CELL,
-  'bomber_position': BOMBER_POSITION
+  'bomber_number': BOMBER_NUMBER
 }
 

@@ -169,31 +169,53 @@ const rollCrew = (setter) => {
   setter(crew);
 }
 
-const getFormation = (setter) => {
-  let roll =  rollDice(3);
-  const cellTable = tableEnum('combat_box_cell')
-  const cell = cellTable.find(c => c.value === roll).label
+const getBomberPosition = (setters) => {
+  console.log(setters);
+  let roll = rollDice(3);
+  const setCell = setters.setCell
+  const cellTable = tableEnum['combat_box_cell'];
+  const cell = cellTable.find(c => c.value === roll).label;
+  setCell(cell);
 
   roll = rollDice(11) + 1;
-  let position;
-  const positionTable = tableEnum('bomber_position');
+  let number;
+  const setBomberNumber = setters.setBomberNumber;
+  const numberTable = tableEnum['bomber_number'];
   switch (cell) {
     case 'High':
-      position = positionTable.find(p => p.includes(roll).high);
-      
+      number = numberTable.find(p => p.value.includes(roll)).high;
+      while (number === 'roll again') {
+        roll = rollDice(11) + 1;
+        number = numberTable.find(p => p.value.includes(roll)).high;
+      }
+      setBomberNumber(number);
+      console.log('cell: ' + cell, 'position: ', number)
       break;
-  
+    case 'Low':
+      number = numberTable.find(p => p.value.includes(roll)).low;
+      while (number === 'roll again') {
+        roll = rollDice(11) + 1;
+        number = numberTable.find(p => p.value.includes(roll)).low;
+      }
+      setBomberNumber(number);
+      console.log('cell: ' + cell, 'position: ', number)
+      break;
+    case 'Middle':
+      number = numberTable.find(p => p.value.includes(roll)).middle;
+      setBomberNumber(number);
+      console.log('cell: ' + cell, 'position: ', number)
+
+      break;
     default:
       break;
   }
-
 }
 
 export const actionEnum = {
   'getResult': getResult,
-  // 'campaignRoll': campaignRoll,
   'processResult': processResult,
-  'rollCrew': rollCrew
+  'rollCrew': rollCrew,
+  'getBomberPosition': getBomberPosition
 
 }
 
