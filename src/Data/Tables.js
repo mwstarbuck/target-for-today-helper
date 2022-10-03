@@ -543,43 +543,43 @@ const COMBAT_BOX_CELL = [
 
 const BOMBER_NUMBER = [
   {
-    value: [2, 3, 4, 5],
+    value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     middle: 1,
     high: 7,
     low: 13
   },
   {
-    value: [6],
+    value: [11, 12, 13, 14, 15],
     middle: 12,
     high: 8,
     low: 14
   },
   {
-    value: [7],
+    value: [16, 17, 18, 19, 20, 21],
     middle: 3,
     high: 9,
     low: 15
   },
   {
-    value: [8],
+    value: [22, 23, 24, 25, 26],
     middle: 4,
     high: 10,
     low: 16
   },
   {
-    value: [9],
+    value: [27, 28, 29, 30],
     middle: 5,
     high: 12,
     low: 17
   },
   {
-    value: [10],
+    value: [31, 32, 33],
     middle: 6,
     high: 'roll again',
     low: 'roll again'
   },
   {
-    value: [11, 12],
+    value: [34, 35, 36],
     middle: 'roll again',
     high: 11,
     low: 18

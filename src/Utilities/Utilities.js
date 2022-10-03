@@ -177,7 +177,7 @@ const getBomberPosition = (setters) => {
   const cell = cellTable.find(c => c.value === roll).label;
   setCell(cell);
 
-  roll = rollDice(11) + 1;
+  roll = rollDice(36);
   let number;
   const setBomberNumber = setters.setBomberNumber;
   const numberTable = tableEnum['bomber_number'];
@@ -185,26 +185,39 @@ const getBomberPosition = (setters) => {
     case 'High':
       number = numberTable.find(p => p.value.includes(roll)).high;
       while (number === 'roll again') {
-        roll = rollDice(11) + 1;
+        roll = rollDice(36);
         number = numberTable.find(p => p.value.includes(roll)).high;
       }
-      setBomberNumber(number);
-      console.log('cell: ' + cell, 'position: ', number)
+      if (number === 7)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else if (number === 11)
+        setBomberNumber(`${number} (Tail End Charlie)`);
+      else
+        setBomberNumber(number);
       break;
     case 'Low':
       number = numberTable.find(p => p.value.includes(roll)).low;
       while (number === 'roll again') {
-        roll = rollDice(11) + 1;
+        roll = rollDice(36);
         number = numberTable.find(p => p.value.includes(roll)).low;
       }
-      setBomberNumber(number);
-      console.log('cell: ' + cell, 'position: ', number)
+      if (number === 13)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else if (number === 18)
+        setBomberNumber(`${number} (Tail End Charlie)`);
+      else
+        setBomberNumber(number);
       break;
     case 'Middle':
       number = numberTable.find(p => p.value.includes(roll)).middle;
-      setBomberNumber(number);
-      console.log('cell: ' + cell, 'position: ', number)
-
+      while (number === 'roll again') {
+        roll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(roll)).middle;
+      }
+      if (number === 1)
+        setBomberNumber(`${number} (Cell Leader)`);
+      else 
+        setBomberNumber(number);
       break;
     default:
       break;

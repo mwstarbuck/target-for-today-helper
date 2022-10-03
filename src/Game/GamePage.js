@@ -42,7 +42,8 @@ const GamePage = () => {
           <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
           <h5>MISSIONS: {ctx.campaign?.missions}</h5>
           <h5>TARGET: {ctx?.target}</h5>
-          <h5>TARGET TYPE: {ctx?.targetType}</h5> </span>
+          <h5>TARGET TYPE: {ctx?.targetType}</h5>
+          <h5>Formation Position: {ctx?.cell}, {ctx?.bomberNumber}</h5> </span>
 
         }
         {ctx?.crew && ctx.crew.map((c, i) => <p style={{ fontSize: 10 }} key={i}>{`${c.position}: 
