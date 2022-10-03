@@ -168,10 +168,8 @@ const getBomberPosition = (setters) => {
     modifier = 1;
   if (cell === 'Middle')
     modifier = -1;
-  else
-    modifier = 0;
   setCell({ cell: cell, modifier: modifier });
-  console.log({ cell: cell, modifier: modifier })
+  modifier && setters.setModifiers([`modifier on table 5-2: ${modifier}`])
 
   roll = rollDice(36);
   let number;

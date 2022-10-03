@@ -140,7 +140,8 @@ export const PRE_MISSION_STEPS = [
     actionText: 'Bomber Positon Roll',
     setter: {
       setterA: 'setCell',
-      setterB: 'setBomberNumber'
+      setterB: 'setBomberNumber',
+      setterC: 'setModifiers'
     },
     contingencyStep: false,
 

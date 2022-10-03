@@ -42,7 +42,8 @@ const Card = (props) => {
     'setTargetType': ctx.setTargetType,
     'setTarget': ctx.setTarget,
     'setCell': ctx.setCell,
-    'setBomberNumber': ctx.setBomberNumber
+    'setBomberNumber': ctx.setBomberNumber,
+    'setModifiers': ctx.setModifiers
   }
 
   const optionsEnum = {
@@ -76,7 +77,8 @@ const Card = (props) => {
     case 'getBomberPosition':
       methodInfo = {
         setCell: contextEnum[props.setter.setterA],
-        setBomberNumber: contextEnum[props.setter.setterB]
+        setBomberNumber: contextEnum[props.setter.setterB],
+        setModifiers: contextEnum[props.setter.setterC]
       }
       break;
     default:

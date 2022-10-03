@@ -5,6 +5,7 @@ import PreMissionInfo from './PreMissionInfo';
 import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import { actionEnum } from '../Utilities/Utilities';
 import { GameContext } from './GameContext';
+import { Popover } from 'antd';
 
 const GamePage = () => {
   const ctx = useContext(GameContext);
@@ -44,7 +45,7 @@ const GamePage = () => {
           <h5>TARGET: {ctx?.target}</h5>
           <h5>TARGET TYPE: {ctx?.targetType}</h5>
           <h5>Formation Position: {ctx?.cell.cell}, {ctx?.bomberNumber}</h5>
-          <h5>modifier: modifier on table 5-2: {ctx?.cell.modifier}</h5> 
+          <h5>modifier: modifier on table 5-2: {ctx?.cell.modifier}</h5>
         </span>
 
         }
@@ -57,7 +58,11 @@ const GamePage = () => {
           step={step} />}
         {/* {step > 1 && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={nextStep}>Next Step</button><button onClick={lastStep}>Cancel/Go Back</button></div>} */}
       </div>
-      <div className='column'>Bomber Card</div>
+      <div className='column'>Bomber Card
+        {/* <Popover trigger='click' placement='top' content={<div>Apply To Rolls<ul>{ctx?.modifiers.map(m => <li>{m}</li>)}</ul></div>}>
+          <div>Roll Mods</div>
+        </Popover> */}
+      </div>
     </div>}
   </>
 }

@@ -6,6 +6,7 @@ export const GameContextProvider = ({ children }) => {
   const [step, setStep] = useState(0);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
+  const [modifiers, setModifiers] =  useState([]);
   const [bomber, setBomber] = useState();
   const [noseTurret, setNoseTurret] = useState();
   const [timePeriod, setTimePeriod] = useState();
@@ -24,6 +25,8 @@ export const GameContextProvider = ({ children }) => {
       setGameStep,
       campaign,
       setCampaign,
+      modifiers,
+      setModifiers,
       bomber,
       setBomber,
       timePeriod,
