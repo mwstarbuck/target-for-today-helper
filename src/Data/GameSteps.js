@@ -131,14 +131,13 @@ export const PRE_MISSION_STEPS = [
     id: 8,
     section: 'pre-mission',
     heading: 'Bomber Position in Formation',
-    instruction: 'Input bombing target (City) depending on the campaign in tables 2-2 through 2-7M depending on selected campaign.',
+    instruction: 'Determin the bomber position for the mission',
     reference: 'Tables 2-2 through 2-7M found in the Target Listings and Gazetteer Handbook',
     additionalInfo: null,
     hasAction: true,
     actionType: 'roll',
     action: 'getBomberPosition',
     actionText: 'Bomber Positon Roll',
-    // options: 'target_type',
     setter: {
       setterA: 'setCell',
       setterB: 'setBomberNumber'
