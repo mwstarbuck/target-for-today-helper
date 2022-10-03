@@ -1,4 +1,3 @@
-import { tab } from "@testing-library/user-event/dist/tab";
 import { tableEnum } from "../Data/Tables";
 
 let engine = -1;
@@ -42,13 +41,10 @@ export const getResult = (roll, diceType, table) => {
 
     case 'd6':
       return theTable.find(x => x.id === roll);
-      break;
     case 'd6-simple':
       return theTable.find(x => x.id === roll).label;
-      break;
     case 'd100':
       return theTable.find(x => x.value.includes(roll));
-      break;
     default:
       break;
   }
@@ -96,10 +92,8 @@ const rollCrew = (setter) => {
     ageRoll2 = rollDice(6);
 
     const rollSum = ageRoll1 + ageRoll2;
-    console.log('ageRoll1: ', ageRoll1, 'ageRoll2: ', ageRoll2, 'sum: ', rollSum)
     let tempAge;
     if (rollSum === 11) {
-      console.log('altAgeRoll');
       tempAge = (rollDice(6) < 4 ? 27 : 28);
     }
     else
@@ -109,7 +103,6 @@ const rollCrew = (setter) => {
     roll = rollDice(100);
     let tempState;
     if (roll === 100) {
-      console.log('altStateRoll')
       tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
     }
     else
@@ -137,10 +130,8 @@ const rollCrew = (setter) => {
     ageRoll2 = rollDice(6);
 
     const rollSum = ageRoll1 + ageRoll2;
-    console.log('ageRoll1: ', ageRoll1, 'ageRoll2: ', ageRoll2, 'sum: ', rollSum)
     let tempAge;
     if (rollSum === 11) {
-      console.log('altAgeRoll');
       tempAge = (rollDice(6) < 4 ? 27 : 28);
     }
     else
@@ -150,7 +141,6 @@ const rollCrew = (setter) => {
     roll = rollDice(100);
     let tempState;
     if (roll === 100) {
-      console.log('altStateRoll')
       tempState = (rollDice(4) > 4 ? 'HI' : 'AK');
     }
     else
@@ -165,17 +155,23 @@ const rollCrew = (setter) => {
     }
     crew.push(member);
   }
-  console.log(crew);
   setter(crew);
 }
 
 const getBomberPosition = (setters) => {
-  console.log(setters);
   let roll = rollDice(3);
   const setCell = setters.setCell
   const cellTable = tableEnum['combat_box_cell'];
   const cell = cellTable.find(c => c.value === roll).label;
-  setCell(cell);
+  let modifier;
+  if (cell === 'Low')
+    modifier = 1;
+  if (cell === 'Middle')
+    modifier = -1;
+  else
+    modifier = 0;
+  setCell({ cell: cell, modifier: modifier });
+  console.log({ cell: cell, modifier: modifier })
 
   roll = rollDice(36);
   let number;
@@ -185,8 +181,8 @@ const getBomberPosition = (setters) => {
     case 'High':
       number = numberTable.find(p => p.value.includes(roll)).high;
       while (number === 'roll again') {
-        roll = rollDice(36);
-        number = numberTable.find(p => p.value.includes(roll)).high;
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).high;
       }
       if (number === 7)
         setBomberNumber(`${number} (Cell Leader)`);
@@ -198,8 +194,8 @@ const getBomberPosition = (setters) => {
     case 'Low':
       number = numberTable.find(p => p.value.includes(roll)).low;
       while (number === 'roll again') {
-        roll = rollDice(36);
-        number = numberTable.find(p => p.value.includes(roll)).low;
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).low;
       }
       if (number === 13)
         setBomberNumber(`${number} (Cell Leader)`);
@@ -211,12 +207,12 @@ const getBomberPosition = (setters) => {
     case 'Middle':
       number = numberTable.find(p => p.value.includes(roll)).middle;
       while (number === 'roll again') {
-        roll = rollDice(36);
-        number = numberTable.find(p => p.value.includes(roll)).middle;
+        const reroll = rollDice(36);
+        number = numberTable.find(p => p.value.includes(reroll)).middle;
       }
       if (number === 1)
         setBomberNumber(`${number} (Cell Leader)`);
-      else 
+      else
         setBomberNumber(number);
       break;
     default:

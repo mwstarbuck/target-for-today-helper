@@ -83,7 +83,6 @@ const Card = (props) => {
       break;
   }
   const params = methodInfo;
-  console.log(params);
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
@@ -127,7 +126,6 @@ const Card = (props) => {
   const onInput = (e) => {
     const input = e.target.value;
     setInputValue(input);
-    console.log(input);
   }
 
   const onSubmit = () => {

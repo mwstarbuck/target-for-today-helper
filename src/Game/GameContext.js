@@ -12,7 +12,7 @@ export const GameContextProvider = ({ children }) => {
   const [target, setTarget] = useState();
   const [crew, setCrew] = useState();
   const [targetType, setTargetType] = useState();
-  const [cell, setCell] = useState();
+  const [cell, setCell] = useState({});
   const [bomberNumber, setBomberNumber] = useState();
 
 
