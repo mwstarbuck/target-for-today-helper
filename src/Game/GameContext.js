@@ -6,7 +6,7 @@ export const GameContextProvider = ({ children }) => {
   const [step, setStep] = useState(0);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
-  const [modifiers, setModifiers] =  useState([]);
+  const [modifiers, setModifiers] = useState({});
   const [bomber, setBomber] = useState();
   const [noseTurret, setNoseTurret] = useState();
   const [timePeriod, setTimePeriod] = useState();
@@ -15,6 +15,7 @@ export const GameContextProvider = ({ children }) => {
   const [targetType, setTargetType] = useState();
   const [cell, setCell] = useState({});
   const [bomberNumber, setBomberNumber] = useState();
+  const [zones, setZones] = useState();
 
 
   return (
@@ -42,7 +43,9 @@ export const GameContextProvider = ({ children }) => {
       cell,
       setCell,
       bomberNumber,
-      setBomberNumber
+      setBomberNumber,
+      zones,
+      setZones
     }}
     >
       {children}
