@@ -5,7 +5,7 @@ import GameContext from './GameContext';
 import { tableEnum } from "../Data/Tables";
 import Select from 'react-select';
 import './GamePage.css'
-
+import { Popover } from 'antd';
 
 //#region test
 // TODO: use result to match table entry
@@ -29,6 +29,7 @@ const Card = (props) => {
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
   const [inputValue, setInputValue] = useState(null);
+  const [showMods, setShowMods] = useState(false);
 
   const selectRef = useRef();
 
@@ -137,6 +138,17 @@ const Card = (props) => {
   }
 
   return <div className='card'>
+    <Popover  open={showMods}
+    zIndex={2000}
+    color='white'
+    trigger='click'
+    overlayStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
+    overlayInnerStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
+    onOpenChange={() => setShowMods(!showMods)}
+    placement='bottom'
+    content={showMods && <div ><ul>{ctx?.modifiers.map(m => <li style={{color: 'red'}}>{m}</li>)}</ul></div>}>
+      <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
+    </Popover>
     <div>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
       <h2 style={{ marginBottom: -5 }}>{props.title}</h2>

@@ -153,7 +153,7 @@ export const PRE_MISSION_STEPS = [
     heading: 'Determine Zones',
     instruction: 'Find the number of zones in the alphabetized Air Force Flight Log Gazetteer - Tables 2-8A (8th Air Force) and 2-8B (15th Air Force).',
     reference: 'Tables 2-8A (8th Air Force) and 2-8B (15th Air Force)',
-    additionalInfo: ['W = Water, A = Albania, Au = Austria, B = Belgium, Bu = Bulgaria, C = Corsica, Cz = Czechoslovakia, E=England, F = France; G = Germany, Gr = Greece, H = Hungary, I = Italy, L=Luxembourg, N=Netherlands, No=Norway, P=Poland, R = Rumania, S=Switzerland, U = Ukraine, Y = Yugoslavia.', 'The number to the left of the slash is the modification, if any, to the roll on Table 5-1 when determining the actual German Fighter Resistance in the zone.  Before noting the target city\'s information in the zone boxes on the Mission Log Sheet, check Table 2 - 8C for modifications to the information.'],
+    additionalInfo: ['W = Water, A = Albania, Au = Austria, B = Belgium, Bu = Bulgaria, C = Corsica, Cz = Czechoslovakia, E = England, F = France; G = Germany, Gr = Greece, H = Hungary, I = Italy, L = Luxembourg, N = Netherlands, No = Norway, P = Poland, R = Rumania, S = Switzerland, U = Ukraine, Y = Yugoslavia.', 'The number to the left of the slash is the modification, if any, to the roll on Table 5-1 when determining the actual German Fighter Resistance in the zone.  Before noting the target city\'s information in the zone boxes on the Mission Log Sheet, check Table 2 - 8C for modifications to the information.'],
     hasAction: true,
     actionType: 'select',
     action: 'submit',
