@@ -44,8 +44,8 @@ const GamePage = () => {
           <h5>MISSIONS: {ctx.campaign?.missions}</h5>
           <h5>TARGET: {ctx?.target}</h5>
           <h5>TARGET TYPE: {ctx?.targetType}</h5>
-          <h5>Formation Position: {ctx?.cell.cell}, {ctx?.bomberNumber}</h5>
-          <h5>modifier: modifier on table 5-2: {ctx?.cell.modifier}</h5>
+          <h5>Formation Position: {ctx?.cell?.cell}, {ctx?.bomberNumber}</h5>
+          <h5>modifier: modifier on table 5-2: {ctx?.cell?.modifier}</h5>
         </span>
 
         }

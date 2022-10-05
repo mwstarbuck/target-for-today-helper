@@ -36,7 +36,8 @@ const Card = (props) => {
     'setCell': ctx.setCell,
     'setBomberNumber': ctx.setBomberNumber,
     'setModifiers': ctx.setModifiers,
-    'setZones': ctx.setZones
+    'modifiers': ctx.modifiers,
+    'setZones': ctx.setZones,
   }
 
   const optionsEnum = {
@@ -66,7 +67,8 @@ const Card = (props) => {
       methodInfo = {
         setCell: contextEnum[props.setter.setterA],
         setBomberNumber: contextEnum[props.setter.setterB],
-        setModifiers: contextEnum[props.setter.setterC]
+        setModifiers: contextEnum[props.setter.setterC],
+        modifiers: contextEnum[props.modifiers]
       }
       break;
     default:
@@ -141,7 +143,7 @@ const Card = (props) => {
       overlayInnerStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
       onOpenChange={() => setShowMods(!showMods)}
       placement='bottom'
-      content={showMods && <div ><ul>{ctx?.modifiers.map(m => <li style={{ color: 'red' }}>{m}</li>)}</ul></div>}>
+      content={showMods && <div ><ul>{ctx?.modifiers?.map(m => <li style={{ color: 'red' }}>{m.modifier}</li>)}</ul></div>}>
       <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
     </Popover>
     <div>

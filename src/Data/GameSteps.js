@@ -143,6 +143,7 @@ export const PRE_MISSION_STEPS = [
       setterB: 'setBomberNumber',
       setterC: 'setModifiers'
     },
+    modifiers: 'modifiers',
     contingencyStep: false,
 
     // modifiers: ['weather', 'engine']
