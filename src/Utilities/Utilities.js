@@ -237,7 +237,7 @@ export const actionEnum = {
   'getResult': getResult,
   'processResult': processResult,
   'rollCrew': rollCrew,
-  'getBomberPosition': getBomberPosition
-
+  'getBomberPosition': getBomberPosition,
+  //more to  come
 }
 
