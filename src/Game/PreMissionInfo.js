@@ -31,7 +31,8 @@ const PreMissionInfo = (props) => {
   }, [step])
   return <>
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Card title={ctx.gameStep?.heading}
+      <Card heading={ctx.gameStep?.heading}
+        subHeading={ctx.gameStep?.subHeading}
         description={ctx.gameStep?.instruction}
         reference={ctx.gameStep?.reference}
         additionalInfo={ctx.gameStep?.additionalInfo}
@@ -48,7 +49,8 @@ const PreMissionInfo = (props) => {
         contingencyStep={ctx.gameStep?.contingencyStep}
         contingencyValue={ctx.gameStep?.contingencyValue}
         contingentUpon={ctx.gameStep?.contingentUpon}
-        skipBack={ctx.gameStep?.skipBack} />
+        skipBack={ctx.gameStep?.skipBack}
+        tableImage={ctx.gameStep?.tableImage} />
     </div>
   </>
 }

@@ -167,11 +167,13 @@ export const PRE_MISSION_STEPS = [
     id: 10,
     section: 'pre-mission',
     heading: 'Determine Fighter Escort',
-    instruction: 'Determine mission\'s fighter escort on Table 2-13',
+    subHeading: 'Zones 2-5',
+    instruction: 'Determine mission\'s fighter escort on Table 2-13 (1D10)',
     reference: 'Table 2-13',
     additionalInfo: null,
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    tableImage: ['2-13-1', '2-13-2', '2-13-3', '2-13-4', '2-13-5', '2-13-6']
   },
   {
     id: 11,
