@@ -17,8 +17,7 @@ const PreMissionInfo = (props) => {
 
       const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
       if (nextStep?.contingencyStep === true) {
-        const value = contingencyEnum[nextStep?.contingencyValue];
-        // console.log(value, nextStep?.contingentUpon);
+        // const value = contingencyEnum[nextStep?.contingencyValue];
         if (contingencyEnum[nextStep?.contingencyValue] === nextStep?.contingentUpon) {
           ctx.setGameStep(nextStep);
         }
@@ -26,27 +25,14 @@ const PreMissionInfo = (props) => {
           ctx.setStep(ctx.step + 1)
         }
       }
-      // }
       else
         ctx.setGameStep(nextStep)
-      // if (step === 3) {
-      //   if (ctx.bomber === 'B-24J') {
-      //     const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
-      //     ctx.setGameStep(nextStep);
-      //   }
-      //   else {
-      //     ctx.setStep(ctx.step + 1)
-      //   }
-      // }
-      // else {
-      //   const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
-      //   ctx.setGameStep(nextStep);
-      // }
     }
   }, [step])
   return <>
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Card title={ctx.gameStep?.heading}
+      <Card heading={ctx.gameStep?.heading}
+        subHeading={ctx.gameStep?.subHeading}
         description={ctx.gameStep?.instruction}
         reference={ctx.gameStep?.reference}
         additionalInfo={ctx.gameStep?.additionalInfo}
@@ -63,7 +49,8 @@ const PreMissionInfo = (props) => {
         contingencyStep={ctx.gameStep?.contingencyStep}
         contingencyValue={ctx.gameStep?.contingencyValue}
         contingentUpon={ctx.gameStep?.contingentUpon}
-        skipBack={ctx.gameStep?.skipBack} />
+        skipBack={ctx.gameStep?.skipBack}
+        tableImage={ctx.gameStep?.tableImage} />
     </div>
   </>
 }

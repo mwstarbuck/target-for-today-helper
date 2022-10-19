@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { tableEnum } from "../Data/Tables";
 
 let engine = -1;
@@ -163,18 +164,19 @@ const getBomberPosition = (setters) => {
   const setCell = setters.setCell
   const cellTable = tableEnum['combat_box_cell'];
   const cell = cellTable.find(c => c.value === roll).label;
-  let modifier;
+  const prevMods = setters.modifiers;
+  let newMods = [];
+  let cellModifier;
   if (cell === 'Low')
-    modifier = 1;
+    cellModifier = 1;
   if (cell === 'Middle')
-    modifier = -1;
-  else
-    modifier = 0;
-  setCell({ cell: cell, modifier: modifier });
-  console.log({ cell: cell, modifier: modifier })
-
+    cellModifier = -1;
+  setCell({ cell: cell, modifier: cellModifier });
+  cellModifier && newMods.push({ relation: 'cell', modifier: `modifier on table 5-2: ${cellModifier}` })
+ 
   roll = rollDice(36);
   let number;
+  let numberMod;
   const setBomberNumber = setters.setBomberNumber;
   const numberTable = tableEnum['bomber_number'];
   switch (cell) {
@@ -184,10 +186,14 @@ const getBomberPosition = (setters) => {
         const reroll = rollDice(36);
         number = numberTable.find(p => p.value.includes(reroll)).high;
       }
-      if (number === 7)
+      if (number === 7) {
         setBomberNumber(`${number} (Cell Leader)`);
-      else if (number === 11)
+        newMods.push({ relation: 'bomberPosition', modifier: `Cell leader: + 1 ME-109 12 O'Clock` });
+      }
+      else if (number === 11) {
         setBomberNumber(`${number} (Tail End Charlie)`);
+        newMods.push({ relation: 'bomberPosition', modifier: `Cell leader: + 1 ME-109 6 O'Clock` });
+      }
       else
         setBomberNumber(number);
       break;
@@ -197,10 +203,14 @@ const getBomberPosition = (setters) => {
         const reroll = rollDice(36);
         number = numberTable.find(p => p.value.includes(reroll)).low;
       }
-      if (number === 13)
+      if (number === 13) {
         setBomberNumber(`${number} (Cell Leader)`);
-      else if (number === 18)
+        newMods.push({ relation: 'bomberPosition', modifier: `Cell leader: + 1 ME-109 12 O'Clock` });
+      }
+      else if (number === 18) {
         setBomberNumber(`${number} (Tail End Charlie)`);
+        newMods.push({ relation: 'bomberPosition', modifier: `Cell leader: + 1 ME-109 6 O'Clock` });
+      }
       else
         setBomberNumber(number);
       break;
@@ -210,21 +220,24 @@ const getBomberPosition = (setters) => {
         const reroll = rollDice(36);
         number = numberTable.find(p => p.value.includes(reroll)).middle;
       }
-      if (number === 1)
-        setBomberNumber(`${number} (Cell Leader)`);
+      if (number === 1) {
+        setBomberNumber(`${number} (Group Mission Lead Bomber)`);
+        newMods.push({ relation: 'bomberPosition', modifier: `Cell leader: + 1 ME-109 12 O'Clock` });
+      }
       else
         setBomberNumber(number);
       break;
     default:
       break;
   }
+  setters.setModifiers(([...prevMods, ...newMods]));
 }
 
 export const actionEnum = {
   'getResult': getResult,
   'processResult': processResult,
   'rollCrew': rollCrew,
-  'getBomberPosition': getBomberPosition
-
+  'getBomberPosition': getBomberPosition,
+  //more to  come
 }
 

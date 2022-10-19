@@ -7,8 +7,8 @@ export const TABLE_2_1 = [
       { value: '9/1942', label: '9/1942' },
       { value: '10/1942', label: '10/1942' },
       { value: '11/1942', label: '11/1942' },
-      { value: '12/1942', label: '13/1942' },
-      { value: '1/1943', label: '8/1943' },
+      { value: '12/1942', label: '12/1942' },
+      { value: '1/1943', label: '1/1943' },
       { value: '2/1943', label: '2/1943' },
       { value: '3/1943', label: '3/1943' },
       { value: '4/1943', label: '4/1943' }
@@ -517,24 +517,6 @@ const HOME_STATE = [
   { value: [100], state: 'See comment' }, //Roll 1d6 1-3) Hawaii Territory 4) Alaska Territory 5-6) roll 1d10+1d10 again on the table above
 ]
 
-const TARGET_TYPE = [
-  { value: 'Airfield', label: 'AirField' },
-  { value: 'Industry', label: 'Industry' },
-  { value: 'Aircraft', label: 'Aircraft' },
-  { value: 'U-Boats', label: 'U-Boats' },
-  { value: 'Marshalling Yards', label: 'Marshalling Yards' },
-  { value: 'Shipyards', label: 'Shipyards' },
-  { value: 'Aircraft Factory', label: 'Aircraft Factory' },
-  { value: 'Oil', label: 'Oil' },
-  { value: 'Shipyard (includes U-boats)', label: 'Shipyard (includes U-boats)' },
-  { value: 'V-Weapons', label: 'V-Weapons' },
-  { value: 'Government', label: 'Government' },
-  { value: 'Tactical Targets', label: 'Tactical Targets' },
-  { value: 'Bridges', label: 'Bridges' },
-  { value: 'Bridges (includes other chokepoints)', label: 'BrBridges (includes other chokepoints' },
-
-]
-
 const COMBAT_BOX_CELL = [
   { value: 1, label: 'High' },
   { value: 2, label: 'Middle' },
@@ -596,7 +578,6 @@ export const tableEnum = {
   'co_age': CO_AGE,
   'nco_age': NCO_AGE,
   'home_state': HOME_STATE,
-  'target_type': TARGET_TYPE,
   'combat_box_cell': COMBAT_BOX_CELL,
   'bomber_number': BOMBER_NUMBER
 }

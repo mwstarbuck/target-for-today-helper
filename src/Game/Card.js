@@ -3,12 +3,12 @@ import b17 from '../Images/b17.jpeg';
 import { actionEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
 import { tableEnum } from "../Data/Tables";
+import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
 import './GamePage.css'
+import { Popover } from 'antd';
+import tableImageEnum from '../Images/Tables/TableEnum';
 
-
-//#region test
-// TODO: use result to match table entry
 let engine = -1;
 let weather = 3;
 const modEnum = {
@@ -16,19 +16,12 @@ const modEnum = {
   'engine': engine
 }
 
-// const add = (action, modifiers, table, ctx) => {
-//   let roll = action();
-//   console.log('roll:', roll);
-//   let result = modifiers?.forEach(m => roll += modEnum[m])
-//   console.log('result:', roll)
-// }
-//#endregion
-
 const Card = (props) => {
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
   const [inputValue, setInputValue] = useState(null);
+  const [showMods, setShowMods] = useState(false);
 
   const selectRef = useRef();
 
@@ -42,23 +35,21 @@ const Card = (props) => {
     'setTargetType': ctx.setTargetType,
     'setTarget': ctx.setTarget,
     'setCell': ctx.setCell,
-    'setBomberNumber': ctx.setBomberNumber
+    'setBomberNumber': ctx.setBomberNumber,
+    'setModifiers': ctx.setModifiers,
+    'modifiers': ctx.modifiers,
+    'setZones': ctx.setZones,
   }
 
   const optionsEnum = {
     'aircraft': ctx?.campaign?.aircraft,
     'timePeriod': ctx?.campaign?.timePeriod,
-    'target_type': tableEnum['target_type']
+    'targetType': options['targetType'],
+    'zones': options['zones']
   }
 
   const action = actionEnum[props.action];
-  // const stepInfo = {
-  //   maxValue: props.maxValue,
-  //   modifiers: props.modifiers,
-  //   diceType: props.diceType,
-  //   table: props.table,
-  //   setter: contextEnum[props.setter]
-  // }
+
   let methodInfo;
   switch (props.action) {
     case 'processResult':
@@ -76,7 +67,9 @@ const Card = (props) => {
     case 'getBomberPosition':
       methodInfo = {
         setCell: contextEnum[props.setter.setterA],
-        setBomberNumber: contextEnum[props.setter.setterB]
+        setBomberNumber: contextEnum[props.setter.setterB],
+        setModifiers: contextEnum[props.setter.setterC],
+        modifiers: contextEnum[props.modifiers]
       }
       break;
     default:
@@ -103,12 +96,21 @@ const Card = (props) => {
       }
       if (ctx.gameStep.skipBack) {
         ctx.setStep(ctx.step - ctx.gameStep.skipBack);
-        contextEnum[props.setter](null);
+        if (props.setter) {
+          for (const [key, value] of Object.entries(props.setter)) {
+            contextEnum[value](null);
+          }
+        }
         setAdvance(false);
         setSelectValue(null);
       }
       else {
-        contextEnum[props.setter](null);
+        if (props.setter) {
+          for (const [key, value] of Object.entries(props.setter)) {
+            contextEnum[value](null);
+          }
+        }
+        // contextEnum[props.setter](null);
         ctx.setStep(ctx.step - 1);
         setAdvance(false);
         setSelectValue(null);
@@ -134,11 +136,25 @@ const Card = (props) => {
     setAdvance(true);
   }
 
+  // console.log(ctx.campaign.campaign - 1)
   return <div className='card'>
-    <div>
+    <Popover open={showMods}
+      // zIndex={2000}
+      color='white'
+      trigger='click'
+      overlayStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
+      overlayInnerStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
+      onOpenChange={() => setShowMods(!showMods)}
+      placement='bottom'
+      content={showMods && <div ><ul>{ctx?.modifiers?.map(m => <li style={{ color: 'red' }}>{m.modifier}</li>)}</ul></div>}>
+      <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
+    </Popover>
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
-      <h2 style={{ marginBottom: -5 }}>{props.title}</h2>
+      <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
+      {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
+      {props.tableImage && <div style={{ alignItems: 'center' }}><img src={tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]]} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -188,6 +204,14 @@ const Card = (props) => {
           <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
             {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+          </div>
+        </>
+      }
+      {props.actionType === 'none' &&
+        <>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
           </div>
         </>
       }
