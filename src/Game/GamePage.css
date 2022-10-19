@@ -49,7 +49,6 @@
   width: 33.33%;
   padding: 10px;
   height: 300px;
-  /*Should be removed. Only for demonstration */
 }
 
 .row:after {
@@ -103,7 +102,6 @@
 }
 
 .card__gobackaction {
-  /* padding: 1rem; */
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
@@ -120,4 +118,31 @@
 .card__gobackaction:hover {
   background-color: red;
   color: white;
+}
+
+.ant-tabs-nav-scroll {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  font-family: Courier, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace !important;
+}
+
+html {
+  background: url(../Images/ivory-off-white-paper-texture.jpg) no-repeat center center fixed !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
 }
