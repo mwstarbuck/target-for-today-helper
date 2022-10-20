@@ -5,7 +5,8 @@ import PreMissionInfo from './PreMissionInfo';
 import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import { actionEnum } from '../Utilities/Utilities';
 import { GameContext } from './GameContext';
-import { Popover } from 'antd';
+import { Popover, Layout } from 'antd';
+
 
 const GamePage = () => {
   const ctx = useContext(GameContext);
@@ -31,7 +32,7 @@ const GamePage = () => {
     ctx.setCampaign(campaign);
   }
   return <>
-    <h1 style={{ opacity: 0.6 }}>Target for Today Helper</h1>
+    <h1 style={{ opacity: 0.6, fontWeight: 600 }}>Target for Today Helper</h1>
 
     {ctx.step === 0 && <button style={{ fontFamily: 'Courier', opacity: 0.7 }} onClick={nextStep}>Start Game</button>}
     {ctx.step > 0 && <div className='row'>
@@ -61,6 +62,7 @@ const GamePage = () => {
       <div className='column'>Bomber Card
       </div>
     </div>}
+
   </>
 }
 

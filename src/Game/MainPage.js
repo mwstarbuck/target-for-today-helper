@@ -19,6 +19,11 @@ const MainPage = () => {
       label: 'Zones Page',
       key: 'zonesPage',
       children: <ZonesPage />
+    },
+    {
+      label: 'Bomber Crew',
+      key: 'bomberCrew',
+      children: "Hello! We're the crew!"
     }
   ]
 
