@@ -6,6 +6,8 @@ import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import { actionEnum } from '../Utilities/Utilities';
 import { GameContext } from './GameContext';
 import { Popover, Layout } from 'antd';
+import Zone from './Zone';
+import b17f from '../Images/b17f-test.png'
 
 
 const GamePage = () => {
@@ -36,7 +38,7 @@ const GamePage = () => {
 
     {ctx.step === 0 && <button style={{ fontFamily: 'Courier', opacity: 0.7 }} onClick={nextStep}>Start Game</button>}
     {ctx.step > 0 && <div className='row'>
-      <div className='column'>
+      <div className='bigColumn'>
         Campaign Info
         {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
           <h4>PERIOD: {ctx?.timePeriod}</h4>
@@ -50,17 +52,16 @@ const GamePage = () => {
         </span>
 
         }
-        {ctx?.crew && ctx.crew.map((c, i) => <p style={{ fontSize: 10 }} key={i}>{`${c.position}: 
-          ${c.name}, Age: ${c.age}, State: ${c.state}, Status: ${c.status}`}</p>)}
+        <Zone />
+        <img src={b17f} style={{ width: 700 }} />
       </div>
       <div className='column'>
-        {/* {step === 1 && <button onClick={() => { actionEnum['campaignRoll'](ctx.setCampaign); nextStep(); }}>Roll for Campaign</button>} */}
+        Game Step Helper
         {step >= 1 && <PreMissionInfo
           step={step} />}
-        {/* {step > 1 && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><button onClick={nextStep}>Next Step</button><button onClick={lastStep}>Cancel/Go Back</button></div>} */}
       </div>
-      <div className='column'>Bomber Card
-      </div>
+      {/* <div className='column'>Bomber Card
+      </div> */}
     </div>}
 
   </>

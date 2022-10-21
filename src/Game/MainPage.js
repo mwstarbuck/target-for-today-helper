@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import GamePage from './GamePage';
 import ZonesPage from './ZonesPage';
+import Crew from './Crew';
 // import "antd/dist/antd.css";
 
 const { TabPane } = Tabs;
@@ -23,7 +24,7 @@ const MainPage = () => {
     {
       label: 'Bomber Crew',
       key: 'bomberCrew',
-      children: "Hello! We're the crew!"
+      children: <Crew />
     }
   ]
 

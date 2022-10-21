@@ -37,12 +37,12 @@ const Zone = () => {
   }
 
   return <Row gutter={[1, 1]}>
-    <Col span={2}><div className='zoneCellText'>Zone</div></Col>
-    <Col span={4}><div className='zoneCellText'>DRM / Locatation</div></Col>
-    <Col span={10}><div className='zoneCellText'>Weather</div></Col>
-    <Col span={8}><div className='zoneCellText'>Fighter Escort Level</div></Col>
+    <Col span={2}><div className='zoneCellHeader'>Zone</div></Col>
+    <Col span={3}><div className='zoneCellHeader'>DRM / Locatation</div></Col>
+    <Col span={10}><div className='zoneCellHeader'>Weather</div></Col>
+    <Col span={9}><div className='zoneCellHeader'>Fighter Escort Level</div></Col>
     <Col span={2}><div className='zoneCellText'>1</div></Col>
-    <Col span={4}><div className='zoneCellText'>-2/W</div></Col>
+    <Col span={3}><div className='zoneCellText'>-2/W</div></Col>
     <Col span={10}>
       <div className='zoneCell'>
         <Col>
@@ -54,7 +54,7 @@ const Zone = () => {
           </Radio.Group>
         </Col>
       </div></Col>
-    <Col span={8}>
+    <Col span={9}>
       <div className='zoneCell'>
         <Radio.Group name='escortLevel' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onEscortChange} value={escortLevel}>
           <Radio value={'none'}><span style={{ fontWeight: escortLevel === 'none' ? 600 : 500 }}>None</span></Radio>
@@ -64,9 +64,9 @@ const Zone = () => {
         </Radio.Group>
       </div>
     </Col>
-    <Col span={10}>
+    <Col span={12}>
       <Row>
-      <Col span={12}>
+      <Col span={10}>
         <div className='zoneCell'>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             Contrails:
@@ -77,11 +77,12 @@ const Zone = () => {
           </div>
         </div>
       </Col>
-      <Col span={12}>
+      <Col span={14}>
         <div className='zoneCell'>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             Enemy Fighter Resistance:
-            <Radio.Group name='resistance' onChange={onResistanceChange} value={resistance}>
+              <Radio.Group name='resistance' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} 
+              onChange={onResistanceChange} value={resistance}>
               <Radio value={'none'}><span style={{ fontWeight: resistance === 'none' ? 600 : 500 }}>None</span></Radio>
               <Radio value={'light'}><span style={{ fontWeight: resistance === 'light' ? 600 : 500 }}>Light</span></Radio>
               <Radio value={'moderate'}><span style={{ fontWeight: resistance === 'moderate' ? 600 : 500 }}>Moderate</span></Radio>
@@ -90,7 +91,7 @@ const Zone = () => {
           </div>
         </div>
       </Col>
-        <Col span={12}>
+        <Col span={10}>
           <div className='zoneCell'>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               Enemy Attack Waves:
@@ -103,14 +104,14 @@ const Zone = () => {
             </div>
           </div>
         </Col>
-        <Col span={12}>
+        <Col span={14}>
           <div className='zoneCell'>
             <div style={{ display: 'flex', flexDirection: 'column', height: 45, paddingTop: 8  }}>
               Enemies Removed: ______________________
             </div>
           </div>
         </Col>
-        <Col span={12}>
+        <Col span={14}>
           <div className='zoneCell'>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               Formation:&emsp;
@@ -122,16 +123,17 @@ const Zone = () => {
             </div>
           </div>
         </Col>
-        <Col span={12}>
+        <Col span={10}>
           <div className='zoneCell'>
           <Checkbox>Below 10K Feet or Less</Checkbox>
           </div>
         </Col>
       </Row>      
     </Col>
-    <Col span={14}>
-      <div className='zoneCell'>
-        <TextArea rows={5}/>
+    <Col span={12}>
+      <div className='zoneCellNotes'>
+        Notes:
+        {/* <TextArea rows={5}/> */}
       </div>
     </Col>
   </Row>

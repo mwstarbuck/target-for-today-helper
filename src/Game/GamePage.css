@@ -1,7 +1,13 @@
-
 .column {
   float: left;
   width: 33.33%;
+  padding: 10px;
+  height: 300px;
+}
+
+.bigColumn {
+  float: left;
+  width: 66.66%;
   padding: 10px;
   height: 300px;
 }
@@ -104,11 +110,32 @@ html {
 
 .zoneCell {
   border: 1px solid black;
+  opacity: .7;
+}
+
+.zoneCellHeader {
+  border: 1px solid black;
+  height: 25px;
+  background-color: rgb(226, 212, 201);
+  opacity: .7;
 }
 
 .zoneCellText {
   border: 1px solid black;
-  height: 25px
+  height: 25px;
+  opacity: .7;
+}
+
+.zoneCellNotes {
+  border: 1px dotted black;
+  opacity: .7;
+  height:max-content;
+  background-color: rgb(226, 212, 201);
+  min-height: 120px;
+}
+
+.zoneCellNotes::after {
+  content: "";
 }
 
 /* makes ant radio button square */

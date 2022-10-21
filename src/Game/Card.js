@@ -6,8 +6,9 @@ import { tableEnum } from "../Data/Tables";
 import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
 import './GamePage.css'
-import { Popover } from 'antd';
+import { Popover, Modal } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
+import ZonesModal from '../Modals/ZonesModal';
 
 let engine = -1;
 let weather = 3;
@@ -22,6 +23,7 @@ const Card = (props) => {
   const [selectValue, setSelectValue] = useState(null);
   const [inputValue, setInputValue] = useState(null);
   const [showMods, setShowMods] = useState(false);
+  const [showZoneModal, setShowZoneModal] = useState(false);
 
   const selectRef = useRef();
 
@@ -207,6 +209,20 @@ const Card = (props) => {
           </div>
         </>
       }
+      {!props.isIncrement && props.actionType === 'modal' && <>
+        <button onClick={() => {
+          setShowZoneModal(true);
+          // setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        </div>
+      </>
+      }
       {props.actionType === 'none' &&
         <>
           <div>
@@ -220,6 +236,7 @@ const Card = (props) => {
         <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
       </span>} */}
     </div>
+    <ZonesModal onSelect={onSelect} options={stepOptions} showZoneModal={showZoneModal} setShowZoneModal={setShowZoneModal} zones={ctx.zones} />
   </div>
 }
 
