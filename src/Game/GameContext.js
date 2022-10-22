@@ -16,6 +16,8 @@ export const GameContextProvider = ({ children }) => {
   const [cell, setCell] = useState({});
   const [bomberNumber, setBomberNumber] = useState();
   const [zones, setZones] = useState();
+  const [zonesInfo, setZonesInfo] = useState(null);
+  const [currentZone, setCurrentZone] = useState(2);
 
 
   return (
@@ -45,7 +47,11 @@ export const GameContextProvider = ({ children }) => {
       bomberNumber,
       setBomberNumber,
       zones,
-      setZones
+      setZones,
+      zonesInfo,
+      setZonesInfo,
+      currentZone,
+      setCurrentZone
     }}
     >
       {children}

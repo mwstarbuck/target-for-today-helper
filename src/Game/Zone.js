@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Row, Col, Radio, Checkbox, Input } from 'antd';
+import GameContext from './GameContext';
 
 const {TextArea} = Input;
 
 const Zone = () => {
+  const ctx = useContext(GameContext);
   const [weatherValue, setWeatherValue] = useState(null);
   const [escortLevel, setEscortLevel] = useState(null);
   const [contrails, setContrails] = useState(null);
@@ -35,14 +37,14 @@ const Zone = () => {
   const onFormationChange = (e) => {
     setFormation(e.target.value);
   }
-
+  ctx.zonesInfo && console.log(ctx.zonesInfo);
   return <Row gutter={[1, 1]}>
     <Col span={2}><div className='zoneCellHeader'>Zone</div></Col>
     <Col span={3}><div className='zoneCellHeader'>DRM / Locatation</div></Col>
     <Col span={10}><div className='zoneCellHeader'>Weather</div></Col>
     <Col span={9}><div className='zoneCellHeader'>Fighter Escort Level</div></Col>
-    <Col span={2}><div className='zoneCellText'>1</div></Col>
-    <Col span={3}><div className='zoneCellText'>-2/W</div></Col>
+    <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1].zone}</div></Col>
+    <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1].drm} / ${ctx.zonesInfo[ctx.currentZone -1].location}`}</div></Col>
     <Col span={10}>
       <div className='zoneCell'>
         <Col>

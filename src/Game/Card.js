@@ -236,7 +236,13 @@ const Card = (props) => {
         <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
       </span>} */}
     </div>
-    <ZonesModal onSelect={onSelect} options={stepOptions} showZoneModal={showZoneModal} setShowZoneModal={setShowZoneModal} zones={ctx.zones} />
+    <ZonesModal 
+    onSelect={onSelect} 
+    options={stepOptions} 
+    showZoneModal={showZoneModal} 
+    setShowZoneModal={setShowZoneModal} 
+    zones={ctx.zones}
+    setZonesInfo={ctx.setZonesInfo} />
   </div>
 }
 
