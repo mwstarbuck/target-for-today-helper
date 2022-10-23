@@ -237,7 +237,7 @@ const Card = (props) => {
         </button>
         <div>
           <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+          <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
         </div>
       </>
       }

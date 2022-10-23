@@ -13,10 +13,12 @@ const TableModal = (props) => {
   };
   return <>
     <Modal
+      title={<h2>Tables Reference</h2>}
       open={showModal}
       onOk={handleOk}
       onCancel={handleCancel} 
-      width={800}>
+      width={1000}
+      style={{textAlign: 'center'}}>
       <div style={{ alignItems: 'center' }}><img src={source} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} /></div>
     </Modal>
   </>
