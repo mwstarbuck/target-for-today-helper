@@ -214,14 +214,16 @@ export const PRE_MISSION_STEPS = [
     additionalInfo: null,
     hasAction: false,
     actionType: 'none'
-  }, {
+  }, 
+  {
     id: 15,
     section: 'pre-mission',
     heading: 'Begin the Mission',
     instruction: 'You, as the pilot of your bomber have just left the briefing hut. You meet your crew, jump into a jeep and drive to the flight line where your crew chief has your bomber ready to go. You make the customary walk- around but you know you will find nothing wrong as your ground crew is top-notch. Boarding your bomber you go through the start-up check list. When the engines are purring smoothly and all the crew members check in on the intercom saying that everything is A-OK, you give the thumbs up to the Crew Chief who pulls the wheel chocks. You taxi out and join the other bombers on the taxiway waiting to takeoff. That comes quickly as bombers take off at 30 second intervals.',
     reference: null,
     additionalInfo: null,
-    hasAction: false,
+    hasAction: true,
+    actionType: 'next'
   },
 ]
 
