@@ -255,7 +255,9 @@ export const TAKEOFF_PROCEDURE = [
     reference: 'Table 3-2 (1D10) & Table 3-3 if possible engine malfunction',
     additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    tableImageDependency: 'none',
+    tableImage: '3-2-&-3-3',
     // action: 'roll',
     // actionText: ''
   },
