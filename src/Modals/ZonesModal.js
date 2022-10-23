@@ -38,68 +38,11 @@ const location = [
 const ZonesModal = (props) => {
   const { options, showZoneModal, setShowZoneModal, onSelect, zones, setZonesInfo } = props;
 
-  let zonesData = [
-    {
-      zone: 1,
-      targetZone: false
-    },
-    {
-      zone: 2,
-      targetZone: false
-    },
-    {
-      zone: 3,
-      targetZone: false
-    },
-    {
-      zone: 4,
-      targetZone: false
-    },
-    {
-      zone: 5,
-      targetZone: false
-    },
-    {
-      zone: 6,
-      targetZone: false
-    },
-    {
-      zone: 7,
-      targetZone: false
-    },
-    {
-      zone: 8,
-      targetZone: false
-    },
-    {
-      zone: 9,
-      targetZone: false
-    },
-    {
-      zone: 10,
-      targetZone: false
-    },
-    {
-      zone: 11,
-      targetZone: false
-    },
-    {
-      zone: 12,
-      targetZone: false
-    },
-    {
-      zone: 13,
-      targetZone: false
-    },
-    {
-      zone: 14,
-      targetZone: false
-    },
-    {
-      zone: 15,
-      targetZone: false
-    },
-  ]
+  let zonesData = [];
+  for (let i = 0; i < zones; i++) {
+    zonesData.push({zone: i + 1,
+    targetZone: i === zones - 1 ? true : false})
+  }
 
   const onInfoSelect = (e, i) => {
     console.log(e);

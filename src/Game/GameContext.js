@@ -19,7 +19,6 @@ export const GameContextProvider = ({ children }) => {
   const [zonesInfo, setZonesInfo] = useState(null);
   const [currentZone, setCurrentZone] = useState(2);
 
-
   return (
     <GameContext.Provider value={{
       step,

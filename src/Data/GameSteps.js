@@ -79,22 +79,22 @@ export const PRE_MISSION_STEPS = [
     contingencyStep: false,
     skipBack: 2
   },
+  // {
+  //   id: 5,
+  //   section: 'pre-mission',
+  //   heading: 'Roll for Crew',
+  //   instruction: 'Roll for Crew memebers.',
+  //   reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
+  //   additionalInfo: [],
+  //   hasAction: true,
+  //   actionType: 'roll',
+  //   action: 'rollCrew',
+  //   actionText: 'Roll for Crew',
+  //   setter: { setterA: 'setCrew' },
+  //   contingencyStep: false,
+  // },
   {
     id: 5,
-    section: 'pre-mission',
-    heading: 'Roll for Crew',
-    instruction: 'Roll for Crew memebers.',
-    reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
-    additionalInfo: [],
-    hasAction: true,
-    actionType: 'roll',
-    action: 'rollCrew',
-    actionText: 'Roll for Crew',
-    setter: { setterA: 'setCrew' },
-    contingencyStep: false,
-  },
-  {
-    id: 6,
     section: 'pre-mission',
     heading: 'Target Selection  (Target Type)',
     instruction: 'Select bombing target type depending on the campaign in tables 2-2 through 2-7M depending on selected campaign.',
@@ -111,7 +111,7 @@ export const PRE_MISSION_STEPS = [
     // modifiers: ['weather', 'engine']
   },
   {
-    id: 7,
+    id: 6,
     section: 'pre-mission',
     heading: 'Target Selection (City)',
     instruction: 'Input bombing target (City) depending on the campaign in tables 2-2 through 2-7M depending on selected campaign.',
@@ -128,7 +128,7 @@ export const PRE_MISSION_STEPS = [
     // modifiers: ['weather', 'engine']
   },
   {
-    id: 8,
+    id: 7,
     section: 'pre-mission',
     heading: 'Bomber Position in Formation',
     instruction: 'Determine formation position for your bomber on Table 2-10A and Table 2-10B',
@@ -149,7 +149,7 @@ export const PRE_MISSION_STEPS = [
     // modifiers: ['weather', 'engine']
   },
   {
-    id: 9,
+    id: 8,
     section: 'pre-mission',
     heading: 'Determine Zones',
     instruction: 'Find the number of zones in the alphabetized Air Force Flight Log Gazetteer - Tables 2-8A (8th Air Force) and 2-8B (15th Air Force).',
@@ -164,7 +164,7 @@ export const PRE_MISSION_STEPS = [
     contingencyStep: false,
   },
   {
-    id: 10,
+    id: 9,
     section: 'pre-mission',
     heading: 'Determine Fighter Escort',
     subHeading: 'Zones 2-5',
@@ -176,17 +176,21 @@ export const PRE_MISSION_STEPS = [
     tableImage: ['2-13-1', '2-13-2', '2-13-3', '2-13-4', '2-13-5', '2-13-6']
   },
   {
-    id: 11,
+    id: 10,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
-    instruction: 'Create crew members and place them on the crew placement board.',
+    instruction: 'Create crew members by clicking below and place crew on the crew placement board.',
     reference: null,
     additionalInfo: null,
     hasAction: false,
-    actionType: 'none'
+    actionType: 'roll',
+    action: 'rollCrew',
+    actionText: 'Roll for Crew',
+    setter: { setterA: 'setCrew' },
+    contingencyStep: false,
   },
   {
-    id: 12,
+    id: 11,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Place the fire extinguishers in their box next to the bomber on the Crew Placement Sheet. Place the appropriate turret gunnery markers nearby.',
@@ -196,7 +200,7 @@ export const PRE_MISSION_STEPS = [
     actionType: 'none'
   },
   {
-    id: 13,
+    id: 12,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
     instruction: 'Place the large bomber counter in the middle of the Battle Board combat area.',
@@ -206,41 +210,42 @@ export const PRE_MISSION_STEPS = [
     actionType: 'none'
   },
   {
-    id: 14,
+    id: 13,
     section: 'pre-mission',
     heading: 'Crew Placement Sheet and Battle Board',
-    instruction: 'Lastly, place the small bomber counter on the Strategic Movement Track in Zone 1 facing toward the Designated Target Zone number.',
+    instruction: 'Lastly, place the small bomber counter on the Strategic Movement Track in Zone 1 facing toward the Designated Target Zone number. Thsnk place the target zone chit in the target zone on the same track.',
     reference: null,
     additionalInfo: null,
     hasAction: false,
     actionType: 'none'
   }, 
   {
-    id: 15,
+    id: 14,
     section: 'pre-mission',
     heading: 'Begin the Mission',
     instruction: 'You, as the pilot of your bomber have just left the briefing hut. You meet your crew, jump into a jeep and drive to the flight line where your crew chief has your bomber ready to go. You make the customary walk- around but you know you will find nothing wrong as your ground crew is top-notch. Boarding your bomber you go through the start-up check list. When the engines are purring smoothly and all the crew members check in on the intercom saying that everything is A-OK, you give the thumbs up to the Crew Chief who pulls the wheel chocks. You taxi out and join the other bombers on the taxiway waiting to takeoff. That comes quickly as bombers take off at 30 second intervals.',
     reference: null,
     additionalInfo: null,
     hasAction: true,
-    actionType: 'next'
+    actionType: 'none'
   },
 ]
 
-const TAKEOFF_PROCEDURE = [
+export const TAKEOFF_PROCEDURE = [
   {
-    id: 12,
+    id: 15,
     section: 'Takeoff Procedure',
     heading: 'Weather over base',
     instruction: 'Roll on Table 3-1',
     reference: 'Table 3-1 (1D10)',
     additionalInfo: ['If based in England, -2 modifier if mission flown in Jan, Feb or Dec and -1 modifier if mission flown in Mar, Apr, Oct or Nov', 'If based in Italy, +1 modifier if mission flown in May or Oct; +2 modifier if flown in Jun or Sep; +3 modifier if flown in Jul or Aug'],
     hasAction: false,
+    actionType: 'none'
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 13,
+    id: 16,
     section: 'Takeoff Procedure',
     heading: 'Take-Off',
     instruction: 'Roll on Table 3-2',
