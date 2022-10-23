@@ -9,6 +9,7 @@ import './GamePage.css'
 import { Popover, Modal } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
 import ZonesModal from '../Modals/ZonesModal';
+import  TableModal from '../Modals/TableModal';
 
 let engine = -1;
 let weather = 3;
@@ -24,6 +25,7 @@ const Card = (props) => {
   const [inputValue, setInputValue] = useState(null);
   const [showMods, setShowMods] = useState(false);
   const [showZoneModal, setShowZoneModal] = useState(false);
+  const [showTableModal, setShowTableModal] = useState(false);
 
   const selectRef = useRef();
 
@@ -158,7 +160,7 @@ const Card = (props) => {
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
-      {props.tableImage && <div style={{ alignItems: 'center' }}><img src={tableSrc} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
+      {props.tableImage && props.actionType !== 'tableModal' && <div style={{ alignItems: 'center' }}><img src={tableSrc} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -225,6 +227,20 @@ const Card = (props) => {
         </div>
       </>
       }
+      {!props.isIncrement && props.actionType === 'tableModal' && <>
+        <button onClick={() => {
+          setShowTableModal(true);
+          // setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        </div>
+      </>
+      }
       {props.actionType === 'none' &&
         <>
           <div>
@@ -245,6 +261,11 @@ const Card = (props) => {
     setShowZoneModal={setShowZoneModal} 
     zones={ctx.zones}
     setZonesInfo={ctx.setZonesInfo} />
+    <TableModal
+      showModal={showTableModal}
+      setShowModal={setShowTableModal}
+      source={tableSrc}
+    />
   </div>
 }
 
