@@ -240,7 +240,9 @@ export const TAKEOFF_PROCEDURE = [
     reference: 'Table 3-1 (1D10)',
     additionalInfo: ['If based in England, -2 modifier if mission flown in Jan, Feb or Dec and -1 modifier if mission flown in Mar, Apr, Oct or Nov', 'If based in Italy, +1 modifier if mission flown in May or Oct; +2 modifier if flown in Jun or Sep; +3 modifier if flown in Jul or Aug'],
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    tableImageDependency: 'none',
+    tableImage: ['3-1']
     // action: 'roll',
     // actionText: ''
   },
