@@ -17,7 +17,7 @@ export const GameContextProvider = ({ children }) => {
   const [bomberNumber, setBomberNumber] = useState();
   const [zones, setZones] = useState();
   const [zonesInfo, setZonesInfo] = useState(null);
-  const [currentZone, setCurrentZone] = useState(2);
+  const [currentZone, setCurrentZone] = useState(1);
 
   return (
     <GameContext.Provider value={{

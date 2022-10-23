@@ -78,6 +78,8 @@ const Card = (props) => {
       break;
   }
   const params = methodInfo;
+
+  const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
@@ -156,7 +158,7 @@ const Card = (props) => {
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
-      {props.tableImage && <div style={{ alignItems: 'center' }}><img src={tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]]} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
+      {props.tableImage && <div style={{ alignItems: 'center' }}><img src={tableSrc} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
