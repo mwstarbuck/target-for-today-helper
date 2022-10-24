@@ -43,6 +43,9 @@ const Card = (props) => {
     'setModifiers': ctx.setModifiers,
     'modifiers': ctx.modifiers,
     'setZones': ctx.setZones,
+    'setCurrentZone': ctx.setCurrentZone,
+    'currentZone': ctx.currentZone,
+    'direction': ctx.direction
   }
 
   const optionsEnum = {
@@ -76,12 +79,40 @@ const Card = (props) => {
         modifiers: contextEnum[props.modifiers]
       }
       break;
+    case 'zoneMovement': 
+      methodInfo = {
+        setter: ctx.setCurrentZone,
+        value: ctx.currentZone,
+        direction: ctx.direction,
+        zones: ctx.zones
+      }
+      break;
     default:
       break;
   }
   const params = methodInfo;
 
-  const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
+  const tableSrc = [];
+    switch (props.tableImageDependency) {
+      case 'campaign':
+        tableSrc.push({table: tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1].table],
+        diceType: props.diceType})
+        break;
+      case 'none':
+        props.tableImage.forEach(t => {
+          tableSrc.push({ table: tableImageEnum[t.table],
+          diceType: t.diceType,
+        name: t.table })
+
+        })
+        console.log(tableSrc);
+        break;
+      default:
+        break;
+    }
+
+
+  // const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
@@ -160,7 +191,7 @@ const Card = (props) => {
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
-      {props.tableImage && props.actionType !== 'tableModal' && <div style={{ alignItems: 'center' }}><img src={tableSrc} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
+      {props.tableImage && props.actionType !== 'tableModal' && <div style={{ alignItems: 'center' }}><img src={tableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -169,7 +200,7 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {!props.isIncrement && props.actionType === 'roll' && <>
+      {!props.isIncrement && (props.actionType === 'roll' || props.actionType === 'click') && <>
         <button onClick={() => {
           action(params);
           setAdvance(true);
@@ -265,6 +296,7 @@ const Card = (props) => {
       showModal={showTableModal}
       setShowModal={setShowTableModal}
       source={tableSrc}
+      diceType={props.diceType}
     />
   </div>
 }

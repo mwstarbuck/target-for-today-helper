@@ -174,7 +174,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
     actionType: 'none',
     tableImageDependency: 'campaign',
-    tableImage: ['2-13-1', '2-13-2', '2-13-3', '2-13-4', '2-13-5', '2-13-6']
+    tableImage: [{ table: '2-13-1', diceType: '1D10' }, { table: '2-13-2', diceType: '1D10' }, { table: '2-13-3', diceType: '1D10' }, { table: '2-13-4', diceType: '1D10' }, { table: '2-13-5', diceType: '1D10' }, { table: '2-13-6', diceType: '1D10' }]
   },
   {
     id: 10,
@@ -243,7 +243,7 @@ export const TAKEOFF_PROCEDURE = [
     hasAction: false,
     actionType: 'none',
     tableImageDependency: 'none',
-    tableImage: '3-1'
+    tableImage: [{table: '3-1', diceType: '1D10'}]
     // action: 'roll',
     // actionText: ''
   },
@@ -257,8 +257,49 @@ export const TAKEOFF_PROCEDURE = [
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: 'none',
-    tableImage: '3-2-&-3-3',
+    tableImage: [{table: '3-2-&-3-3', diceType: '1D10'}],
     actionText: 'See Table Reference',
+    // action: 'roll',
+    // actionText: ''
+  },
+]
+
+export const ZONES_PROCEDURE = [
+  {
+    id: 17,
+    section: 'Movement in the Zones',
+    heading: 'Movement',
+    instruction: 'Click to move to next zone. Move your bomber on the tracker as well.',
+    reference: 'Section 4.1',
+    // additionalInfo: [],
+    hasAction: true,
+    actionType: 'click',
+    action: 'zoneMovement',
+    options: null,
+    actionText: 'Move to next zone',
+    // diceType: 'd6-simple',
+    // maxValue: 6,
+    // table: 'table_2_9',
+    setter: { setterA: 'setCurrentZone' },
+    contingencyStep: false,
+    contingencyValue: 'direction',
+    // contingentUpon: 'B-24J'
+    // action: 'roll',
+    // actionText: ''
+  },
+  {
+    id: 18,
+    section: 'Weather in the Zone',
+    heading: 'Weather in the Zone',
+    instruction: 'Roll on Table 3-2',
+    reference: 'Table 4-1 (1D10) & Table 4-1A if 100% cloud cover is rolled on table 4-1 and bomber is over Alps',
+    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    hasAction: false,
+    actionType: 'tableModal',
+    tableImageDependency: 'none',
+    tableImage: [{ table: '4-1', diceType: '1D10' }, { table: '4-1A', diceType: '1D10' },],
+    actionText: 'See Table 4-1',
+    diceType: '1D10',
     // action: 'roll',
     // actionText: ''
   },

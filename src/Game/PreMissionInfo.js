@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GameContext from './GameContext';
-import { PRE_MISSION_STEPS, TAKEOFF_PROCEDURE } from '../Data/GameSteps';
+import { PRE_MISSION_STEPS, TAKEOFF_PROCEDURE, ZONES_PROCEDURE } from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
@@ -15,7 +15,8 @@ const PreMissionInfo = (props) => {
   React.useEffect(() => {
     if (step > 0) {
 
-      const nextStep = step <= 14 ? PRE_MISSION_STEPS.find(s => s.id === step) : TAKEOFF_PROCEDURE.find(s => s.id === step);
+      const nextStep = step <= 14 ? PRE_MISSION_STEPS.find(s => s.id === step) : step <= 16 ? TAKEOFF_PROCEDURE.find(s => s.id === step) 
+        : ZONES_PROCEDURE.find(s => s.id === step);
       if (nextStep?.contingencyStep === true) {
         // const value = contingencyEnum[nextStep?.contingencyValue];
         if (contingencyEnum[nextStep?.contingencyValue] === nextStep?.contingentUpon) {

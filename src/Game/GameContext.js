@@ -18,6 +18,7 @@ export const GameContextProvider = ({ children }) => {
   const [zones, setZones] = useState();
   const [zonesInfo, setZonesInfo] = useState(null);
   const [currentZone, setCurrentZone] = useState(1);
+  const [direction, setDirection] = useState('outbound')
 
   return (
     <GameContext.Provider value={{
@@ -50,7 +51,9 @@ export const GameContextProvider = ({ children }) => {
       zonesInfo,
       setZonesInfo,
       currentZone,
-      setCurrentZone
+      setCurrentZone,
+      direction, 
+      setDirection
     }}
     >
       {children}

@@ -45,7 +45,6 @@ const ZonesModal = (props) => {
   }
 
   const onInfoSelect = (e, i) => {
-    console.log(e);
     const value = e.value
     zonesData[i.name].drm = value;
     if (i.name + 1 == zones) {
