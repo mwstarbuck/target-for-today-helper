@@ -22,8 +22,8 @@ const TableModal = (props) => {
       style={{textAlign: 'center'}}>
       {source.map(s => (
         <div> 
-      <h2>{s.name}</h2>
-        {s.diceType && <h3>Roll {s.diceType}</h3>}
+          <h3>{s.name}</h3>{s.diceType && <h3>(Roll {s.diceType})</h3>}
+        {/* {s.diceType && <h3>Roll {s.diceType}</h3>} */}
         <div style={{ alignItems: 'center' }}><img src={s.table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} /></div>
         </div>)
       )}
