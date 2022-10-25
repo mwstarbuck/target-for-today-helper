@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
-import { Modal } from 'antd';
+import { Modal, Divider } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
 
 const TableModal = (props) => {
-  const {showModal, setShowModal, source, diceType} = props;
-  
+  const { showModal, setShowModal, source } = props;
+
   const handleOk = () => {
     setShowModal(false);
   };
@@ -17,18 +17,17 @@ const TableModal = (props) => {
       title={<h2>Tables Reference</h2>}
       open={showModal}
       onOk={handleOk}
-      onCancel={handleCancel} 
+      onCancel={handleCancel}
       width={1000}
-      style={{textAlign: 'center'}}>
-      {source.map(s => (
-        <div> 
-          <h3>{s.name}</h3>{s.diceType && <h3>(Roll {s.diceType})</h3>}
-        {/* {s.diceType && <h3>Roll {s.diceType}</h3>} */}
-        <div style={{ alignItems: 'center' }}><img src={s.table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} /></div>
+      style={{ textAlign: 'center' }}>
+      {source.map((t, i) => (
+        <div>
+          <div style={{ textAlign: 'center' }}><h3>{t.title}</h3>{t.diceType && <h4>(Roll {t.diceType})</h4>}</div>
+
+          <div style={{ alignItems: 'center' }}><img src={t.table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} /></div>
+          {i < source.length - 1 && < Divider />}
         </div>)
       )}
-      {/* {diceType && <h2>Roll {diceType}</h2>}
-      <div style={{ alignItems: 'center' }}><img src={source} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} /></div> */}
     </Modal>
   </>
 }
