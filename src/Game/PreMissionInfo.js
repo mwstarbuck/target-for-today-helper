@@ -54,7 +54,8 @@ const PreMissionInfo = (props) => {
         contingentUpon={ctx.gameStep?.contingentUpon}
         skipBack={ctx.gameStep?.skipBack}
         tableImageDependency={ctx.gameStep?.tableImageDependency}
-        tableImage={ctx.gameStep?.tableImage} />
+        tableImage={ctx.gameStep?.tableImage}
+        tableNotes={ctx.gameStep?.tableNotes} />
     </div>
   </>
 }

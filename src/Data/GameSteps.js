@@ -174,6 +174,7 @@ export const PRE_MISSION_STEPS = [
     hasAction: false,
     actionType: 'tableForCard',
     tableImageDependency: 'campaign',
+    tableNotes: '2-13-note',
     tableImage: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level' }]
   },
   {
@@ -243,7 +244,8 @@ export const TAKEOFF_PROCEDURE = [
     hasAction: false,
     actionType: 'tableForCard',
     tableImageDependency: 'none',
-    tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)' }]
+    tableNotes: '3-1-note',
+    tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }]
     // action: 'roll',
     // actionText: ''
   },
@@ -257,7 +259,7 @@ export const TAKEOFF_PROCEDURE = [
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: 'none',
-    tableImage: [{ table: '3-2', diceType: '1D10', title: '3-2 Take-Off' }, { table: '3-3', diceType: '1D6', title: '3-3 Bomber Crashes on Take-off' }],
+    tableImage: [{ table: '3-2', diceType: '1D10', title: '3-2 Take-Off', note: '3-2-note' }, { table: '3-3', diceType: '1D6', title: '3-3 Bomber Crashes on Take-off', note: '3-3-note' }],
     actionText: 'See Table Reference',
     // action: 'roll',
     // actionText: ''
@@ -297,7 +299,7 @@ export const ZONES_PROCEDURE = [
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: 'none',
-    tableImage: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps' },],
+    tableImage: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
     // action: 'roll',
@@ -313,7 +315,8 @@ export const ZONES_PROCEDURE = [
     hasAction: false,
     actionType: 'tableForCard',
     tableImageDependency: 'none',
-    tableImage: [{ table: '4-2', diceType: '1D10 + 1D10', title: '4-2 Mission Recall' }],
+    tableNotes: '4-2-note',
+    tableImage: [{ table: '4-2', diceType: '1D10 + 1D10', title: '4-2 Mission Recall', note: '4-2-note' }],
     actionText: 'See Table 4-2',
     diceType: '1D10 + 1D10',
     contingencyStep: true,

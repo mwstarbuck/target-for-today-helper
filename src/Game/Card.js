@@ -8,6 +8,7 @@ import Select from 'react-select';
 import './GamePage.css'
 import { Popover, Modal } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
+import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
 import ZonesModal from '../Modals/ZonesModal';
 import TableModal from '../Modals/TableModal';
 
@@ -90,7 +91,8 @@ const Card = (props) => {
     case 'campaign':
       tableSrc.push({
         table: tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1].table],
-        diceType: props.diceType, title: props.title
+        diceType: props.diceType, 
+        title: props.title
       })
       break;
     case 'none':
@@ -98,7 +100,8 @@ const Card = (props) => {
         tableSrc.push({
           table: tableImageEnum[t.table],
           diceType: t.diceType,
-          title: t.title
+          title: t.title,
+          note: tableNoteEnum[t.note]
         })
 
       })
@@ -189,9 +192,11 @@ const Card = (props) => {
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
       {props.tableImage && props.actionType === 'tableForCard' &&
         <div style={{ alignItems: 'center' }}>
-          <img src={tableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          <Popover trigger='hover' content={<img src={tableNoteEnum[props.tableNotes]} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={tableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          </Popover>
         </div>
-        }
+      }
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
