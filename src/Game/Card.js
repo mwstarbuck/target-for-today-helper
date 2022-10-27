@@ -129,7 +129,7 @@ const Card = (props) => {
 
         })
       }
-      
+
       break;
     case 'tableModal':
       props.tableImage.forEach(t => {
@@ -142,6 +142,25 @@ const Card = (props) => {
 
       })
       break;
+
+    case 'cardModalCombo':
+      props.cardTable.forEach(t => {
+        cardTableSrc.push({
+          table: tableImageEnum[t.table],
+          diceType: t.diceType,
+          title: t.title,
+          note: tableNoteEnum[t.note]
+        })
+      })
+      props.modalTable.forEach(t => {
+        modalTableSrc.push({
+          table: tableImageEnum[t.table],
+          diceType: t.diceType,
+          title: t.title,
+          note: tableNoteEnum[t.note]
+        })
+      })
+      break;
     default:
       break;
   }
@@ -151,7 +170,7 @@ const Card = (props) => {
       const table = props.tableImage[ctx.campaign.campaign - 1];
       tableSrc.push({
         table: tableImageEnum[table.table],
-        diceType: table.diceType, 
+        diceType: table.diceType,
         title: table.title,
         note: tableNoteEnum[table.note]
       })
@@ -345,6 +364,25 @@ const Card = (props) => {
             <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
           </div>
         </>
+      }
+      {!props.isIncrement && props.actionType === 'cardModalCombo' && <>
+        <div style={{ alignItems: 'center' }}>
+          <Popover trigger='hover' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          </Popover>
+        </div>
+        <button onClick={() => {
+          setShowTableModal(true);
+          // setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+        </div>
+      </>
       }
       {/* {props.isIncrement && <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
         <button onClick={() => lastStep()} className='card__goback'>Go Back</button>

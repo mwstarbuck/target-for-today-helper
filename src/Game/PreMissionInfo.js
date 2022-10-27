@@ -55,6 +55,8 @@ const PreMissionInfo = (props) => {
         skipBack={ctx.gameStep?.skipBack}
         tableImageDependency={ctx.gameStep?.tableImageDependency}
         tableImage={ctx.gameStep?.tableImage}
+        cardTable={ctx.gameStep?.cardTable}
+        modalTable={ctx.gameStep?.modalTable}
         tableNotes={ctx.gameStep?.tableNotes} />
     </div>
   </>

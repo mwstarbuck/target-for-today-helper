@@ -11,7 +11,7 @@ const TableModal = (props) => {
   const handleCancel = () => {
     setShowModal(false);
   };
-  console.log(source);
+
   return <>
     <Modal
       title={<h2>Tables Reference</h2>}
