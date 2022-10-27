@@ -13,6 +13,7 @@ import ZonesModal from '../Modals/ZonesModal';
 import TableModal from '../Modals/TableModal';
 
 const Card = (props) => {
+  const { actionType, tableImageDependency } = props;
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
@@ -86,13 +87,73 @@ const Card = (props) => {
   }
   const params = methodInfo;
 
+  const getVariableTable = (sourceList, dependency, endList) => {
+    switch (dependency) {
+      case 'aircraft':
+        const aircraft = contextEnum['aircraft'];
+        const table = sourceList.find(t => t.match.includes(aircraft))
+        endList.push(table);
+        break;
+
+      default:
+        break;
+    }
+  }
+  const cardTableSrc = [];
+  const modalTableSrc = [];
+  switch (actionType) {
+    case 'tableForCard':
+      if (tableImageDependency) {
+        switch (tableImageDependency) {
+          case 'campaign':
+            const table = props.tableImage[ctx.campaign.campaign - 1];
+            cardTableSrc.push({
+              table: tableImageEnum[table.table],
+              diceType: table.diceType,
+              title: table.title,
+              note: tableNoteEnum[table.note]
+            })
+            break;
+          default:
+            break;
+        }
+      }
+      else {
+        props.tableImage.forEach(t => {
+          cardTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+      
+      break;
+    case 'tableModal':
+      props.tableImage.forEach(t => {
+        modalTableSrc.push({
+          table: tableImageEnum[t.table],
+          diceType: t.diceType,
+          title: t.title,
+          note: tableNoteEnum[t.note]
+        })
+
+      })
+      break;
+    default:
+      break;
+  }
   const tableSrc = [];
   switch (props.tableImageDependency) {
     case 'campaign':
+      const table = props.tableImage[ctx.campaign.campaign - 1];
       tableSrc.push({
-        table: tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1].table],
-        diceType: props.diceType, 
-        title: props.title
+        table: tableImageEnum[table.table],
+        diceType: table.diceType, 
+        title: table.title,
+        note: tableNoteEnum[table.note]
       })
       break;
     case 'none':
@@ -192,8 +253,8 @@ const Card = (props) => {
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
       {props.tableImage && props.actionType === 'tableForCard' &&
         <div style={{ alignItems: 'center' }}>
-          <Popover trigger='hover' content={<img src={tableNoteEnum[props.tableNotes]} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-            <img src={tableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          <Popover trigger='hover' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
           </Popover>
         </div>
       }
@@ -300,7 +361,7 @@ const Card = (props) => {
     <TableModal
       showModal={showTableModal}
       setShowModal={setShowTableModal}
-      source={tableSrc}
+      source={modalTableSrc}
       diceType={props.diceType}
     />
   </div>

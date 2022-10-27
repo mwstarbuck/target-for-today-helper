@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
   const [modifiers, setModifiers] = useState([]);

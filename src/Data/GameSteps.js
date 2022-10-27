@@ -175,7 +175,7 @@ export const PRE_MISSION_STEPS = [
     actionType: 'tableForCard',
     tableImageDependency: 'campaign',
     tableNotes: '2-13-note',
-    tableImage: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level' }]
+    tableImage: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }]
   },
   {
     id: 10,
@@ -243,7 +243,7 @@ export const TAKEOFF_PROCEDURE = [
     additionalInfo: ['If based in England, -2 modifier if mission flown in Jan, Feb or Dec and -1 modifier if mission flown in Mar, Apr, Oct or Nov', 'If based in Italy, +1 modifier if mission flown in May or Oct; +2 modifier if flown in Jun or Sep; +3 modifier if flown in Jul or Aug'],
     hasAction: false,
     actionType: 'tableForCard',
-    tableImageDependency: 'none',
+    tableImageDependency: null,
     tableNotes: '3-1-note',
     tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }]
     // action: 'roll',
@@ -348,9 +348,9 @@ export const ZONES_PROCEDURE = [
     reference: 'Table 4-4 (1D10)',
     // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
-    actionType: 'tableModal',
-    tableImageDependency: 'none',
-    tableImage: [{ table: '4-4', diceType: '1D10', title: '4-1 Weather in Zone' }, { table: '4-4', diceType: '1D10', title: '4-4 Contrails' },],
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    tableImage: [{ table: '4-4', diceType: '1D10', title: '4-4 Contrails', note: '4-4-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
     // action: 'roll',

@@ -47,7 +47,7 @@ const Zone = () => {
   const onFormationChange = (e) => {
     setFormation(e.target.value);
   }
-  ctx.zonesInfo && console.log(ctx.zonesInfo);
+
   return <Row gutter={[1, 1]}>
     <Col span={2}><div className='zoneCellHeader'>Zone</div></Col>
     <Col span={3}><div className='zoneCellHeader'>DRM / Locatation</div></Col>
