@@ -173,7 +173,7 @@ const getBomberPosition = (setters) => {
     cellModifier = -1;
   setCell({ cell: cell, modifier: cellModifier });
   cellModifier && newMods.push({ relation: 'cell', modifier: `modifier on table 5-2: ${cellModifier}` })
- 
+
   roll = rollDice(36);
   let number;
   let numberMod;
@@ -233,11 +233,34 @@ const getBomberPosition = (setters) => {
   setters.setModifiers(([...prevMods, ...newMods]));
 }
 
+const zoneMovement = (stepInfo) => {
+  let value = stepInfo.value
+  const zones = stepInfo.zones
+  if (stepInfo.direction === 'outbound') {
+    if (value + 1 > zones) {
+      value = zones;
+      stepInfo.setter(value);
+    }
+    else {
+      stepInfo.setter(value + 1);
+    }
+  }
+  else {
+    if (value - 1 < 1) {
+      value = 1;
+      stepInfo.setter(value);
+    }
+    else {
+      stepInfo.setter(value - 1);
+    }
+  }
+}
 export const actionEnum = {
   'getResult': getResult,
   'processResult': processResult,
   'rollCrew': rollCrew,
   'getBomberPosition': getBomberPosition,
+  'zoneMovement': zoneMovement
   //more to  come
 }
 

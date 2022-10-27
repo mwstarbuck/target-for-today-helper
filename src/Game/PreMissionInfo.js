@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GameContext from './GameContext';
-import { PRE_MISSION_STEPS } from '../Data/GameSteps';
+import { PRE_MISSION_STEPS, TAKEOFF_PROCEDURE, ZONES_PROCEDURE } from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
@@ -9,13 +9,16 @@ const PreMissionInfo = (props) => {
   const [gameStep, setGameStep] = React.useState(null)
 
   const contingencyEnum = {
-    'bomber': ctx.bomber
+    'bomber': ctx.bomber,
+    'weather': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone).weather,
   }
 
   React.useEffect(() => {
     if (step > 0) {
 
-      const nextStep = PRE_MISSION_STEPS.find(s => s.id === step)
+      const nextStep = step <= 14 ? PRE_MISSION_STEPS.find(s => s.id === step) : step <= 16 ? TAKEOFF_PROCEDURE.find(s => s.id === step)
+        : ZONES_PROCEDURE.find(s => s.id === step);
+      console.log(contingencyEnum[nextStep?.contingencyValue]);
       if (nextStep?.contingencyStep === true) {
         // const value = contingencyEnum[nextStep?.contingencyValue];
         if (contingencyEnum[nextStep?.contingencyValue] === nextStep?.contingentUpon) {
@@ -50,7 +53,9 @@ const PreMissionInfo = (props) => {
         contingencyValue={ctx.gameStep?.contingencyValue}
         contingentUpon={ctx.gameStep?.contingentUpon}
         skipBack={ctx.gameStep?.skipBack}
-        tableImage={ctx.gameStep?.tableImage} />
+        tableImageDependency={ctx.gameStep?.tableImageDependency}
+        tableImage={ctx.gameStep?.tableImage}
+        tableNotes={ctx.gameStep?.tableNotes} />
     </div>
   </>
 }

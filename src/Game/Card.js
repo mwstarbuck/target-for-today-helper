@@ -6,15 +6,11 @@ import { tableEnum } from "../Data/Tables";
 import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
 import './GamePage.css'
-import { Popover } from 'antd';
+import { Popover, Modal } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
-
-let engine = -1;
-let weather = 3;
-const modEnum = {
-  'weather': weather, //ctx.weather
-  'engine': engine
-}
+import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
+import ZonesModal from '../Modals/ZonesModal';
+import TableModal from '../Modals/TableModal';
 
 const Card = (props) => {
   const ctx = useContext(GameContext);
@@ -22,6 +18,8 @@ const Card = (props) => {
   const [selectValue, setSelectValue] = useState(null);
   const [inputValue, setInputValue] = useState(null);
   const [showMods, setShowMods] = useState(false);
+  const [showZoneModal, setShowZoneModal] = useState(false);
+  const [showTableModal, setShowTableModal] = useState(false);
 
   const selectRef = useRef();
 
@@ -39,6 +37,9 @@ const Card = (props) => {
     'setModifiers': ctx.setModifiers,
     'modifiers': ctx.modifiers,
     'setZones': ctx.setZones,
+    'setCurrentZone': ctx.setCurrentZone,
+    'currentZone': ctx.currentZone,
+    'direction': ctx.direction
   }
 
   const optionsEnum = {
@@ -72,10 +73,45 @@ const Card = (props) => {
         modifiers: contextEnum[props.modifiers]
       }
       break;
+    case 'zoneMovement':
+      methodInfo = {
+        setter: ctx.setCurrentZone,
+        value: ctx.currentZone,
+        direction: ctx.direction,
+        zones: ctx.zones
+      }
+      break;
     default:
       break;
   }
   const params = methodInfo;
+
+  const tableSrc = [];
+  switch (props.tableImageDependency) {
+    case 'campaign':
+      tableSrc.push({
+        table: tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1].table],
+        diceType: props.diceType, 
+        title: props.title
+      })
+      break;
+    case 'none':
+      props.tableImage.forEach(t => {
+        tableSrc.push({
+          table: tableImageEnum[t.table],
+          diceType: t.diceType,
+          title: t.title,
+          note: tableNoteEnum[t.note]
+        })
+
+      })
+      break;
+    default:
+      break;
+  }
+
+
+  // const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
   const cardAction = <>
@@ -149,12 +185,18 @@ const Card = (props) => {
       content={showMods && <div ><ul>{ctx?.modifiers?.map(m => <li style={{ color: 'red' }}>{m.modifier}</li>)}</ul></div>}>
       <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
     </Popover>
-    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
-      {props.tableImage && <div style={{ alignItems: 'center' }}><img src={tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]]} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline'}} /></div>}
+      {props.tableImage && props.actionType === 'tableForCard' &&
+        <div style={{ alignItems: 'center' }}>
+          <Popover trigger='hover' content={<img src={tableNoteEnum[props.tableNotes]} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={tableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          </Popover>
+        </div>
+      }
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -163,7 +205,7 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {!props.isIncrement && props.actionType === 'roll' && <>
+      {!props.isIncrement && (props.actionType === 'roll' || props.actionType === 'click') && <>
         <button onClick={() => {
           action(params);
           setAdvance(true);
@@ -207,7 +249,35 @@ const Card = (props) => {
           </div>
         </>
       }
-      {props.actionType === 'none' &&
+      {!props.isIncrement && props.actionType === 'modal' && <>
+        <button onClick={() => {
+          setShowZoneModal(true);
+          // setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        </div>
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'tableModal' && <>
+        <button onClick={() => {
+          setShowTableModal(true);
+          // setAdvance(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button>
+        <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+        </div>
+      </>
+      }
+      {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
         <>
           <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
@@ -220,6 +290,19 @@ const Card = (props) => {
         <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
       </span>} */}
     </div>
+    <ZonesModal
+      onSelect={onSelect}
+      options={stepOptions}
+      showZoneModal={showZoneModal}
+      setShowZoneModal={setShowZoneModal}
+      zones={ctx.zones}
+      setZonesInfo={ctx.setZonesInfo} />
+    <TableModal
+      showModal={showTableModal}
+      setShowModal={setShowTableModal}
+      source={tableSrc}
+      diceType={props.diceType}
+    />
   </div>
 }
 
