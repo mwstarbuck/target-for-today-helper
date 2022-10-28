@@ -52,8 +52,8 @@ const GamePage = () => {
         </span>
 
         }
-        <Zone />
-        <img src={b17f} style={{ width: 700 }} />
+        {ctx.zonesInfo && <Zone />}
+        {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />}
       </div>
       <div className='column'>
         Game Step Helper

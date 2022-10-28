@@ -54,6 +54,8 @@ const PreMissionInfo = (props) => {
         contingentUpon={ctx.gameStep?.contingentUpon}
         skipBack={ctx.gameStep?.skipBack}
         tableImageDependency={ctx.gameStep?.tableImageDependency}
+        cardTableDependency={ctx.gameStep?.cardTableDependency}
+        modalTableDependency={ctx.gameStep?.modalTableDependency}
         tableImage={ctx.gameStep?.tableImage}
         cardTable={ctx.gameStep?.cardTable}
         modalTable={ctx.gameStep?.modalTable}

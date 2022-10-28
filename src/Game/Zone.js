@@ -6,7 +6,7 @@ const { TextArea } = Input;
 
 const Zone = () => {
   const ctx = useContext(GameContext);
-  const [weatherValue, setWeatherValue] = useState(null);
+  const [weatherValue, setWeatherValue] = useState(ctx.zonesInfo?.find(z => z.zone === ctx?.currentZone).weather || null);
   const [escortLevel, setEscortLevel] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
@@ -26,6 +26,7 @@ const Zone = () => {
       console.log(ctx.zonesInfo)
     }
     ctx.setZonesInfo(zones)
+    console.log(ctx.zonesInfo)
   }
 
   const onEscortChange = (e) => {

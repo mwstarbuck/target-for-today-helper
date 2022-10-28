@@ -40,8 +40,10 @@ const ZonesModal = (props) => {
 
   let zonesData = [];
   for (let i = 0; i < zones; i++) {
-    zonesData.push({zone: i + 1,
-    targetZone: i === zones - 1 ? true : false})
+    zonesData.push({
+      zone: i + 1,
+      targetZone: i === zones - 1 ? true : false
+    })
   }
 
   const onInfoSelect = (e, i) => {
@@ -57,19 +59,19 @@ const ZonesModal = (props) => {
   for (let i = 0; i < zones; i++) {
     zoneList.push(
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 2 }}>
-        <div>
+        <div key={i}>
           {`Zone:${i + 1} DRM`}
           <Select
-            key={i}
+            key={`Zone:${i + 1} DRM`}
             options={drm}
             name={i}
-            onChange={( e, i ) => onInfoSelect( e, i )}
+            onChange={(e, i) => onInfoSelect(e, i)}
           />
         </div>
         <div>
           {`Zone:${i + 1} Loaction`}
           <Select
-            key={i}
+            key={`Zone:${i + 1} Loaction`}
             options={location}
             onChange={(e) => zonesData[i].location = e.value} />
         </div>

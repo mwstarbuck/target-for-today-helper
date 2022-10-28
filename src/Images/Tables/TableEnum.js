@@ -15,6 +15,7 @@ const tableImageEnum = {
   '4-3B': require('./4-3B.png'),
   '4-3C': require('./4-3C.png'),
   '4-4': require('./4-4.png'),
+  '4-8': require('./4-8.png'),
 }
 
 export default tableImageEnum;
