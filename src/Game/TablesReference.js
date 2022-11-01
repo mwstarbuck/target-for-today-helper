@@ -7,24 +7,25 @@ import TableModal from '../Modals/TableModal';
 const TablesReference = () => {
   const ctx = useContext(GameContext);
   const [showTableModal, setShowTableModal] = useState(false);
+  const [table, setTable] = useState([]);
 
-  let table;
-  const setTable = (e) => {
-    console.log(e);
-    // table = {
-    //   title: e.target
-    // }
+
+  const setModal = (table) => {
+    console.log(table);
+    setTable([table]);
+    setShowTableModal(true)
   }
-  return <ul>
-    {GameTablesList.map(t => <li><div value={t} onClick={setTable}>{t.table}</div></li>)}
+  return <>
+  <ul>
+    {GameTablesList.map(t => <li><a value={t} onClick={() => setModal(t)}>{t.table}</a></li>)}
     </ul>
 
-    {/* <TableModal
+    <TableModal
       showModal={showTableModal}
       setShowModal={setShowTableModal}
-      source={modalTableSrc}
-      diceType={props.diceType}
-    /> */}
+      source={table}
+    />
+  </>
 
 }
 
