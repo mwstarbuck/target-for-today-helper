@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import GamePage from './GamePage';
 import ZonesPage from './ZonesPage';
 import Crew from './Crew';
+import TablesReference from './TablesReference';
 // import "antd/dist/antd.css";
 
 const { TabPane } = Tabs;
@@ -25,7 +26,12 @@ const MainPage = () => {
       label: 'Bomber Crew',
       key: 'bomberCrew',
       children: <Crew />
-    }
+    },
+    {
+      label: 'Tables Reference',
+      key: 'tablesReference',
+      children: <TablesReference />
+    },
   ]
 
   const handleTabChange = (key) => {

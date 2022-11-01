@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(23);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
   const [modifiers, setModifiers] = useState([]);
@@ -52,7 +52,7 @@ export const GameContextProvider = ({ children }) => {
       setZonesInfo,
       currentZone,
       setCurrentZone,
-      direction, 
+      direction,
       setDirection
     }}
     >
