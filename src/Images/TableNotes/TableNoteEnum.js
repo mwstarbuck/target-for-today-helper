@@ -10,6 +10,13 @@ const tableNoteEnum = {
   '4-8-note': require('./4-8-note.png'),
   '5-1-note': require('./5-1-note.png'),
   '5-2-note': require('./5-2-note.png'),
+  '5-3A-note': require('./5-3A-note.png'),
+  '5-3B-note': require('./5-3B-note.png'),
+  '5-3C-note': require('./5-3C-note.png'),
+  '5-3D-note': require('./5-3D-note.png'),
+  '5-4-note': require('./5-4-note.png'),
+  '5-5-note': require('./5-5-note.png'),
+  '5-5A-note': require('./5-5A-note.png'),
 }
 
 export default tableNoteEnum;

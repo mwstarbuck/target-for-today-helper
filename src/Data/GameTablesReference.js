@@ -4,5 +4,12 @@ export const GameTablesList = [
   { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' },
   { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' },
   { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' },
-  { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }
+  { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' },
+  { table: '5-3A', diceType: '1D6 + 1D6', title: '5-3A', note: '5-3A-note' },
+  { table: '5-3B', diceType: '1D6 + 1D6', title: '5-3B', note: '5-3B-note' },
+  { table: '5-3C', diceType: '1D6 + 1D6', title: '5-3C', note: '5-3C-note' },
+  { table: '5-3D', diceType: '2D6', title: '5-3D', note: '5-3D-note' },
+  { table: '5-4', diceType: '2D6', title: '5-4', note: '5-4-note' },
+  { table: '5-5', diceType: null, title: '5-5', note: '5-5-note' },
+  { table: '5-5A', diceType: '1D6', title: '5-5A', note: '5-5A-note' },
 ]

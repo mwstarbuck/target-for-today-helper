@@ -3,6 +3,8 @@ import { List, Button } from 'antd';
 import { GameContext } from './GameContext';
 import { GameTablesList } from '../Data/GameTablesReference';
 import TableModal from '../Modals/TableModal';
+import tableImageEnum from '../Images/Tables/TableEnum';
+import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
 
 const TablesReference = () => {
   const ctx = useContext(GameContext);
@@ -12,10 +14,16 @@ const TablesReference = () => {
 
   const setModal = (table) => {
     console.log(table);
-    setTable([table]);
+    const displayTable = {
+      title: table.table,
+      diceType: table.diceType,
+      table: tableImageEnum[table.table],
+      note: tableNoteEnum[table.note]
+    }
+    setTable([displayTable]);
     setShowTableModal(true)
   }
-  return <>
+  return <div style={{textAlign: 'left'}}>
   <ul>
     {GameTablesList.map(t => <li><a value={t} onClick={() => setModal(t)}>{t.table}</a></li>)}
     </ul>
@@ -24,8 +32,9 @@ const TablesReference = () => {
       showModal={showTableModal}
       setShowModal={setShowTableModal}
       source={table}
+      opacity={1}
     />
-  </>
+  </div>
 
 }
 

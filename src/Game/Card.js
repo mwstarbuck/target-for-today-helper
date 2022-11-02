@@ -6,7 +6,7 @@ import { tableEnum } from "../Data/Tables";
 import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
 import './GamePage.css'
-import { Popover, Modal } from 'antd';
+import { Popover, Radio } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
 import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
 import ZonesModal from '../Modals/ZonesModal';
@@ -21,6 +21,7 @@ const Card = (props) => {
   const [showMods, setShowMods] = useState(false);
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
+  const [goToNextCard, setGoToNextCard] = useState('');
 
   const selectRef = useRef();
 
@@ -119,6 +120,7 @@ const Card = (props) => {
   }
   const cardTableSrc = [];
   const modalTableSrc = [];
+  let cardMessage;
   switch (actionType) {
     case 'tableForCard':
       if (cardTableDependency) {
@@ -194,36 +196,18 @@ const Card = (props) => {
         })
       }
       break;
+    case 'cardMessage':
+      cardMessage = props.message.find(t => t.match.includes('12/1944')).message;
+      console.log(cardMessage)
+      break;
     default:
       break;
   }
-  // const tableSrc = [];
-  // switch (props.tableImageDependency) {
-  //   case 'campaign':
-  //     const table = props.tableImage[ctx.campaign.campaign - 1];
-  //     tableSrc.push({
-  //       table: tableImageEnum[table.table],
-  //       diceType: table.diceType,
-  //       title: table.title,
-  //       note: tableNoteEnum[table.note]
-  //     })
-  //     break;
-  //   case 'none':
-  //     props.tableImage.forEach(t => {
-  //       tableSrc.push({
-  //         table: tableImageEnum[t.table],
-  //         diceType: t.diceType,
-  //         title: t.title,
-  //         note: tableNoteEnum[t.note]
-  //       })
 
-  //     })
-  //     break;
-  //   default:
-  //     break;
-  // }
-
-
+  const onRadioChange = (e) => {
+    const value = e.target.value
+    setGoToNextCard(value);
+  }
   // const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
@@ -234,9 +218,21 @@ const Card = (props) => {
   </>
 
   const nextStep = () => {
-    ctx.setStep(ctx.step + 1);
-    setAdvance(false);
-    setSelectValue(null);
+    if (props.nextCardTest) {
+      if (goToNextCard) {
+        ctx.setStep(ctx.step + 1);
+        setGoToNextCard(false);
+      }
+      else {
+        ctx.setStep(ctx.step + 2);
+        setGoToNextCard(false);
+      }
+    }
+    else {
+      ctx.setStep(ctx.step + 1);
+      setAdvance(false);
+      setSelectValue(null);
+    }
   }
   const lastStep = () => {
     if (ctx.step > 0) {
@@ -304,16 +300,37 @@ const Card = (props) => {
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
       {props.cardTable && props.actionType === 'tableForCard' &&
-        <div style={{ alignItems: 'center' }}>
-          <Popover trigger='hover' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+        <div>
+          <Popover trigger='click' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <a style={{ cursor: 'pointer' }}>See Table Notes</a>
           </Popover>
+          <div style={{ alignItems: 'center' }}>
+            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          </div>
+        </div>
+      }
+      {props.actionType === 'cardMessage' &&
+        <div>
+          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+            {cardMessage && <p>{cardMessage}</p>}
+          </div>
+          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+            <p>Rolled Random Event?</p>
+            <Radio.Group onChange={onRadioChange} value={goToNextCard}>
+              <Radio value={true}><span style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>Yes</span></Radio>
+              <Radio value={false}><span style={{ fontWeight: goToNextCard === false ? 600 : 500 }}>No</span></Radio>
+            </Radio.Group>
+          </div>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+          </div>
         </div>
       }
       {props.additionalInfo &&
         <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
-          <ul style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
+          <ul style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem', textAlign: 'left' }}>
             {props.additionalInfo.map((ai, i) => <li key={i}>{ai}</li>)}
           </ul>
         </div>}
