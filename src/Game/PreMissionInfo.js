@@ -19,7 +19,7 @@ const PreMissionInfo = (props) => {
         return PRE_MISSION_STEPS.find(s => s.id === step);
       case step <= 16:
         return TAKEOFF_PROCEDURE.find(s => s.id === step);
-      case step <= 22:
+      case step <= 24:
         return ZONES_PROCEDURE.find(s => s.id === step);
       case step <= 40:
         return COMBAT_PROCEDURE.find(s => s.id === step);
@@ -77,6 +77,7 @@ const PreMissionInfo = (props) => {
         tableNotes={ctx.gameStep?.tableNotes}
         message={ctx?.gameStep?.cardMessage}
         nextCardTest={ctx?.gameStep?.nextCardTest}
+        cardTestName={ctx?.gameStep?.cardTestName}
         radioQuestion={ctx?.gameStep?.radioQuestion}
         radioInfo={ctx?.gameStep?.radioInfo} />
     </div>

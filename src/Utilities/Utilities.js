@@ -236,7 +236,7 @@ const getBomberPosition = (setters) => {
 const zoneMovement = (stepInfo) => {
   let value = stepInfo.value
   const zones = stepInfo.zones
-  if (stepInfo.direction === 'outbound') {
+  if (stepInfo.outbound) {
     if (value + 1 > zones) {
       value = zones;
       stepInfo.setter(value);

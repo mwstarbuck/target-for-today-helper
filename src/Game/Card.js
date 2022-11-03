@@ -22,6 +22,11 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
+  const startStep = 0;
+  const preMission = 1;
+  const takeOff = 15;
+  const zoneMove = 17;
+  const combat = 24
 
   const selectRef = useRef();
 
@@ -41,7 +46,7 @@ const Card = (props) => {
     'setZones': ctx.setZones,
     'setCurrentZone': ctx.setCurrentZone,
     'currentZone': ctx.currentZone,
-    'direction': ctx.direction,
+    'outbound': ctx.outbound,
     'aircraft': ctx?.bomber
   }
 
@@ -80,7 +85,7 @@ const Card = (props) => {
       methodInfo = {
         setter: ctx.setCurrentZone,
         value: ctx.currentZone,
-        direction: ctx.direction,
+        outbound: ctx.outbound,
         zones: ctx.zones
       }
       break;
@@ -94,7 +99,6 @@ const Card = (props) => {
     switch (dependency) {
       case 'aircraft':
         const aircraft = contextEnum['aircraft'];
-        console.log(aircraft);
         table = sourceList.find(t => t.match.includes(aircraft))
         endList.push({
           table: tableImageEnum[table.table],
@@ -219,13 +223,79 @@ const Card = (props) => {
 
   const nextStep = () => {
     if (props.nextCardTest) {
-      if (goToNextCard) {
-        ctx.setStep(ctx.step + 1);
-        setGoToNextCard(false);
-      }
-      else {
-        ctx.setStep(ctx.step + 2);
-        setGoToNextCard(false);
+      switch (props.cardTestName) {
+        case 'radioResult':
+          if (goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 2);
+            setGoToNextCard(false);
+          }
+          break;
+        case 'goCombatTest':
+          const drm = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).drm;
+          console.log(drm);
+          if (drm === 'N/A')
+            ctx.setStep(zoneMove)
+          else
+            ctx.setStep(ctx.step + 1)
+          break;
+        case 'resistance':
+          const resistance = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance;
+          console.log(resistance);
+          if (resistance === 'none')
+            ctx.setStep(zoneMove)
+          else
+            ctx.setStep(ctx.step + 1)
+          break;
+        case 'rollResistance':
+          const zone = ctx.currentZone;
+          const campaign = ctx.campaign.campaign;
+          const outbound = ctx.outbound;
+          switch (campaign) {
+            case 1:
+              if (zone === 6 && outbound)
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            case 2:
+              if ((zone === 6 || zone === 11) && outbound === 'outbound')
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            case 3:
+              if ((zone === 6 || zone === 11 || zone === 12) && outbound)
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            case 4:
+              if ((zone === 8 || zone === 10 || zone === 13) && outbound)
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            case 5:
+              if ((zone === 8 || zone === 10) && outbound)
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            case 6:
+              if ((zone === 6 || zone === 11) && outbound)
+                ctx.setStep(ctx.step + 1)
+              else
+                ctx.setStep(ctx.step + 2)
+              break;
+            default:
+              break;
+          }
+        default:
+          break;
       }
     }
     else {
@@ -233,6 +303,21 @@ const Card = (props) => {
       setAdvance(false);
       setSelectValue(null);
     }
+    // if (props.nextCardTest) {
+    //   if (goToNextCard) {
+    //     ctx.setStep(ctx.step + 1);
+    //     setGoToNextCard(false);
+    //   }
+    //   else {
+    //     ctx.setStep(ctx.step + 2);
+    //     setGoToNextCard(false);
+    //   }
+    // }
+    // else {
+    //   ctx.setStep(ctx.step + 1);
+    //   setAdvance(false);
+    //   setSelectValue(null);
+    // }
   }
   const lastStep = () => {
     if (ctx.step > 0) {
@@ -328,7 +413,7 @@ const Card = (props) => {
         </div>
       }
       {props.additionalInfo &&
-        <div style={{ fontSize: 14, margin: '1rem', border: '1px solid grey' }}>
+        <div style={{ fontSize: 11, fontWeight: 800, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
           <ul style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem', textAlign: 'left' }}>
             {props.additionalInfo.map((ai, i) => <li key={i}>{ai}</li>)}
@@ -343,6 +428,7 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
+        <button onClick={() => ctx.setOutbound(!ctx.outbound)}>test abort!</button>
         <div>
           <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
           {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}

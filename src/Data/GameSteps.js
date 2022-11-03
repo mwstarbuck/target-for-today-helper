@@ -290,13 +290,47 @@ export const ZONES_PROCEDURE = [
     // table: 'table_2_9',
     setter: { setterA: 'setCurrentZone' },
     contingencyStep: false,
-    contingencyValue: 'direction',
+    contingencyValue: 'outbound',
+    nextCardTest: true,
+    cardTestName: 'rollResistance',
     // contingentUpon: 'B-24J'
     // action: 'roll',
     // actionText: ''
   },
   {
     id: 18,
+    section: 'Movement in the Zones',
+    heading: 'Determine Fighter Escort',
+    subHeading: 'Zones 2-5',
+    instruction: 'Determine mission\'s fighter escort on Table 2-13 (1D10). Make note of the escort level for the current escort level zone range.',
+    reference: 'Table 2-13',
+    additionalInfo: null,
+    hasAction: false,
+    actionType: 'tableForCard',
+    cardTableDependency: 'campaign',
+    modalTableDependency: null,
+    //tableImageDependency: 'campaign',
+    tableNotes: '2-13-note',
+    cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }],
+  },
+  // {
+  //   id: 19,
+  //   section: 'Movement in the Zones',
+  //   heading: 'Reminders',
+  //   subHeading: 'Set Variables reminder',
+  //   instruction: 'Please be sure to set the escort level for the current campaign specific zone range.',
+  //   // reference: 'Table 2-13',
+  //   additionalInfo: null,
+  //   hasAction: true,
+  //   actionType: 'none',
+  //   // actionType: 'tableForCard',
+  //   // cardTableDependency: 'campaign',
+  //   modalTableDependency: null,
+  //   //tableImageDependency: 'campaign',
+  //   skipBack: 2
+  // },
+  {
+    id: 19,
     section: 'Movement in the Zones',
     heading: 'Weather in the Zone',
     instruction: 'Roll on Table 4-1 and select the result in the zone section',
@@ -310,11 +344,12 @@ export const ZONES_PROCEDURE = [
     modalTable: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
+    skipBack: 2
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 19,
+    id: 20,
     section: 'Movement in the Zones',
     heading: 'Check for Mission Recall',
     instruction: 'Roll on Table 4-2 if weather in zone is 100% cloud cover',
@@ -334,7 +369,7 @@ export const ZONES_PROCEDURE = [
     contingentUpon: '100% clouds'
   },
   {
-    id: 20,
+    id: 21,
     section: 'Movement in the Zones',
     heading: 'Check for Mechanial Failure',
     instruction: 'Roll on Table 4-3A (1D10 + 1D10). If result is mechanical failure, roll on table 4-3B or 4-3C',
@@ -355,7 +390,7 @@ export const ZONES_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 21,
+    id: 22,
     section: 'Movement in the Zones',
     heading: 'Contrails',
     instruction: 'Roll 1D10 on Table 4-4',
@@ -373,7 +408,7 @@ export const ZONES_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 22,
+    id: 23,
     section: 'Movement in the Zones',
     heading: 'Rejoin Formation',
     instruction: 'Roll 1D6 on Table 4-8',
@@ -388,16 +423,40 @@ export const ZONES_PROCEDURE = [
     // action: 'roll',
     // actionText: ''
   },
+  {
+    id: 24,
+    section: 'Movement in the Zones',
+    heading: 'Rejoin Formation',
+    instruction: 'Read Instruction',
+    reference: 'DRM for zone',
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '4-8', diceType: '1D6', title: '4-8 Rejoin Formation', note: '4-8-note' }],
+    actionText: 'See Table 4-8',
+    diceType: '1D10',
+    nextCardTest: true,
+    cardTestName: 'goCombatTest',
+    // contingencyStep: true,
+    contingencyValue: 'drm',
+    contingentUpon: 'N/A'
+    // action: 'roll',
+    // actionText: ''
+  },
 ]
 
 export const COMBAT_PROCEDURE = [
   {
-    id: 23,
+    id: 25,
     section: 'Combat',
     heading: 'German Fighter Resistance in Zone',
     instruction: 'Roll on Table 5-1',
     reference: 'Table 5-1 (1D10)',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['Roll on Table 5-1 German Fighter Resistance Levels.',
+      'Cross-index the campaign you are playing with the die roll.',
+      'Record the resistance level on the Zone Worksheet.',
+      'A result of “None” on Table 5-1 always means NO German fighters encountered this zone (do not roll on Tables 5-2 through 5-4.'],
     hasAction: false,
     actionType: 'tableForCard',
     tableImageDependency: null,
@@ -405,11 +464,13 @@ export const COMBAT_PROCEDURE = [
     cardTable: [{ table: '5-1', diceType: '1D10', title: '5-1 German Fighter Resistance in Zone', note: '5-1-note' }],
     actionText: 'See Table 5-1',
     diceType: '1D10',
+    nextCardTest: true,
+    cardTestName: 'resistance'
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 24,
+    id: 26,
     section: 'Combat',
     heading: 'German Fighter Waves in Zone',
     instruction: 'Roll on Table 5-2',
@@ -426,35 +487,39 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 25,
+    id: 27,
     section: 'Combat',
     heading: 'German Fighter Number and Attack Angles',
     instruction: 'Roll on Table 5-3A,B or C',
     reference: 'Table 5-3, Section 5.3 game rules pg. 15.',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['', '', '', '', '', ''],
     hasAction: false,
     actionType: 'cardMessage',
     tableImageDependency: null,
     modalTableDependency: null,
-    cardMessage: [{message: 'See Table 5-3A in the Tables Reference Tab', match: ['11/1942', '12/1942', '1/1943', '2/1943',
-      '3/1943', '4/1943', '5/1943', '6/1943', '7/1943', '8/1943', '9/1943', '10/1943', '11/1943']}, 
-    {message: 'See Table 5-3B in the Tables Reference Tab', match: ['12/1943', '1/1944', '2/1944', '3/1944',
-        '4/1944', '5/1944', '6/1944', '7/1944', '8/1944', '9/1944', '10/1944', '11/1944']}, 
-    {message: 'See Table 5-3C in the Tables Reference Tab', match: ['12/1944', '1/1945', '2/1945','3/1945', '4/1945', '5/1945']}],
-    // modalTable: [{ table: '5-1', diceType: '1D10', title: '5-1 Weather in Zone' }, { table: '5-1', diceType: '1D10', title: '5-1 German Fighter Resistance in Zone', note: '5-1-note' }],
-    // actionText: 'See Table 4-1',
+    cardMessage: [{
+      message: 'See Table 5-3A in the Tables Reference Tab', match: ['11/1942', '12/1942', '1/1943', '2/1943',
+        '3/1943', '4/1943', '5/1943', '6/1943', '7/1943', '8/1943', '9/1943', '10/1943', '11/1943']
+    },
+    {
+      message: 'See Table 5-3B in the Tables Reference Tab', match: ['12/1943', '1/1944', '2/1944', '3/1944',
+        '4/1944', '5/1944', '6/1944', '7/1944', '8/1944', '9/1944', '10/1944', '11/1944']
+    },
+    { message: 'See Table 5-3C in the Tables Reference Tab', match: ['12/1944', '1/1945', '2/1945', '3/1945', '4/1945', '5/1945'] }],
     diceType: '1D6 + 1D6',
+    nextCardTest: 'radioResult',
     nextCardTest: true,
+    cardTestName: 'radioResult',
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 26,
+    id: 28,
     section: 'Combat',
     heading: 'Random Event!',
     instruction: 'Roll 2D6 on Table 5-3D',
     reference: 'Table 5-3D, rule section 5.3.1, pg. 15.',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['', '', '', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -468,12 +533,12 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 27,
+    id: 29,
     section: 'Combat',
     heading: 'Number of Fighters Driven Off By Escort',
     instruction: 'Roll 2D6 on Table 5-4',
     reference: 'Table 5-4 (2D6), Rule section 5.4, pg. 14',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['', '', '', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -486,12 +551,12 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 28,
+    id: 30,
     section: 'Combat',
     heading: 'Bomber Defensive Fire',
     instruction: 'Determin Bomber defensive Fire allocation on table 5-5.',
     reference: 'See Table 5-5, Rule Section 5.5, pg.15',
-    additionalInfo: ['on table 5-5 allocate defensive fire', 'each gun may only fire at one target per round', 'Place target marker next to the chosen target', 'Mark off ammunition box on the mission log sheet', 'Next, determine German fighter pilot skill on table 5-5A'],
+    additionalInfo: ['on table 5-5 allocate defensive fire', 'each gun may only fire at one target per round', 'Place target marker next to the chosen target', 'Mark off ammunition box on the mission log sheet', 'Next, determine German fighter pilot skill on table 5-5A', '', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -503,12 +568,12 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 29,
+    id: 31,
     section: 'Combat',
     heading: 'German Fighter Skill',
     instruction: 'Roll 1D6 on Table 5-5A',
     reference: 'Table 5-5A, game section 5.5.1, pg 16',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['', '', '', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -520,12 +585,12 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 30,
+    id: 32,
     section: 'Combat',
     heading: 'German Fighter Resistance in Zone',
     instruction: 'Roll on Table 5-1',
     reference: 'Table 5-1 (1D10) & Table 4-1A if 100% cloud cover is rolled on table 4-1 and bomber is over Alps',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    additionalInfo: ['', '', '', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,

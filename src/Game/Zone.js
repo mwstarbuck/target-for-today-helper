@@ -30,7 +30,18 @@ const Zone = () => {
   }
 
   const onEscortChange = (e) => {
-    setEscortLevel(e.target.value);
+    const value = e.target.value
+    setEscortLevel(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.resistance = value
+        break;
+      }
+      console.log(ctx.zonesInfo)
+    }
+    ctx.setZonesInfo(zones)
+    console.log(ctx.zonesInfo)
   }
 
   const onContrailsChange = (e) => {
@@ -38,7 +49,18 @@ const Zone = () => {
   }
 
   const onResistanceChange = (e) => {
-    setResistance(e.target.value);
+    const value = e.target.value
+    setResistance(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.resistance = value
+        break;
+      }
+      console.log(ctx.zonesInfo)
+    }
+    ctx.setZonesInfo(zones)
+    console.log(ctx.zonesInfo)
   }
 
   const onWaveChange = (e) => {
