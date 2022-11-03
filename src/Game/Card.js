@@ -244,8 +244,15 @@ const Card = (props) => {
           break;
         case 'resistance':
           const resistance = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance;
-          console.log(resistance);
           if (resistance === 'none')
+            ctx.setStep(zoneMove)
+          else
+            ctx.setStep(ctx.step + 1)
+          break;
+        case 'waves':
+          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves;
+          console.log(waves);
+          if (waves === 0)
             ctx.setStep(zoneMove)
           else
             ctx.setStep(ctx.step + 1)

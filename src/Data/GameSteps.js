@@ -483,6 +483,8 @@ export const COMBAT_PROCEDURE = [
     cardTable: [{ table: '5-2', diceType: '1D10', title: '5-2  Number of German Fighter Waves (Any Zone)', note: '5-2-note' }],
     // actionText: 'See Table 4-1',
     diceType: '1D10',
+    nextCardTest: true,
+    cardTestName: 'waves'
     // action: 'roll',
     // actionText: ''
   },

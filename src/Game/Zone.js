@@ -38,10 +38,8 @@ const Zone = () => {
         zone.resistance = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
     ctx.setZonesInfo(zones)
-    console.log(ctx.zonesInfo)
   }
 
   const onContrailsChange = (e) => {
@@ -57,14 +55,24 @@ const Zone = () => {
         zone.resistance = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
     ctx.setZonesInfo(zones)
-    console.log(ctx.zonesInfo)
   }
 
   const onWaveChange = (e) => {
     setWaves(e.target.value);
+    const value = e.target.value
+    setWaves(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.waves = value
+        break;
+      }
+      console.log(ctx.zonesInfo)
+    }
+    ctx.setZonesInfo(zones)
+    console.log(ctx.zonesInfo)
   }
 
   const onFormationChange = (e) => {
@@ -131,10 +139,10 @@ const Zone = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               Enemy Attack Waves:
               <Radio.Group name='waves' onChange={onWaveChange} value={waves}>
-                <Radio value={'none'}><span style={{ fontWeight: waves === 'none' ? 600 : 500 }}>None</span></Radio>
-                <Radio value={'1'}><span style={{ fontWeight: waves === '1' ? 600 : 500 }}>1</span></Radio>
-                <Radio value={'2'}><span style={{ fontWeight: waves === '2' ? 600 : 500 }}>2</span></Radio>
-                <Radio value={'3'}><span style={{ fontWeight: waves === '3' ? 600 : 500 }}>3</span></Radio>
+                <Radio value={0}><span style={{ fontWeight: waves === 'none' ? 600 : 500 }}>None</span></Radio>
+                <Radio value={1}><span style={{ fontWeight: waves === '1' ? 600 : 500 }}>1</span></Radio>
+                <Radio value={2}><span style={{ fontWeight: waves === '2' ? 600 : 500 }}>2</span></Radio>
+                <Radio value={3}><span style={{ fontWeight: waves === '3' ? 600 : 500 }}>3</span></Radio>
               </Radio.Group>
             </div>
           </div>
@@ -150,7 +158,7 @@ const Zone = () => {
           <div className='zoneCell'>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               Formation:&emsp;
-              <Radio.Group name='waves' onChange={onFormationChange} value={formation}>
+              <Radio.Group name='formation' onChange={onFormationChange} value={formation}>
                 <Radio value={'in'}><span style={{ fontWeight: formation === 'in' ? 600 : 500 }}>In</span></Radio>
                 <Radio value={'out'}><span style={{ fontWeight: formation === 'out' ? 600 : 500 }}>Out</span></Radio>
                 <Radio value={'disrupted'}><span style={{ fontWeight: formation === 'disrupted' ? 600 : 500 }}>Disrupted</span></Radio>
