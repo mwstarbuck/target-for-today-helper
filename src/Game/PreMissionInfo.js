@@ -76,10 +76,11 @@ const PreMissionInfo = (props) => {
         modalTable={ctx.gameStep?.modalTable}
         tableNotes={ctx.gameStep?.tableNotes}
         message={ctx?.gameStep?.cardMessage}
+        messageType={ctx?.gameStep?.messageType}
         nextCardTest={ctx?.gameStep?.nextCardTest}
         cardTestName={ctx?.gameStep?.cardTestName}
         radioQuestion={ctx?.gameStep?.radioQuestion}
-        radioInfo={ctx?.gameStep?.radioInfo} />
+        radioDetails={ctx?.gameStep?.radioDetails} />
     </div>
   </>
 }

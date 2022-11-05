@@ -13,7 +13,7 @@ import ZonesModal from '../Modals/ZonesModal';
 import TableModal from '../Modals/TableModal';
 
 const Card = (props) => {
-  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable } = props;
+  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType } = props;
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
@@ -22,6 +22,7 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
+  const [hasChosen, setHasChosen] = useState('');
   const startStep = 0;
   const preMission = 1;
   const takeOff = 15;
@@ -200,18 +201,27 @@ const Card = (props) => {
         })
       }
       break;
-    case 'cardMessage':
-      cardMessage = props.message.find(t => t.match.includes('12/1944')).message;
-      console.log(cardMessage)
-      break;
     default:
       break;
   }
-
-  const onRadioChange = (e) => {
-    const value = e.target.value
-    setGoToNextCard(value);
+  const getMessage = () => {
+    if (messageType) {
+      switch (messageType) {
+        case 'fighterNumberTable':
+          cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
+          console.log(cardMessage)
+          break;
+        case 'combatSummary':
+          cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
+          console.log(cardMessage)
+          break;
+        default:
+          break;
+      }
+    }
   }
+  getMessage();
+
   // const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
@@ -227,11 +237,36 @@ const Card = (props) => {
         case 'radioResult':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
+            setHasChosen(false);
           }
           else {
             ctx.setStep(ctx.step + 2);
+            setGoToNextCard(null);
+            setHasChosen(false);
+          }
+          break;
+        case 'survivingFighters':
+          if (goToNextCard) {
+            ctx.setStep(ctx.step + 1);
             setGoToNextCard(false);
+            setHasChosen(false);
+          }
+          else {
+            if (ctx.waveCount === ctx.waveTotal) {
+              ctx.setWaveCount('done');
+              ctx.setStep(27);
+            }
+            else if (ctx.waveCount > ctx.waveTotal) {
+              ctx.setStep(zoneMove);
+            }
+            else {
+              ctx.setWaveCount(ctx.waveCount + 1);
+              ctx.setStep(27);
+              setGoToNextCard(null);
+              setHasChosen(false);
+              ctx.setWaveCount(ctx.waveCount + 1)
+            }
           }
           break;
         case 'goCombatTest':
@@ -252,10 +287,18 @@ const Card = (props) => {
         case 'waves':
           const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves;
           console.log(waves);
-          if (waves === 0)
+          if (ctx.waveCount === 0)
             ctx.setStep(zoneMove)
+          else if (ctx.waveCount === 'done') {
+            ctx.setStep(zoneMove);
+            ctx.setWaveCount(0);
+          }
+
           else
             ctx.setStep(ctx.step + 1)
+          break;
+        case 'nextZone':
+          ctx.setStep(zoneMove)
           break;
         case 'rollResistance':
           const zone = ctx.currentZone;
@@ -310,21 +353,6 @@ const Card = (props) => {
       setAdvance(false);
       setSelectValue(null);
     }
-    // if (props.nextCardTest) {
-    //   if (goToNextCard) {
-    //     ctx.setStep(ctx.step + 1);
-    //     setGoToNextCard(false);
-    //   }
-    //   else {
-    //     ctx.setStep(ctx.step + 2);
-    //     setGoToNextCard(false);
-    //   }
-    // }
-    // else {
-    //   ctx.setStep(ctx.step + 1);
-    //   setAdvance(false);
-    //   setSelectValue(null);
-    // }
   }
   const lastStep = () => {
     if (ctx.step > 0) {
@@ -373,6 +401,12 @@ const Card = (props) => {
     setAdvance(true);
   }
 
+  const onRadioChange = (e) => {
+    const value = e.target.value
+    setGoToNextCard(value);
+    setHasChosen(true);
+  }
+
   // console.log(ctx.campaign.campaign - 1)
   return <div className='card'>
     <Popover open={showMods}
@@ -406,6 +440,17 @@ const Card = (props) => {
           <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
             {cardMessage && <p>{cardMessage}</p>}
           </div>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+          </div>
+        </div>
+      }
+      {props.actionType === 'cardMessage&Radio' &&
+        <div>
+          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+            {cardMessage && <p>{cardMessage}</p>}
+          </div>
           <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
             <p>Rolled Random Event?</p>
             <Radio.Group onChange={onRadioChange} value={goToNextCard}>
@@ -415,7 +460,28 @@ const Card = (props) => {
           </div>
           <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+            {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+          </div>
+        </div>
+      }
+      {props.actionType === 'yesOrNo' &&
+        <div>
+          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+            {cardMessage && <p>{cardMessage}</p>}
+          </div>
+          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+            <p>{props.radioQuestion}</p>
+            <Radio.Group onChange={onRadioChange} value={goToNextCard}>
+              {props.radioDetails.map(rd => <Radio
+                value={rd.value}><span
+                  style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>
+                  {rd.label}</span>
+              </Radio>)}
+            </Radio.Group>
+          </div>
+          <div>
+            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+            {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
           </div>
         </div>
       }
@@ -516,7 +582,6 @@ const Card = (props) => {
         </div>
         <button onClick={() => {
           setShowTableModal(true);
-          // setAdvance(true);
         }}
           className='card__button'>
           {props.actionText}

@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
   const [modifiers, setModifiers] = useState([]);
@@ -18,7 +18,9 @@ export const GameContextProvider = ({ children }) => {
   const [zones, setZones] = useState();
   const [zonesInfo, setZonesInfo] = useState(null);
   const [currentZone, setCurrentZone] = useState(1);
-  const [outbound, setOutbound] = useState(true)
+  const [outbound, setOutbound] = useState(true);
+  const [waveTotal, setWaveTotal] = useState(0);
+  const [waveCount, setWaveCount] = useState(0);
 
   return (
     <GameContext.Provider value={{
@@ -53,7 +55,11 @@ export const GameContextProvider = ({ children }) => {
       currentZone,
       setCurrentZone,
       outbound,
-      setOutbound
+      setOutbound,
+      waveTotal, 
+      setWaveTotal,
+      waveCount, 
+      setWaveCount
     }}
     >
       {children}

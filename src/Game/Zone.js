@@ -71,7 +71,14 @@ const Zone = () => {
       }
       console.log(ctx.zonesInfo)
     }
-    ctx.setZonesInfo(zones)
+    ctx.setZonesInfo(zones);
+    ctx.setWaveTotal(value);
+    if (value > 0) {
+      ctx.setWaveCount(1);
+    }
+    else {
+      ctx.setWaveCount(0);
+    }
     console.log(ctx.zonesInfo)
   }
 

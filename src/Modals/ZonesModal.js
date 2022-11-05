@@ -59,7 +59,7 @@ const ZonesModal = (props) => {
   let zoneList = [];
   for (let i = 0; i < zones; i++) {
     zoneList.push(
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 2 }}>
+      <div key={i} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 2 }}>
         <div key={i}>
           {`Zone:${i + 1} DRM`}
           <Select
