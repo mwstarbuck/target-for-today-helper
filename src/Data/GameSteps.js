@@ -172,12 +172,13 @@ export const PRE_MISSION_STEPS = [
     reference: 'Table 2-13',
     additionalInfo: null,
     hasAction: false,
-    actionType: 'tableForCard',
+    actionType: 'tableCardZoneClick',
     cardTableDependency: 'campaign',
     modalTableDependency: null,
     //tableImageDependency: 'campaign',
     tableNotes: '2-13-note',
-    cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }]
+    cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }],
+    zoneClicks: 'escort'
   },
   {
     id: 10,
@@ -276,7 +277,7 @@ export const ZONES_PROCEDURE = [
   {
     id: 17,
     section: 'Movement in the Zones',
-    heading: 'Movement',
+    heading: 'Movement to Next Zone',
     instruction: 'Click to move to next zone. Move your bomber on the tracker as well.',
     reference: 'Section 4.1',
     // additionalInfo: [],
@@ -344,7 +345,8 @@ export const ZONES_PROCEDURE = [
     modalTable: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
-    skipBack: 2
+    skipBack: 2,
+    // zoneClicks: 'weather'
     // action: 'roll',
     // actionText: ''
   },
@@ -428,7 +430,7 @@ export const ZONES_PROCEDURE = [
     section: 'Movement in the Zones',
     heading: 'Possible Enemy Resistance?',
     instruction: 'Read Instruction',
-    reference: 'If the DRM value for zone is "N/A", move to next zone.',
+    reference: 'If the DRM value for zone is "N/A", you will now move to next zone.',
     hasAction: false,
     actionType: 'none',
     tableImageDependency: null,
@@ -477,12 +479,13 @@ export const COMBAT_PROCEDURE = [
     reference: 'Table 5-2 (1D10) Section 5.2 Rules pg. 14',
     additionalInfo: ['Roll on table 5-2 for the current zone', 'Mark number of waves in the zone worksheet'],
     hasAction: false,
-    actionType: 'tableForCard',
+    actionType: 'tableCardZoneClick',
     tableImageDependency: null,
     modalTableDependency: null,
     cardTable: [{ table: '5-2', diceType: '1D10', title: '5-2  Number of German Fighter Waves (Any Zone)', note: '5-2-note' }],
     // actionText: 'See Table 4-1',
     diceType: '1D10',
+    zoneClicks: 'resistance'
     // nextCardTest: true,
     // cardTestName: 'waves'
     // action: 'roll',
@@ -513,9 +516,6 @@ export const COMBAT_PROCEDURE = [
       { message: 'Combat is Over for the current zone', match: ['done'] }],
     nextCardTest: true,
     cardTestName: 'waves'
-
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 28,

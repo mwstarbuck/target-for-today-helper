@@ -35,11 +35,12 @@ const Zone = () => {
     let zones = ctx.zonesInfo;
     for (const zone of zones) {
       if (zone.zone === ctx.currentZone) {
-        zone.resistance = value
+        zone.escort = value
         break;
       }
     }
     ctx.setZonesInfo(zones)
+    ctx.setEscort(value);
   }
 
   const onContrailsChange = (e) => {

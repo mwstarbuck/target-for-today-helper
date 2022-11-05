@@ -21,6 +21,8 @@ export const GameContextProvider = ({ children }) => {
   const [outbound, setOutbound] = useState(true);
   const [waveTotal, setWaveTotal] = useState(0);
   const [waveCount, setWaveCount] = useState(0);
+  const [round, setRound] = useState(0);
+  const [escort, setEscort] = useState(null);
 
   return (
     <GameContext.Provider value={{
@@ -59,7 +61,10 @@ export const GameContextProvider = ({ children }) => {
       waveTotal, 
       setWaveTotal,
       waveCount, 
-      setWaveCount
+      setWaveCount,
+      round, 
+      setRound,
+      escort, setEscort
     }}
     >
       {children}

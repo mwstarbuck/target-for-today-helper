@@ -80,7 +80,8 @@ const PreMissionInfo = (props) => {
         nextCardTest={ctx?.gameStep?.nextCardTest}
         cardTestName={ctx?.gameStep?.cardTestName}
         radioQuestion={ctx?.gameStep?.radioQuestion}
-        radioDetails={ctx?.gameStep?.radioDetails} />
+        radioDetails={ctx?.gameStep?.radioDetails}
+        zoneClicks={ctx?.gameStep?.zoneClicks} />
     </div>
   </>
 }

@@ -13,7 +13,8 @@ import ZonesModal from '../Modals/ZonesModal';
 import TableModal from '../Modals/TableModal';
 
 const Card = (props) => {
-  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType } = props;
+  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType,
+    zoneClicks } = props;
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
@@ -48,7 +49,9 @@ const Card = (props) => {
     'setCurrentZone': ctx.setCurrentZone,
     'currentZone': ctx.currentZone,
     'outbound': ctx.outbound,
-    'aircraft': ctx?.bomber
+    'aircraft': ctx?.bomber,
+    'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone).resistance,
+    'escort': ctx?.escort
   }
 
   const optionsEnum = {
@@ -60,40 +63,60 @@ const Card = (props) => {
 
   const action = actionEnum[props.action];
 
-  let methodInfo;
-  switch (props.action) {
-    case 'processResult':
-      methodInfo = {
-        maxValue: props.maxValue,
-        modifiers: props.modifiers,
-        diceType: props.diceType,
-        table: props.table,
-        setter: contextEnum[props.setter.setterA]
-      }
-      break;
-    case 'rollCrew':
-      methodInfo = contextEnum[props.setter.setterA]
-      break;
-    case 'getBomberPosition':
-      methodInfo = {
-        setCell: contextEnum[props.setter.setterA],
-        setBomberNumber: contextEnum[props.setter.setterB],
-        setModifiers: contextEnum[props.setter.setterC],
-        modifiers: contextEnum[props.modifiers]
-      }
-      break;
-    case 'zoneMovement':
-      methodInfo = {
-        setter: ctx.setCurrentZone,
-        value: ctx.currentZone,
-        outbound: ctx.outbound,
-        zones: ctx.zones
-      }
-      break;
-    default:
-      break;
+  useEffect(() => {
+    if (zoneClicks === 'escort') {
+      setAdvance(true);
+    }
+  }, [ctx.zonesInfo.find(z => z.zone === ctx.currentZone).escort]);
+  useEffect(() => {
+    if (zoneClicks === 'resistance') {
+      setAdvance(true);
+    }
+  }, [ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance])
+
+  const getMethodParamsEtc = () => {
+    switch (props.action) {
+      case 'processResult':
+        const pRParams = {
+          maxValue: props.maxValue,
+          modifiers: props.modifiers,
+          diceType: props.diceType,
+          table: props.table,
+          setter: contextEnum[props.setter.setterA]
+        }
+        return pRParams;
+        break;
+      case 'rollCrew':
+        const crewInfo = contextEnum[props.setter.setterA];
+        return crewInfo;
+        break;
+      case 'getBomberPosition':
+        const bPParams = {
+          setCell: contextEnum[props.setter.setterA],
+          setBomberNumber: contextEnum[props.setter.setterB],
+          setModifiers: contextEnum[props.setter.setterC],
+          modifiers: contextEnum[props.modifiers]
+        }
+        return bPParams;
+        break;
+      case 'zoneMovement':
+
+        const zMParams = {
+          setter: ctx.setCurrentZone,
+          value: ctx.currentZone,
+          outbound: ctx.outbound,
+          zones: ctx.zones
+        }
+        if (ctx.round !== 1)
+          ctx.setRound(1);
+        return zMParams;
+        break;
+      default:
+        break;
+    }
   }
-  const params = methodInfo;
+  const params = getMethodParamsEtc();
+  // let methodInfo;
 
   const getVariableTable = (sourceList, dependency, endList) => {
     let table;
@@ -138,9 +161,7 @@ const Card = (props) => {
               title: table.title,
               note: tableNoteEnum[table.note]
             })
-            break;
-          default:
-            break;
+            // break;
         }
       }
       else {
@@ -156,6 +177,34 @@ const Card = (props) => {
       }
 
       break;
+    case 'tableCardZoneClick':
+      if (cardTableDependency) {
+        switch (cardTableDependency) {
+          case 'campaign':
+            const table = cardTable[ctx.campaign.campaign - 1];
+            cardTableSrc.push({
+              table: tableImageEnum[table.table],
+              diceType: table.diceType,
+              title: table.title,
+              note: tableNoteEnum[table.note]
+            })
+          // break;
+        }
+      }
+      else {
+        cardTable.forEach(t => {
+          cardTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+
+      break;
+      
     case 'tableModal':
       if (modalTableDependency) {
         getVariableTable(modalTable, modalTableDependency, modalTableSrc)
@@ -407,6 +456,7 @@ const Card = (props) => {
     setHasChosen(true);
   }
 
+
   // console.log(ctx.campaign.campaign - 1)
   return <div className='card'>
     <Popover open={showMods}
@@ -425,7 +475,7 @@ const Card = (props) => {
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
-      {props.cardTable && props.actionType === 'tableForCard' &&
+      {props.cardTable && (props.actionType === 'tableForCard' || props.actionType === 'tableCardZoneClick') &&
         <div>
           <Popover trigger='click' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
             <a style={{ cursor: 'pointer' }}>See Table Notes</a>
@@ -592,10 +642,11 @@ const Card = (props) => {
         </div>
       </>
       }
-      {/* {props.isIncrement && <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-        <button onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        <button onClick={() => nextStep()} className='card__advance'>Next Step</button>
-      </span>} */}
+      {props.actionType === 'tableCardZoneClick' && <div>
+        <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+      </div>}
+
     </div>
     <ZonesModal
       onSelect={onSelect}
