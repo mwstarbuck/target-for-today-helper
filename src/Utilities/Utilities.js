@@ -255,6 +255,7 @@ const zoneMovement = (stepInfo) => {
     }
   }
 }
+
 export const actionEnum = {
   'getResult': getResult,
   'processResult': processResult,

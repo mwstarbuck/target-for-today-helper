@@ -9,8 +9,8 @@ const PreMissionInfo = (props) => {
   const [gameStep, setGameStep] = React.useState(null)
 
   const contingencyEnum = {
-    'bomber': ctx.bomber,
-    'weather': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone).weather,
+    'bomber': ctx?.bomber,
+    'weather': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.weather,
   }
 
   const getStepInstructions = (step) => {
@@ -81,7 +81,7 @@ const PreMissionInfo = (props) => {
         cardTestName={ctx?.gameStep?.cardTestName}
         radioQuestion={ctx?.gameStep?.radioQuestion}
         radioDetails={ctx?.gameStep?.radioDetails}
-        zoneClicks={ctx?.gameStep?.zoneClicks} />
+        inputRequired={ctx?.gameStep?.inputRequired} />
     </div>
   </>
 }

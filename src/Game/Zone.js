@@ -6,7 +6,7 @@ const { TextArea } = Input;
 
 const Zone = () => {
   const ctx = useContext(GameContext);
-  const [weatherValue, setWeatherValue] = useState(ctx.zonesInfo?.find(z => z.zone === ctx?.currentZone).weather || null);
+  const [weatherValue, setWeatherValue] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.weather || null);
   const [escortLevel, setEscortLevel] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
@@ -23,10 +23,9 @@ const Zone = () => {
         zone.weather = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
-    ctx.setZonesInfo(zones)
-    console.log(ctx.zonesInfo)
+    ctx.setZonesInfo(zones);
+    ctx.setWeather(value);
   }
 
   const onEscortChange = (e) => {
@@ -44,7 +43,18 @@ const Zone = () => {
   }
 
   const onContrailsChange = (e) => {
-    setContrails(e.target.value);
+    // setContrails(e.target.value);
+    const value = e.target.value
+    setContrails(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.resistance = value
+        break;
+      }
+    }
+    ctx.setZonesInfo(zones)
+    ctx.setContrails(value);
   }
 
   const onResistanceChange = (e) => {
@@ -57,7 +67,8 @@ const Zone = () => {
         break;
       }
     }
-    ctx.setZonesInfo(zones)
+    ctx.setZonesInfo(zones);
+    ctx.setResistance(value);
   }
 
   const onWaveChange = (e) => {
@@ -92,12 +103,12 @@ const Zone = () => {
     <Col span={3}><div className='zoneCellHeader'>DRM / Locatation</div></Col>
     <Col span={10}><div className='zoneCellHeader'>Weather</div></Col>
     <Col span={9}><div className='zoneCellHeader'>Fighter Escort Level</div></Col>
-    <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1].zone}</div></Col>
-    <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1].drm} / ${ctx.zonesInfo[ctx.currentZone - 1].location}`}</div></Col>
+    <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1]?.zone}</div></Col>
+    <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1]?.drm} / ${ctx.zonesInfo[ctx.currentZone - 1]?.location}`}</div></Col>
     <Col span={10}>
       <div className='zoneCell'>
         <Col>
-          <Radio.Group style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onWeatherChange} value={weatherValue}>
+          <Radio.Group name='weather' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onWeatherChange} value={weatherValue}>
             <Radio value={'clear'}><span style={{ fontWeight: weatherValue === 'clear' ? 600 : 500 }}>Clear</span></Radio>
             <Radio value={'haze'}><span style={{ fontWeight: weatherValue === 'haze' ? 600 : 500 }}>Haze</span></Radio>
             <Radio value={'50% clouds'}><span style={{ fontWeight: weatherValue === '50% clouds' ? 600 : 500 }}>50% Clouds</span></Radio>

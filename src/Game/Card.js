@@ -11,10 +11,15 @@ import tableImageEnum from '../Images/Tables/TableEnum';
 import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
 import ZonesModal from '../Modals/ZonesModal';
 import TableModal from '../Modals/TableModal';
+import TableCard from './CardComponents/TableCard';
+import MessageCard from './CardComponents/MessageCard';
+import MessageAndRadioCard from './CardComponents/MessageAndRadioCard';
+import YesOrNoCard from './CardComponents/YesOrNoCard';
+import ButtonActionCard from './CardComponents/ButtonActionCard';
+import SelectCard from './CardComponents/SelectCard';
 
 const Card = (props) => {
-  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType,
-    zoneClicks } = props;
+  const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
   const ctx = useContext(GameContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
@@ -23,7 +28,7 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
-  const [hasChosen, setHasChosen] = useState('');
+  // const [hasChosen, setHasChosen] = useState('');
   const startStep = 0;
   const preMission = 1;
   const takeOff = 15;
@@ -33,24 +38,24 @@ const Card = (props) => {
   const selectRef = useRef();
 
   const contextEnum = {
-    'setCampaign': ctx.setCampaign,
-    'setStep': ctx.setStep,
-    'setBomber': ctx.setBomber,
-    'setTimePeriod': ctx.setTimePeriod,
-    'setNoseTurret': ctx.setNoseTurret,
-    'setCrew': ctx.setCrew,
-    'setTargetType': ctx.setTargetType,
-    'setTarget': ctx.setTarget,
-    'setCell': ctx.setCell,
-    'setBomberNumber': ctx.setBomberNumber,
-    'setModifiers': ctx.setModifiers,
-    'modifiers': ctx.modifiers,
-    'setZones': ctx.setZones,
-    'setCurrentZone': ctx.setCurrentZone,
-    'currentZone': ctx.currentZone,
-    'outbound': ctx.outbound,
+    'setCampaign': ctx?.setCampaign,
+    'setStep': ctx?.setStep,
+    'setBomber': ctx?.setBomber,
+    'setTimePeriod': ctx?.setTimePeriod,
+    'setNoseTurret': ctx?.setNoseTurret,
+    'setCrew': ctx?.setCrew,
+    'setTargetType': ctx?.setTargetType,
+    'setTarget': ctx?.setTarget,
+    'setCell': ctx?.setCell,
+    'setBomberNumber': ctx?.setBomberNumber,
+    'setModifiers': ctx?.setModifiers,
+    'modifiers': ctx?.modifiers,
+    'setZones': ctx?.setZones,
+    'setCurrentZone': ctx?.setCurrentZone,
+    'currentZone': ctx?.currentZone,
+    'outbound': ctx?.outbound,
     'aircraft': ctx?.bomber,
-    'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone).resistance,
+    'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
     'escort': ctx?.escort
   }
 
@@ -63,16 +68,37 @@ const Card = (props) => {
 
   const action = actionEnum[props.action];
 
+  // useEffect(() => {
+  //   if (inputRequired === 'none') {
+  //     setAdvance(true);
+  //   }
+  // }, []);
   useEffect(() => {
-    if (zoneClicks === 'escort') {
+    if (inputRequired === 'weather') {
       setAdvance(true);
     }
-  }, [ctx.zonesInfo.find(z => z.zone === ctx.currentZone).escort]);
+  }, [ctx?.weather]);
+  
   useEffect(() => {
-    if (zoneClicks === 'resistance') {
+    if (inputRequired === 'escort') {
       setAdvance(true);
     }
-  }, [ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance])
+  }, [ctx?.escort]);
+  useEffect(() => {
+    if (inputRequired === 'resistance') {
+      setAdvance(true);
+    }
+  }, [ctx?.resistance]);
+  useEffect(() => {
+    if (inputRequired === 'contrails') {
+      setAdvance(true);
+    }
+  }, [ctx?.contrails]);
+  useEffect(() => {
+    if (inputRequired === 'waves') {
+      setAdvance(true);
+    }
+  }, [ctx?.waveTotal]);
 
   const getMethodParamsEtc = () => {
     switch (props.action) {
@@ -107,8 +133,9 @@ const Card = (props) => {
           outbound: ctx.outbound,
           zones: ctx.zones
         }
-        if (ctx.round !== 1)
-          ctx.setRound(1);
+
+        // if (ctx.round !== 1)
+        //   ctx.setRound(1);
         return zMParams;
         break;
       default:
@@ -161,7 +188,7 @@ const Card = (props) => {
               title: table.title,
               note: tableNoteEnum[table.note]
             })
-            // break;
+          // break;
         }
       }
       else {
@@ -188,7 +215,7 @@ const Card = (props) => {
               title: table.title,
               note: tableNoteEnum[table.note]
             })
-          // break;
+            break;
         }
       }
       else {
@@ -202,9 +229,8 @@ const Card = (props) => {
 
         })
       }
-
       break;
-      
+
     case 'tableModal':
       if (modalTableDependency) {
         getVariableTable(modalTable, modalTableDependency, modalTableSrc)
@@ -287,33 +313,35 @@ const Card = (props) => {
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
             setGoToNextCard(null);
-            setHasChosen(false);
+            setAdvance(false);
           }
           else {
             ctx.setStep(ctx.step + 2);
             setGoToNextCard(null);
-            setHasChosen(false);
+            setAdvance(false);
           }
           break;
         case 'survivingFighters':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
             setGoToNextCard(false);
-            setHasChosen(false);
+            setAdvance(false);
           }
           else {
             if (ctx.waveCount === ctx.waveTotal) {
               ctx.setWaveCount('done');
               ctx.setStep(27);
+              setAdvance(false);
             }
             else if (ctx.waveCount > ctx.waveTotal) {
               ctx.setStep(zoneMove);
+              setAdvance(false);
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setStep(27);
               setGoToNextCard(null);
-              setHasChosen(false);
+              setAdvance(false);
               ctx.setWaveCount(ctx.waveCount + 1)
             }
           }
@@ -321,33 +349,47 @@ const Card = (props) => {
         case 'goCombatTest':
           const drm = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).drm;
           console.log(drm);
-          if (drm === 'N/A')
+          if (drm === 'N/A') {
             ctx.setStep(zoneMove)
-          else
-            ctx.setStep(ctx.step + 1)
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
           break;
         case 'resistance':
           const resistance = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance;
-          if (resistance === 'none')
-            ctx.setStep(zoneMove)
-          else
-            ctx.setStep(ctx.step + 1)
+          if (resistance === 'none') {
+            ctx.setStep(zoneMove);
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
           break;
         case 'waves':
           const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves;
           console.log(waves);
-          if (ctx.waveCount === 0)
-            ctx.setStep(zoneMove)
+          if (ctx.waveCount === 0) {
+            ctx.setStep(zoneMove);
+            setAdvance(false);
+          }
           else if (ctx.waveCount === 'done') {
             ctx.setStep(zoneMove);
             ctx.setWaveCount(0);
+            setAdvance(false);
           }
 
-          else
-            ctx.setStep(ctx.step + 1)
+          else {
+            ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
           break;
         case 'nextZone':
-          ctx.setStep(zoneMove)
+          ctx.setStep(zoneMove);
+          setAdvance(false);
           break;
         case 'rollResistance':
           const zone = ctx.currentZone;
@@ -355,40 +397,53 @@ const Card = (props) => {
           const outbound = ctx.outbound;
           switch (campaign) {
             case 1:
-              if (zone === 6 && outbound)
-                ctx.setStep(ctx.step + 1)
+              if (zone === 6 && outbound) {
+                ctx.setStep(ctx.step + 1);
+              }
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             case 2:
               if ((zone === 6 || zone === 11) && outbound === 'outbound')
-                ctx.setStep(ctx.step + 1)
+                ctx.setStep(ctx.step + 1);
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             case 3:
               if ((zone === 6 || zone === 11 || zone === 12) && outbound)
-                ctx.setStep(ctx.step + 1)
+                ctx.setStep(ctx.step + 1);
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             case 4:
               if ((zone === 8 || zone === 10 || zone === 13) && outbound)
-                ctx.setStep(ctx.step + 1)
+                ctx.setStep(ctx.step + 1);
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             case 5:
               if ((zone === 8 || zone === 10) && outbound)
-                ctx.setStep(ctx.step + 1)
+                ctx.setStep(ctx.step + 1);
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             case 6:
               if ((zone === 6 || zone === 11) && outbound)
-                ctx.setStep(ctx.step + 1)
+                ctx.setStep(ctx.step + 1);
               else
-                ctx.setStep(ctx.step + 2)
+                ctx.setStep(ctx.step + 2);
+
+              setAdvance(false);
               break;
             default:
               break;
@@ -403,6 +458,7 @@ const Card = (props) => {
       setSelectValue(null);
     }
   }
+
   const lastStep = () => {
     if (ctx.step > 0) {
       if (ctx.step === 1) {
@@ -453,7 +509,7 @@ const Card = (props) => {
   const onRadioChange = (e) => {
     const value = e.target.value
     setGoToNextCard(value);
-    setHasChosen(true);
+    setAdvance(true);
   }
 
 
@@ -475,65 +531,89 @@ const Card = (props) => {
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
+
       {props.cardTable && (props.actionType === 'tableForCard' || props.actionType === 'tableCardZoneClick') &&
-        <div>
-          <Popover trigger='click' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-            <a style={{ cursor: 'pointer' }}>See Table Notes</a>
-          </Popover>
-          <div style={{ alignItems: 'center' }}>
-            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
-          </div>
-        </div>
+        <TableCard
+          note={cardTableSrc[0].note}
+          table={cardTableSrc[0].table} />
+        // <div>
+        //   <Popover trigger='click' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+        //     <a style={{ cursor: 'pointer' }}>See Table Notes</a>
+        //   </Popover>
+        //   <div style={{ alignItems: 'center' }}>
+        //     <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+        //   </div>
+        // </div>
       }
       {props.actionType === 'cardMessage' &&
-        <div>
-          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-            {cardMessage && <p>{cardMessage}</p>}
-          </div>
-          <div>
-            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-          </div>
-        </div>
+        <MessageCard
+          cardMessage={cardMessage}
+          lastStep={lastStep}
+          nextStep={nextStep}
+        />
+        // <div>
+        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+        //     {cardMessage && <p>{cardMessage}</p>}
+        //   </div>
+        //   <div>
+        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        //     <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
+        //   </div>
+        // </div>
       }
       {props.actionType === 'cardMessage&Radio' &&
-        <div>
-          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-            {cardMessage && <p>{cardMessage}</p>}
-          </div>
-          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-            <p>Rolled Random Event?</p>
-            <Radio.Group onChange={onRadioChange} value={goToNextCard}>
-              <Radio value={true}><span style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>Yes</span></Radio>
-              <Radio value={false}><span style={{ fontWeight: goToNextCard === false ? 600 : 500 }}>No</span></Radio>
-            </Radio.Group>
-          </div>
-          <div>
-            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-          </div>
-        </div>
+        <MessageAndRadioCard
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          lastStep={lastStep}
+          nextStep={nextStep}
+          advance={advance} />
+        // <div>
+        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+        //     {cardMessage && <p>{cardMessage}</p>}
+        //   </div>
+        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+        //     <p>Rolled Random Event?</p>
+        //     <Radio.Group onChange={onRadioChange} value={goToNextCard}>
+        //       <Radio value={true}><span style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>Yes</span></Radio>
+        //       <Radio value={false}><span style={{ fontWeight: goToNextCard === false ? 600 : 500 }}>No</span></Radio>
+        //     </Radio.Group>
+        //   </div>
+        //   <div>
+        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        //     {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        //   </div>
+        // </div>
       }
       {props.actionType === 'yesOrNo' &&
-        <div>
-          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-            {cardMessage && <p>{cardMessage}</p>}
-          </div>
-          <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-            <p>{props.radioQuestion}</p>
-            <Radio.Group onChange={onRadioChange} value={goToNextCard}>
-              {props.radioDetails.map(rd => <Radio
-                value={rd.value}><span
-                  style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>
-                  {rd.label}</span>
-              </Radio>)}
-            </Radio.Group>
-          </div>
-          <div>
-            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-          </div>
-        </div>
+        <YesOrNoCard
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          radioDetails={props.radioDetails}
+          lastStep={lastStep}
+          nextStep={nextStep}
+          advance={advance} />
+        // <div>
+        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+        //     {cardMessage && <p>{cardMessage}</p>}
+        //   </div>
+        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
+        //     <p>{props.radioQuestion}</p>
+        //     <Radio.Group onChange={onRadioChange} value={goToNextCard}>
+        //       {props.radioDetails.map(rd => <Radio
+        //         value={rd.value}><span
+        //           style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>
+        //           {rd.label}</span>
+        //       </Radio>)}
+        //     </Radio.Group>
+        //   </div>
+        //   <div>
+        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        //     {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        //   </div>
+        // </div>
       }
       {props.additionalInfo &&
         <div style={{ fontSize: 11, fontWeight: 800, margin: '1rem', border: '1px solid grey' }}>
@@ -543,34 +623,54 @@ const Card = (props) => {
           </ul>
         </div>}
       <i style={{ fontSize: 14, marginBottom: props.hasAction ? 0 : 10 }}>{props.reference}</i>
-      {!props.isIncrement && (props.actionType === 'roll' || props.actionType === 'click') && <>
-        <button onClick={() => {
-          action(params);
-          setAdvance(true);
-        }}
-          className='card__button'>
-          {props.actionText}
-        </button>
-        <button onClick={() => ctx.setOutbound(!ctx.outbound)}>test abort!</button>
-        <div>
-          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        </div>
-      </>
+      {!props.isIncrement && (props.actionType === 'roll' || props.actionType === 'click') &&
+        <ButtonActionCard
+          params={params}
+          actionText={props.actionText}
+          outbound={ctx.setOutbound}
+          setOutbound={ctx.setOutbound}
+          lastStep={lastStep}
+          nextStep={nextStep}
+          action={action}
+          setAdvance={setAdvance}
+          advance={advance} />
+        // <>
+        //   <button onClick={() => {
+        //     action(params);
+        //     setAdvance(true);
+        //   }}
+        //     className='card__button'>
+        //     {props.actionText}
+        //   </button>
+        //   <button onClick={() => ctx.setOutbound(!ctx.outbound)}>test abort!</button>
+        //   <div>
+        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        //     {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        //   </div>
+        // </>
       }
       {!props.isIncrement && props.actionType === 'select' &&
-        <><div className='selector'>
-          <Select ref={selectRef} menuPlacement='top'
-            options={stepOptions}
-            onChange={onSelect}
-            value={selectValue}
-          />
-        </div>
-          <div>
-            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-          </div>
-        </>
+        <SelectCard
+          selectRef={selectRef}
+          stepOptions={stepOptions}
+          onSelect={onSelect}
+          selectValue={selectValue}
+          lastStep={lastStep}
+          nextStep={nextStep}
+          advance={advance} />
+
+        // <><div className='selector'>
+        //   <Select ref={selectRef} menuPlacement='top'
+        //     options={stepOptions}
+        //     onChange={onSelect}
+        //     value={selectValue}
+        //   />
+        // </div>
+        //   <div>
+        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        //     {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        //   </div>
+        // </>
       }
       {props.actionType === 'input' &&
         <><div className='input'>
@@ -582,10 +682,10 @@ const Card = (props) => {
             {props.actionText}
           </button>
         </div>
-          <div>
+          {/* <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
             {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-          </div>
+          </div> */}
         </>
       }
       {!props.isIncrement && props.actionType === 'modal' && <>
@@ -596,10 +696,10 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
-        <div>
+        {/* <div>
           <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
           {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        </div>
+        </div> */}
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
@@ -610,18 +710,18 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
-        <div>
+        {/* <div>
           <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
           <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-        </div>
+        </div> */}
       </>
       }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
         <>
-          <div>
+          {/* <div>
             <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
             <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-          </div>
+          </div> */}
         </>
       }
       {!props.isIncrement && props.actionType === 'cardModalCombo' && <>
@@ -636,16 +736,22 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
-        <div>
+        {/* <div>
           <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
           <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-        </div>
+        </div> */}
       </>
       }
-      {props.actionType === 'tableCardZoneClick' && <div>
+      {/* {props.actionType === 'tableCardZoneClick' && <div>
         <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-      </div>}
+      </div>} */}
+      {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+        <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
+        : <div>
+          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
+          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
+        </div>}
 
     </div>
     <ZonesModal

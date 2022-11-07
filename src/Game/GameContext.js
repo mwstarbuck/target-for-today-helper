@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [gameStep, setGameStep] = useState();
   const [campaign, setCampaign] = useState();
   const [modifiers, setModifiers] = useState([]);
@@ -23,6 +23,11 @@ export const GameContextProvider = ({ children }) => {
   const [waveCount, setWaveCount] = useState(0);
   const [round, setRound] = useState(0);
   const [escort, setEscort] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const [contrails, setContrails] = useState(null);
+  const [resistance, setResistance] = useState(null);
+
+  
 
   return (
     <GameContext.Provider value={{
@@ -64,7 +69,10 @@ export const GameContextProvider = ({ children }) => {
       setWaveCount,
       round, 
       setRound,
-      escort, setEscort
+      escort, setEscort,
+      weather, setWeather,
+      contrails, setContrails,
+      resistance, setResistance
     }}
     >
       {children}

@@ -21,6 +21,7 @@ export const PRE_MISSION_STEPS = [
     options: null,
     setter: { setterA: 'setCampaign' },//'setCampaign',
     contingencyStep: false,
+    inputRequired: 'button'
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ export const PRE_MISSION_STEPS = [
     options: 'aircraft',
     setter: { setterA: 'setBomber' },
     contingencyStep: false,
+    inputRequired: 'select'
   },
   {
     id: 3,
@@ -58,7 +60,8 @@ export const PRE_MISSION_STEPS = [
     setter: { setterA: 'setNoseTurret' },
     contingencyStep: true,
     contingencyValue: 'bomber',
-    contingentUpon: 'B-24J'
+    contingentUpon: 'B-24J',
+    inputRequired: 'button'
   },
   {
     id: 4,
@@ -77,22 +80,9 @@ export const PRE_MISSION_STEPS = [
     options: 'timePeriod',
     setter: { setterA: 'setTimePeriod' },
     contingencyStep: false,
-    skipBack: 2
+    skipBack: 2,
+    inputRequired: 'select'
   },
-  // {
-  //   id: 5,
-  //   section: 'pre-mission',
-  //   heading: 'Roll for Crew',
-  //   instruction: 'Roll for Crew memebers.',
-  //   reference: 'Table 2-1, Target Listings and Gazetteer Handbook',
-  //   additionalInfo: [],
-  //   hasAction: true,
-  //   actionType: 'roll',
-  //   action: 'rollCrew',
-  //   actionText: 'Roll for Crew',
-  //   setter: { setterA: 'setCrew' },
-  //   contingencyStep: false,
-  // },
   {
     id: 5,
     section: 'pre-mission',
@@ -107,8 +97,7 @@ export const PRE_MISSION_STEPS = [
     options: 'targetType',
     setter: { setterA: 'setTargetType' },
     contingencyStep: false,
-
-    // modifiers: ['weather', 'engine']
+    inputRequired: 'select'
   },
   {
     id: 6,
@@ -124,6 +113,7 @@ export const PRE_MISSION_STEPS = [
     // options: 'target_type',
     setter: { setterA: 'setTarget' },
     contingencyStep: false,
+    inputRequired: 'button'
 
     // modifiers: ['weather', 'engine']
   },
@@ -145,7 +135,6 @@ export const PRE_MISSION_STEPS = [
     },
     modifiers: 'modifiers',
     contingencyStep: false,
-
     // modifiers: ['weather', 'engine']
   },
   {
@@ -162,6 +151,7 @@ export const PRE_MISSION_STEPS = [
     options: 'zones',
     setter: { setterA: 'setZones' },
     contingencyStep: false,
+    inputRequired: 'button'
   },
   {
     id: 9,
@@ -178,7 +168,7 @@ export const PRE_MISSION_STEPS = [
     //tableImageDependency: 'campaign',
     tableNotes: '2-13-note',
     cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }],
-    zoneClicks: 'escort'
+    inputRequired: 'escort'
   },
   {
     id: 10,
@@ -193,6 +183,7 @@ export const PRE_MISSION_STEPS = [
     actionText: 'Roll for Crew',
     setter: { setterA: 'setCrew' },
     contingencyStep: false,
+    inputRequired: 'none'
   },
   {
     id: 11,
@@ -202,7 +193,9 @@ export const PRE_MISSION_STEPS = [
     reference: null,
     additionalInfo: null,
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    inputRequired: 'none'
+
   },
   {
     id: 12,
@@ -212,7 +205,8 @@ export const PRE_MISSION_STEPS = [
     reference: null,
     additionalInfo: null,
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    inputRequired: 'none'
   },
   {
     id: 13,
@@ -222,7 +216,8 @@ export const PRE_MISSION_STEPS = [
     reference: null,
     additionalInfo: null,
     hasAction: false,
-    actionType: 'none'
+    actionType: 'none',
+    inputRequired: 'none'
   },
   {
     id: 14,
@@ -232,7 +227,8 @@ export const PRE_MISSION_STEPS = [
     reference: null,
     additionalInfo: null,
     hasAction: true,
-    actionType: 'none'
+    actionType: 'none',
+    inputRequired: 'none'
   },
 ]
 
@@ -251,6 +247,7 @@ export const TAKEOFF_PROCEDURE = [
     tableNotes: '3-1-note',
     tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
     cardTable: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -268,6 +265,7 @@ export const TAKEOFF_PROCEDURE = [
     tableImage: [{ table: '3-2', diceType: '1D10', title: '3-2 Take-Off', note: '3-2-note' }, { table: '3-3', diceType: '1D6', title: '3-3 Bomber Crashes on Take-off', note: '3-3-note' }],
     modalTable: [{ table: '3-2', diceType: '1D10', title: '3-2 Take-Off', note: '3-2-note' }, { table: '3-3', diceType: '1D6', title: '3-3 Bomber Crashes on Take-off', note: '3-3-note' }],
     actionText: 'See Table Reference',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -298,6 +296,7 @@ export const ZONES_PROCEDURE = [
     // action: 'roll',
     // actionText: ''
   },
+  //THis card only shows for zones it needs to rolled in
   {
     id: 18,
     section: 'Movement in the Zones',
@@ -313,6 +312,7 @@ export const ZONES_PROCEDURE = [
     //tableImageDependency: 'campaign',
     tableNotes: '2-13-note',
     cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }],
+    inputRequired: 'escort'
   },
   // {
   //   id: 19,
@@ -341,12 +341,11 @@ export const ZONES_PROCEDURE = [
     actionType: 'tableModal',
     // tableImageDependency: 'none',
     modalTableDependency: null,
-    // tableImage: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     modalTable: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
     skipBack: 2,
-    // zoneClicks: 'weather'
+    inputRequired: 'weather'
     // action: 'roll',
     // actionText: ''
   },
@@ -368,7 +367,8 @@ export const ZONES_PROCEDURE = [
     diceType: '1D10 + 1D10',
     contingencyStep: true,
     contingencyValue: 'weather',
-    contingentUpon: '100% clouds'
+    contingentUpon: '100% clouds',
+    inputRequired: 'none'
   },
   {
     id: 21,
@@ -387,7 +387,8 @@ export const ZONES_PROCEDURE = [
     modalTable: [{ table: '4-3B', diceType: '1D10', title: '4-3B Failed System', note: '4-4-note', match: ['B-17F', 'B-17G', 'YB-40'] }, { table: '4-3C', diceType: '1D10', title: '4-3C Failed System', note: '4-4-note', match: ['B-24D', 'B-24J'] }],
     actionText: 'See Table 4-3',
     diceType: '1D10',
-    skipBack: 2
+    skipBack: 2,
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -406,6 +407,7 @@ export const ZONES_PROCEDURE = [
     cardTable: [{ table: '4-4', diceType: '1D10', title: '4-4 Contrails', note: '4-4-note' }],
     actionText: 'See Table 4-1',
     diceType: '1D10',
+    inputRequired: 'contrails'
     // action: 'roll',
     // actionText: ''
   },
@@ -422,6 +424,7 @@ export const ZONES_PROCEDURE = [
     cardTable: [{ table: '4-8', diceType: '1D6', title: '4-8 Rejoin Formation', note: '4-8-note' }],
     actionText: 'See Table 4-8',
     diceType: '1D10',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -442,7 +445,9 @@ export const ZONES_PROCEDURE = [
     cardTestName: 'goCombatTest',
     // contingencyStep: true,
     contingencyValue: 'drm',
-    contingentUpon: 'N/A'
+    contingentUpon: 'N/A',
+    inputRequired: 'none'
+
     // action: 'roll',
     // actionText: ''
   },
@@ -467,7 +472,8 @@ export const COMBAT_PROCEDURE = [
     actionText: 'See Table 5-1',
     diceType: '1D10',
     nextCardTest: true,
-    cardTestName: 'resistance'
+    cardTestName: 'resistance', 
+    inputRequired: 'resistance'
     // action: 'roll',
     // actionText: ''
   },
@@ -485,7 +491,7 @@ export const COMBAT_PROCEDURE = [
     cardTable: [{ table: '5-2', diceType: '1D10', title: '5-2  Number of German Fighter Waves (Any Zone)', note: '5-2-note' }],
     // actionText: 'See Table 4-1',
     diceType: '1D10',
-    zoneClicks: 'resistance'
+    inputRequired: 'waves'
     // nextCardTest: true,
     // cardTestName: 'waves'
     // action: 'roll',
@@ -515,7 +521,8 @@ export const COMBAT_PROCEDURE = [
       { message: 'Starting Fighter Wave 3', match: [3] },
       { message: 'Combat is Over for the current zone', match: ['done'] }],
     nextCardTest: true,
-    cardTestName: 'waves'
+    cardTestName: 'waves',
+    inputRequired: 'none'
   },
   {
     id: 28,
@@ -542,7 +549,8 @@ export const COMBAT_PROCEDURE = [
     cardTestName: 'radioResult',
     messageType: 'fighterNumberTable',
     radioQuestion: 'Rolled Random Event?',
-    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false },]
+    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false },],
+    inputRequired: 'radio'
     // action: 'roll',
     // actionText: ''
   },
@@ -564,6 +572,7 @@ export const COMBAT_PROCEDURE = [
     diceType: '2D6',
     nextCardTest: true,
     cardTestName: 'nextZone',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -581,7 +590,8 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-4', diceType: '2D6', title: '5-4 Number of Fighters Driven Off By Escort', note: '5-4-note' }],
     actionText: 'See Table 5-4',
     diceType: '2D6',
-    skipBack: 2
+    skipBack: 2,
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -599,6 +609,7 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-5', diceType: null, title: 'Bomber Defensive Fire for Round', note: '5-5-note' }],
     actionText: 'See Table 5-5',
     diceType: null,
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -616,6 +627,7 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-5A', diceType: '1D6', title: '5-5A German Fighter Skill', note: '5-5A-note' }],
     actionText: 'See Table 5-5A',
     diceType: '1D6',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -633,6 +645,7 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-6', diceType: '2D6', title: '5-6 Bomber Defensive Fire Resolution', note: '5-6-note' }, { table: '5-6A', diceType: '1D6', title: '5-6A Area Spray Fire Table (Optional)', note: '5-6A-note' }],
     actionText: 'See Tables 5-6(A)',
     diceType: '1D10',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -667,6 +680,7 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }, { table: '5-7A', diceType: '2D6', title: '5-7A Fighter Damage for FCA and FBOA hits (optional)', note: '5-7A-note' }, { table: '5-7B', diceType: '2D6', title: '5-7B Hit Fighter Damage for Destroyed hits (optional)', note: '5-7B-note' }],
     actionText: 'See Table 4-1',
     diceType: '1D10',
+    inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
@@ -688,6 +702,7 @@ export const COMBAT_PROCEDURE = [
     cardTestName: 'survivingFighters',
     radioQuestion: 'Surviving German Fighters?',
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    inputRequired: 'radio'
     // action: 'roll',
     // actionText: ''
   },
