@@ -134,8 +134,6 @@ const Card = (props) => {
           zones: ctx.zones
         }
 
-        // if (ctx.round !== 1)
-        //   ctx.setRound(1);
         return zMParams;
         break;
       default:
@@ -202,8 +200,8 @@ const Card = (props) => {
 
         })
       }
-
       break;
+
     case 'tableCardZoneClick':
       if (cardTableDependency) {
         switch (cardTableDependency) {
@@ -276,6 +274,7 @@ const Card = (props) => {
         })
       }
       break;
+
     default:
       break;
   }
@@ -297,14 +296,11 @@ const Card = (props) => {
   }
   getMessage();
 
-  // const tableSrc = props.tableImageDependency === 'campaign' ? tableImageEnum[props.tableImage[ctx.campaign?.campaign - 1]] : tableImageEnum[props.tableImage]
   const stepOptions = props.options ? optionsEnum[props.options] : [];
 
-  const cardAction = <>
-    {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(params)} className='card__button'>{props.actionText}</button>}
-    {/* {props.hasAction && props.actionType === 'select' &&
-    <Select options={options}></Select>} */}
-  </>
+  // const cardAction = <>
+  //   {props.hasAction && props.actionType === 'roll' && <button onClick={() => action(params)} className='card__button'>{props.actionText}</button>}
+  // </>
 
   const nextStep = () => {
     if (props.nextCardTest) {
@@ -512,11 +508,8 @@ const Card = (props) => {
     setAdvance(true);
   }
 
-
-  // console.log(ctx.campaign.campaign - 1)
   return <div className='card'>
     <Popover open={showMods}
-      // zIndex={2000}
       color='white'
       trigger='click'
       overlayStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
@@ -536,14 +529,6 @@ const Card = (props) => {
         <TableCard
           note={cardTableSrc[0].note}
           table={cardTableSrc[0].table} />
-        // <div>
-        //   <Popover trigger='click' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-        //     <a style={{ cursor: 'pointer' }}>See Table Notes</a>
-        //   </Popover>
-        //   <div style={{ alignItems: 'center' }}>
-        //     <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
-        //   </div>
-        // </div>
       }
       {props.actionType === 'cardMessage' &&
         <MessageCard
@@ -551,15 +536,6 @@ const Card = (props) => {
           lastStep={lastStep}
           nextStep={nextStep}
         />
-        // <div>
-        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-        //     {cardMessage && <p>{cardMessage}</p>}
-        //   </div>
-        //   <div>
-        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        //     <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-        //   </div>
-        // </div>
       }
       {props.actionType === 'cardMessage&Radio' &&
         <MessageAndRadioCard
@@ -569,22 +545,6 @@ const Card = (props) => {
           lastStep={lastStep}
           nextStep={nextStep}
           advance={advance} />
-        // <div>
-        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-        //     {cardMessage && <p>{cardMessage}</p>}
-        //   </div>
-        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-        //     <p>Rolled Random Event?</p>
-        //     <Radio.Group onChange={onRadioChange} value={goToNextCard}>
-        //       <Radio value={true}><span style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>Yes</span></Radio>
-        //       <Radio value={false}><span style={{ fontWeight: goToNextCard === false ? 600 : 500 }}>No</span></Radio>
-        //     </Radio.Group>
-        //   </div>
-        //   <div>
-        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        //     {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        //   </div>
-        // </div>
       }
       {props.actionType === 'yesOrNo' &&
         <YesOrNoCard
@@ -595,25 +555,6 @@ const Card = (props) => {
           lastStep={lastStep}
           nextStep={nextStep}
           advance={advance} />
-        // <div>
-        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-        //     {cardMessage && <p>{cardMessage}</p>}
-        //   </div>
-        //   <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-        //     <p>{props.radioQuestion}</p>
-        //     <Radio.Group onChange={onRadioChange} value={goToNextCard}>
-        //       {props.radioDetails.map(rd => <Radio
-        //         value={rd.value}><span
-        //           style={{ fontWeight: goToNextCard === true ? 600 : 500 }}>
-        //           {rd.label}</span>
-        //       </Radio>)}
-        //     </Radio.Group>
-        //   </div>
-        //   <div>
-        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        //     {hasChosen && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        //   </div>
-        // </div>
       }
       {props.additionalInfo &&
         <div style={{ fontSize: 11, fontWeight: 800, margin: '1rem', border: '1px solid grey' }}>
@@ -634,20 +575,6 @@ const Card = (props) => {
           action={action}
           setAdvance={setAdvance}
           advance={advance} />
-        // <>
-        //   <button onClick={() => {
-        //     action(params);
-        //     setAdvance(true);
-        //   }}
-        //     className='card__button'>
-        //     {props.actionText}
-        //   </button>
-        //   <button onClick={() => ctx.setOutbound(!ctx.outbound)}>test abort!</button>
-        //   <div>
-        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        //     {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        //   </div>
-        // </>
       }
       {!props.isIncrement && props.actionType === 'select' &&
         <SelectCard
@@ -658,22 +585,9 @@ const Card = (props) => {
           lastStep={lastStep}
           nextStep={nextStep}
           advance={advance} />
-
-        // <><div className='selector'>
-        //   <Select ref={selectRef} menuPlacement='top'
-        //     options={stepOptions}
-        //     onChange={onSelect}
-        //     value={selectValue}
-        //   />
-        // </div>
-        //   <div>
-        //     <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        //     {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        //   </div>
-        // </>
       }
       {props.actionType === 'input' &&
-        <><div className='input'>
+        <div className='input'>
           <input onChange={onInput} />
           <button onClick={() => {
             onSubmit();
@@ -682,11 +596,6 @@ const Card = (props) => {
             {props.actionText}
           </button>
         </div>
-          {/* <div>
-            <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-            {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-          </div> */}
-        </>
       }
       {!props.isIncrement && props.actionType === 'modal' && <>
         <button onClick={() => {
@@ -696,24 +605,15 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
-        {/* <div>
-          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-          {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-        </div> */}
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
         <button onClick={() => {
           setShowTableModal(true);
-          // setAdvance(true);
         }}
           className='card__button'>
           {props.actionText}
         </button>
-        {/* <div>
-          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-          <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-        </div> */}
       </>
       }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
@@ -736,10 +636,6 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
-        {/* <div>
-          <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-          <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-        </div> */}
       </>
       }
       {/* {props.actionType === 'tableCardZoneClick' && <div>

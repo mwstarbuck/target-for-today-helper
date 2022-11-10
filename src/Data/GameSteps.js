@@ -522,7 +522,8 @@ export const COMBAT_PROCEDURE = [
       { message: 'Combat is Over for the current zone', match: ['done'] }],
     nextCardTest: true,
     cardTestName: 'waves',
-    inputRequired: 'none'
+    inputRequired: 'none',
+    updateCombat: true
   },
   {
     id: 28,
