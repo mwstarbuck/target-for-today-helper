@@ -508,6 +508,13 @@ const Card = (props) => {
     setAdvance(true);
   }
 
+  const updateCombat = () => {
+    if (ctx.waveCount < ctx.waveTotal) {
+      //Elligible fighters?
+      //Round < 3?
+    }
+  }
+
   return <div className='card'>
     <Popover open={showMods}
       color='white'
