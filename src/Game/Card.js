@@ -28,7 +28,8 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
-  // const [hasChosen, setHasChosen] = useState('');
+  const [elligibleFighters, setElligibleFighters] = useState('');
+  
   const startStep = 0;
   const preMission = 1;
   const takeOff = 15;
@@ -512,6 +513,19 @@ const Card = (props) => {
     if (ctx.waveCount < ctx.waveTotal) {
       //Elligible fighters?
       //Round < 3?
+    }
+  }
+
+  const getRound = () => {
+    if (messageType) {
+      switch (messageType) {
+        case 'combatSummary':
+          cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
+          console.log(cardMessage)
+          break;
+        default:
+          break;
+      }
     }
   }
 
