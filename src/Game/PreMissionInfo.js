@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import GameContext from './GameContext';
-import { PRE_MISSION_STEPS, TAKEOFF_PROCEDURE, ZONES_PROCEDURE } from '../Data/GameSteps';
+import { COMBAT_PROCEDURE, PRE_MISSION_STEPS, TAKEOFF_PROCEDURE, ZONES_PROCEDURE } from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
@@ -9,16 +9,31 @@ const PreMissionInfo = (props) => {
   const [gameStep, setGameStep] = React.useState(null)
 
   const contingencyEnum = {
-    'bomber': ctx.bomber,
-    'weather': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone).weather,
+    'bomber': ctx?.bomber,
+    'weather': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.weather,
   }
 
+  const getStepInstructions = (step) => {
+    switch (true) {
+      case step <= 14:
+        return PRE_MISSION_STEPS.find(s => s.id === step);
+      case step <= 16:
+        return TAKEOFF_PROCEDURE.find(s => s.id === step);
+      case step <= 24:
+        return ZONES_PROCEDURE.find(s => s.id === step);
+      case step <= 40:
+        return COMBAT_PROCEDURE.find(s => s.id === step);
+      default:
+        break;
+    }
+  }
   React.useEffect(() => {
     if (step > 0) {
 
-      const nextStep = step <= 14 ? PRE_MISSION_STEPS.find(s => s.id === step) : step <= 16 ? TAKEOFF_PROCEDURE.find(s => s.id === step)
-        : ZONES_PROCEDURE.find(s => s.id === step);
-      console.log(contingencyEnum[nextStep?.contingencyValue]);
+      // const nextStep = step <= 14 ? PRE_MISSION_STEPS.find(s => s.id === step) : step <= 16 ? TAKEOFF_PROCEDURE.find(s => s.id === step)
+      //   : ZONES_PROCEDURE.find(s => s.id === step);
+      const nextStep = getStepInstructions(step);
+
       if (nextStep?.contingencyStep === true) {
         // const value = contingencyEnum[nextStep?.contingencyValue];
         if (contingencyEnum[nextStep?.contingencyValue] === nextStep?.contingentUpon) {
@@ -54,8 +69,20 @@ const PreMissionInfo = (props) => {
         contingentUpon={ctx.gameStep?.contingentUpon}
         skipBack={ctx.gameStep?.skipBack}
         tableImageDependency={ctx.gameStep?.tableImageDependency}
+        cardTableDependency={ctx.gameStep?.cardTableDependency}
+        modalTableDependency={ctx.gameStep?.modalTableDependency}
         tableImage={ctx.gameStep?.tableImage}
-        tableNotes={ctx.gameStep?.tableNotes} />
+        cardTable={ctx.gameStep?.cardTable}
+        modalTable={ctx.gameStep?.modalTable}
+        tableNotes={ctx.gameStep?.tableNotes}
+        message={ctx?.gameStep?.cardMessage}
+        messageType={ctx?.gameStep?.messageType}
+        nextCardTest={ctx?.gameStep?.nextCardTest}
+        cardTestName={ctx?.gameStep?.cardTestName}
+        radioQuestion={ctx?.gameStep?.radioQuestion}
+        radioDetails={ctx?.gameStep?.radioDetails}
+        inputRequired={ctx?.gameStep?.inputRequired}
+        updateCombat={ctx?.gameStep.updateCombat} />
     </div>
   </>
 }

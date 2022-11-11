@@ -6,7 +6,7 @@ const { TextArea } = Input;
 
 const Zone = () => {
   const ctx = useContext(GameContext);
-  const [weatherValue, setWeatherValue] = useState(null);
+  const [weatherValue, setWeatherValue] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.weather || null);
   const [escortLevel, setEscortLevel] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
@@ -23,42 +23,92 @@ const Zone = () => {
         zone.weather = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
-    ctx.setZonesInfo(zones)
+    ctx.setZonesInfo(zones);
+    ctx.setWeather(value);
   }
 
   const onEscortChange = (e) => {
-    setEscortLevel(e.target.value);
+    const value = e.target.value
+    setEscortLevel(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.escort = value
+        break;
+      }
+    }
+    ctx.setZonesInfo(zones)
+    ctx.setEscort(value);
   }
 
   const onContrailsChange = (e) => {
-    setContrails(e.target.value);
+    // setContrails(e.target.value);
+    const value = e.target.value
+    setContrails(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.resistance = value
+        break;
+      }
+    }
+    ctx.setZonesInfo(zones)
+    ctx.setContrails(value);
   }
 
   const onResistanceChange = (e) => {
-    setResistance(e.target.value);
+    const value = e.target.value
+    setResistance(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.resistance = value
+        break;
+      }
+    }
+    ctx.setZonesInfo(zones);
+    ctx.setResistance(value);
   }
 
   const onWaveChange = (e) => {
     setWaves(e.target.value);
+    const value = e.target.value
+    setWaves(value);
+    let zones = ctx.zonesInfo;
+    for (const zone of zones) {
+      if (zone.zone === ctx.currentZone) {
+        zone.waves = value
+        break;
+      }
+      console.log(ctx.zonesInfo)
+    }
+    ctx.setZonesInfo(zones);
+    ctx.setWaveTotal(value);
+    if (value > 0) {
+      ctx.setWaveCount(1);
+    }
+    else {
+      ctx.setWaveCount(0);
+    }
+    console.log(ctx.zonesInfo)
   }
 
   const onFormationChange = (e) => {
     setFormation(e.target.value);
   }
-  ctx.zonesInfo && console.log(ctx.zonesInfo);
+
   return <Row gutter={[1, 1]}>
     <Col span={2}><div className='zoneCellHeader'>Zone</div></Col>
     <Col span={3}><div className='zoneCellHeader'>DRM / Locatation</div></Col>
     <Col span={10}><div className='zoneCellHeader'>Weather</div></Col>
     <Col span={9}><div className='zoneCellHeader'>Fighter Escort Level</div></Col>
-    <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1].zone}</div></Col>
-    <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1].drm} / ${ctx.zonesInfo[ctx.currentZone - 1].location}`}</div></Col>
+    <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1]?.zone}</div></Col>
+    <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1]?.drm} / ${ctx.zonesInfo[ctx.currentZone - 1]?.location}`}</div></Col>
     <Col span={10}>
       <div className='zoneCell'>
         <Col>
-          <Radio.Group style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onWeatherChange} value={weatherValue}>
+          <Radio.Group name='weather' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onWeatherChange} value={weatherValue}>
             <Radio value={'clear'}><span style={{ fontWeight: weatherValue === 'clear' ? 600 : 500 }}>Clear</span></Radio>
             <Radio value={'haze'}><span style={{ fontWeight: weatherValue === 'haze' ? 600 : 500 }}>Haze</span></Radio>
             <Radio value={'50% clouds'}><span style={{ fontWeight: weatherValue === '50% clouds' ? 600 : 500 }}>50% Clouds</span></Radio>
@@ -108,10 +158,10 @@ const Zone = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               Enemy Attack Waves:
               <Radio.Group name='waves' onChange={onWaveChange} value={waves}>
-                <Radio value={'none'}><span style={{ fontWeight: waves === 'none' ? 600 : 500 }}>None</span></Radio>
-                <Radio value={'1'}><span style={{ fontWeight: waves === '1' ? 600 : 500 }}>1</span></Radio>
-                <Radio value={'2'}><span style={{ fontWeight: waves === '2' ? 600 : 500 }}>2</span></Radio>
-                <Radio value={'3'}><span style={{ fontWeight: waves === '3' ? 600 : 500 }}>3</span></Radio>
+                <Radio value={0}><span style={{ fontWeight: waves === 'none' ? 600 : 500 }}>None</span></Radio>
+                <Radio value={1}><span style={{ fontWeight: waves === '1' ? 600 : 500 }}>1</span></Radio>
+                <Radio value={2}><span style={{ fontWeight: waves === '2' ? 600 : 500 }}>2</span></Radio>
+                <Radio value={3}><span style={{ fontWeight: waves === '3' ? 600 : 500 }}>3</span></Radio>
               </Radio.Group>
             </div>
           </div>
@@ -127,7 +177,7 @@ const Zone = () => {
           <div className='zoneCell'>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               Formation:&emsp;
-              <Radio.Group name='waves' onChange={onFormationChange} value={formation}>
+              <Radio.Group name='formation' onChange={onFormationChange} value={formation}>
                 <Radio value={'in'}><span style={{ fontWeight: formation === 'in' ? 600 : 500 }}>In</span></Radio>
                 <Radio value={'out'}><span style={{ fontWeight: formation === 'out' ? 600 : 500 }}>Out</span></Radio>
                 <Radio value={'disrupted'}><span style={{ fontWeight: formation === 'disrupted' ? 600 : 500 }}>Disrupted</span></Radio>

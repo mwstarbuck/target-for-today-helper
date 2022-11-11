@@ -234,9 +234,10 @@ const getBomberPosition = (setters) => {
 }
 
 const zoneMovement = (stepInfo) => {
+  //when this occurs, wipe out previous zone UI values all but escort
   let value = stepInfo.value
   const zones = stepInfo.zones
-  if (stepInfo.direction === 'outbound') {
+  if (stepInfo.outbound) {
     if (value + 1 > zones) {
       value = zones;
       stepInfo.setter(value);
@@ -255,6 +256,7 @@ const zoneMovement = (stepInfo) => {
     }
   }
 }
+
 export const actionEnum = {
   'getResult': getResult,
   'processResult': processResult,

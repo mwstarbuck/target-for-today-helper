@@ -1,9 +1,10 @@
-import React, { createContext } from 'react';
+import React, { useContext } from 'react';
 import { Modal } from 'antd';
 import Select from 'react-select';
+import GameContext from '../Game/GameContext';
 
 const drm = [
-  { value: '"N/A"', label: '"N/A"' },
+  { value: 'N/A', label: 'N/A' },
   { value: -2, label: -2 },
   { value: -1, label: -1 },
   { value: 0, label: 0 },
@@ -12,19 +13,18 @@ const drm = [
 ]
 
 const location = [
-  { value: 'Base', label: 'Base' },
+  { value: 'E', label: 'E' },
+  { value: 'I', label: 'I' },
   { value: 'W', label: 'W' },
   { value: 'A', label: 'A' },
   { value: 'B', label: 'B' },
   { value: 'Bu', label: 'Bu' },
   { value: 'C', label: 'C' },
   { value: 'Cz', label: 'Cz' },
-  { value: 'E', label: 'E' },
   { value: 'F', label: 'F' },
   { value: 'G', label: 'G' },
   { value: 'Gr', label: 'Gr' },
   { value: 'H', label: 'H' },
-  { value: 'I', label: 'I' },
   { value: 'L', label: 'L' },
   { value: 'N', label: 'N' },
   { value: 'No', label: 'No' },
@@ -36,12 +36,15 @@ const location = [
 ]
 
 const ZonesModal = (props) => {
+  const ctx = useContext(GameContext);
   const { options, showZoneModal, setShowZoneModal, onSelect, zones, setZonesInfo } = props;
 
   let zonesData = [];
   for (let i = 0; i < zones; i++) {
-    zonesData.push({zone: i + 1,
-    targetZone: i === zones - 1 ? true : false})
+    zonesData.push({
+      zone: i + 1,
+      targetZone: i === zones - 1 ? true : false
+    })
   }
 
   const onInfoSelect = (e, i) => {
@@ -56,21 +59,23 @@ const ZonesModal = (props) => {
   let zoneList = [];
   for (let i = 0; i < zones; i++) {
     zoneList.push(
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 2 }}>
-        <div>
+      <div key={i} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 2 }}>
+        <div key={i}>
           {`Zone:${i + 1} DRM`}
           <Select
-            key={i}
+            key={`Zone:${i + 1} DRM`}
             options={drm}
             name={i}
-            onChange={( e, i ) => onInfoSelect( e, i )}
+            // defaultInputValue={'N/A'}
+            onChange={(e, i) => onInfoSelect(e, i)}
           />
         </div>
         <div>
           {`Zone:${i + 1} Loaction`}
           <Select
-            key={i}
+            key={`Zone:${i + 1} Loaction`}
             options={location}
+            // defaultInputValue={ctx.campaign.base === '8th Airforce (England)' ? 'E' : 'I'}
             onChange={(e) => zonesData[i].location = e.value} />
         </div>
       </div>);
