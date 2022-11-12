@@ -7,7 +7,7 @@ const { TextArea } = Input;
 const Zone = () => {
   const ctx = useContext(GameContext);
   const [weatherValue, setWeatherValue] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.weather || null);
-  const [escortLevel, setEscortLevel] = useState(null);
+  const [escortLevel, setEscortLevel] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.escort || null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
   const [waves, setWaves] = useState(null);

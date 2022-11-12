@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CombatSummaryCard = (props) => {
+const CombatStatusCard = (props) => {
   const { cardMessage, round} = props;
   return <div>
     <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
@@ -14,4 +14,4 @@ const CombatSummaryCard = (props) => {
   </div>
 }
 
-export default CombatSummaryCard;
+export default CombatStatusCard;

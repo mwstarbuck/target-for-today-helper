@@ -17,6 +17,9 @@ import MessageAndRadioCard from './CardComponents/MessageAndRadioCard';
 import YesOrNoCard from './CardComponents/YesOrNoCard';
 import ButtonActionCard from './CardComponents/ButtonActionCard';
 import SelectCard from './CardComponents/SelectCard';
+import CombatStatusCard from './CardComponents/CombatStatusCard';
+import ModalCard from './CardComponents/ModalCard';
+import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -29,7 +32,7 @@ const Card = (props) => {
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [elligibleFighters, setElligibleFighters] = useState('');
-  
+
   const startStep = 0;
   const preMission = 1;
   const takeOff = 15;
@@ -79,7 +82,7 @@ const Card = (props) => {
       setAdvance(true);
     }
   }, [ctx?.weather]);
-  
+
   useEffect(() => {
     if (inputRequired === 'escort') {
       setAdvance(true);
@@ -286,7 +289,7 @@ const Card = (props) => {
           cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
           console.log(cardMessage)
           break;
-        case 'combatSummary':
+        case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
           console.log(cardMessage)
           break;
@@ -343,6 +346,18 @@ const Card = (props) => {
             }
           }
           break;
+        case 'abortOrBail':
+          if (!goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(false);
+            setAdvance(false);
+          }
+          else {
+            ctx.setOutbound(false);
+            ctx.setStep(26);
+            setAdvance(false);
+          }
+          break;
         case 'hitsOnBomber':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
@@ -362,7 +377,39 @@ const Card = (props) => {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setRound(1);
               ctx.setStep(zoneMove);
+              setGoToNextCard(false);
+              setAdvance(false);
             }
+          }
+          break;
+        case 'moreHits':
+          if (!goToNextCard) {
+            if (ctx.round === 3) {
+              if (ctx.waveCount === ctx.waveTotal) {
+                ctx.setWaveCount('done');
+                ctx.setStep(27);
+                setGoToNextCard(false);
+                setAdvance(false);
+              }
+              else {
+                ctx.setWaveCount(ctx.waveCount + 1);
+                ctx.setRound(1);
+                ctx.setStep(27);
+                setGoToNextCard(false);
+                setAdvance(false);
+              }
+            }
+            else {
+              ctx.setRound(ctx.round + 1)
+              ctx.setStep(27);
+              setGoToNextCard(false);
+              setAdvance(false);
+            }
+          }
+          else {
+            ctx.setStep(38);
+            setGoToNextCard(false);
+            setAdvance(false);
           }
           break;
         case 'goCombatTest':
@@ -374,6 +421,7 @@ const Card = (props) => {
           }
           else {
             ctx.setStep(ctx.step + 1);
+            ctx.setRound(1);
             setAdvance(false);
           }
           break;
@@ -541,7 +589,7 @@ const Card = (props) => {
   const getRound = () => {
     if (messageType) {
       switch (messageType) {
-        case 'combatSummary':
+        case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
           console.log(cardMessage)
           break;
@@ -599,6 +647,14 @@ const Card = (props) => {
           nextStep={nextStep}
           advance={advance} />
       }
+      {props.actionType === 'combatStatus' &&
+        <CombatStatusCard
+          cardMessage={cardMessage}
+          round={ctx.round}
+          lastStep={lastStep}
+          nextStep={nextStep}
+        />
+      }
       {props.additionalInfo &&
         <div style={{ fontSize: 11, fontWeight: 800, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -651,12 +707,30 @@ const Card = (props) => {
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
-        <button onClick={() => {
+        <ModalCard setShowTableModal={setShowTableModal} actionText={props.actionText} />
+        {/* <button onClick={() => {
           setShowTableModal(true);
         }}
           className='card__button'>
           {props.actionText}
-        </button>
+        </button> */}
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'tableModalYesNo' && <>
+        <ModalYesOrNoCard
+          setShowTableModal={setShowTableModal}
+          actionText={props.actionText}
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion} />
+        {/* <button onClick={() => {
+          setShowTableModal(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button> */}
       </>
       }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
@@ -681,10 +755,6 @@ const Card = (props) => {
         </button>
       </>
       }
-      {/* {props.actionType === 'tableCardZoneClick' && <div>
-        <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-      </div>} */}
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
         : <div>
