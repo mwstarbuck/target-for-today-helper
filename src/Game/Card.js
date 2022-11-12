@@ -336,10 +336,32 @@ const Card = (props) => {
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
+              ctx.setRound(1);
               ctx.setStep(27);
               setGoToNextCard(null);
               setAdvance(false);
-              ctx.setWaveCount(ctx.waveCount + 1)
+            }
+          }
+          break;
+        case 'hitsOnBomber':
+          if (goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(false);
+            setAdvance(false);
+          }
+          else {
+            if (ctx.waveCount === ctx.waveTotal) {
+              ctx.setStep(zoneMove);
+              ctx.setWaveCount(0);
+              setGoToNextCard.setWaveTotal(0);
+              ctx.setRound(1);
+              setGoToNextCard(false);
+              setAdvance(false);
+            }
+            else {
+              ctx.setWaveCount(ctx.waveCount + 1);
+              ctx.setRound(1);
+              ctx.setStep(zoneMove);
             }
           }
           break;

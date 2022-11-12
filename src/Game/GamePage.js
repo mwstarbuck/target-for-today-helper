@@ -16,6 +16,35 @@ const GamePage = () => {
   // const [step, setStep] = useState(0);
   const step = ctx.step;
 
+  const jumpToStep = () => {
+
+    ctx.setCampaign({
+      id: 1,
+      campaign: 1,
+      timePeriod: '2/1943',
+      aircraft: 'B-17F',
+      base: '8th Airforce (England)',
+      missions: 25,
+      altMissions: null
+    })
+    ctx.setBomber('B-17F');
+    ctx.setTimePeriod('2/1943');
+    ctx.setTarget('Leone');
+    ctx.setTargetType('Airfield');
+    ctx.setCell('middle');
+    ctx.setBomberNumber(3);
+    ctx.setZones(5);
+    ctx.setZonesInfo([{
+      zone: 1,
+      targetZone: false,
+      drm: 'N/A',
+      location: 'E'
+    }]);
+    ctx.setCurrentZone(1);
+    ctx.setOutbound(true);
+    ctx.setStep(ctx.step + 1);
+  }
+
   const nextStep = () => {
     ctx.setStep(ctx.step + 1);
   }

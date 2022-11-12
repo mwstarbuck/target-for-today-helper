@@ -82,7 +82,7 @@ const PreMissionInfo = (props) => {
         radioQuestion={ctx?.gameStep?.radioQuestion}
         radioDetails={ctx?.gameStep?.radioDetails}
         inputRequired={ctx?.gameStep?.inputRequired}
-        updateCombat={ctx?.gameStep.updateCombat} />
+        updateCombat={ctx?.gameStep?.updateCombat} />
     </div>
   </>
 }
