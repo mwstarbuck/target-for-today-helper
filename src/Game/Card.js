@@ -135,7 +135,12 @@ const Card = (props) => {
           setter: ctx.setCurrentZone,
           value: ctx.currentZone,
           outbound: ctx.outbound,
-          zones: ctx.zones
+          zones: ctx.zones,
+          setWeather: ctx.setWeather,
+          setResistance: ctx.setResistance,
+          setContrails: ctx.setContrails,
+          setWaveTotal: ctx.setWaveTotal,
+          setWaveCount: ctx.setWaveCount
         }
 
         return zMParams;
@@ -366,9 +371,9 @@ const Card = (props) => {
           }
           else {
             if (ctx.waveCount === ctx.waveTotal) {
-              ctx.setStep(zoneMove);
-              ctx.setWaveCount(0);
-              setGoToNextCard.setWaveTotal(0);
+              ctx.setStep(27);
+              ctx.setWaveCount('done');
+              ctx.setWaveTotal(0);
               ctx.setRound(1);
               setGoToNextCard(false);
               setAdvance(false);
@@ -376,7 +381,7 @@ const Card = (props) => {
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setRound(1);
-              ctx.setStep(zoneMove);
+              ctx.setStep(27);
               setGoToNextCard(false);
               setAdvance(false);
             }
@@ -387,6 +392,7 @@ const Card = (props) => {
             if (ctx.round === 3) {
               if (ctx.waveCount === ctx.waveTotal) {
                 ctx.setWaveCount('done');
+                ctx.setWaveTotal(0);
                 ctx.setStep(27);
                 setGoToNextCard(false);
                 setAdvance(false);
@@ -653,6 +659,7 @@ const Card = (props) => {
           round={ctx.round}
           lastStep={lastStep}
           nextStep={nextStep}
+          waveCount={ctx?.waveCount}
         />
       }
       {props.additionalInfo &&
