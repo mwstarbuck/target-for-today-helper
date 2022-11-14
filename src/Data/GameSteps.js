@@ -520,8 +520,6 @@ export const COMBAT_PROCEDURE = [
       { message: 'Starting Fighter Wave 2', match: [2] },
       { message: 'Starting Fighter Wave 3', match: [3] },
       { message: 'Combat is Over for the current zone', match: ['done'] }],
-    nextCardTest: true,
-    cardTestName: 'waves',
     inputRequired: 'none',
     updateCombat: true
   },
@@ -580,6 +578,28 @@ export const COMBAT_PROCEDURE = [
   {
     id: 30,
     section: 'Combat',
+    heading: 'Roll for New Round Attack Levels and Angles',
+    instruction: 'Roll on Table 5-9 & 5-9A for each elligible fighter',
+    reference: 'Table 5-1 (1D10)',
+    additionalInfo: ['Roll on Table 5-9 & 5-9A for each elligible fighter.',
+      'Place fighteres in the clock position designated by the table.',
+      'Do not roll on pilot skill level table.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '5-9s', diceType: '1D10', title: '5-9(A) 2nd & 3rd Attack Angles and Levels', note: null }],
+    actionText: 'See Table 5-9(A)',
+    diceType: '1D6',
+    // nextCardTest: true,
+    // cardTestName: 'resistance',
+    inputRequired: 'none'
+    // action: 'roll',
+    // actionText: ''
+  }, 
+  {
+    id: 31,
+    section: 'Combat',
     heading: 'Number of Fighters Driven Off By Escort',
     instruction: 'Roll 2D6 on Table 5-4',
     reference: 'Table 5-4 (2D6), Rule section 5.4, pg. 14',
@@ -597,7 +617,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 31,
+    id: 32,
     section: 'Combat',
     heading: 'Bomber Defensive Fire',
     instruction: 'Determine Bomber defensive Fire allocation on table 5-5.',
@@ -610,12 +630,14 @@ export const COMBAT_PROCEDURE = [
     modalTable: [{ table: '5-5', diceType: null, title: 'Bomber Defensive Fire for Round', note: '5-5-note' }],
     actionText: 'See Table 5-5',
     diceType: null,
-    inputRequired: 'none'
+    inputRequired: 'none',
+    nextCardTest: true,
+    cardTestName: 'skillRoll',
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 32,
+    id: 33,
     section: 'Combat',
     heading: 'German Fighter Skill',
     instruction: 'Roll 1D6 on Table 5-5A for first round of combat only.',
@@ -629,49 +651,33 @@ export const COMBAT_PROCEDURE = [
     actionText: 'See Table 5-5A',
     diceType: '1D6',
     inputRequired: 'none',
-    contingencyStep: true,
-    contingencyValue: 'rund',
-    contingentUpon: 1,
+    // contingencyStep: true,
+    // contingencyValue: 'round',
+    // contingentUpon: 1,
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 33,
+    id: 34,
     section: 'Combat',
     heading: 'Bomber Defensive Fire',
     instruction: 'Roll on Table 5-6',
     reference: 'Rules section 5.5.3. Table 5-6 (2D6) & Table 5-6A (1D6) for spray fire.',
-    additionalInfo: ['After each funs target marker has been placed, mark off 1 ammo for regular fire (3 ammo for spray fire).', 'Ammo maty be shifted from one gun to another by any crewman. See rule 5.5.3.', 'Roll on table 5-6 for each turret or gun.', '', '', ''],
+    additionalInfo: ['After each gun target marker has been placed, mark off 1 ammo for regular fire (3 ammo for spray fire).', 'Ammo maty be shifted from one gun to another by any crewman. See rule 5.5.3.', 'Roll on table 5-6 for each turret or gun.', '', '', ''],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
     modalTableDependency: null,
     modalTable: [{ table: '5-6', diceType: '2D6', title: '5-6 Bomber Defensive Fire Resolution', note: '5-6-note' }, { table: '5-6A', diceType: '1D6', title: '5-6A Area Spray Fire Table (Optional)', note: '5-6A-note' }],
-    actionText: 'See Tables 5-6(A)',
+    actionText: 'See 5-6 & 5-6A',
     diceType: '1D10',
-    inputRequired: 'none'
+    inputRequired: 'none',
+    skipBack: 2
     // action: 'roll',
     // actionText: ''
   },
-  // {
-  //   id: 34,
-  //   section: 'Combat',
-  //   heading: 'Hit Damage on German Fighters',
-  //   instruction: 'Roll on Table 5-7',
-  //   reference: 'Rules section 5.5.3. Table 5-7 (2D6) & Table 4-1A if 100% cloud cover is rolled on table 4-1 and bomber is over Alps',
-  //   additionalInfo: ['After each funs target marker has been placed, mark off 1 ammo for regular fire (3 ammo for spray fire).', 'Ammo maty be shifted from one gun to another by any crewman. See rule 5.5.3.', 'Roll on table 5-6 for each turret or gun.', '', '', ''],
-  //   hasAction: false,
-  //   actionType: 'tableModal',
-  //   tableImageDependency: null,
-  //   modalTableDependency: null,
-  //   modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }],
-  //   actionText: 'See Table 4-1',
-  //   diceType: '1D10',
-  //   // action: 'roll',
-  //   // actionText: ''
-  // },
   {
-    id: 34,
+    id: 35,
     section: 'Combat',
     heading: 'Hit Damage on German Fighters',
     instruction: 'Roll on Table 5-7',
@@ -682,14 +688,14 @@ export const COMBAT_PROCEDURE = [
     tableImageDependency: null,
     modalTableDependency: null,
     modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }, { table: '5-7A', diceType: '2D6', title: '5-7A Fighter Damage for FCA and FBOA hits (optional)', note: '5-7A-note' }, { table: '5-7B', diceType: '2D6', title: '5-7B Hit Fighter Damage for Destroyed hits (optional)', note: '5-7B-note' }],
-    actionText: 'See Table 4-1',
+    actionText: 'See Tables 5-7(A-B)',
     diceType: '1D10',
     inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
   },
   {
-    id: 35,
+    id: 36,
     section: 'Combat',
     heading: 'Surviving Fighters?',
     instruction: 'Check the appropriate box',
@@ -711,7 +717,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 36,
+    id: 37,
     section: 'Combat',
     heading: 'German Offensice Fire',
     instruction: 'Resolve possible hits on bomber.',
@@ -731,7 +737,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 37,
+    id: 38,
     section: 'Combat',
     heading: 'German Offensive Fighter Hits?',
     instruction: 'Check the appropriate box',
@@ -754,7 +760,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 38,
+    id: 39,
     section: 'Combat',
     heading: 'Resolve Bomber Damage',
     instruction: 'Resolve shell hits by area of attack.',
@@ -774,7 +780,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 39,
+    id: 40,
     section: 'Combat',
     heading: 'Resolve Bomber Damage',
     instruction: 'Enter answer to question.',
@@ -795,7 +801,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'radio'
   },
   {
-    id: 40,
+    id: 41,
     section: 'Combat',
     heading: 'Abort Or Bail Out?',
     instruction: 'Confirm answer below',

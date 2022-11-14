@@ -247,7 +247,7 @@ const zoneMovement = (stepInfo) => {
       stepInfo.setWeather(null);
       stepInfo.setResistance(null);
       stepInfo.setContrails(null)
-      stepInfo.setWaveTotal(null);
+      stepInfo.setWaveTotal(undefined);
       stepInfo.setWaveCount(null);
     }
   }

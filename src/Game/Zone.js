@@ -82,23 +82,23 @@ const Zone = () => {
     setWaves(e.target.value);
     const value = e.target.value
     setWaves(value);
+    ctx.setWaveTotal(value);
     let zones = ctx.zonesInfo;
     for (const zone of zones) {
       if (zone.zone === ctx.currentZone) {
         zone.waves = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
-    ctx.setZonesInfo(zones);
-    ctx.setWaveTotal(value);
     if (value > 0) {
       ctx.setWaveCount(1);
+      ctx.setRound(1)
     }
     else {
       ctx.setWaveCount(0);
+      ctx.setRound(1);
     }
-    console.log(ctx.zonesInfo)
+    ctx.setZonesInfo(zones);
   }
 
   const onFormationChange = (e) => {

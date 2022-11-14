@@ -38,6 +38,7 @@ const Card = (props) => {
   const takeOff = 15;
   const zoneMove = 17;
   const combat = 24
+  const newAttackAngles = 30;
 
   const selectRef = useRef();
 
@@ -321,15 +322,22 @@ const Card = (props) => {
             setAdvance(false);
           }
           else {
-            ctx.setStep(ctx.step + 2);
+            if (ctx.round === 1) {
+            ctx.setStep(ctx.step + 3); //skips new attack angles card
             setGoToNextCard(null);
             setAdvance(false);
+            }
+            else {
+              ctx.setStep(ctx.step + 2); //skips new attack angles card
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
           }
           break;
         case 'survivingFighters':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
             setAdvance(false);
           }
           else {
@@ -337,10 +345,12 @@ const Card = (props) => {
               ctx.setWaveCount('done');
               ctx.setStep(27);
               setAdvance(false);
+              setGoToNextCard(null);
             }
             else if (ctx.waveCount > ctx.waveTotal) {
               ctx.setStep(zoneMove);
               setAdvance(false);
+              setGoToNextCard(null);
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
@@ -354,19 +364,20 @@ const Card = (props) => {
         case 'abortOrBail':
           if (!goToNextCard) {
             ctx.setStep(ctx.step + 1);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
             setAdvance(false);
           }
           else {
             ctx.setOutbound(false);
             ctx.setStep(26);
             setAdvance(false);
+            setGoToNextCard(null);
           }
           break;
         case 'hitsOnBomber':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
             setAdvance(false);
           }
           else {
@@ -375,14 +386,14 @@ const Card = (props) => {
               ctx.setWaveCount('done');
               ctx.setWaveTotal(0);
               ctx.setRound(1);
-              setGoToNextCard(false);
+              setGoToNextCard(null);
               setAdvance(false);
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setRound(1);
               ctx.setStep(27);
-              setGoToNextCard(false);
+              setGoToNextCard(null);
               setAdvance(false);
             }
           }
@@ -394,27 +405,27 @@ const Card = (props) => {
                 ctx.setWaveCount('done');
                 ctx.setWaveTotal(0);
                 ctx.setStep(27);
-                setGoToNextCard(false);
+                setGoToNextCard(null);
                 setAdvance(false);
               }
               else {
                 ctx.setWaveCount(ctx.waveCount + 1);
                 ctx.setRound(1);
                 ctx.setStep(27);
-                setGoToNextCard(false);
+                setGoToNextCard(null);
                 setAdvance(false);
               }
             }
             else {
               ctx.setRound(ctx.round + 1)
               ctx.setStep(27);
-              setGoToNextCard(false);
+              setGoToNextCard(null);
               setAdvance(false);
             }
           }
           else {
             ctx.setStep(38);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
             setAdvance(false);
           }
           break;
@@ -443,8 +454,7 @@ const Card = (props) => {
           }
           break;
         case 'waves':
-          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves;
-          console.log(waves);
+          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves; //change to ctx.waveTotal
           if (ctx.waveCount === 0) {
             ctx.setStep(zoneMove);
             setAdvance(false);
@@ -454,9 +464,24 @@ const Card = (props) => {
             ctx.setWaveCount(0);
             setAdvance(false);
           }
-
+          else if (ctx.round > 1) {
+            ctx.setStep(newAttackAngles);
+            ctx.setWaveCount(0);
+            setAdvance(false);
+          }
           else {
             ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
+          break;
+        case 'skillRoll':
+          console.log(ctx.round);
+          if (ctx.round === 1) {
+            ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 2);
             setAdvance(false);
           }
           break;
@@ -660,6 +685,7 @@ const Card = (props) => {
           lastStep={lastStep}
           nextStep={nextStep}
           waveCount={ctx?.waveCount}
+          waveTotal={ctx?.waveTotal}
         />
       }
       {props.additionalInfo &&

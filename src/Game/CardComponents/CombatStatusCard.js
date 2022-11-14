@@ -1,16 +1,14 @@
 import React from 'react';
 
 const CombatStatusCard = (props) => {
-  const { cardMessage, round, waveCount} = props;
+  const { cardMessage, round, waveCount, waveTotal} = props;
+  const total = waveTotal;
+  console.log(total);
   return <div>
     <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
       {cardMessage && <p>{cardMessage}</p>}
-      { waveCount !== 'done' && <p>Round: {round}</p>}
+      {( waveCount !== 'done' && waveTotal !== 0) && <p>Round: {round}</p>}
     </div>
-    {/* <div>
-      <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-      <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>
-    </div> */}
   </div>
 }
 
