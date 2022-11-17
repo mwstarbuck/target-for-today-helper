@@ -19,5 +19,6 @@ export const GameTablesList = [
   { table: '5-7B', diceType: '2D6', title: '5-7B', note: '5-7B-note' },
   { table: '5-8', diceType: '2D6', title: '5-8', note: '5-8-note' },
   { table: '5-9s', diceType: '1D6', title: '5-9(A)', note: null },
-  
+  { table: '5-10', diceType: '2D6', title: '5-10', note: null },
+  { table: '5-11', diceType: '1D6', title: '5-11', note: '5-11-note' },
 ]

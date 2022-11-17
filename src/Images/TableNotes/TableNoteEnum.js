@@ -23,6 +23,7 @@ const tableNoteEnum = {
   '5-7A-note': require('./5-7A-note.png'),
   '5-7B-note': require('./5-7B-note.png'),
   '5-8-note': require('./5-8-note.png'),
+  '5-11-note': require('./5-11-note.png'),
 }
 
 export default tableNoteEnum;
