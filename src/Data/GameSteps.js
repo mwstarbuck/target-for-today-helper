@@ -798,7 +798,7 @@ export const COMBAT_PROCEDURE = [
     reference: 'Rules section 5.7',
     // additionalInfo: ['', '', '', '', ''],
     hasAction: true,
-    actionType: 'tableModalYesNo',
+    actionType: 'damageModal',
     tableImageDependency: null,
     modalTableDependency: null,
     modalTable: [{ table: '5-8', diceType: '2D6', title: '5-10', note: '5-10-note' },],
