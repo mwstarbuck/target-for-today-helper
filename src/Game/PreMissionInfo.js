@@ -21,7 +21,7 @@ const PreMissionInfo = (props) => {
         return TAKEOFF_PROCEDURE.find(s => s.id === step);
       case step <= 24:
         return ZONES_PROCEDURE.find(s => s.id === step);
-      case step <= 40:
+      case step <= 45:
         return COMBAT_PROCEDURE.find(s => s.id === step);
       default:
         break;

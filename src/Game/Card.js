@@ -20,6 +20,7 @@ import SelectCard from './CardComponents/SelectCard';
 import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
+import DamageModal from '../Modals/DamageModal/DamageModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -30,6 +31,7 @@ const Card = (props) => {
   const [showMods, setShowMods] = useState(false);
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
+  const [showDamageModal, setShowDamageModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [elligibleFighters, setElligibleFighters] = useState('');
 
@@ -323,9 +325,9 @@ const Card = (props) => {
           }
           else {
             if (ctx.round === 1) {
-            ctx.setStep(ctx.step + 3); //skips new attack angles card
-            setGoToNextCard(null);
-            setAdvance(false);
+              ctx.setStep(ctx.step + 3); //skips new attack angles card
+              setGoToNextCard(null);
+              setAdvance(false);
             }
             else {
               ctx.setStep(ctx.step + 2); //skips new attack angles card
@@ -562,7 +564,7 @@ const Card = (props) => {
       if (ctx.step === 1) {
         ctx.setCampaign(null);
       }
-      if (ctx.gameStep.skipBack) {
+      if (ctx.gameStep?.skipBack) {
         ctx.setStep(ctx.step - ctx.gameStep.skipBack);
         if (props.setter) {
           for (const [key, value] of Object.entries(props.setter)) {
@@ -740,13 +742,7 @@ const Card = (props) => {
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
-        <ModalCard setShowTableModal={setShowTableModal} actionText={props.actionText} />
-        {/* <button onClick={() => {
-          setShowTableModal(true);
-        }}
-          className='card__button'>
-          {props.actionText}
-        </button> */}
+        <ModalCard setShowModal={setShowTableModal} actionText={props.actionText} />
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModalYesNo' && <>
@@ -764,6 +760,10 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button> */}
+      </>
+      }
+      {props.actionType === 'damageModal' && <>
+        <ModalCard setShowModal={setShowDamageModal} actionText={props.actionText} />
       </>
       }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
@@ -809,6 +809,9 @@ const Card = (props) => {
       source={modalTableSrc}
       diceType={props.diceType}
     />
+    <DamageModal
+      showModal={showDamageModal}
+      setShowModal={setShowDamageModal} />
   </div>
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import TableModal from '../../Modals/TableModal';
 
-const ModalCard = ({setShowTableModal, actionText}) => {
+const ModalCard = ({setShowModal, actionText}) => {
   return <>
     <button onClick={() => {
-      setShowTableModal(true);
+      setShowModal(true);
     }}
       className='card__button'>
       {actionText}

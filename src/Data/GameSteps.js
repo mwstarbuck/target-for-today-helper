@@ -596,7 +596,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
-  }, 
+  },
   {
     id: 31,
     section: 'Combat',
@@ -789,27 +789,22 @@ export const COMBAT_PROCEDURE = [
     diceType: '1D6',
     inputRequired: 'none',
   },
-  //yes or no for actual damage move on to damage area tables?
   {
     id: 41,
     section: 'Combat',
     heading: 'Resolve Bomber Damage',
     instruction: 'Enter answer to question.',
     reference: 'Rules section 5.7',
-    // additionalInfo: ['', '', '', '', ''],
+    additionalInfo: ['', '', '', '', ''],
     hasAction: true,
     actionType: 'damageModal',
     tableImageDependency: null,
     modalTableDependency: null,
-    modalTable: [{ table: '5-8', diceType: '2D6', title: '5-10', note: '5-10-note' },],
-    actionText: 'See Table 5-8',
-    diceType: '2D6',
+    // modalTable: [{ table: '5-8', diceType: '2D6', title: '5-10', note: '5-10-note' },],
+    actionText: 'Roll Damage',
+    // diceType: '2D6',
     inputRequired: 'none',
-    nextCardTest: true,
-    cardTestName: 'moreHits',
-    radioQuestion: 'Need to resolve more hits to bomber?',
-    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
-    inputRequired: 'radio'
+    // skipBack: 1
   },
   {
     id: 42,
