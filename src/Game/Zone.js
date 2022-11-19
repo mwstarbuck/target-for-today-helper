@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Row, Col, Radio, Checkbox, Input } from 'antd';
 import GameContext from './GameContext';
 
@@ -7,13 +7,20 @@ const { TextArea } = Input;
 const Zone = () => {
   const ctx = useContext(GameContext);
   const [weatherValue, setWeatherValue] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.weather || null);
-  const [escortLevel, setEscortLevel] = useState(null);
+  const [escortLevel, setEscortLevel] = useState(ctx?.zonesInfo?.find(z => z.zone === ctx?.currentZone)?.escort || null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
   const [waves, setWaves] = useState(null);
   const [formation, setFormation] = useState(null);
 
-
+  useEffect(() => {
+    if (ctx.outbound) {
+      setWeatherValue(ctx.weather);
+      setContrails(ctx.contrails);
+      setResistance(ctx.resistance);
+      setWaves(ctx.waveTotal);
+    }
+  })
   const onWeatherChange = (e) => {
     const value = e.target.value
     setWeatherValue(value);
@@ -75,23 +82,23 @@ const Zone = () => {
     setWaves(e.target.value);
     const value = e.target.value
     setWaves(value);
+    ctx.setWaveTotal(value);
     let zones = ctx.zonesInfo;
     for (const zone of zones) {
       if (zone.zone === ctx.currentZone) {
         zone.waves = value
         break;
       }
-      console.log(ctx.zonesInfo)
     }
-    ctx.setZonesInfo(zones);
-    ctx.setWaveTotal(value);
     if (value > 0) {
       ctx.setWaveCount(1);
+      ctx.setRound(1)
     }
     else {
       ctx.setWaveCount(0);
+      ctx.setRound(1);
     }
-    console.log(ctx.zonesInfo)
+    ctx.setZonesInfo(zones);
   }
 
   const onFormationChange = (e) => {

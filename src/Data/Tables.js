@@ -532,7 +532,7 @@ const BOMBER_NUMBER = [
   },
   {
     value: [11, 12, 13, 14, 15],
-    middle: 12,
+    middle: 2,
     high: 8,
     low: 14
   },

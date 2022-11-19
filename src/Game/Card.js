@@ -17,6 +17,9 @@ import MessageAndRadioCard from './CardComponents/MessageAndRadioCard';
 import YesOrNoCard from './CardComponents/YesOrNoCard';
 import ButtonActionCard from './CardComponents/ButtonActionCard';
 import SelectCard from './CardComponents/SelectCard';
+import CombatStatusCard from './CardComponents/CombatStatusCard';
+import ModalCard from './CardComponents/ModalCard';
+import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -29,12 +32,13 @@ const Card = (props) => {
   const [showTableModal, setShowTableModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [elligibleFighters, setElligibleFighters] = useState('');
-  
+
   const startStep = 0;
   const preMission = 1;
   const takeOff = 15;
   const zoneMove = 17;
   const combat = 24
+  const newAttackAngles = 30;
 
   const selectRef = useRef();
 
@@ -79,7 +83,7 @@ const Card = (props) => {
       setAdvance(true);
     }
   }, [ctx?.weather]);
-  
+
   useEffect(() => {
     if (inputRequired === 'escort') {
       setAdvance(true);
@@ -132,7 +136,12 @@ const Card = (props) => {
           setter: ctx.setCurrentZone,
           value: ctx.currentZone,
           outbound: ctx.outbound,
-          zones: ctx.zones
+          zones: ctx.zones,
+          setWeather: ctx.setWeather,
+          setResistance: ctx.setResistance,
+          setContrails: ctx.setContrails,
+          setWaveTotal: ctx.setWaveTotal,
+          setWaveCount: ctx.setWaveCount
         }
 
         return zMParams;
@@ -286,7 +295,7 @@ const Card = (props) => {
           cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
           console.log(cardMessage)
           break;
-        case 'combatSummary':
+        case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
           console.log(cardMessage)
           break;
@@ -313,15 +322,22 @@ const Card = (props) => {
             setAdvance(false);
           }
           else {
-            ctx.setStep(ctx.step + 2);
+            if (ctx.round === 1) {
+            ctx.setStep(ctx.step + 3); //skips new attack angles card
             setGoToNextCard(null);
             setAdvance(false);
+            }
+            else {
+              ctx.setStep(ctx.step + 2); //skips new attack angles card
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
           }
           break;
         case 'survivingFighters':
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
-            setGoToNextCard(false);
+            setGoToNextCard(null);
             setAdvance(false);
           }
           else {
@@ -329,18 +345,88 @@ const Card = (props) => {
               ctx.setWaveCount('done');
               ctx.setStep(27);
               setAdvance(false);
+              setGoToNextCard(null);
             }
             else if (ctx.waveCount > ctx.waveTotal) {
               ctx.setStep(zoneMove);
               setAdvance(false);
+              setGoToNextCard(null);
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
+              ctx.setRound(1);
               ctx.setStep(27);
               setGoToNextCard(null);
               setAdvance(false);
-              ctx.setWaveCount(ctx.waveCount + 1)
             }
+          }
+          break;
+        case 'abortOrBail':
+          if (!goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          else {
+            ctx.setOutbound(false);
+            ctx.setStep(26);
+            setAdvance(false);
+            setGoToNextCard(null);
+          }
+          break;
+        case 'hitsOnBomber':
+          if (goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          else {
+            if (ctx.waveCount === ctx.waveTotal) {
+              ctx.setStep(27);
+              ctx.setWaveCount('done');
+              ctx.setWaveTotal(0);
+              ctx.setRound(1);
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
+            else {
+              ctx.setWaveCount(ctx.waveCount + 1);
+              ctx.setRound(1);
+              ctx.setStep(27);
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
+          }
+          break;
+        case 'moreHits':
+          if (!goToNextCard) {
+            if (ctx.round === 3) {
+              if (ctx.waveCount === ctx.waveTotal) {
+                ctx.setWaveCount('done');
+                ctx.setWaveTotal(0);
+                ctx.setStep(27);
+                setGoToNextCard(null);
+                setAdvance(false);
+              }
+              else {
+                ctx.setWaveCount(ctx.waveCount + 1);
+                ctx.setRound(1);
+                ctx.setStep(27);
+                setGoToNextCard(null);
+                setAdvance(false);
+              }
+            }
+            else {
+              ctx.setRound(ctx.round + 1)
+              ctx.setStep(27);
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
+          }
+          else {
+            ctx.setStep(38);
+            setGoToNextCard(null);
+            setAdvance(false);
           }
           break;
         case 'goCombatTest':
@@ -352,6 +438,7 @@ const Card = (props) => {
           }
           else {
             ctx.setStep(ctx.step + 1);
+            ctx.setRound(1);
             setAdvance(false);
           }
           break;
@@ -367,8 +454,7 @@ const Card = (props) => {
           }
           break;
         case 'waves':
-          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves;
-          console.log(waves);
+          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves; //change to ctx.waveTotal
           if (ctx.waveCount === 0) {
             ctx.setStep(zoneMove);
             setAdvance(false);
@@ -378,9 +464,24 @@ const Card = (props) => {
             ctx.setWaveCount(0);
             setAdvance(false);
           }
-
+          else if (ctx.round > 1) {
+            ctx.setStep(newAttackAngles);
+            ctx.setWaveCount(0);
+            setAdvance(false);
+          }
           else {
             ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
+          break;
+        case 'skillRoll':
+          console.log(ctx.round);
+          if (ctx.round === 1) {
+            ctx.setStep(ctx.step + 1);
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 2);
             setAdvance(false);
           }
           break;
@@ -519,7 +620,7 @@ const Card = (props) => {
   const getRound = () => {
     if (messageType) {
       switch (messageType) {
-        case 'combatSummary':
+        case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
           console.log(cardMessage)
           break;
@@ -577,6 +678,16 @@ const Card = (props) => {
           nextStep={nextStep}
           advance={advance} />
       }
+      {props.actionType === 'combatStatus' &&
+        <CombatStatusCard
+          cardMessage={cardMessage}
+          round={ctx.round}
+          lastStep={lastStep}
+          nextStep={nextStep}
+          waveCount={ctx?.waveCount}
+          waveTotal={ctx?.waveTotal}
+        />
+      }
       {props.additionalInfo &&
         <div style={{ fontSize: 11, fontWeight: 800, margin: '1rem', border: '1px solid grey' }}>
           <h3>Additional Info:</h3>
@@ -629,12 +740,30 @@ const Card = (props) => {
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
-        <button onClick={() => {
+        <ModalCard setShowTableModal={setShowTableModal} actionText={props.actionText} />
+        {/* <button onClick={() => {
           setShowTableModal(true);
         }}
           className='card__button'>
           {props.actionText}
-        </button>
+        </button> */}
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'tableModalYesNo' && <>
+        <ModalYesOrNoCard
+          setShowTableModal={setShowTableModal}
+          actionText={props.actionText}
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion} />
+        {/* <button onClick={() => {
+          setShowTableModal(true);
+        }}
+          className='card__button'>
+          {props.actionText}
+        </button> */}
       </>
       }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
@@ -659,10 +788,6 @@ const Card = (props) => {
         </button>
       </>
       }
-      {/* {props.actionType === 'tableCardZoneClick' && <div>
-        <button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
-        {advance && <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button>}
-      </div>} */}
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
         : <div>
