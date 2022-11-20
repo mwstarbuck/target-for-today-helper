@@ -46,6 +46,7 @@ const tableImageEnum = {
   '5-13A-6': require('./5-13A-6.png'),
   '5-13A-7': require('./5-13A-7.png'),
   '5-13A-8': require('./5-13A-8.png'),
+  '5-16': require('./5-16.png'),
   '5-17': require('./5-17.png'),
 }
 

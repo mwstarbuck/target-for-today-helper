@@ -21,6 +21,7 @@ import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 import DamageModal from '../Modals/DamageModal/DamageModal';
+import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -39,7 +40,7 @@ const Card = (props) => {
   const preMission = 1;
   const takeOff = 15;
   const zoneMove = 17;
-  const combat = 24
+  const combatSummary = 27;
   const newAttackAngles = 30;
 
   const selectRef = useRef();
@@ -318,63 +319,94 @@ const Card = (props) => {
     if (props.nextCardTest) {
       switch (props.cardTestName) {
         case 'radioResult':
-          if (goToNextCard) {
-            ctx.setStep(ctx.step + 1);
-            setGoToNextCard(null);
-            setAdvance(false);
-          }
-          else {
-            if (ctx.round === 1) {
-              ctx.setStep(ctx.step + 3); //skips new attack angles card
-              setGoToNextCard(null);
-              setAdvance(false);
-            }
-            else {
-              ctx.setStep(ctx.step + 2); //skips new attack angles card
-              setGoToNextCard(null);
-              setAdvance(false);
-            }
-          }
+          radioResultStep(goToNextCard, ctx.setStep, ctx.step, setGoToNextCard, setAdvance, ctx.round)
+          // if (goToNextCard) {
+          //   ctx.setStep(ctx.step + 1);
+          //   setGoToNextCard(null);
+          //   setAdvance(false);
+          // }
+          // else {
+          //   if (ctx.round === 1) {
+          //     ctx.setStep(ctx.step + 3); //skips new attack angles card
+          //     setGoToNextCard(null);
+          //     setAdvance(false);
+          //   }
+          //   else {
+          //     ctx.setStep(ctx.step + 2); //skips new attack angles card
+          //     setGoToNextCard(null);
+          //     setAdvance(false);
+          //   }
+          // }
           break;
         case 'survivingFighters':
-          if (goToNextCard) {
-            ctx.setStep(ctx.step + 1);
-            setGoToNextCard(null);
-            setAdvance(false);
-          }
-          else {
-            if (ctx.waveCount === ctx.waveTotal) {
-              ctx.setWaveCount('done');
-              ctx.setStep(27);
-              setAdvance(false);
-              setGoToNextCard(null);
-            }
-            else if (ctx.waveCount > ctx.waveTotal) {
-              ctx.setStep(zoneMove);
-              setAdvance(false);
-              setGoToNextCard(null);
-            }
-            else {
-              ctx.setWaveCount(ctx.waveCount + 1);
-              ctx.setRound(1);
-              ctx.setStep(27);
-              setGoToNextCard(null);
-              setAdvance(false);
-            }
-          }
+          survivingFightersStep(goToNextCard, ctx.setStep, ctx.step, ctx.setWaveCount, ctx.waveCount, ctx.waveTotal, ctx.setRound, setGoToNextCard, setAdvance, zoneMove);
+          // if (goToNextCard) {
+          //   ctx.setStep(ctx.step + 1);
+          //   setGoToNextCard(null);
+          //   setAdvance(false);
+          // }
+          // else {
+          //   if (ctx.waveCount === ctx.waveTotal) {
+          //     ctx.setWaveCount('done');
+          //     ctx.setStep(27);
+          //     setAdvance(false);
+          //     setGoToNextCard(null);
+          //   }
+          //   else if (ctx.waveCount > ctx.waveTotal) {
+          //     ctx.setStep(zoneMove);
+          //     setAdvance(false);
+          //     setGoToNextCard(null);
+          //   }
+          //   else {
+          //     ctx.setWaveCount(ctx.waveCount + 1);
+          //     ctx.setRound(1);
+          //     ctx.setStep(27);
+          //     setGoToNextCard(null);
+          //     setAdvance(false);
+          //   }
+          // }
           break;
         case 'abortOrBail':
+          console.log( 'I. wc: ' + ctx.waveCount, 'wt: ' + ctx.waveTotal, 'round: ' + ctx.round);
           if (!goToNextCard) {
-            ctx.setStep(ctx.step + 1);
-            setGoToNextCard(null);
-            setAdvance(false);
+            if (ctx.round === 3) {
+              if (ctx.waveCount === ctx.waveTotal) {
+                ctx.setWaveCount('done');
+                ctx.setWaveTotal(0);
+                ctx.setStep(combatSummary);
+                setGoToNextCard(null);
+                setAdvance(false);
+                // console.log(' round === 3 & WC === WT');
+                console.log('374' + ctx.waveCount);
+                
+              }
+              else {
+                ctx.setWaveCount(ctx.waveCount + 1);
+                ctx.setRound(1);
+                ctx.setStep(combatSummary);
+                setGoToNextCard(null);
+                setAdvance(false);
+                console.log(' round === 1 & WC++');
+                console.log('384' + ctx.waveCount);
+              }
+            }
+            else {
+              ctx.setRound(ctx.round + 1)
+              ctx.setStep(combatSummary);
+              setGoToNextCard(null);
+              setAdvance(false);
+              console.log(' round++, wc stays same');
+            }
           }
           else {
             ctx.setOutbound(false);
             ctx.setStep(26);
             setAdvance(false);
             setGoToNextCard(null);
+            console.log(' Outbound');
           }
+          console.log('II. wc: ' + ctx.waveCount, 'wt: ' + ctx.waveTotal, 'round: ' + ctx.round);
+
           break;
         case 'hitsOnBomber':
           if (goToNextCard) {
@@ -384,20 +416,49 @@ const Card = (props) => {
           }
           else {
             if (ctx.waveCount === ctx.waveTotal) {
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
               ctx.setWaveCount('done');
               ctx.setWaveTotal(0);
               ctx.setRound(1);
               setGoToNextCard(null);
               setAdvance(false);
+              console.log('420' + ctx.waveCount);
             }
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setRound(1);
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
               setGoToNextCard(null);
               setAdvance(false);
+              console.log('428' + ctx.waveCount);
             }
+          }
+          break;
+        case 'continueGOF':
+          if (goToNextCard) {
+            ctx.setStep(37);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(null);
+            setAdvance(false);
+            // if (ctx.waveCount === ctx.waveTotal) {
+              //   ctx.setStep(27);
+            //   ctx.setWaveCount('done');
+            //   ctx.setWaveTotal(0);
+            //   ctx.setRound(1);
+            //   setGoToNextCard(null);
+            //   setAdvance(false);
+            // }
+            // else {
+            //   ctx.setWaveCount(ctx.waveCount + 1);
+            //   ctx.setRound(1);
+            //   ctx.setStep(27);
+            //   setGoToNextCard(null);
+            //   setAdvance(false);
+            // }
           }
           break;
         case 'moreHits':
@@ -406,21 +467,23 @@ const Card = (props) => {
               if (ctx.waveCount === ctx.waveTotal) {
                 ctx.setWaveCount('done');
                 ctx.setWaveTotal(0);
-                ctx.setStep(27);
+                ctx.setStep(combatSummary);
                 setGoToNextCard(null);
                 setAdvance(false);
+                console.log('368' + ctx.waveCount);
               }
               else {
                 ctx.setWaveCount(ctx.waveCount + 1);
                 ctx.setRound(1);
-                ctx.setStep(27);
+                ctx.setStep(combatSummary);
                 setGoToNextCard(null);
                 setAdvance(false);
+                console.log('476' + ctx.waveCount);
               }
             }
             else {
               ctx.setRound(ctx.round + 1)
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
               setGoToNextCard(null);
               setAdvance(false);
             }
@@ -456,7 +519,7 @@ const Card = (props) => {
           }
           break;
         case 'waves':
-          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves; //change to ctx.waveTotal
+          // const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves; //change to ctx.waveTotal
           if (ctx.waveCount === 0) {
             ctx.setStep(zoneMove);
             setAdvance(false);
@@ -465,11 +528,13 @@ const Card = (props) => {
             ctx.setStep(zoneMove);
             ctx.setWaveCount(0);
             setAdvance(false);
+            console.log('529' + ctx.waveCount);
           }
           else if (ctx.round > 1) {
             ctx.setStep(newAttackAngles);
-            ctx.setWaveCount(0);
+            // ctx.setWaveCount(0);
             setAdvance(false);
+            console.log('535 ' + ctx.waveCount);
           }
           else {
             ctx.setStep(ctx.step + 1);
@@ -676,6 +741,7 @@ const Card = (props) => {
           onRadioChange={onRadioChange}
           goToNextCard={goToNextCard}
           radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion}
           lastStep={lastStep}
           nextStep={nextStep}
           advance={advance} />

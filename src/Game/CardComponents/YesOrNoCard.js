@@ -2,13 +2,13 @@ import React from 'react';
 import { Radio } from 'antd';
 
 const YesOrNoCard = (props) => {
-  const {cardMessage, onRadioChange, goToNextCard, radioDetails, lastStep, nextStep, advance} = props;
+  const {cardMessage, onRadioChange, goToNextCard, radioDetails, radioQuestion} = props;
   return <div>
     <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
       {cardMessage && <p>{cardMessage}</p>}
     </div>
     <div style={{ alignItems: 'center', fontSize: 16, fontWeight: 600 }}>
-      <p>{props.radioQuestion}</p>
+      <p>{radioQuestion}</p>
       <Radio.Group onChange={onRadioChange} value={goToNextCard}>
         {radioDetails.map((rd, i) => <Radio 
           key={i}

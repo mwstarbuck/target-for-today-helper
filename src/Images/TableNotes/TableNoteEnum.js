@@ -34,6 +34,7 @@ const tableNoteEnum = {
   '5-13A-6-note': require('./5-13A-6-note.png'),
   '5-13A-7-note': require('./5-13A-7-note.png'),
   '5-13A-8-note': require('./5-13A-8-note.png'),
+  '5-16-note': require('./5-16-note.png'),
   '5-17-note': require('./5-17-note.png'),
 }
 

@@ -880,90 +880,90 @@ export const COMBAT_PROCEDURE = [
         },
       ]
     },
-      {
-        id: 'B-17G', areaHitTables: [
-          {
-            table: '5-12-B17-front',
-            diceType: '2D6',
-            title: '5-12 (B-17G) Attack from 10:30 / 12 / 1:30 O\'clock',
-            note: '5-12-B17-front-note'
-          },
-          {
-            table: '5-12-B17-side',
-            diceType: '2D6',
-            title: '5-12 (B-17G) Attack from 9 / 3 O\'clock',
-            note: '5-12_9-3-note'
-          },
-          {
-            table: '5-12-B17-tail',
-            diceType: '2D6',
-            title: '5-12 (B-17G) Attack From: 6 O\'clock',
-            note: '5-12_6-note'
-          },
-          {
-            table: '5-12-B17-vert',
-            diceType: '2D6',
-            title: '5-12 (B-17G) Vertical Dive and Climb Attacks',
-            note: '5-12_VD-VC-note'
-          },
-        ],
-        areaDamageTables: [
-          {
-            table: '5-13A-1',
-            diceType: '2D6',
-            title: '5-13A-1 NOSE (B-17G)',
-            note: '5-13A-1-note'
-          },
-          {
-            table: '5-13A-2',
-            diceType: '2D6',
-            title: '5-13A-2 PILOT COMPARTMENT (B-17G)',
-            note: '5-13A-2-note'
-          },
-          {
-            table: '5-13A-3',
-            diceType: '2D6',
-            title: '5-13A-3 BOMB BAY (B-17G)',
-            note: '5-13A-3-note'
-          },
-          {
-            table: '5-13A-4',
-            diceType: '2D6',
-            title: '5-13A-4 RADIO ROOM (B-17G)',
-            note: '5-13A-4-note'
-          },
-          {
-            table: '5-13A-5',
-            diceType: '2D6',
-            title: '5-13A-5 WAIST (B-17G)',
-            note: '5-13A-5-note'
-          },
-          {
-            table: '5-13A-6',
-            diceType: '2D6',
-            title: '5-13A-6 TAIL SECTION (B-17G)',
-            note: '5-13A-6-note'
-          },
-          {
-            table: '5-13A-7',
-            diceType: '2D6',
-            title: '5-13A-7 WINGS (B-17G)',
-            note: '5-13A-7-note'
-          },
-          {
-            table: '5-13A-8',
-            diceType: '2D6',
-            title: '5-13A-8 INSTRUMENTS (B-17G)',
-            note: '5-13A-8-note'
-          },
-          {
-            table: '5-17',
-            diceType: '1D6',
-            title: '5-17 CREW (B-17G)',
-            note: '5-17-note'
-          },
-        ]
-      },],
+    {
+      id: 'B-17G', areaHitTables: [
+        {
+          table: '5-12-B17-front',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack from 10:30 / 12 / 1:30 O\'clock',
+          note: '5-12-B17-front-note'
+        },
+        {
+          table: '5-12-B17-side',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack from 9 / 3 O\'clock',
+          note: '5-12_9-3-note'
+        },
+        {
+          table: '5-12-B17-tail',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack From: 6 O\'clock',
+          note: '5-12_6-note'
+        },
+        {
+          table: '5-12-B17-vert',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Vertical Dive and Climb Attacks',
+          note: '5-12_VD-VC-note'
+        },
+      ],
+      areaDamageTables: [
+        {
+          table: '5-13A-1',
+          diceType: '2D6',
+          title: '5-13A-1 NOSE (B-17G)',
+          note: '5-13A-1-note'
+        },
+        {
+          table: '5-13A-2',
+          diceType: '2D6',
+          title: '5-13A-2 PILOT COMPARTMENT (B-17G)',
+          note: '5-13A-2-note'
+        },
+        {
+          table: '5-13A-3',
+          diceType: '2D6',
+          title: '5-13A-3 BOMB BAY (B-17G)',
+          note: '5-13A-3-note'
+        },
+        {
+          table: '5-13A-4',
+          diceType: '2D6',
+          title: '5-13A-4 RADIO ROOM (B-17G)',
+          note: '5-13A-4-note'
+        },
+        {
+          table: '5-13A-5',
+          diceType: '2D6',
+          title: '5-13A-5 WAIST (B-17G)',
+          note: '5-13A-5-note'
+        },
+        {
+          table: '5-13A-6',
+          diceType: '2D6',
+          title: '5-13A-6 TAIL SECTION (B-17G)',
+          note: '5-13A-6-note'
+        },
+        {
+          table: '5-13A-7',
+          diceType: '2D6',
+          title: '5-13A-7 WINGS (B-17G)',
+          note: '5-13A-7-note'
+        },
+        {
+          table: '5-13A-8',
+          diceType: '2D6',
+          title: '5-13A-8 INSTRUMENTS (B-17G)',
+          note: '5-13A-8-note'
+        },
+        {
+          table: '5-17',
+          diceType: '1D6',
+          title: '5-17 CREW (B-17G)',
+          note: '5-17-note'
+        },
+      ]
+    },],
     actionText: 'Roll Damage',
     // diceType: '2D6',
     inputRequired: 'none',
@@ -980,7 +980,7 @@ export const COMBAT_PROCEDURE = [
     actionType: 'tableForCard',
     tableImageDependency: null,
     modalTableDependency: null,
-    cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: null }],
+    cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: '5-16-note' }],
     actionText: 'See Table 6-16',
     diceType: '2D6',
     // nextCardTest: true,
@@ -991,19 +991,18 @@ export const COMBAT_PROCEDURE = [
     id: 43,
     section: 'Combat',
     heading: 'Continue German Offensive Fire?',
-    instruction: 'Check the appropriate box',
+    instruction: 'Finished with German offensive fire?',
     reference: 'see section ?',
     // additionalInfo: ['', '', '', '', ''],
     hasAction: false,
     actionType: 'yesOrNo',
     tableImageDependency: null,
     modalTableDependency: null,
-    diceType: '1D10',
+    // diceType: '1D10',
     nextCardTest: true,
     cardTestName: 'continueGOF',
-    radioQuestion: 'Continue German offensive fire for another elligible fighter?',
+    radioQuestion: 'Continue German offensive fire procedure for another elligible fighter?',
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
-    inputRequired: 'radio',
     inputRequired: 'radio',
   },
   {
