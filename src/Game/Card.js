@@ -811,7 +811,9 @@ const Card = (props) => {
     />
     <DamageModal
       showModal={showDamageModal}
-      setShowModal={setShowDamageModal} />
+      setShowModal={setShowDamageModal}
+      bomber={ctx.bomber}
+      hitTables={props.hitTables} />
   </div>
 }
 

@@ -34,6 +34,19 @@ const tableImageEnum = {
   '5-9s': require('./5-9s.png'),
   '5-10': require('./5-10.png'),
   '5-11': require('./5-11.png'),
+  '5-12-B17-front': require('./5-12-B17-front.png'),
+  '5-12-B17-side': require('./5-12-B17-side.png'),
+  '5-12-B17-tail': require('./5-12-B17-tail.png'),
+  '5-12-B17-vert': require('./5-12-B17-vert.png'),
+  '5-13A-1': require('./5-13A-1.png'),
+  '5-13A-2': require('./5-13A-2.png'),
+  '5-13A-3': require('./5-13A-3.png'),
+  '5-13A-4': require('./5-13A-4.png'),
+  '5-13A-5': require('./5-13A-5.png'),
+  '5-13A-6': require('./5-13A-6.png'),
+  '5-13A-7': require('./5-13A-7.png'),
+  '5-13A-8': require('./5-13A-8.png'),
+  '5-17': require('./5-17.png'),
 }
 
 export default tableImageEnum;

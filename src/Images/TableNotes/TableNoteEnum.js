@@ -24,6 +24,17 @@ const tableNoteEnum = {
   '5-7B-note': require('./5-7B-note.png'),
   '5-8-note': require('./5-8-note.png'),
   '5-11-note': require('./5-11-note.png'),
+  '5-12-B17-note': require('./5-12-B17-note.png'),
+  '5-12-B17-vert-note': require('./5-12-B17-vert-note.png'),
+  '5-13A-1-note': require('./5-13A-1-note.png'),
+  '5-13A-2-note': require('./5-13A-2-note.png'),
+  '5-13A-3-note': require('./5-13A-3-note.png'),
+  '5-13A-4-note': require('./5-13A-4-note.png'),
+  '5-13A-5-note': require('./5-13A-5-note.png'),
+  '5-13A-6-note': require('./5-13A-6-note.png'),
+  '5-13A-7-note': require('./5-13A-7-note.png'),
+  '5-13A-8-note': require('./5-13A-8-note.png'),
+  '5-17-note': require('./5-17-note.png'),
 }
 
 export default tableNoteEnum;

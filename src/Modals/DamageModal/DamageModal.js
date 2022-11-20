@@ -5,7 +5,7 @@ import AreaHitTabs from '../DamageModal/AreaHitTabs';
 import AreaDamageTabs from '../DamageModal/AreaDamageTabs';
 
 const DamageModal = (props) => {
-  const { showModal, setShowModal, source, opacity } = props;
+  const { showModal, setShowModal, hitTables, bomber } = props;
 
   const handleOk = () => {
     setShowModal(false);
@@ -22,10 +22,10 @@ const DamageModal = (props) => {
       width={1200}
       style={{ textAlign: 'center' }}>
       <div><p style={{ fontSize: 19, fontWeight: 600 }}>Select and Roll for Area Hit</p></div>
-      <AreaHitTabs />
+      <AreaHitTabs tables={hitTables?.find(t => t.id === bomber).areaHitTables} />
       <Divider />
       <div><p style={{ fontSize: 19, fontWeight: 600 }}>Select and Roll for Damage to Area</p></div>
-      <AreaDamageTabs />
+      <AreaDamageTabs tables={hitTables?.find(t => t.id === bomber).areaDamageTables} />
     </Modal>
   </>
 }

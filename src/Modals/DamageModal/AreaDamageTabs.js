@@ -1,57 +1,59 @@
 import React, { useState } from 'react';
 import { Tabs } from 'antd';
+import HitAndDamage from './HitAndDamage';
+
 // import "antd/dist/antd.css";
 
 const { TabPane } = Tabs;
 
-const AreaDamageTabs = () => {
+const AreaDamageTabs = ({tables}) => {
   const [activeKey, setActiveKey] = useState('gamePage');
 
   const items = [
     {
       label: 'Nose',
       key: 'nose',
-      children: <div>Nose</div>
+      children: <HitAndDamage table={tables[0]} /> //<div>Nose</div>
     },
     {
       label: 'Pilot Compartment',
       key: 'pilotCompartment',
-      children: <div>Pilot Compartment</div>
+      children: <HitAndDamage table={tables[1]} /> //<div>Pilot Compartment</div>
     },
     {
       label: 'Bomb Bay',
       key: 'bombBay',
-      children: <div>Bomb Bay</div>
+      children: <HitAndDamage table={tables[2]} /> //<div>Bomb Bay</div>
     },
     {
       label: 'Radio Room',
       key: 'radioRoom',
-      children: <div>Radio Room</div>
+      children: <HitAndDamage table={tables[3]} /> //<div>Radio Room</div>
     },
     {
       label: 'Waist',
       key: 'waist',
-      children: <div>Nose</div>
+      children: <HitAndDamage table={tables[4]} /> //<div>Nose</div>
     },
     {
       label: 'Tail Section',
       key: 'tailSection',
-      children: <div>Tail Section</div>
+      children: <HitAndDamage table={tables[5]} /> //<div>Tail Section</div>
     },
     {
       label: 'Wings',
       key: 'wings',
-      children: <div>Wings</div>
+      children: <HitAndDamage table={tables[6]} /> //<div>Wings</div>
     },
     {
       label: 'Instruments',
       key: 'instruments',
-      children: <div>Instruments</div>
+      children: <HitAndDamage table={tables[7]} /> //<div>Instruments</div>
     },
     {
       label: 'Crew Wound',
       key: 'crewWound',
-      children: <div>Crew Wound</div>
+      children: <HitAndDamage table={tables[8]} /> //<div>Crew Wound</div>
     },
   ]
 
