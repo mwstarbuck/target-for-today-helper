@@ -13,7 +13,6 @@ const TablesReference = () => {
 
 
   const setModal = (table) => {
-    console.log(table);
     const displayTable = {
       title: table.table,
       diceType: table.diceType,

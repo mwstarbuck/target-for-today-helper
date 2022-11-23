@@ -60,7 +60,7 @@ const GamePage = () => {
     },
     {
       zone: 5,
-      targetZone: false,
+      targetZone: true,
       drm: '0',
       location: 'F'
     }]);

@@ -1,6 +1,13 @@
 import React, { useContext } from 'react';
 import GameContext from './GameContext';
-import { COMBAT_PROCEDURE, PRE_MISSION_STEPS, TAKEOFF_PROCEDURE, ZONES_PROCEDURE } from '../Data/GameSteps';
+import {
+  COMBAT_PROCEDURE,
+  PRE_MISSION_STEPS,
+  TAKEOFF_PROCEDURE,
+  ZONES_PROCEDURE,
+  TARGET_ZONE_PROCEDURE,
+  LANDING_PROCEDURE
+} from '../Data/GameSteps';
 import Card from './Card';
 
 const PreMissionInfo = (props) => {
@@ -21,8 +28,12 @@ const PreMissionInfo = (props) => {
         return TAKEOFF_PROCEDURE.find(s => s.id === step);
       case step <= 24:
         return ZONES_PROCEDURE.find(s => s.id === step);
-      case step <= 45:
+      case step <= 44:
         return COMBAT_PROCEDURE.find(s => s.id === step);
+      case step <= 55:
+        return TARGET_ZONE_PROCEDURE.find(s => s.id === step);
+      case step <= 56:
+        return LANDING_PROCEDURE.find(s => s.id === step);
       default:
         break;
     }
@@ -84,7 +95,7 @@ const PreMissionInfo = (props) => {
         inputRequired={ctx?.gameStep?.inputRequired}
         updateCombat={ctx?.gameStep?.updateCombat}
         hitTables={ctx?.gameStep?.hitTables}
-        />
+      />
     </div>
   </>
 }

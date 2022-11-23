@@ -52,7 +52,6 @@ const ZonesModal = (props) => {
     zonesData[i.name].drm = value;
     if (i.name + 1 == zones) {
       zonesData[i.name].targetZone = true;
-      console.log(zonesData);
     }
   }
 
@@ -66,7 +65,6 @@ const ZonesModal = (props) => {
             key={`Zone:${i + 1} DRM`}
             options={drm}
             name={i}
-            // defaultInputValue={'N/A'}
             onChange={(e, i) => onInfoSelect(e, i)}
           />
         </div>
@@ -75,7 +73,6 @@ const ZonesModal = (props) => {
           <Select
             key={`Zone:${i + 1} Loaction`}
             options={location}
-            // defaultInputValue={ctx.campaign.base === '8th Airforce (England)' ? 'E' : 'I'}
             onChange={(e) => zonesData[i].location = e.value} />
         </div>
       </div>);
