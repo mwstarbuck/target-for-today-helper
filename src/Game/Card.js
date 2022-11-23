@@ -46,6 +46,7 @@ const Card = (props) => {
   const newAttackAngles = 30;
   const startBombingProcedure = 45;
   const bombRun = 50;
+  const startLandingProcedure = 57;
 
   const selectRef = useRef();
 
@@ -291,6 +292,22 @@ const Card = (props) => {
         })
       }
       break;
+    case 'tableModalYesNo':
+      if (modalTableDependency) {
+        getVariableTable(modalTable, modalTableDependency, modalTableSrc)
+      }
+      else {
+        modalTable.forEach(t => {
+          modalTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+      break;
 
     default:
       break;
@@ -502,6 +519,7 @@ const Card = (props) => {
           break;
         case 'backToCombat':
           ctx.setStep(startCombatProcedure);
+          ctx.setResistance(null);
           setAdvance(false);
           break;
         case 'headForHome':
@@ -512,7 +530,7 @@ const Card = (props) => {
           const resistance = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance;
           if (resistance === 'none') {
             const targetZone = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).targetZone;
-            if (targetZone) {
+            if (targetZone && ctx.outbound) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }
@@ -529,8 +547,14 @@ const Card = (props) => {
         case 'waves':
           console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
+            if (ctx.targetZone === ctx.currentZone) {
+              ctx.setStep(startBombingProcedure);
+              setAdvance(false);
+            }
+            else{
             ctx.setStep(zoneMove);
             setAdvance(false);
+            }
           }
           else if (ctx.waveCount === 'done') {
             const targetZone = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).targetZone;
@@ -575,17 +599,20 @@ const Card = (props) => {
           const outbound = ctx.outbound;
           switch (campaign) {
             case 1:
-              if (zone === 6 && outbound) {
+              if (zone === 6 && outbound) 
                 ctx.setStep(ctx.step + 1);
-              }
+              else if (zone === 1 && !outbound) 
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
               setAdvance(false);
               break;
             case 2:
-              if ((zone === 6 || zone === 11) && outbound === 'outbound')
+              if ((zone === 6 || zone === 11) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -594,6 +621,8 @@ const Card = (props) => {
             case 3:
               if ((zone === 6 || zone === 11 || zone === 12) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -602,6 +631,8 @@ const Card = (props) => {
             case 4:
               if ((zone === 8 || zone === 10 || zone === 13) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -610,6 +641,8 @@ const Card = (props) => {
             case 5:
               if ((zone === 8 || zone === 10) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -618,6 +651,8 @@ const Card = (props) => {
             case 6:
               if ((zone === 6 || zone === 11) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 

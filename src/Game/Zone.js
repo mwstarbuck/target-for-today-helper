@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, createContext } from 'react';
 import { Row, Col, Radio, Checkbox, Input } from 'antd';
 import GameContext from './GameContext';
 
@@ -14,13 +14,20 @@ const Zone = () => {
   const [formation, setFormation] = useState(null);
 
   useEffect(() => {
-    if (ctx.outbound) {
+    if (ctx.currentZone === ctx.targetZone && !ctx.outbound) { 
+      setWeatherValue(ctx.weather);
+      setContrails(ctx.contrails);
+      setResistance(null);
+      setWaves(null);
+    }
+    else {
       setWeatherValue(ctx.weather);
       setContrails(ctx.contrails);
       setResistance(ctx.resistance);
       setWaves(ctx.waveTotal);
-    }
-  })
+    } 
+  },[ctx.currentZone, ctx.outbound])
+
   const onWeatherChange = (e) => {
     const value = e.target.value
     setWeatherValue(value);

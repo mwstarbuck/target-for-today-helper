@@ -72,6 +72,7 @@ const GamePage = () => {
         break;
       }
     }
+    ctx.setTargetZone(5);
     ctx.setEscort('fair');
     ctx.setOutbound(true);
     ctx.setStep(17);

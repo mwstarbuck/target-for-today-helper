@@ -78,8 +78,8 @@ const ZonesModal = (props) => {
       </div>);
   }
   const handleOk = () => {
-
     setZonesInfo(zonesData);
+    ctx.setTargetZone(zonesData[zonesData.length - 1].zone);
     setShowZoneModal(false);
   };
   const handleCancel = () => {
