@@ -60,7 +60,7 @@ const GamePage = () => {
     },
     {
       zone: 5,
-      targetZone: false,
+      targetZone: true,
       drm: '0',
       location: 'F'
     }]);
@@ -72,6 +72,7 @@ const GamePage = () => {
         break;
       }
     }
+    ctx.setTargetZone(5);
     ctx.setEscort('fair');
     ctx.setOutbound(true);
     ctx.setStep(17);

@@ -18,6 +18,7 @@ export const GameContextProvider = ({ children }) => {
   const [zones, setZones] = useState();
   const [zonesInfo, setZonesInfo] = useState(null);
   const [currentZone, setCurrentZone] = useState(1);
+  const [targetZone, setTargetZone] = useState(null);
   const [outbound, setOutbound] = useState(true);
   const [waveTotal, setWaveTotal] = useState(0);
   const [waveCount, setWaveCount] = useState(0);
@@ -57,22 +58,17 @@ export const GameContextProvider = ({ children }) => {
       setBomberNumber,
       zones,
       setZones,
-      zonesInfo,
-      setZonesInfo,
-      currentZone,
-      setCurrentZone,
-      outbound,
-      setOutbound,
-      waveTotal, 
-      setWaveTotal,
-      waveCount, 
-      setWaveCount,
-      round, 
-      setRound,
+      zonesInfo, setZonesInfo,
+      currentZone, setCurrentZone,
+      targetZone, setTargetZone,
+      outbound,setOutbound,
+      waveTotal, setWaveTotal,
+      waveCount, setWaveCount,
+      round, setRound,
       escort, setEscort,
       weather, setWeather,
       contrails, setContrails,
-      resistance, setResistance
+      resistance, setResistance,
     }}
     >
       {children}

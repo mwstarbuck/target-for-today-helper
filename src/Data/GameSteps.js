@@ -278,23 +278,16 @@ export const ZONES_PROCEDURE = [
     heading: 'Movement to Next Zone',
     instruction: 'Click to move to next zone. Move your bomber on the tracker as well.',
     reference: 'Section 4.1',
-    // additionalInfo: [],
     hasAction: true,
     actionType: 'click',
     action: 'zoneMovement',
     options: null,
     actionText: 'Move to next zone',
-    // diceType: 'd6-simple',
-    // maxValue: 6,
-    // table: 'table_2_9',
     setter: { setterA: 'setCurrentZone' },
     contingencyStep: false,
     contingencyValue: 'outbound',
     nextCardTest: true,
     cardTestName: 'rollResistance',
-    // contingentUpon: 'B-24J'
-    // action: 'roll',
-    // actionText: ''
   },
   //THis card only shows for zones it needs to rolled in
   {
@@ -314,40 +307,20 @@ export const ZONES_PROCEDURE = [
     cardTable: [{ table: '2-13-1', diceType: '1D10', title: 'Campaign 1 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-2', diceType: '1D10', title: 'Campaign 2 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-3', diceType: '1D10', title: 'Campaign 3 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-4', diceType: '1D10', title: 'Campaign 4 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-5', diceType: '1D10', title: 'Campaign 5 Table 2-13 Fighter Escort Level', note: '2-13-note' }, { table: '2-13-6', diceType: '1D10', title: 'Campaign 6 Table 2-13 Fighter Escort Level', note: '2-13-note' }],
     inputRequired: 'escort'
   },
-  // {
-  //   id: 19,
-  //   section: 'Movement in the Zones',
-  //   heading: 'Reminders',
-  //   subHeading: 'Set Variables reminder',
-  //   instruction: 'Please be sure to set the escort level for the current campaign specific zone range.',
-  //   // reference: 'Table 2-13',
-  //   additionalInfo: null,
-  //   hasAction: true,
-  //   actionType: 'none',
-  //   // actionType: 'tableForCard',
-  //   // cardTableDependency: 'campaign',
-  //   modalTableDependency: null,
-  //   //tableImageDependency: 'campaign',
-  //   skipBack: 2
-  // },
   {
     id: 19,
     section: 'Movement in the Zones',
     heading: 'Weather in the Zone',
     instruction: 'Roll on Table 4-1 and select the result in the zone section',
     reference: 'Table 4-1 (1D10) & Table 4-1A if 100% cloud cover is rolled on table 4-1 and bomber is over Alps',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
     actionType: 'tableModal',
-    // tableImageDependency: 'none',
     modalTableDependency: null,
     modalTable: [{ table: '4-1', diceType: '1D10', title: '4-1 Weather in Zone', note: '4-1-note' }, { table: '4-1A', diceType: '1D10', title: '4-1A Weather Over Alps', note: '4-1A-note' },],
     actionText: 'See Table 4-1',
     diceType: '1D10',
     skipBack: 2,
     inputRequired: 'weather'
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 20,
@@ -355,13 +328,11 @@ export const ZONES_PROCEDURE = [
     heading: 'Check for Mission Recall',
     instruction: 'Roll on Table 4-2 if weather in zone is 100% cloud cover',
     reference: 'Section 4.3 Table 4-2 (1D10 + 1D10)',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
     actionType: 'tableForCard',
     // tableImageDependency: 'none',
     cardTableDependency: null,
     tableNotes: '4-2-note',
-    // tableImage: [{ table: '4-2', diceType: '1D10 + 1D10', title: '4-2 Mission Recall', note: '4-2-note' }],
     cardTable: [{ table: '4-2', diceType: '1D10 + 1D10', title: '4-2 Mission Recall', note: '4-2-note' }],
     actionText: 'See Table 4-2',
     diceType: '1D10 + 1D10',
@@ -376,21 +347,17 @@ export const ZONES_PROCEDURE = [
     heading: 'Check for Mechanial Failure',
     instruction: 'Roll on Table 4-3A (1D10 + 1D10). If result is mechanical failure, roll on table 4-3B or 4-3C',
     reference: 'Table 4-3A (1D10 + 1D10)',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
     actionType: 'cardModalCombo',
     tableImageDependency: null,
     cardTableDependency: null,
     modalTableDependency: 'aircraft',
-    // tableImage: [{ table: '4-3A', diceType: '1D10', title: '4-3A Mechanical Failure' }, { table: '4-3B', diceType: '1D10', title: '4-3B Failed System' },],
     cardTable: [{ table: '4-3A', diceType: '1D10', title: '4-3A Mechanical Failure', note: '4-4-note' }],
     modalTable: [{ table: '4-3B', diceType: '1D10', title: '4-3B Failed System', note: '4-4-note', match: ['B-17F', 'B-17G', 'YB-40'] }, { table: '4-3C', diceType: '1D10', title: '4-3C Failed System', note: '4-4-note', match: ['B-24D', 'B-24J'] }],
     actionText: 'See Table 4-3',
     diceType: '1D10',
     skipBack: 2,
     inputRequired: 'none'
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 22,
@@ -398,7 +365,6 @@ export const ZONES_PROCEDURE = [
     heading: 'Contrails',
     instruction: 'Roll 1D10 on Table 4-4',
     reference: 'Table 4-4 (1D10)',
-    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
     hasAction: false,
     actionType: 'tableForCard',
     tableImageDependency: null,
@@ -408,8 +374,6 @@ export const ZONES_PROCEDURE = [
     actionText: 'See Table 4-1',
     diceType: '1D10',
     inputRequired: 'contrails'
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 23,
@@ -438,18 +402,11 @@ export const ZONES_PROCEDURE = [
     actionType: 'none',
     tableImageDependency: null,
     modalTableDependency: null,
-    // cardTable: [{ table: '4-8', diceType: '1D6', title: '4-8 Rejoin Formation', note: '4-8-note' }],
-    // actionText: 'See Table 4-8',
-    // diceType: '1D10',
     nextCardTest: true,
     cardTestName: 'goCombatTest',
-    // contingencyStep: true,
     contingencyValue: 'drm',
     contingentUpon: 'N/A',
     inputRequired: 'none'
-
-    // action: 'roll',
-    // actionText: ''
   },
 ]
 
@@ -492,10 +449,6 @@ export const COMBAT_PROCEDURE = [
     // actionText: 'See Table 4-1',
     diceType: '1D10',
     inputRequired: 'waves'
-    // nextCardTest: true,
-    // cardTestName: 'waves'
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 27,
@@ -559,7 +512,7 @@ export const COMBAT_PROCEDURE = [
     heading: 'Random Event!',
     instruction: 'Roll 2D6 on Table 5-3D',
     reference: 'Table 5-3D, rule section 5.3.1, pg. 15.',
-    additionalInfo: ['Events rolled on this table take place in the next zone.', 'After determining event, move to the next zone.'],
+    additionalInfo: ['Events rolled on this table take place in the next zone.', 'After determining event, make a note of the event and apply the result in the next zone.'],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -596,7 +549,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'none'
     // action: 'roll',
     // actionText: ''
-  }, 
+  },
   {
     id: 31,
     section: 'Combat',
@@ -720,7 +673,7 @@ export const COMBAT_PROCEDURE = [
     heading: 'German Offensive Fire',
     instruction: 'Resolve possible hits on bomber.',
     reference: 'Rules section 5.6 Table 5-8',
-    additionalInfo: ['', '', '', '', ''],
+    additionalInfo: ['Roll for German offensive fire for for each elligible fighter', 'If a hit is scored, move to next steps to check for shell hits, hit effects, damage , and collision', 'Repeat for each elligible fighter'],
     hasAction: true,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -745,17 +698,12 @@ export const COMBAT_PROCEDURE = [
     actionType: 'yesOrNo',
     tableImageDependency: null,
     modalTableDependency: null,
-    // modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }, { table: '5-7A', diceType: '2D6', title: '5-7A Fighter Damage for FCA and FBOA hits (optional)', note: '5-7A-note' }, { table: '5-7B', diceType: '2D6', title: '5-7B Hit Fighter Damage for Destroyed hits (optional)', note: '5-7B-note' }],
-    // actionText: 'See Table 4-1',
     diceType: '1D10',
     nextCardTest: true,
     cardTestName: 'hitsOnBomber',
     radioQuestion: 'Successful hits on Bomber?',
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
     inputRequired: 'radio',
-    inputRequired: 'radio',
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 39,
@@ -776,7 +724,7 @@ export const COMBAT_PROCEDURE = [
   {
     id: 40,
     section: 'Combat',
-    heading: 'Resolve Bomber Hit Effect',
+    heading: 'Resolve Bomber Hit Multiplier Effect',
     instruction: 'Roll on hit effect multiplier table.',
     reference: 'Rules section 5.6 Table 5-11',
     additionalInfo: ['', '', '', '', ''],
@@ -789,30 +737,228 @@ export const COMBAT_PROCEDURE = [
     diceType: '1D6',
     inputRequired: 'none',
   },
-  //yes or no for actual damage move on to damage area tables?
   {
     id: 41,
     section: 'Combat',
     heading: 'Resolve Bomber Damage',
     instruction: 'Enter answer to question.',
     reference: 'Rules section 5.7',
-    // additionalInfo: ['', '', '', '', ''],
+    additionalInfo: ['', '', '', '', ''],
     hasAction: true,
     actionType: 'damageModal',
     tableImageDependency: null,
     modalTableDependency: null,
-    modalTable: [{ table: '5-8', diceType: '2D6', title: '5-10', note: '5-10-note' },],
-    actionText: 'See Table 5-8',
-    diceType: '2D6',
+    hitTables: [{
+      id: 'B-17F', areaHitTables: [
+        {
+          table: '5-12-B17-front',
+          diceType: '2D6',
+          title: '5-12 (B-17F) Attack from 10:30 / 12 / 1:30 O\'clock',
+          note: '5-12-B17-note'
+        },
+        {
+          table: '5-12-B17-side',
+          diceType: '2D6',
+          title: '5-12 (B-17F) Attack from 9 / 3 O\'clock',
+          note: '5-12-B17-note'
+        },
+        {
+          table: '5-12-B17-tail',
+          diceType: '2D6',
+          title: '5-12 (B-17F) Attack From: 6 O\'clock',
+          note: '5-12-B17-note'
+        },
+        {
+          table: '5-12-B17-vert',
+          diceType: '2D6',
+          title: '5-12 (B-17F) Vertical Dive and Climb Attacks',
+          note: '5-12-B17-vert-note'
+        },
+      ],
+      areaDamageTables: [
+        {
+          table: '5-13A-1',
+          diceType: '2D6',
+          title: '5-13A-1 NOSE (B-17F)',
+          note: '5-13A-1-note'
+        },
+        {
+          table: '5-13A-2',
+          diceType: '2D6',
+          title: '5-13A-2 PILOT COMPARTMENT (B-17F)',
+          note: '5-13A-2-note'
+        },
+        {
+          table: '5-13A-3',
+          diceType: '2D6',
+          title: '5-13A-3 BOMB BAY (B-17F)',
+          note: '5-13A-3-note'
+        },
+        {
+          table: '5-13A-4',
+          diceType: '2D6',
+          title: '5-13A-4 RADIO ROOM (B-17F)',
+          note: '5-13A-4-note'
+        },
+        {
+          table: '5-13A-5',
+          diceType: '2D6',
+          title: '5-13A-5 WAIST (B-17F)',
+          note: '5-13A-5-note'
+        },
+        {
+          table: '5-13A-6',
+          diceType: '2D6',
+          title: '5-13A-6 TAIL SECTION (B-17F)',
+          note: '5-13A-6-note'
+        },
+        {
+          table: '5-13A-7',
+          diceType: '2D6',
+          title: '5-13A-7 WINGS (B-17F)',
+          note: '5-13A-7-note'
+        },
+        {
+          table: '5-13A-8',
+          diceType: '2D6',
+          title: '5-13A-8 INSTRUMENTS (B-17F)',
+          note: '5-13A-8-note'
+        },
+        {
+          table: '5-17',
+          diceType: '1D6',
+          title: '5-17 CREW (B-17F)',
+          note: '5-17-note'
+        },
+      ]
+    },
+    {
+      id: 'B-17G', areaHitTables: [
+        {
+          table: '5-12-B17-front',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack from 10:30 / 12 / 1:30 O\'clock',
+          note: '5-12-B17-front-note'
+        },
+        {
+          table: '5-12-B17-side',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack from 9 / 3 O\'clock',
+          note: '5-12_9-3-note'
+        },
+        {
+          table: '5-12-B17-tail',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Attack From: 6 O\'clock',
+          note: '5-12_6-note'
+        },
+        {
+          table: '5-12-B17-vert',
+          diceType: '2D6',
+          title: '5-12 (B-17G) Vertical Dive and Climb Attacks',
+          note: '5-12_VD-VC-note'
+        },
+      ],
+      areaDamageTables: [
+        {
+          table: '5-13A-1',
+          diceType: '2D6',
+          title: '5-13A-1 NOSE (B-17G)',
+          note: '5-13A-1-note'
+        },
+        {
+          table: '5-13A-2',
+          diceType: '2D6',
+          title: '5-13A-2 PILOT COMPARTMENT (B-17G)',
+          note: '5-13A-2-note'
+        },
+        {
+          table: '5-13A-3',
+          diceType: '2D6',
+          title: '5-13A-3 BOMB BAY (B-17G)',
+          note: '5-13A-3-note'
+        },
+        {
+          table: '5-13A-4',
+          diceType: '2D6',
+          title: '5-13A-4 RADIO ROOM (B-17G)',
+          note: '5-13A-4-note'
+        },
+        {
+          table: '5-13A-5',
+          diceType: '2D6',
+          title: '5-13A-5 WAIST (B-17G)',
+          note: '5-13A-5-note'
+        },
+        {
+          table: '5-13A-6',
+          diceType: '2D6',
+          title: '5-13A-6 TAIL SECTION (B-17G)',
+          note: '5-13A-6-note'
+        },
+        {
+          table: '5-13A-7',
+          diceType: '2D6',
+          title: '5-13A-7 WINGS (B-17G)',
+          note: '5-13A-7-note'
+        },
+        {
+          table: '5-13A-8',
+          diceType: '2D6',
+          title: '5-13A-8 INSTRUMENTS (B-17G)',
+          note: '5-13A-8-note'
+        },
+        {
+          table: '5-17',
+          diceType: '1D6',
+          title: '5-17 CREW (B-17G)',
+          note: '5-17-note'
+        },
+      ]
+    },],
+    actionText: 'Roll Damage',
+    // diceType: '2D6',
     inputRequired: 'none',
-    nextCardTest: true,
-    cardTestName: 'moreHits',
-    radioQuestion: 'Need to resolve more hits to bomber?',
-    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
-    inputRequired: 'radio'
+    // skipBack: 1
   },
   {
     id: 42,
+    section: 'Combat',
+    heading: 'German Fighter Collision',
+    instruction: 'Roll on Table 5-16',
+    reference: 'Table 5-16 (2D6)',
+    additionalInfo: ['Roll on Table 5-16 to chrck for possible collision.',],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: '5-16-note' }],
+    actionText: 'See Table 6-16',
+    diceType: '2D6',
+    // nextCardTest: true,
+    // cardTestName: 'resistance',
+    inputRequired: 'none'
+  },
+  {
+    id: 43,
+    section: 'Combat',
+    heading: 'Continue German Offensive Fire?',
+    instruction: 'Finished with German offensive fire?',
+    reference: 'see section ?',
+    // additionalInfo: ['', '', '', '', ''],
+    hasAction: false,
+    actionType: 'yesOrNo',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    // diceType: '1D10',
+    nextCardTest: true,
+    cardTestName: 'continueGOF',
+    radioQuestion: 'Continue German offensive fire procedure for another elligible fighter?',
+    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    inputRequired: 'radio',
+  },
+  {
+    id: 44,
     section: 'Combat',
     heading: 'Abort Or Bail Out?',
     instruction: 'Confirm answer below',
@@ -824,9 +970,249 @@ export const COMBAT_PROCEDURE = [
     modalTableDependency: null,
     // diceType: '1D10',
     nextCardTest: true,
-    cardTestName: 'abortOrBail',
+    cardTestName: 'abortBailOrContinue',
     radioQuestion: 'Abort mission or bail out??',
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
     inputRequired: 'radio'
+  },
+]
+
+export const TARGET_ZONE_PROCEDURE = [
+  {
+    id: 45,
+    section: 'Target Zone',
+    heading: 'Check Target Visibility',
+    instruction: 'Roll on Table 6-1 and select the result in the zone section',
+    reference: 'Table 6-1 (1D6)',
+    // additionalInfo: ['If roll is 1, roll on Table 3-3', 'If roll is 2 and weather is poor over base there is a mid-air formation accident and you become formation lead (see section 4.7), otherwise takeoff is ok'],
+    hasAction: false,
+    actionType: 'tableModal',
+    // tableImageDependency: 'none',
+    modalTableDependency: null,
+    modalTable: [{ table: '6-1', diceType: '1D6', title: '6-1 Target Visibility', note: '6-1-note' }],
+    actionText: 'See Table 6-1',
+    diceType: '1D6',
+    // skipBack: 2,
+    inputRequired: 'none'
+    // action: 'roll',
+    // actionText: ''
+  },
+  {
+    id: 46,
+    section: 'Target Zone',
+    heading: 'Check For Flak Over Target',
+    instruction: 'Roll on Table 6-2',
+    reference: 'Table 6-2 (1D6)',
+    hasAction: false,
+    actionType: 'tableModalYesNo',
+    modalTableDependency: null,
+    modalTable: [{ table: '6-2', diceType: '1D6', title: '6-2 Flak Over Target', note: '6-2-note' }],
+    actionText: 'See Table 6-2',
+    diceType: '1D6',
+    // skipBack: 2,
+    nextCardTest: true,
+    cardTestName: 'isFlak',
+    radioQuestion: 'Is there flak in the target zone?',
+    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    inputRequired: 'radio',
+  },
+  {
+    id: 47,
+    section: 'Target Zone',
+    heading: 'Check For Flak To Hit Bomber',
+    instruction: 'Roll 3 times on Table 6-3',
+    reference: 'Table 6-3 (2D6)',
+    additionalInfo: ['Roll 3 times on table 6-3', 'For each hit rolled on table 6-3, roll once on table 6-4 of next step to determine area hit.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '6-3', diceType: '1D6', title: '6-3 Flak To Hit The Bomber', note: '6-3-note' }],
+    actionText: 'See Table 6-2',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 48,
+    section: 'Target Zone',
+    heading: 'Roll for Flak Shell Hits',
+    instruction: 'For each hit on table 6-3, roll once on table 6-4.',
+    reference: 'Table 6-4 (2D6)',
+    additionalInfo: ['For each hit on table 6-3, roll once on table 6-4.', 'Record the number of hits for rolling on table 6-4.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '6-4', diceType: '2D6', title: '6-4 Flak Shell Hits', note: '6-4-note' }],
+    actionText: 'See Table 6-4',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 49,
+    section: 'Target Zone',
+    heading: 'Roll for Area Affected by Flak',
+    instruction: 'Roll once on Table 6-5 for each shell hit on the bomber.',
+    reference: 'Table 6-5 (2D6)',
+    additionalInfo: ['Roll once on Table 6-5 for each shell hit on the bomber.'],
+    hasAction: false,
+    actionType: 'tableModal',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    modalTable: [{ table: '6-5', diceType: '2D6', title: '6-5 Area Affected By Flak', note: '6-5-note' }],
+    actionText: 'See Table 6-5',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 50,
+    section: 'Target Zone',
+    heading: 'The Bomb Run',
+    instruction: 'Roll on Table 6-6 to determine if bombs are "On Target".',
+    reference: 'Table 6-6 (2D6)',
+    additionalInfo: ['Roll on Table 6-6 and record result.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '6-6', diceType: '2D6', title: '6-6 The Bomb Run', note: '6-6-note' }],
+    actionText: 'See Table 6-6',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 51,
+    section: 'Target Zone',
+    heading: 'Bombing Accuracy',
+    instruction: 'Roll on Table 6-7 to determine the bombing accuracy".',
+    reference: 'Table 6-6 (2D6)',
+    additionalInfo: ['Roll on Table 6-7 and record the result.'],
+    hasAction: false,
+    actionType: 'tableModal',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    modalTable: [{ table: '6-7', diceType: '2D6', title: '6-7 Bombing Accuracy', note: '6-7-note' }],
+    actionText: 'See Table 6-7',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 52,
+    section: 'Target Zone',
+    heading: 'Head For Home',
+    instruction: 'Click on the Next Step button below to have the pilot head for the base.',
+    reference: 'Rules Section 6.6',
+    hasAction: false,
+    actionType: 'none',
+    nextCardTest: true,
+    cardTestName: 'headForHome',
+    options: null,
+    tableImageDependency: null,
+    modalTableDependency: null,
+    inputRequired: 'none',
+  },
+  {
+    id: 53,
+    section: 'Target Zone',
+    heading: '6-2 Flak Over Target On Return',
+    instruction: 'Roll on Table 6-2',
+    reference: 'Table 6-2 (1D6)',
+    hasAction: false,
+    actionType: 'tableModalYesNo',
+    modalTableDependency: null,
+    modalTable: [{ table: '6-2', diceType: '1D6', title: '6-2 Flak Over Target', note: '6-2-note' }],
+    actionText: 'See Table 6-2',
+    diceType: '1D6',
+    // skipBack: 2,
+    nextCardTest: true,
+    cardTestName: 'isFlak',
+    radioQuestion: 'Is there flak in the target zone?',
+    radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    inputRequired: 'radio',
+  },
+  {
+    id: 54,
+    section: 'Target Zone',
+    heading: 'Check For Flak To Hit Bomber',
+    instruction: 'Roll 3 times on Table 6-3',
+    reference: 'Table 6-3 (2D6)',
+    additionalInfo: ['Roll 3 times on table 6-3', 'For each hit rolled on table 6-3, roll once on table 6-4 of next step to determine area hit.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '6-3', diceType: '1D6', title: '6-3 Flak To Hit The Bomber', note: '6-3-note' }],
+    actionText: 'See Table 6-2',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 55,
+    section: 'Target Zone',
+    heading: 'Roll for Flak Shell Hits',
+    instruction: 'For each hit on table 6-3, roll once on table 6-4.',
+    reference: 'Table 6-4 (2D6)',
+    additionalInfo: ['For each hit on table 6-3, roll once on table 6-4.', 'Record the number of hits for rolling on table 6-4.'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    cardTable: [{ table: '6-4', diceType: '2D6', title: '6-4 Flak Shell Hits', note: '6-4-note' }],
+    actionText: 'See Table 6-4',
+    diceType: '2D6',
+    inputRequired: 'none',
+  },
+  {
+    id: 56,
+    section: 'Target Zone',
+    heading: 'Roll for Area Affected by Flak',
+    instruction: 'Roll once on Table 6-5 for each shell hit on the bomber.',
+    reference: 'Table 6-5 (2D6)',
+    additionalInfo: ['Roll once on Table 6-5 for each shell hit on the bomber.'],
+    hasAction: false,
+    actionType: 'tableModal',
+    tableImageDependency: null,
+    modalTableDependency: null,
+    modalTable: [{ table: '6-5', diceType: '2D6', title: '6-5 Area Affected by Flak', note: '6-5-note' }],
+    actionText: 'See Table 6-5',
+    diceType: '2D6',
+    inputRequired: 'none',
+    nextCardTest: true,
+    cardTestName: 'backToCombat',
+  },
+]
+
+export const LANDING_PROCEDURE = [
+  {
+    id: 57,
+    section: 'Landing Procedure',
+    heading: 'Landing - Weather Over Base Check ',
+    instruction: 'Roll 1D10 on Table 3-1 to determine weather over base for landing',
+    reference: 'Table 3-1 (1D10)',
+    additionalInfo: ['If based in England, -2 modifier if mission flown in Jan, Feb or Dec and -1 modifier if mission flown in Mar, Apr, Oct or Nov', 'If based in Italy, +1 modifier if mission flown in May or Oct; +2 modifier if flown in Jun or Sep; +3 modifier if flown in Jul or Aug'],
+    hasAction: false,
+    actionType: 'tableForCard',
+    tableImageDependency: null,
+    cardTableDependency: null,
+    tableNotes: '3-1-note',
+    // tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
+    cardTable: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
+    inputRequired: 'none'
+  },
+  {
+    id: 58,
+    section: 'Landing Procedure',
+    heading: 'Landing at Base',
+    instruction: 'Roll 2D6 on Table 7-1 for Landing',
+    reference: 'Table 3-1 (1D10)',
+    additionalInfo: ['', ''],
+    hasAction: false,
+    actionType: 'tableModal',
+    tableImageDependency: null,
+    cardTableDependency: null,
+    tableNotes: '3-1-note',
+    tableImage: [],
+    modalTable: [{ table: '7-1', diceType: '2D6', title: 'Table 7-1 Landing On Land', note: '7-1-note' }],
+    inputRequired: 'none'
   },
 ]

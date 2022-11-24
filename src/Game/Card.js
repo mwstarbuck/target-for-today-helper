@@ -20,6 +20,9 @@ import SelectCard from './CardComponents/SelectCard';
 import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
+import DamageModal from '../Modals/DamageModal/DamageModal';
+// import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
+import GameStepUtilities from '../Utilities/StepMethods';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -30,6 +33,7 @@ const Card = (props) => {
   const [showMods, setShowMods] = useState(false);
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
+  const [showDamageModal, setShowDamageModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [elligibleFighters, setElligibleFighters] = useState('');
 
@@ -37,8 +41,12 @@ const Card = (props) => {
   const preMission = 1;
   const takeOff = 15;
   const zoneMove = 17;
-  const combat = 24
+  const startCombatProcedure = 25;
+  const combatSummary = 27;
   const newAttackAngles = 30;
+  const startBombingProcedure = 45;
+  const bombRun = 50;
+  const startLandingProcedure = 57;
 
   const selectRef = useRef();
 
@@ -145,7 +153,7 @@ const Card = (props) => {
         }
 
         return zMParams;
-        break;
+        break;    
       default:
         break;
     }
@@ -284,6 +292,22 @@ const Card = (props) => {
         })
       }
       break;
+    case 'tableModalYesNo':
+      if (modalTableDependency) {
+        getVariableTable(modalTable, modalTableDependency, modalTableSrc)
+      }
+      else {
+        modalTable.forEach(t => {
+          modalTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+      break;
 
     default:
       break;
@@ -293,11 +317,9 @@ const Card = (props) => {
       switch (messageType) {
         case 'fighterNumberTable':
           cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
-          console.log(cardMessage)
           break;
         case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
-          console.log(cardMessage)
           break;
         default:
           break;
@@ -316,6 +338,7 @@ const Card = (props) => {
     if (props.nextCardTest) {
       switch (props.cardTestName) {
         case 'radioResult':
+          // GameStepUtilities.radioResultStep(goToNextCard, ctx.setStep, ctx.step, setGoToNextCard, setAdvance, ctx.round)
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
             setGoToNextCard(null);
@@ -323,9 +346,9 @@ const Card = (props) => {
           }
           else {
             if (ctx.round === 1) {
-            ctx.setStep(ctx.step + 3); //skips new attack angles card
-            setGoToNextCard(null);
-            setAdvance(false);
+              ctx.setStep(ctx.step + 3); //skips new attack angles card
+              setGoToNextCard(null);
+              setAdvance(false);
             }
             else {
               ctx.setStep(ctx.step + 2); //skips new attack angles card
@@ -335,6 +358,7 @@ const Card = (props) => {
           }
           break;
         case 'survivingFighters':
+          // GameStepUtilities.survivingFightersStep(goToNextCard, ctx.setStep, ctx.step, ctx.setWaveCount, ctx.waveCount, ctx.waveTotal, ctx.setRound, setGoToNextCard, setAdvance, zoneMove, ctx.zonesInfo);
           if (goToNextCard) {
             ctx.setStep(ctx.step + 1);
             setGoToNextCard(null);
@@ -361,11 +385,30 @@ const Card = (props) => {
             }
           }
           break;
-        case 'abortOrBail':
+        case 'abortBailOrContinue':
           if (!goToNextCard) {
-            ctx.setStep(ctx.step + 1);
-            setGoToNextCard(null);
-            setAdvance(false);
+            if (ctx.round === 3) {
+              if (ctx.waveCount === ctx.waveTotal) {
+                ctx.setWaveCount('done');
+                ctx.setWaveTotal(null);
+                ctx.setStep(combatSummary);
+                setGoToNextCard(null);
+                setAdvance(false);
+              }
+              else {
+                ctx.setWaveCount(ctx.waveCount + 1);
+                ctx.setRound(1);
+                ctx.setStep(combatSummary);
+                setGoToNextCard(null);
+                setAdvance(false);
+              }
+            }
+            else {
+              ctx.setRound(ctx.round + 1)
+              ctx.setStep(combatSummary);
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
           }
           else {
             ctx.setOutbound(false);
@@ -373,6 +416,7 @@ const Card = (props) => {
             setAdvance(false);
             setGoToNextCard(null);
           }
+
           break;
         case 'hitsOnBomber':
           if (goToNextCard) {
@@ -382,7 +426,7 @@ const Card = (props) => {
           }
           else {
             if (ctx.waveCount === ctx.waveTotal) {
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
               ctx.setWaveCount('done');
               ctx.setWaveTotal(0);
               ctx.setRound(1);
@@ -392,7 +436,39 @@ const Card = (props) => {
             else {
               ctx.setWaveCount(ctx.waveCount + 1);
               ctx.setRound(1);
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
+              setGoToNextCard(null);
+              setAdvance(false);
+            }
+          }
+          break;
+        case 'continueGOF':
+          if (goToNextCard) {
+            ctx.setStep(37);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          else {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          break;
+        case 'isFlak':
+          if (goToNextCard) {
+            ctx.setStep(ctx.step + 1);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
+          else {
+            if (ctx.outbound) {
+            ctx.setStep(bombRun);
+            setGoToNextCard(null);
+            setAdvance(false);
+            }
+            else {
+              ctx.setStep(startCombatProcedure);
+              ctx.setResistance(null);
               setGoToNextCard(null);
               setAdvance(false);
             }
@@ -404,21 +480,21 @@ const Card = (props) => {
               if (ctx.waveCount === ctx.waveTotal) {
                 ctx.setWaveCount('done');
                 ctx.setWaveTotal(0);
-                ctx.setStep(27);
+                ctx.setStep(combatSummary);
                 setGoToNextCard(null);
                 setAdvance(false);
               }
               else {
                 ctx.setWaveCount(ctx.waveCount + 1);
                 ctx.setRound(1);
-                ctx.setStep(27);
+                ctx.setStep(combatSummary);
                 setGoToNextCard(null);
                 setAdvance(false);
               }
             }
             else {
               ctx.setRound(ctx.round + 1)
-              ctx.setStep(27);
+              ctx.setStep(combatSummary);
               setGoToNextCard(null);
               setAdvance(false);
             }
@@ -431,7 +507,6 @@ const Card = (props) => {
           break;
         case 'goCombatTest':
           const drm = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).drm;
-          console.log(drm);
           if (drm === 'N/A') {
             ctx.setStep(zoneMove)
             setAdvance(false);
@@ -442,11 +517,27 @@ const Card = (props) => {
             setAdvance(false);
           }
           break;
+        case 'backToCombat':
+          ctx.setStep(startCombatProcedure);
+          ctx.setResistance(null);
+          setAdvance(false);
+          break;
+        case 'headForHome':
+          ctx.setOutbound(false);
+          ctx.setStep(ctx.step + 1);
+          break;
         case 'resistance':
           const resistance = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).resistance;
           if (resistance === 'none') {
+            const targetZone = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).targetZone;
+            if (targetZone && ctx.outbound) {
+              ctx.setStep(startBombingProcedure);
+              setAdvance(false);
+            }
+            else {
             ctx.setStep(zoneMove);
             setAdvance(false);
+            }
           }
           else {
             ctx.setStep(ctx.step + 1);
@@ -454,19 +545,32 @@ const Card = (props) => {
           }
           break;
         case 'waves':
-          const waves = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).waves; //change to ctx.waveTotal
+          console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
+            if (ctx.targetZone === ctx.currentZone) {
+              ctx.setStep(startBombingProcedure);
+              setAdvance(false);
+            }
+            else{
             ctx.setStep(zoneMove);
             setAdvance(false);
+            }
           }
           else if (ctx.waveCount === 'done') {
-            ctx.setStep(zoneMove);
-            ctx.setWaveCount(0);
-            setAdvance(false);
+            const targetZone = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).targetZone;
+            if (targetZone) {
+              ctx.setStep(startBombingProcedure);
+              setAdvance(false);
+              ctx.setWaveCount(0);
+            }
+            else {
+              ctx.setStep(zoneMove);
+              ctx.setWaveCount(0);
+              setAdvance(false);
+            }
           }
           else if (ctx.round > 1) {
             ctx.setStep(newAttackAngles);
-            ctx.setWaveCount(0);
             setAdvance(false);
           }
           else {
@@ -486,8 +590,27 @@ const Card = (props) => {
           }
           break;
         case 'nextZone':
-          ctx.setStep(zoneMove);
-          setAdvance(false);
+          // ctx.setStep(zoneMove);
+          // setAdvance(false);
+          console.log('WC: ' + ctx.waveCount)
+          if (ctx.waveCount === ctx.waveTotal) {
+            ctx.setWaveCount('done');
+            ctx.setStep(27);
+            setAdvance(false);
+            setGoToNextCard(null);
+          }
+          else if (ctx.waveCount > ctx.waveTotal) {
+            ctx.setStep(zoneMove);
+            setAdvance(false);
+            setGoToNextCard(null);
+          }
+          else {
+            ctx.setWaveCount(ctx.waveCount + 1);
+            ctx.setRound(1);
+            ctx.setStep(27);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
           break;
         case 'rollResistance':
           const zone = ctx.currentZone;
@@ -495,17 +618,20 @@ const Card = (props) => {
           const outbound = ctx.outbound;
           switch (campaign) {
             case 1:
-              if (zone === 6 && outbound) {
+              if (zone === 6 && outbound) 
                 ctx.setStep(ctx.step + 1);
-              }
+              else if (zone === 1 && !outbound) 
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
               setAdvance(false);
               break;
             case 2:
-              if ((zone === 6 || zone === 11) && outbound === 'outbound')
+              if ((zone === 6 || zone === 11) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -514,6 +640,8 @@ const Card = (props) => {
             case 3:
               if ((zone === 6 || zone === 11 || zone === 12) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -522,6 +650,8 @@ const Card = (props) => {
             case 4:
               if ((zone === 8 || zone === 10 || zone === 13) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -530,6 +660,8 @@ const Card = (props) => {
             case 5:
               if ((zone === 8 || zone === 10) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -538,6 +670,8 @@ const Card = (props) => {
             case 6:
               if ((zone === 6 || zone === 11) && outbound)
                 ctx.setStep(ctx.step + 1);
+              else if (zone === 1 && !outbound)
+                ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
 
@@ -562,7 +696,7 @@ const Card = (props) => {
       if (ctx.step === 1) {
         ctx.setCampaign(null);
       }
-      if (ctx.gameStep.skipBack) {
+      if (ctx.gameStep?.skipBack) {
         ctx.setStep(ctx.step - ctx.gameStep.skipBack);
         if (props.setter) {
           for (const [key, value] of Object.entries(props.setter)) {
@@ -622,7 +756,6 @@ const Card = (props) => {
       switch (messageType) {
         case 'combatStatus':
           cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
-          console.log(cardMessage)
           break;
         default:
           break;
@@ -674,6 +807,7 @@ const Card = (props) => {
           onRadioChange={onRadioChange}
           goToNextCard={goToNextCard}
           radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion}
           lastStep={lastStep}
           nextStep={nextStep}
           advance={advance} />
@@ -740,13 +874,7 @@ const Card = (props) => {
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModal' && <>
-        <ModalCard setShowTableModal={setShowTableModal} actionText={props.actionText} />
-        {/* <button onClick={() => {
-          setShowTableModal(true);
-        }}
-          className='card__button'>
-          {props.actionText}
-        </button> */}
+        <ModalCard setShowModal={setShowTableModal} actionText={props.actionText} />
       </>
       }
       {!props.isIncrement && props.actionType === 'tableModalYesNo' && <>
@@ -766,6 +894,10 @@ const Card = (props) => {
         </button> */}
       </>
       }
+      {props.actionType === 'damageModal' && <>
+        <ModalCard setShowModal={setShowDamageModal} actionText={props.actionText} />
+      </>
+      }
       {(props.actionType === 'none' || props.actionType === 'tableForCard') &&
         <>
           {/* <div>
@@ -776,8 +908,8 @@ const Card = (props) => {
       }
       {!props.isIncrement && props.actionType === 'cardModalCombo' && <>
         <div style={{ alignItems: 'center' }}>
-          <Popover trigger='hover' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          <Popover trigger='hover' placement='left' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={cardTableSrc[0].table} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />
           </Popover>
         </div>
         <button onClick={() => {
@@ -809,6 +941,11 @@ const Card = (props) => {
       source={modalTableSrc}
       diceType={props.diceType}
     />
+    <DamageModal
+      showModal={showDamageModal}
+      setShowModal={setShowDamageModal}
+      bomber={ctx.bomber}
+      hitTables={props.hitTables} />
   </div>
 }
 
