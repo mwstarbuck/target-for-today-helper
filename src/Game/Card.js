@@ -590,8 +590,27 @@ const Card = (props) => {
           }
           break;
         case 'nextZone':
-          ctx.setStep(zoneMove);
-          setAdvance(false);
+          // ctx.setStep(zoneMove);
+          // setAdvance(false);
+          console.log('WC: ' + ctx.waveCount)
+          if (ctx.waveCount === ctx.waveTotal) {
+            ctx.setWaveCount('done');
+            ctx.setStep(27);
+            setAdvance(false);
+            setGoToNextCard(null);
+          }
+          else if (ctx.waveCount > ctx.waveTotal) {
+            ctx.setStep(zoneMove);
+            setAdvance(false);
+            setGoToNextCard(null);
+          }
+          else {
+            ctx.setWaveCount(ctx.waveCount + 1);
+            ctx.setRound(1);
+            ctx.setStep(27);
+            setGoToNextCard(null);
+            setAdvance(false);
+          }
           break;
         case 'rollResistance':
           const zone = ctx.currentZone;
@@ -889,8 +908,8 @@ const Card = (props) => {
       }
       {!props.isIncrement && props.actionType === 'cardModalCombo' && <>
         <div style={{ alignItems: 'center' }}>
-          <Popover trigger='hover' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
-            <img src={cardTableSrc[0].table} style={{ opacity: 0.6, paddingTop: 10, alignSelf: 'baseline' }} />
+          <Popover trigger='hover' placement='left' content={<img src={cardTableSrc[0].note} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />}>
+            <img src={cardTableSrc[0].table} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} />
           </Popover>
         </div>
         <button onClick={() => {

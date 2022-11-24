@@ -402,18 +402,11 @@ export const ZONES_PROCEDURE = [
     actionType: 'none',
     tableImageDependency: null,
     modalTableDependency: null,
-    // cardTable: [{ table: '4-8', diceType: '1D6', title: '4-8 Rejoin Formation', note: '4-8-note' }],
-    // actionText: 'See Table 4-8',
-    // diceType: '1D10',
     nextCardTest: true,
     cardTestName: 'goCombatTest',
-    // contingencyStep: true,
     contingencyValue: 'drm',
     contingentUpon: 'N/A',
     inputRequired: 'none'
-
-    // action: 'roll',
-    // actionText: ''
   },
 ]
 
@@ -456,10 +449,6 @@ export const COMBAT_PROCEDURE = [
     // actionText: 'See Table 4-1',
     diceType: '1D10',
     inputRequired: 'waves'
-    // nextCardTest: true,
-    // cardTestName: 'waves'
-    // action: 'roll',
-    // actionText: ''
   },
   {
     id: 27,
@@ -523,7 +512,7 @@ export const COMBAT_PROCEDURE = [
     heading: 'Random Event!',
     instruction: 'Roll 2D6 on Table 5-3D',
     reference: 'Table 5-3D, rule section 5.3.1, pg. 15.',
-    additionalInfo: ['Events rolled on this table take place in the next zone.', 'After determining event, move to the next zone.'],
+    additionalInfo: ['Events rolled on this table take place in the next zone.', 'After determining event, make a note of the event and apply the result in the next zone.'],
     hasAction: false,
     actionType: 'tableModal',
     tableImageDependency: null,
@@ -1218,12 +1207,12 @@ export const LANDING_PROCEDURE = [
     reference: 'Table 3-1 (1D10)',
     additionalInfo: ['', ''],
     hasAction: false,
-    actionType: 'tableForCard',
+    actionType: 'tableModal',
     tableImageDependency: null,
     cardTableDependency: null,
     tableNotes: '3-1-note',
     tableImage: [],
-    cardTable: [{ table: '7-1', diceType: '2D6', title: 'Table 7-1 Landing On Land', note: '7-1-note' }],
+    modalTable: [{ table: '7-1', diceType: '2D6', title: 'Table 7-1 Landing On Land', note: '7-1-note' }],
     inputRequired: 'none'
   },
 ]
