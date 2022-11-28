@@ -23,6 +23,7 @@ import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 import DamageModal from '../Modals/DamageModal/DamageModal';
 // import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 import GameStepUtilities from '../Utilities/StepMethods';
+import {makeMods} from '../Utilities/ModUtility';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -35,7 +36,7 @@ const Card = (props) => {
   const [showTableModal, setShowTableModal] = useState(false);
   const [showDamageModal, setShowDamageModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
-  const [elligibleFighters, setElligibleFighters] = useState('');
+  const [cardMods, setCardMods] = useState(null);
 
   const startStep = 0;
   const preMission = 1;
@@ -69,7 +70,9 @@ const Card = (props) => {
     'outbound': ctx?.outbound,
     'aircraft': ctx?.bomber,
     'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
-    'escort': ctx?.escort
+    'escort': ctx?.escort,
+    'period': ctx?.timePeriod,
+    'base': ctx?.campaign?.base
   }
 
   const optionsEnum = {
@@ -77,6 +80,10 @@ const Card = (props) => {
     'timePeriod': ctx?.campaign?.timePeriod,
     'targetType': options['targetType'],
     'zones': options['zones']
+  }
+
+  const theMods = {
+    'period': ctx?.timePeriod,
   }
 
   const action = actionEnum[props.action];
@@ -112,6 +119,12 @@ const Card = (props) => {
       setAdvance(true);
     }
   }, [ctx?.waveTotal]);
+
+  useEffect(() => {
+    if (props.mods) {
+      setCardMods(makeMods(props.mods, contextEnum));
+    }
+  }, [props]);
 
   const getMethodParamsEtc = () => {
     switch (props.action) {
@@ -153,7 +166,7 @@ const Card = (props) => {
         }
 
         return zMParams;
-        break;    
+        break;
       default:
         break;
     }
@@ -462,9 +475,9 @@ const Card = (props) => {
           }
           else {
             if (ctx.outbound) {
-            ctx.setStep(bombRun);
-            setGoToNextCard(null);
-            setAdvance(false);
+              ctx.setStep(bombRun);
+              setGoToNextCard(null);
+              setAdvance(false);
             }
             else {
               ctx.setStep(startCombatProcedure);
@@ -535,8 +548,8 @@ const Card = (props) => {
               setAdvance(false);
             }
             else {
-            ctx.setStep(zoneMove);
-            setAdvance(false);
+              ctx.setStep(zoneMove);
+              setAdvance(false);
             }
           }
           else {
@@ -551,9 +564,9 @@ const Card = (props) => {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }
-            else{
-            ctx.setStep(zoneMove);
-            setAdvance(false);
+            else {
+              ctx.setStep(zoneMove);
+              setAdvance(false);
             }
           }
           else if (ctx.waveCount === 'done') {
@@ -618,9 +631,9 @@ const Card = (props) => {
           const outbound = ctx.outbound;
           switch (campaign) {
             case 1:
-              if (zone === 6 && outbound) 
+              if (zone === 6 && outbound)
                 ctx.setStep(ctx.step + 1);
-              else if (zone === 1 && !outbound) 
+              else if (zone === 1 && !outbound)
                 ctx.setStep(startLandingProcedure);
               else
                 ctx.setStep(ctx.step + 2);
@@ -740,38 +753,44 @@ const Card = (props) => {
 
   const onRadioChange = (e) => {
     const value = e.target.value
-    setGoToNextCard(value);
+    setGoToNextCard(value); 
     setAdvance(true);
   }
 
-  const updateCombat = () => {
-    if (ctx.waveCount < ctx.waveTotal) {
-      //Elligible fighters?
-      //Round < 3?
-    }
-  }
+  // if (props.mods) {
+  //   setCardMods(makeMods(props.mods, contextEnum));
+  // }
 
-  const getRound = () => {
-    if (messageType) {
-      switch (messageType) {
-        case 'combatStatus':
-          cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
-          break;
-        default:
-          break;
-      }
-    }
-  }
+  // const updateCombat = () => {
+  //   if (ctx.waveCount < ctx.waveTotal) {
+  //     //Elligible fighters?
+  //     //Round < 3?
+  //   }
+  // }
+
+  // const getRound = () => {
+  //   if (messageType) {
+  //     switch (messageType) {
+  //       case 'combatStatus':
+  //         cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   }
+  // }
 
   return <div className='card'>
     <Popover open={showMods}
       color='white'
       trigger='click'
-      overlayStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
-      overlayInnerStyle={{ width: 300, border: '2 solid grey', opacity: 1 }}
+      overlayStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
+      overlayInnerStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
       onOpenChange={() => setShowMods(!showMods)}
       placement='bottom'
-      content={showMods && <div ><ul>{ctx?.modifiers?.map(m => <li style={{ color: 'red' }}>{m.modifier}</li>)}</ul></div>}>
+      content={showMods && <div ><ul>{cardMods?.modList?.map(m => <li style={{ color: 'red' }}>{m}</li>)}</ul>
+        <div>Roll Modifier: {cardMods?.result}</div>
+      </div>}>
       <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
     </Popover>
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>

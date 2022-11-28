@@ -247,7 +247,52 @@ export const TAKEOFF_PROCEDURE = [
     tableNotes: '3-1-note',
     tableImage: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
     cardTable: [{ table: '3-1', diceType: '1D10', title: 'Table 3-1 Weather Over Base (Take-Off and Landing)', note: '3-1-note' }],
-    inputRequired: 'none'
+    inputRequired: 'none',
+    mods: [{
+      type: 'thisThenThat',
+      info: [
+        {
+          this: 'base',
+          thisValue: '8th Airforce (England)',
+          that: 'period',
+          thatValue: ['12/1943', '1/1943', '2/1943', '12/1943', '1/1944', '2/1944', '12/1944', '1/1945', '2/1945'],
+          result: -2,
+          message: '-2 for missions flown in Jan, Feb, or Dec'
+        },
+        {
+          this: 'base',
+          thisValue: '8th Airforce (England)',
+          that: 'period',
+          thatValue: ['10/1942', '11/1942', '3/1943', '4/1943', '10/1943', '11/1943', '3/1944', '4/1944', '10/1944', '11/1944', '3/1945', '4/1945'],
+          result: -1,
+          message: '-1 for missions flown in Mar, Apr, Oct or Nov'
+        },
+        {
+          this: 'base',
+          thisValue: '15th Airforce (Italy)',
+          that: 'period',
+          thatValue: ['5/1944', '10/1944'],
+          result: 1,
+          message: '+1 for missions flown in Mar or Oct'
+        },
+        {
+          this: 'base',
+          thisValue: '15th Airforce (Italy)',
+          that: 'period',
+          thatValue: ['6/1944', '9/1944'],
+          result: 2,
+          message: '+2 for missions flown in Mar or Oct'
+        },
+        {
+          this: 'base',
+          thisValue: '15th Airforce (Italy)',
+          that: 'period',
+          thatValue: ['7/1944', '8/1944'],
+          result: 2,
+          message: '+3 for missions flown in Mar or Oct'
+        },
+      ],
+    }]
     // action: 'roll',
     // actionText: ''
   },
