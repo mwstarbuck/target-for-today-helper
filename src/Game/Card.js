@@ -560,7 +560,7 @@ const Card = (props) => {
         case 'waves':
           console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
-            if (ctx.targetZone === ctx.currentZone) {
+            if (ctx.targetZone === ctx.currentZone && ctx.outbound) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }

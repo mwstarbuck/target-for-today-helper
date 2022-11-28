@@ -27,7 +27,7 @@ export const GameContextProvider = ({ children }) => {
   const [weather, setWeather] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
-
+  const [nose, setNose] = useState(null)
   
 
   return (
@@ -69,6 +69,7 @@ export const GameContextProvider = ({ children }) => {
       weather, setWeather,
       contrails, setContrails,
       resistance, setResistance,
+      nose, setNose
     }}
     >
       {children}
