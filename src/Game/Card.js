@@ -560,7 +560,7 @@ const Card = (props) => {
         case 'waves':
           console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
-            if (ctx.targetZone === ctx.currentZone && ctx.outbound) {
+            if (ctx.targetZone === ctx.currentZone) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }
@@ -571,7 +571,7 @@ const Card = (props) => {
           }
           else if (ctx.waveCount === 'done') {
             const targetZone = ctx.zonesInfo.find(z => z.zone === ctx.currentZone).targetZone;
-            if (targetZone) {
+            if (targetZone && ctx.outbound) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
               ctx.setWaveCount(0);

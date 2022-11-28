@@ -120,13 +120,13 @@ const GamePage = () => {
 
             <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Target</div></Col>
             <Col span={9}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Target Type</div></Col>
-            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Position</div></Col>
-            <Col span={3}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Missions</div></Col>
+            <Col span={7}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Position</div></Col>
+            <Col span={2}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Missions</div></Col>
 
             <Col span={6}><div style={{ border: '1px solid black' }}>{ctx?.target}</div></Col>
             <Col span={9}><div style={{ border: '1px solid black' }}>{ctx?.targetType}</div></Col>
-            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx?.cell?.cell}, {ctx?.bomberNumber}</div></Col>
-            <Col span={3}><div style={{ border: '1px solid black' }}>{ctx.campaign?.missions}</div></Col>
+            <Col span={7}><div style={{ border: '1px solid black' }}>{ctx?.cell?.cell}, {ctx?.bomberNumber}</div></Col>
+            <Col span={2}><div style={{ border: '1px solid black' }}>{ctx.campaign?.missions}</div></Col>
           </Row> 
           </div>
           <br />
