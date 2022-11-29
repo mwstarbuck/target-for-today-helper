@@ -20,14 +20,15 @@ export const GameContextProvider = ({ children }) => {
   const [currentZone, setCurrentZone] = useState(1);
   const [targetZone, setTargetZone] = useState(null);
   const [outbound, setOutbound] = useState(true);
-  const [waveTotal, setWaveTotal] = useState(0);
+  const [waveTotal, setWaveTotal] = useState(null);
   const [waveCount, setWaveCount] = useState(0);
   const [round, setRound] = useState(0);
   const [escort, setEscort] = useState(null);
   const [weather, setWeather] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
-  const [nose, setNose] = useState(null)
+  const [nose, setNose] = useState(null);
+  const [pilotComp, setPilotComp] = useState(null)
   
 
   return (
@@ -69,7 +70,8 @@ export const GameContextProvider = ({ children }) => {
       weather, setWeather,
       contrails, setContrails,
       resistance, setResistance,
-      nose, setNose
+      nose, setNose,
+      pilotComp, setPilotComp
     }}
     >
       {children}

@@ -65,7 +65,7 @@ const NoseCompartment = () => {
   const label = 'Norden Bomb Sight Out';
   return <div style={{ width: 490, minWidth: 490, border: '1px solid black'}}>
     <Row style={{paddingLeft: 5, textAlign: 'left'}}>
-      <Col span={24}><div style={{ backgroundColor: 'rgb(226, 212, 201)', marginLeft: -5, borderBottom: '1px solid black' }}><h3 style={{textAlign: 'center'}}>Nose Compartment</h3></div></Col>
+      <Col span={24}><div style={{ backgroundColor: 'rgb(226, 212, 201)', marginLeft: -5, borderBottom: '1px solid black' }}><h3 style={{ textAlign: 'center', margin: 0 }}>Nose Compartment</h3></div></Col>
       <Col span={12}><Checkbox onChange={onChange} name='sight'>Norden Bomb Sight Out</Checkbox></Col>
       <Col span={12}><Checkbox onChange={onChange} name='noseGun'>Nose Gun Inoperable</Checkbox></Col>
       <Col span={9}>Cheek Gun Inoperable:</Col>

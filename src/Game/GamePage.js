@@ -9,6 +9,7 @@ import { Row, Col } from 'antd';
 import Zone from './Zone';
 import b17f from '../Images/b17f-test.png'
 import NoseCompartment from './PageComponents/NoseCompartment';
+import PilotCompartment from './PageComponents/PilotCompartment';
 
 
 const GamePage = () => {
@@ -135,6 +136,7 @@ const GamePage = () => {
         {ctx.zonesInfo && <Zone />}
         {/* {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />} */}
         {ctx.zonesInfo && <NoseCompartment />}
+        {ctx.zonesInfo && <PilotCompartment />}
       </div>
       <div className='column'>
         Game Step Helper
