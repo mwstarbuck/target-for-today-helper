@@ -48,6 +48,15 @@ export const fighters = [
   { value: 'Ta-152', label: 'Ta-152', attacks: 2 },
 ]
 
+export const angles = [
+  { value: '12:00', label: '12:00'},
+  { value: '1:30', label: '1:30'},
+  { value: '3:00', label: '3:00'},
+  { value: '6:00', label: '6:00'},
+  { value: '9:00', label: '9:00'},
+  { value: '10:30', label: '10:30'},
+]
+
 export const optionsEnum = {
   'targetType': targetType,
   'zones': zones,

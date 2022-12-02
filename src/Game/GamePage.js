@@ -11,6 +11,7 @@ import b17f from '../Images/b17f-test.png'
 import NoseCompartment from './PageComponents/NoseCompartment';
 import PilotCompartment from './PageComponents/PilotCompartment';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
+import Fighter from './PageComponents/Combat/Fighter';
 
 
 const GamePage = () => {
@@ -138,7 +139,7 @@ const GamePage = () => {
         {/* {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />} */}
         {ctx.zonesInfo && <NoseCompartment />}
         {ctx.zonesInfo && <PilotCompartment />}
-        <CombatComponent />
+        <Fighter />
       </div>
       <div className='column'>
         Game Step Helper
