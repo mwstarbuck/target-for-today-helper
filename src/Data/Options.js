@@ -55,6 +55,8 @@ export const angles = [
   { value: '6:00', label: '6:00'},
   { value: '9:00', label: '9:00'},
   { value: '10:30', label: '10:30'},
+  { value: 'Vertical Climb', label: 'Vertical Climb' },
+  { value: 'Vertical Dive', label: 'Vertical Dive' },
 ]
 
 export const optionsEnum = {

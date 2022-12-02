@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { problems } from '../Data/CompartmentStatus';
 
 export const GameContext = createContext();
 
@@ -28,7 +29,7 @@ export const GameContextProvider = ({ children }) => {
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
   const [nose, setNose] = useState(null);
-  const [pilotComp, setPilotComp] = useState(null)
+  const [pilotComp, setPilotComp] = useState(problems)
   
 
   return (
