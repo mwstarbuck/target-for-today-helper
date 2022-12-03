@@ -14,13 +14,13 @@ const problems = {
 }
 
 const PilotCompartment = () => {
-  const ctx = useContext(GameContext);
-  const [pilotComp, setPilotComp] = useState(problems)
+  const {pilotComp,setPilotComp} = useContext(GameContext);
+  // const [pilotComp, setPilotComp] = useState(ctx.pilotComp)
 
   const onChange = (e) => {
     const name = e.target.name;
     const checked = e.target.checked;
-    let newPilotComp = pilotComp;
+    let newPilotComp = {...pilotComp};
     switch (name) {
       case 'windowFirstHit':
         newPilotComp.windowFirstHit = checked
@@ -49,8 +49,8 @@ const PilotCompartment = () => {
       default:
         break;
     }
+    // setPilotComp(newPilotComp);
     setPilotComp(newPilotComp);
-    ctx.setPilotComp(newPilotComp);
   }
 
   return <div style={{ width: 490, minWidth: 490, border: '1px solid black' }}>

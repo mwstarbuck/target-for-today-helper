@@ -22,7 +22,7 @@ const NoseCompartment = () => {
   const onChange = (e) => {
     const name = e.target.name;
     const checked = e.target.checked;
-    let newNose = nose;
+    let newNose = {...nose};
     switch (name) {
       case 'sight':
         newNose.sight = checked
@@ -59,7 +59,6 @@ const NoseCompartment = () => {
     }
     setNose(newNose);
     ctx.setNose(newNose);
-    console.log(ctx.nose);
   }
 
   const label = 'Norden Bomb Sight Out';
