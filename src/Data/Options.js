@@ -33,7 +33,34 @@ export const zones = [
   { value: 15, label: 15 },
 ]
 
+export const fighters = [
+  { value: 'Me-109', label: 'Me-109', attacks: 3 },
+  { value: 'Me-109 S', label: 'Me-109 S', attacks: 3 },
+  { value: 'Me-110', label: 'Me-110', attacks: 2 },
+  { value: 'Me-210', label: 'Me-210', attacks: 2 },
+  { value: 'Me-410', label: 'Me-410', attacks: 2 },
+  { value: 'Me-163', label: 'Me-163', attacks: 1 },
+  { value: 'Me-262', label: 'Me-262', attacks: 3 },
+  { value: 'Fw-190', label: 'Fw-190', attacks: 2 },
+  { value: 'Fw-190 S', label: 'Fw-190 S', attacks: 3 },
+  { value: 'He-162', label: 'He-162', attacks: 1 },
+  { value: 'Ju-88', label: 'Ju-88', attacks: 2 }, 
+  { value: 'Ta-152', label: 'Ta-152', attacks: 2 },
+]
+
+export const angles = [
+  { value: '12:00', label: '12:00'},
+  { value: '1:30', label: '1:30'},
+  { value: '3:00', label: '3:00'},
+  { value: '6:00', label: '6:00'},
+  { value: '9:00', label: '9:00'},
+  { value: '10:30', label: '10:30'},
+  { value: 'Vertical Climb', label: 'Vertical Climb' },
+  { value: 'Vertical Dive', label: 'Vertical Dive' },
+]
+
 export const optionsEnum = {
   'targetType': targetType,
-  'zones': zones
+  'zones': zones,
+  'fighters': fighters
 }

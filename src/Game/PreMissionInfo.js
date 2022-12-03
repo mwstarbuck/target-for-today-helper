@@ -95,6 +95,7 @@ const PreMissionInfo = (props) => {
         inputRequired={ctx?.gameStep?.inputRequired}
         updateCombat={ctx?.gameStep?.updateCombat}
         hitTables={ctx?.gameStep?.hitTables}
+        mods={ctx?.gameStep?.mods}
       />
     </div>
   </>

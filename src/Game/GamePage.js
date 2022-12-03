@@ -1,13 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { rollDice, nextStep } from '../Utilities/Utilities';
 import { TABLE_2_1 } from '../Data/Tables';
 import PreMissionInfo from './PreMissionInfo';
 import { PRE_MISSION_STEPS } from '../Data/GameSteps';
 import { actionEnum } from '../Utilities/Utilities';
 import { GameContext } from './GameContext';
-import { Popover, Layout } from 'antd';
+import { Row, Col } from 'antd';
 import Zone from './Zone';
 import b17f from '../Images/b17f-test.png'
+import NoseCompartment from './PageComponents/NoseCompartment';
+import PilotCompartment from './PageComponents/PilotCompartment';
+import CombatComponent from './PageComponents/Combat/CombatComponent';
+import Fighter from './PageComponents/Combat/Fighter';
 
 
 const GamePage = () => {
@@ -95,6 +99,7 @@ const GamePage = () => {
     const campaign = (TABLE_2_1.find(c => c.id === result));
     ctx.setCampaign(campaign);
   }
+
   return <>
     <h1 style={{ opacity: 0.6, fontWeight: 600 }}>Target for Today Helper</h1>
 
@@ -103,20 +108,38 @@ const GamePage = () => {
     {ctx.step > 0 && <div className='row'>
       <div className='bigColumn'>
         Campaign Info
-        {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}> <h3>CAMPAIGN #: {ctx.campaign?.campaign}</h3>
-          <h4>PERIOD: {ctx?.timePeriod}</h4>
-          <h4>AIRCRAFT: {ctx?.bomber}{ctx.noseTurret ? <span style={{ fontSize: 12 }}>{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</span> : null}</h4>
-          <h5>BASING: <span>{ctx.campaign?.base}</span></h5>
-          <h5>MISSIONS: {ctx.campaign?.missions}</h5>
-          <h5>TARGET: {ctx?.target}</h5>
-          <h5>TARGET TYPE: {ctx?.targetType}</h5>
-          <h5>Formation Position: {ctx?.cell?.cell}, {ctx?.bomberNumber}</h5>
-          <h5>modifier: modifier on table 5-2: {ctx?.cell?.modifier}</h5>
-        </span>
+        {step >= 1 && ctx.campaign && <span style={{ opacity: 0.6 }}>
+          <div style={{ width: 1175, minWidth: 1175}}>
+          <Row>
+            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Campaign</div></Col>
+            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Period</div></Col>
+            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Bomber</div></Col>
+            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Base</div></Col>
 
+            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx.campaign?.campaign}</div></Col>
+            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx?.timePeriod}</div></Col>
+            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx?.bomber}{ctx.noseTurret ? <span style={{ fontSize: 12 }}>{ctx?.bomber === 'B-24J' && `(${ctx?.noseTurret})`}</span> : null}</div></Col>
+            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx.campaign?.base}</div></Col>
+
+            <Col span={6}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Target</div></Col>
+            <Col span={9}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Target Type</div></Col>
+            <Col span={7}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Position</div></Col>
+            <Col span={2}><div style={{ backgroundColor: 'rgb(226, 212, 201)', border: '1px solid black', fontWeight: 700 }}>Missions</div></Col>
+
+            <Col span={6}><div style={{ border: '1px solid black' }}>{ctx?.target}</div></Col>
+            <Col span={9}><div style={{ border: '1px solid black' }}>{ctx?.targetType}</div></Col>
+            <Col span={7}><div style={{ border: '1px solid black' }}>{ctx?.cell?.cell}, {ctx?.bomberNumber}</div></Col>
+            <Col span={2}><div style={{ border: '1px solid black' }}>{ctx.campaign?.missions}</div></Col>
+          </Row> 
+          </div>
+          <br />
+        </span>
         }
         {ctx.zonesInfo && <Zone />}
-        {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />}
+        {/* {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />} */}
+        {ctx.zonesInfo && <NoseCompartment />}
+        {ctx.zonesInfo && <PilotCompartment />}
+        <Fighter />
       </div>
       <div className='column'>
         Game Step Helper
