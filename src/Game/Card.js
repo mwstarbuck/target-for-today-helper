@@ -733,6 +733,7 @@ const Card = (props) => {
 
     }
   }
+  
   const onSelect = (selection) => {
     const setter = contextEnum[props.setter.setterA]
     setSelectValue(selection);

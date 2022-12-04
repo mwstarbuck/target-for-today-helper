@@ -1,13 +1,12 @@
-import React, { useContext, useMemo, useState } from 'react';
-import { Row, Col, Radio, Divider, Checkbox } from 'antd';
+import React, { useState, useContext } from 'react';
 import Select from 'react-select';
-import { fighters, angles } from '../../../Data/Options';
-import GameContext from '../../GameContext';
-import NoseCompartment from '../NoseCompartment';
-import { useEffect } from 'react';
-import Guns from './Guns';
+import GameContext from '../GameContext';
+import { Row, Col, Divider, Radio } from 'antd';
+import { fighters, angles } from '../../Data/Options';
+import Guns from '../PageComponents/Combat/Guns';
 
-const Fighter = () => {
+
+const EnterAnglesLevels = ({number}) => {
   const ctx = useContext(GameContext);
   const [type, setType] = useState(null);
   const [skill, setSkill] = useState('average');
@@ -49,6 +48,7 @@ const Fighter = () => {
   // }
 
   return <div style={{ width: 550, minWidth: 550, border: '1px solid black' }}>
+    {number}
     <Row gutter={[10, 5]} style={{ padding: 5 }}>
       <Col span={24}>
         <Select
@@ -69,7 +69,7 @@ const Fighter = () => {
           <Radio disabled={angle === 'Vertical Climb' || angle === 'Vertical Dive'} value={'low'}>Low</Radio>
         </Radio.Group>
       </Col>
-      <Col span={11} style={{ borderRight: '1px solid grey', paddingRight: 2 }}>
+      {/* <Col span={11} style={{ borderRight: '1px solid grey', paddingRight: 2 }}>
         <Radio.Group name='skill' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 8 }} onChange={onSkillChange} value={skill} defaultValue='average'>
           <Radio value={'green'}>Green</Radio>
           <Radio value={'average'}>Average</Radio>
@@ -90,12 +90,10 @@ const Fighter = () => {
       <Col span={24}>Choose Bomber Gun</Col>
       <Col span={24}>
         <Guns angle={angle} level={level} tt={ctx.pilotComp.tTurretInoperable} />
-        {/* <Radio.Group name='status' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 8, paddingLeft: 8 }} onChange={onGunSelect} value={selectedGun}>
-          {elligibleGuns?.map(g => <Radio disabled={g.inoperable} value={g.gun}>{g.gun}</Radio>)}
-        </Radio.Group> */}
-      </Col>
+      </Col> */}
     </Row>
   </div>
+
 }
 
-export default Fighter;
+export default EnterAnglesLevels;
