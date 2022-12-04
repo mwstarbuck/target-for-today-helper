@@ -21,6 +21,7 @@ import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 import DamageModal from '../Modals/DamageModal/DamageModal';
+import TableModalAndInput from './CardComponents/tableModalAndInput';
 // import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
@@ -308,6 +309,32 @@ const Card = (props) => {
     case 'tableModalYesNo':
       if (modalTableDependency) {
         getVariableTable(modalTable, modalTableDependency, modalTableSrc)
+      }
+      else {
+        modalTable.forEach(t => {
+          modalTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+      break;
+    case 'tableModalAndInput':
+      if (modalTableDependency) {
+        switch (modalTableDependency) {
+          case 'campaign':
+            const table = modalTable[ctx.campaign.campaign - 1];
+            modalTableSrc.push({
+              table: tableImageEnum[table.table],
+              diceType: table.diceType,
+              title: table.title,
+              note: tableNoteEnum[table.note]
+            })
+          // break;
+        }
       }
       else {
         modalTable.forEach(t => {
@@ -938,6 +965,17 @@ const Card = (props) => {
           className='card__button'>
           {props.actionText}
         </button>
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'tableModalAndInput' && <>
+        <TableModalAndInput 
+          setShowTableModal={setShowTableModal}
+          actionText={props.actionText}
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion} />
       </>
       }
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
