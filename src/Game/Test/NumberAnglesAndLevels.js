@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
 import EnterAnglesLevels from './EnterAngleLevel';
-import { Row, Col, Divider, Radio } from 'antd';
+import { Row, Col, Divider, Radio, Button } from 'antd';
+import CombatContext from '../Context/CombatContext';
 
 
 
@@ -14,26 +15,59 @@ const number = [
 ]
 
 const NumberAnglesAndLevels = () => {
+  const combatCTX = useContext(CombatContext);
   const [fighterNumber, setFighterNumber] = useState(null);
+  const [waveData, setWaveData] = useState(null);
+  const [showNext, setShowNext] = useState(false)
 
   const onChange = (e) => {
     const number = e.value;
     setFighterNumber(number)
+    let fighters = [];
+    for (let i = 0; i < number; i++) {
+      fighters.push({
+        id: i + 1,
+        type: null,
+        angle: null,
+        level: null,
+        skill: 'average',
+        status: null,
+        targetedBy: [],
+        attacks: null
+      })
+    }
+    setWaveData(fighters);
+  }
+  
+  const onClick = () => {
+    combatCTX.setWaveData(waveData);
+    // console.log(combatCTX.waveData);
   }
 
-  let fighters = [];
-  for (let i = 0; i < fighterNumber; i++) {
-    fighters.push(
-      <Col key={i} span={24}>
-        <EnterAnglesLevels number={i + 1} />
-      </Col>)
-  }
+  // let fighters = [];
+  // for (let i = 0; i < fighterNumber; i++) {
+  //   fighters.push(
+  //     <Col key={i} span={24}>
+  //       <EnterAnglesLevels number={i + 1} />
+  //     </Col>)
+  // }
+  console.log(combatCTX.waveData);
 
+  const wave = waveData?.map((f, i) => <Col key={f.id} span={24}>
+  <EnterAnglesLevels number={i} waveData={waveData} setWaveData={setWaveData} />
+  </Col>)
   return <div>
     <div>Select Number of Fighers rolled in the wave.</div>
-    <Select options={number} onChange={onChange} value={fighterNumber} />
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+      <div style={{ width: 400, alignSelf: 'center', padding: 10}}>
+      <Select options={number} onChange={onChange} value={fighterNumber} />
+      </div>
+    </div>
     <Row gutter={[2, 5]}>
-      {fighters.length > 0 && fighters.map(f => f)}
+      {wave?.length > 0 && wave.map(f => f)}
+    <Col span={24} style={{textAlign: 'center', padding: 10}}>
+      <Button onClick={onClick}>Ok</Button>
+    </Col>
     </Row>
   </div>
 }
