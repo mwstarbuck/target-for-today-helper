@@ -33,7 +33,8 @@ const EnterGFNumber = ({setShowModal}) => {
         skill: 'average',
         status: null,
         targetedBy: [],
-        attacks: null
+        attacks: null,
+        drivenOff: false
       })
     }
     setWaveData(fighters);
@@ -41,8 +42,6 @@ const EnterGFNumber = ({setShowModal}) => {
 
   const onClick = () => {
     combatCTX.setWaveData(waveData);
-    setShowModal(false);
-
     // console.log(combatCTX.waveData);
   }
 

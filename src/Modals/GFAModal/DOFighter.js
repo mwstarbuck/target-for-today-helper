@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
 import GameContext from '../../Game/GameContext';
-import { Row, Col, Divider, Radio, Button } from 'antd';
+import { Row, Col, Divider, Checkbox, Button } from 'antd';
 import { fighters, angles } from '../../Data/Options';
 import Guns from '../../Game/PageComponents/Combat/Guns';
 import CombatContext from '../../Game/Context/CombatContext';
@@ -11,71 +11,36 @@ const DOFighters = (/*{ number, waveData, setWaveData }*/) => {
   // const ctx = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
   const waveData = combatCTX.waveData
-  // const angle = waveData[number].angle;
-  // const level = waveData[number].level
-  // const [type, setType] = useState(details.type);
-  // const [skill, setSkill] = useState(details.skill);
-  // const [status, setStatus] = useState(details.status);
-  // const [angle, setAngle] = useState(details.angle);
-  // const [level, setLevel] = useState(details.level);
-  // const [attacks, setAttack] = useState(details.attacks);
-  // const [targetedBy, setTargetedBy] = useState(details.targetedBy);
 
-  // const onFighterChange = (e) => {
-  //   console.log(e);
-  //   const type = e.value;
-  //   const attacks = e.attacks;
-  //   let temp = [...waveData];
-  //   temp[number].type = type;
-  //   temp[number].attacks = attacks;
-  //   setWaveData(temp);
-  //   // setType(type);
-  // }
+  const onChange = (e) => {
+    const id = e.target.id;
+    const checked = e.target.checked;
+    let wDCopy = [...waveData]
+    console.log(e);
+    wDCopy[id].drivenOff = checked;
+    // const newWaveData = wDCopy.filter(f => f.drivenOff === false);
+    combatCTX.setWaveData(wDCopy);
+    console.log(waveData);
+  }
 
-  // const onAngleChange = (e) => {
-  //   const angle = e.value
-  //   let temp = [...waveData]
-  //   temp[number].angle = angle
-  //   if (angle === 'Vertical Climb' || angle === 'Vertical Dive') {
-  //     temp[number].level = null;
-  //   }
-  //   setWaveData(temp)
-  //   // setAngle(angle);
-  //   console.log(angle);
-  // }
+  const onRemoveFighters = () => {
+    let wDCopy = [...waveData]
+    const newWaveData = wDCopy.filter(f => f.drivenOff === false);
+    combatCTX.setWaveData(newWaveData);
+  }
 
-  // const onLevelChange = (e) => {
-  //   const level = e.target.value
-  //   let temp = [...waveData]
-  //   temp[number].level = level
-  //   setWaveData(temp)
-  //   // setLevel(level);
-  // }
-
-  // const onSkillChange = (e) => {
-  //   const skill = e.target.value
-  //   setSkill(skill);
-  // }
-
-  // const onStatusChange = (e) => {
-  //   const status = e.target.value
-  //   setStatus(status);
-  // }
-
-  // const onGunSelect = (e) => {
-  //   const gun = e.target.value
-  //   setSelectedGun(gun);
-  // }
+  if (waveData.length === 0)
+    return <div style={{ width: 350, minWidth: 350, margin: 16, fontSize: 15, fontWeight: 600 }}>All fighters have been driven off. Click Ok or Cancel button to close modal.</div>
   return (<>
-    {waveData?.map((f, i) => <div style={{ width: 450, minWidth: 450, border: '1px solid grey', margin: 16 }}>
-      <Row style={{padding: 5}}>
-        <Col span={4}><p>{f.type}</p></Col>
-        <Col span={4}><p>{f.angle}</p></Col>
-        <Col span={3}><p>{f.level}</p></Col>
-        <Col span={13} style={{ textAlign: 'right' }}><Button>Driven Off</Button></Col>
+    {waveData?.map((f, i) => <div key={i} style={{ width: 350, minWidth: 350, border: '1px solid grey', margin: 16 }}>
+      <Row gutter={5} style={{padding: 5}}>
+        <Col span={6}><p style={{fontSize: 13, fontWeight: 600}}>{f.type}</p></Col>
+        <Col span={9}><p>{f.angle} {f.level}</p></Col>
+        <Col span={9} style={{ textAlign: 'right' }}><Checkbox id={i} onChange={onChange}>Driven Off</Checkbox></Col>
       </Row>
     </div>
     )}
+    <Button onClick={() => onRemoveFighters()}>Remove Fighter(s)</Button>
   </>
   )
 
