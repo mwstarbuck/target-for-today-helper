@@ -2,10 +2,10 @@ import React from 'react';
 import { Radio } from 'antd';
 import TableModal from '../../Modals/TableModal';
 
-const TableModalAndInput = ({ cardMessage, onRadioChange, goToNextCard, radioDetails, radioQuestion, setShowTableModal, actionText }) => {
+const TableModalAndInput = ({ cardMessage, onRadioChange, goToNextCard, radioDetails, radioQuestion, setShowModal, actionText }) => {
   return <>
     <button onClick={() => {
-      setShowTableModal(true);
+      setShowModal(true);
     }}
       className='card__button'>
       {actionText}

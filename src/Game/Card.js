@@ -21,10 +21,11 @@ import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 import DamageModal from '../Modals/DamageModal/DamageModal';
-import TableModalAndInput from './CardComponents/tableModalAndInput';
+import TableModalAndInput from './CardComponents/TableModalAndInput';
 // import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
+import GFAModal from '../Modals/FighterModal/GFAModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -36,6 +37,7 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [showDamageModal, setShowDamageModal] = useState(false);
+  const [showGFAModal, setShowGFAModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [cardMods, setCardMods] = useState(null);
 
@@ -969,7 +971,7 @@ const Card = (props) => {
       }
       {!props.isIncrement && props.actionType === 'tableModalAndInput' && <>
         <TableModalAndInput 
-          setShowTableModal={setShowTableModal}
+          setShowModal={setShowGFAModal}
           actionText={props.actionText}
           cardMessage={cardMessage}
           onRadioChange={onRadioChange}
@@ -1004,6 +1006,12 @@ const Card = (props) => {
       setShowModal={setShowDamageModal}
       bomber={ctx.bomber}
       hitTables={props.hitTables} />
+    <GFAModal 
+      showModal={showGFAModal}
+      setShowModal={setShowGFAModal}
+      source={modalTableSrc}
+      diceType={props.diceType}
+      />
   </div>
 }
 

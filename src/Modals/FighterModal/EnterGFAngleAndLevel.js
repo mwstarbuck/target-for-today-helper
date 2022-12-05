@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
-import GameContext from '../GameContext';
+import GameContext from '../../Game/GameContext';
 import { Row, Col, Divider, Radio, Button } from 'antd';
 import { fighters, angles } from '../../Data/Options';
-import Guns from '../PageComponents/Combat/Guns';
+import Guns from '../../Game/PageComponents/Combat/Guns';
 
 
 const EnterGFAnglesLevels = ({ number, waveData, setWaveData }) => {

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
-import EnterAnglesLevels from './EnterAngleLevel';
+import EnterGFAnglesLevels from './EnterGFAngleAndLevel'
 import { Row, Col, Divider, Radio, Button } from 'antd';
-import CombatContext from '../Context/CombatContext';
+import CombatContext from '../../Game/Context/CombatContext';
 
 
 
@@ -14,7 +14,7 @@ const number = [
   { value: 5, label: 5 }
 ]
 
-const EnterGFNumber = () => {
+const EnterGFNumber = ({setShowModal}) => {
   const combatCTX = useContext(CombatContext);
   const [fighterNumber, setFighterNumber] = useState(null);
   const [waveData, setWaveData] = useState(null);
@@ -41,6 +41,8 @@ const EnterGFNumber = () => {
 
   const onClick = () => {
     combatCTX.setWaveData(waveData);
+    setShowModal(false);
+
     // console.log(combatCTX.waveData);
   }
 
@@ -54,7 +56,7 @@ const EnterGFNumber = () => {
   console.log(combatCTX.waveData);
 
   const wave = waveData?.map((f, i) => <Col key={f.id} span={24}>
-    <EnterAnglesLevels number={i} waveData={waveData} setWaveData={setWaveData} />
+    <EnterGFAnglesLevels number={i} waveData={waveData} setWaveData={setWaveData} />
   </Col>)
   return <div>
     <div>Select Number of Fighers rolled in the wave.</div>
