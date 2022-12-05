@@ -1,16 +1,9 @@
-import React, { useContext } from 'react';
-import { Modal, Popover, Divider, Row, Col, Steps } from 'antd';
-import Select from 'react-select';
-import GameContext from '../../Game/GameContext';
-import CombatContext from '../../Game/Context/CombatContext';
-import EnterGFNumber from './EnterGFNumber';
-import EnterGFAnglesLevels from './EnterGFAngleAndLevel';
+import React from 'react';
+import {  Popover, Row, Col } from 'antd';
 import DOFighters from './DOFighter';
 
 const GFDrivenOff = (props) => {
-  // const ctx = useContext(GameContext);
-  const combatCTX = useContext(CombatContext);
-  const { showModal, setShowModal, source, opacity } = props;
+  const { opacity } = props;
 
   return <>
     <Row>
