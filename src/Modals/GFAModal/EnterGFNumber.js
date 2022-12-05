@@ -67,7 +67,7 @@ const EnterGFNumber = ({setShowModal}) => {
     </div>
     <Row gutter={[2, 5]}>
       {wave?.length > 0 && wave.map(f => f)}
-      <Col span={24} style={{ textAlign: 'center', padding: 10 }}>
+      <Col span={24} style={{ textAlign: 'center'}}>
         <Button onClick={onClick}>Ok</Button>
       </Col>
     </Row>

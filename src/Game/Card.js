@@ -25,7 +25,7 @@ import TableModalAndInput from './CardComponents/TableModalAndInput';
 // import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
-import GFAModal from '../Modals/FighterModal/GFAModal';
+import GFAModal from '../Modals/GFAModal/GFAModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;

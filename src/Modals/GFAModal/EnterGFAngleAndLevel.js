@@ -63,9 +63,11 @@ const EnterGFAnglesLevels = ({ number, waveData, setWaveData }) => {
   //   const gun = e.target.value
   //   setSelectedGun(gun);
   // }
-  return <div style={{ width: 550, minWidth: 550, border: '1px solid black', margin: 16 }}>
-    {number + 1}
-    <Row gutter={[10, 5]} style={{ padding: 5 }}>
+  return <div style={{ width: 450, minWidth: 450, border: '1px solid black', margin: 16 }}>
+    {/* {number + 1} */}
+    <Row gutter={[10, 5]} style={{ padding: 5}}>
+      <Col span={4} style={{alignContent: 'center'}}>{number + 1}</Col>
+      <Col span={20} style={{textAlign: 'right'}}><Button>Driven Off</Button></Col>
       <Col span={24}>
         <Select
           options={fighters}
