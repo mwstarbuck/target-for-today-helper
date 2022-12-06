@@ -29,7 +29,7 @@ const DOFighters = () => {
       <Row gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6}}>
         <Col span={6}><p style={{fontSize: 14, fontWeight: 600}}>{f.type}</p></Col>
         <Col span={9}><p>{f.angle} {f.level}</p></Col>
-        {(f.angle !== 'Vertical Dive' && f.angle !== 'Vertical Climb') && <Col span={9} style={{ textAlign: 'right' }}><Checkbox id={i} onChange={onChange}>Driven Off</Checkbox></Col>}
+        {f.angle !== 'Vertical Dive' && <Col span={9} style={{ textAlign: 'right' }}><Checkbox id={i} onChange={onChange}>Driven Off</Checkbox></Col>}
       </Row>
     </div>
     )}

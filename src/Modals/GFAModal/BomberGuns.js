@@ -76,58 +76,85 @@ const BomberGuns = ({ angle, level }) => {
           
         }
         if (level === 'level') {
-          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable });
+          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable },
+            { gun: 'Ball Turr.', inoperable: 'todo' }, { gun: 'Right Wst.', inoperable: 'todo' });
           
         }
         if (level === 'low') {
-          guns.push({ gun: 'Ball Turr.', inoperable: 'todo' });
+          guns.push({ gun: 'Ball Turr.', inoperable: 'todo' }, { gun: 'Right Wst.', inoperable: 'todo' });
       
         }
         break;
       case '6:00':
         if (level === 'high') {
           guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable }, { gun: 'Right Wst.', inoperable: 'todo' });
-
+          if (bomber === 'B-17F' || bomber === 'B-17G')
+            guns.push({ gun: 'Radio Rm.', inoperable: 'todo' }, { gun: 'Tail Gun', inoperable: 'todo' });
+          if (bomber === 'B-24D' || bomber === 'B-24J')
+            guns.push({ gun: 'Tail Turr..', inoperable: 'todo' });
         }
         if (level === 'level') {
-          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable });
-
+          if (bomber === 'B-17F' || bomber === 'B-17G')
+            guns.push({ gun: 'Tail Gun.', inoperable: 'todo' });
+          if (bomber === 'B-24D' || bomber === 'B-24J')
+            guns.push({ gun: 'Tail Turr..', inoperable: 'todo' });
         }
         if (level === 'low') {
           guns.push({ gun: 'Ball Turr.', inoperable: 'todo' });
-
+          if (bomber === 'B-17F' || bomber === 'B-17G')
+            guns.push({ gun: 'Tail Gun.', inoperable: 'todo' });
+          if (bomber === 'B-24D' || bomber === 'B-24J')
+            guns.push({ gun: 'Tail Turr..', inoperable: 'todo' });
         }
         break;
       case '9:00':
         if (level === 'high') {
-          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable }, { gun: 'Right Wst.', inoperable: 'todo' });
+          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable }, { gun: 'Left Wst.', inoperable: 'todo' });
 
         }
         if (level === 'level') {
-          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable });
+          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable },
+            { gun: 'Ball Turr.', inoperable: 'todo' }, { gun: 'Left Wst.', inoperable: 'todo' });
 
         }
         if (level === 'low') {
-          guns.push({ gun: 'Ball Turr.', inoperable: 'todo' });
+          guns.push({ gun: 'Ball Turr.', inoperable: 'todo' }, { gun: 'Left Wst.', inoperable: 'todo' });
 
         }
         break;
       case '10:30':
         if (level === 'high') {
-          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable }, { gun: 'Right Wst.', inoperable: 'todo' });
-
+          guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable }, { gun: 'Left Wst.', inoperable: 'todo' });
+          if (bomber === 'B-17F' || bomber === 'B-17G' || bomber === 'B-24D')
+            guns.push({ gun: 'Left Chk', inoperable: nose.rightCheekGun });
+          if (bomber === 'B-24J')
+            guns.push({ gun: 'Nose Turr.', inoperable: nose.noseGun });
         }
         if (level === 'level') {
           guns.push({ gun: 'Top Turr.', inoperable: pilotComp.tTurretInoperable });
-
+          if (bomber === 'B-17F' || bomber === 'B-17G' || bomber === 'B-24D')
+            guns.push({ gun: 'Left Chk', inoperable: nose.rightCheekGun });
+          if (bomber === 'B-17G')
+            guns.push({ gun: 'Chin Turr.', inoperable: nose.noseGun });
+          if (bomber === 'B-24J')
+            guns.push({ gun: 'Nose Turr.', inoperable: nose.noseGun });
         }
         if (level === 'low') {
           guns.push({ gun: 'Ball Turr.', inoperable: 'todo' });
-
+          if (bomber === 'B-17F' || bomber === 'B-17G' || bomber === 'B-24D')
+            guns.push({ gun: 'Left Chk', inoperable: nose.rightCheekGun });
+          if (bomber === 'B-17F' || bomber === 'B-17G' || bomber === 'B-24D' || bomber === 'B-24J')
+            guns.push({ gun: 'Left Wst', inoperable: 'todo' });
+          if (bomber === 'B-17G')
+            guns.push({ gun: 'Chin Turr.', inoperable: nose.noseGun });
+          if (bomber === 'B-24J')
+            guns.push({ gun: 'Nose Turr.', inoperable: nose.noseGun });
         }
         break;
       case 'Vertical Dive':
         guns.push({ gun: 'Top Turr.', inoperable: 'todo' });
+        if (bomber === 'B-17G')
+          guns.push({ gun: 'Radio Rm.', inoperable: 'todo' }); //optional rule 10.5.3
         break;
       case 'Vertical Climb':
         guns.push({ gun: 'Ball Turr.', inoperable: 'todo' });
