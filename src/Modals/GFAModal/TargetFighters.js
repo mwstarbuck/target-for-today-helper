@@ -30,7 +30,7 @@ const TargetFighters = ({activeGuns, setActiveGuns}) => {
         <Row gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6 }}>
           <Col span={6} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{f.type}</p></Col>
           <Col span={18} style={{ borderBottom: '1px solid lightgrey' }}><p>{f.angle} {f.level}</p></Col>
-          <Col span={24} style={{ marginTop: 5 }}><BomberGuns activeGuns={activeGuns} setActiveGuns={setActiveGuns} angle={f.angle} level={f.level} /></Col>
+          <Col span={24} style={{ marginTop: 5 }}><BomberGuns fighter={i} activeGuns={activeGuns} setActiveGuns={setActiveGuns} angle={f.angle} level={f.level} /></Col>
         </Row>
       </div>
       )}
