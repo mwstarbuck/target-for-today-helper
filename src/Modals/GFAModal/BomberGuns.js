@@ -1,11 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Row, Col, Radio, Divider, Checkbox } from 'antd';
 import GameContext from '../../Game/GameContext';
+import CombatContext from '../../Game/Context/CombatContext';
+import Gun from './Gun';
 
-const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter }) => {
+const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter}) => {
   const ctx = useContext(GameContext);
+  const combatCTX = useContext(CombatContext);
   const [elligibleGuns, setElligibleGuns] = useState(null); //make ctx
-  const [selectedGun, setSelectedGun] = useState(null); //make ctx
+  const [selectedGuns, setSelectedGuns] = useState([]); //make ctx
+  const waveData = combatCTX.waveData;
 
   const inUse = (gun) => {
     const targetAndGun = activeGuns.find(g => g.gun === gun);
@@ -186,10 +190,10 @@ const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter }) => {
   const onGunSelect = (e) => {
     const checked = e.target.checked;
     const id = e.target.fighter;
-    const gun = e.target.name
+    const gun = e.target.name;
     if (checked){
       let newActiveGuns = [...activeGuns];
-      newActiveGuns.push({gun: e.target.name, id: id});
+      newActiveGuns.push({gun: gun, id: id});
       setActiveGuns(newActiveGuns);
     }
     else {
@@ -197,11 +201,15 @@ const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter }) => {
       const newActiveGuns = temp.filter(g => g.gun !== gun);
       setActiveGuns(newActiveGuns);
     }
-    // setSelectedGun(gun);
   }
-  
   return <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 0, paddingLeft: 8 }}>
-    {elligibleGuns?.map((g, i)=> <Checkbox key={i} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)}
+    {/* {elligibleGuns?.map((g, i)=> <Checkbox key={i} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)} */}
+    {elligibleGuns?.map((g, i) => <Gun 
+                                    key={i} 
+                                    fighter={fighter}
+                                    onGunSelect={onGunSelect}
+                                    gun={g}
+                                    />)}
   </div>
 }
 

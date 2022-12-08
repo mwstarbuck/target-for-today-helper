@@ -21,7 +21,7 @@ const DOFighters = () => {
     combatCTX.setWaveData(newWaveData);
   }
 
-  if (waveData.length === 0)
+  if (waveData?.length === 0)
     return <div style={{ width: 350, minWidth: 350, margin: 16, fontSize: 15, fontWeight: 600 }}>All fighters have been driven off. Click Ok or Cancel button to close modal.</div>
   return (<>
     <div style={{ textAlign: 'center' }}>

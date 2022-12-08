@@ -8,6 +8,7 @@ import GFA from './GFA';
 import GFDrivenOff from './GFDrivenOff';
 import GFTargeting from './GFTargeting';
 
+
 const GFAModal = (props) => {
   // const ctx = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
@@ -25,7 +26,7 @@ const GFAModal = (props) => {
     },
     {
       title: 'Target Fighters',
-      content: <GFTargeting />
+      content: <GFTargeting current={current} />
     },
     {
       title: 'Fighter Skill',

@@ -16,16 +16,13 @@ const TargetFighters = ({activeGuns, setActiveGuns}) => {
     combatCTX.setWaveData(wDCopy);
   }
 
-  const onRemoveFighters = () => {
-    let wDCopy = [...waveData]
-    const newWaveData = wDCopy.filter(f => f.drivenOff === false);
-    combatCTX.setWaveData(newWaveData);
+  const onClick = () => {
+    let tempData = [...waveData];
+    activeGuns?.forEach(g => tempData[g.id].targetedBy.push(g.gun));
+    combatCTX.setWaveData(tempData);
   }
 
-  if (waveData.length === 0)
-    return <div style={{ width: 350, minWidth: 350, margin: 16, fontSize: 15, fontWeight: 600 }}>All fighters have been driven off. Click Ok or Cancel button to close modal.</div>
   return (<>
-    {/* <div style={{ textAlign: 'center' }}> */}
       {waveData?.map((f, i) => <div key={i} style={{ width: 450, minWidth: 450, height: 75, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
         <Row gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6 }}>
           <Col span={6} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{f.type}</p></Col>
@@ -35,7 +32,7 @@ const TargetFighters = ({activeGuns, setActiveGuns}) => {
       </div>
       )}
     {/* </div> */}
-    <div style={{ marginLeft: 155, marginBottom: 25 }}><Button>Confirm Targets</Button></div>
+    <div style={{ marginLeft: 155, marginBottom: 25 }}><Button onClick={onClick}>Confirm Targets</Button></div>
   </>
   )
 

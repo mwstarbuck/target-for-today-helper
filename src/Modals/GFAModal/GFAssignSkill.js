@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Popover, Row, Col } from 'antd';
 import TargetFighters from './TargetFighters';
 
-const GFTargeting = (props) => {
-  const { opacity} = props;
+const GFAssignSkill = (props) => {
+  const { opacity } = props;
   const [activeGuns, setActiveGuns] = useState([]);
 
   return <>
@@ -15,4 +15,4 @@ const GFTargeting = (props) => {
   </>
 }
 
-export default GFTargeting;
+export default GFAssignSkill;
