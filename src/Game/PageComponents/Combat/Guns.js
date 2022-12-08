@@ -2,12 +2,11 @@ import React, {useContext, useState, useEffect} from 'react';
 import { Row, Col, Radio, Divider, Checkbox } from 'antd';
 import GameContext from '../../GameContext';
 
-const Guns = ({angle, level, tt }) => {
+const Guns = ({angle, level }) => {
   const ctx = useContext(GameContext);
   const [elligibleGuns, setElligibleGuns] = useState(null); //make ctx
   const [selectedGun, setSelectedGun] = useState(null); //make ctx
 
-  let thing = ctx.pilotComp.tTurretInoperable;
 
   const createGunList = () => {
     const bomber = ctx.bomber;

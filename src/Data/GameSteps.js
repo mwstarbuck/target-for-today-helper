@@ -529,9 +529,10 @@ export const COMBAT_PROCEDURE = [
     reference: 'Table 5-3, Section 5.3 game rules pg. 15.',
     additionalInfo: ['Roll 1D6 + 1D6 and cross reference the the resistance level rolled on 5-1.', 'Place fighteres in the clock position designated by the table.', 'If a random event or no attack is rolled, roll 1D6 per table notes to determine which option to take.'],
     hasAction: false,
-    actionType: 'cardMessage&Radio',
-    tableImageDependency: null,
-    modalTableDependency: null,
+    // actionType: 'cardMessage&Radio', //revert
+    actionType: 'tableModalAndInput',
+    cardTableDependency: null,
+    modalTableDependency: 'campaign',
     cardMessage: [{
       message: 'See Table 5-3A in the Tables Reference Tab', match: ['11/1942', '12/1942', '1/1943', '2/1943',
         '3/1943', '4/1943', '5/1943', '6/1943', '7/1943', '8/1943', '9/1943', '10/1943', '11/1943']
@@ -541,15 +542,16 @@ export const COMBAT_PROCEDURE = [
         '4/1944', '5/1944', '6/1944', '7/1944', '8/1944', '9/1944', '10/1944', '11/1944']
     },
     { message: 'See Table 5-3C in the Tables Reference Tab', match: ['12/1944', '1/1945', '2/1945', '3/1945', '4/1945', '5/1945'] }],
+    modalTable: [{ table: '5-3A', diceType: '1D6 + 1D6', title: '5-3A German Fighter Appearance', note: '5-3A-note' }, { table: '5-3A', diceType: '1D6 + 1D6', title: '5-3A German Fighter Appearance', note: '5-3A-note' }, { table: '5-3B', diceType: '1D6 + 1D6', title: '5-3B German Fighter Appearance', note: '5-3B-note' }, { table: '5-3B', diceType: '1D6 + 1D6', title: '5-3B German Fighter Appearance', note: '5-3B-note' }, { table: '5-3B', diceType: '1D6 + 1D6', title: '5-3B German Fighter Appearance', note: '5-3B-note' }, { table: '5-3C', diceType: '1D6 + 1D6', title: '5-3C German Fighter Appearance', note: '5-3C-note' },],
     diceType: '1D6 + 1D6',
     nextCardTest: true,
     cardTestName: 'radioResult',
     messageType: 'fighterNumberTable',
     radioQuestion: 'Rolled Random Event?',
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false },],
-    inputRequired: 'radio'
+    inputRequired: 'radio',
     // action: 'roll',
-    // actionText: ''
+    actionText: 'Roll for GFA'
   },
   {
     id: 29,

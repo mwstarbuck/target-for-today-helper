@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {Checkbox, Row, Col} from 'antd';
 import GameContext from '../GameContext';
 
@@ -17,7 +17,11 @@ const problems = {
 
 const NoseCompartment = () => {
   const ctx = useContext(GameContext);
-  const [nose, setNose] = useState(problems)
+  const [nose, setNose] = useState(ctx.nose || problems)
+
+  useEffect(() => {
+    setNose(ctx.nose);
+  }, [])
 
   const onChange = (e) => {
     const name = e.target.name;
@@ -65,19 +69,19 @@ const NoseCompartment = () => {
   return <div style={{ width: 490, minWidth: 490, border: '1px solid black'}}>
     <Row style={{paddingLeft: 5, textAlign: 'left'}}>
       <Col span={24}><div style={{ backgroundColor: 'rgb(226, 212, 201)', marginLeft: -5, borderBottom: '1px solid black' }}><h3 style={{ textAlign: 'center', margin: 0 }}>Nose Compartment</h3></div></Col>
-      <Col span={12}><Checkbox onChange={onChange} name='sight'>Norden Bomb Sight Out</Checkbox></Col>
-      <Col span={12}><Checkbox onChange={onChange} name='noseGun'>Nose Gun Inoperable</Checkbox></Col>
+      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.nose.sight} name='sight'>Norden Bomb Sight Out</Checkbox></Col>
+      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.nose.noseGun} name='noseGun'>Nose Gun Inoperable</Checkbox></Col>
       <Col span={9}>Cheek Gun Inoperable:</Col>
-      <Col span={4}><Checkbox onChange={onChange} name='leftCheekGun'>Left</Checkbox></Col>
-      <Col span={11}><Checkbox onChange={onChange} name='rightCheekGun'>Right</Checkbox></Col>
-      <Col span={24}><Checkbox onChange={onChange} name='navEquipment'>Navigator Equipment Inoperable</Checkbox></Col>
-      <Col span={24}><Checkbox onChange={onChange} name='bombControls'>Bombardier Controls Inoperable</Checkbox></Col>
+      <Col span={4}><Checkbox onChange={onChange} checked={ctx?.nose.leftCheekGun} name='leftCheekGun'>Left</Checkbox></Col>
+      <Col span={11}><Checkbox onChange={onChange} checked={ctx?.nose.rightCheekGun} name='rightCheekGun'>Right</Checkbox></Col>
+      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.nose.navEquipment} name='navEquipment'>Navigator Equipment Inoperable</Checkbox></Col>
+      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.nose.bombControls} name='bombControls'>Bombardier Controls Inoperable</Checkbox></Col>
       <Col span={4}>Heat Out:</Col>
-      <Col span={6}><Checkbox onChange={onChange} name='bombHeat'>Bombardier</Checkbox></Col>
-      <Col span={14}><Checkbox onChange={onChange} name='navHeat'>Navigator</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.nose.bombHeat} name='bombHeat'>Bombardier</Checkbox></Col>
+      <Col span={14}><Checkbox onChange={onChange} checked={ctx?.nose.navHeat} name='navHeat'>Navigator</Checkbox></Col>
       <Col span={5}>Oxygen Out:</Col>
-      <Col span={6}><Checkbox onChange={onChange} name='bombO2'>Bombardier</Checkbox></Col>
-      <Col span={13}><Checkbox onChange={onChange} name='navO2'>Navigator</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.nose.bombO2} name='bombO2'>Bombardier</Checkbox></Col>
+      <Col span={13}><Checkbox onChange={onChange} checked={ctx?.nose.navO2} name='navO2'>Navigator</Checkbox></Col>
     </Row>
   </div>
 }

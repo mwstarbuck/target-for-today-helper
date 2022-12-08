@@ -21,9 +21,11 @@ import CombatStatusCard from './CardComponents/CombatStatusCard';
 import ModalCard from './CardComponents/ModalCard';
 import ModalYesOrNoCard from './CardComponents/modalYesOrNoCard';
 import DamageModal from '../Modals/DamageModal/DamageModal';
+import TableModalAndInput from './CardComponents/TableModalAndInput';
 // import { radioResultStep, survivingFightersStep } from '../Utilities/StepMethods';
 import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
+import GFAModal from '../Modals/GFAModal/GFAModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -35,6 +37,7 @@ const Card = (props) => {
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [showDamageModal, setShowDamageModal] = useState(false);
+  const [showGFAModal, setShowGFAModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [cardMods, setCardMods] = useState(null);
 
@@ -308,6 +311,32 @@ const Card = (props) => {
     case 'tableModalYesNo':
       if (modalTableDependency) {
         getVariableTable(modalTable, modalTableDependency, modalTableSrc)
+      }
+      else {
+        modalTable.forEach(t => {
+          modalTableSrc.push({
+            table: tableImageEnum[t.table],
+            diceType: t.diceType,
+            title: t.title,
+            note: tableNoteEnum[t.note]
+          })
+
+        })
+      }
+      break;
+    case 'tableModalAndInput':
+      if (modalTableDependency) {
+        switch (modalTableDependency) {
+          case 'campaign':
+            const table = modalTable[ctx.campaign.campaign - 1];
+            modalTableSrc.push({
+              table: tableImageEnum[table.table],
+              diceType: table.diceType,
+              title: table.title,
+              note: tableNoteEnum[table.note]
+            })
+          // break;
+        }
       }
       else {
         modalTable.forEach(t => {
@@ -733,6 +762,7 @@ const Card = (props) => {
 
     }
   }
+  
   const onSelect = (selection) => {
     const setter = contextEnum[props.setter.setterA]
     setSelectValue(selection);
@@ -939,6 +969,17 @@ const Card = (props) => {
         </button>
       </>
       }
+      {!props.isIncrement && props.actionType === 'tableModalAndInput' && <>
+        <TableModalAndInput 
+          setShowModal={setShowGFAModal}
+          actionText={props.actionText}
+          cardMessage={cardMessage}
+          onRadioChange={onRadioChange}
+          goToNextCard={goToNextCard}
+          radioDetails={props.radioDetails}
+          radioQuestion={props.radioQuestion} />
+      </>
+      }
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
         : <div>
@@ -965,6 +1006,12 @@ const Card = (props) => {
       setShowModal={setShowDamageModal}
       bomber={ctx.bomber}
       hitTables={props.hitTables} />
+    <GFAModal 
+      showModal={showGFAModal}
+      setShowModal={setShowGFAModal}
+      source={modalTableSrc}
+      diceType={props.diceType}
+      />
   </div>
 }
 

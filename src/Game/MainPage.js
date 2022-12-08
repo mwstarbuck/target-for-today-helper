@@ -4,6 +4,7 @@ import GamePage from './GamePage';
 import ZonesPage from './ZonesPage';
 import Crew from './Crew';
 import TablesReference from './TablesReference';
+import Test from './Test/Test';
 // import "antd/dist/antd.css";
 
 const { TabPane } = Tabs;
@@ -31,6 +32,11 @@ const MainPage = () => {
       label: 'Tables Reference',
       key: 'tablesReference',
       children: <TablesReference />
+    },
+    {
+      label: 'Test',
+      key: 'test',
+      children: <Test />
     },
   ]
 
