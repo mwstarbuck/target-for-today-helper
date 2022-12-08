@@ -4,10 +4,10 @@ import GameContext from '../../Game/GameContext';
 import CombatContext from '../../Game/Context/CombatContext';
 import Gun from './Gun';
 
-const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter}) => {
+const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter, guns}) => {
   const ctx = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
-  const [elligibleGuns, setElligibleGuns] = useState(null); //make ctx
+  const [elligibleGuns, setElligibleGuns] = useState(guns); //make ctx
   const [selectedGuns, setSelectedGuns] = useState([]); //make ctx
   const waveData = combatCTX.waveData;
 
@@ -182,34 +182,39 @@ const BomberGuns = ({ angle, level, activeGuns, setActiveGuns, fighter}) => {
     setElligibleGuns(guns);
   }
 
-  useEffect(() => {
-    createGunList();
-    console.log('fired')
-  }, [angle, level, ctx.pilotComp, ctx.nose, activeGuns])
-
   const onGunSelect = (e) => {
     const checked = e.target.checked;
     const id = e.target.fighter;
     const gun = e.target.name;
+    let newD = [...combatCTX.waveData];
+    newD[id].guns.forEach(g => {
+      if (g.gun === gun)
+        g.checked = checked
+    });
     if (checked){
-      let newActiveGuns = [...activeGuns];
+      let newActiveGuns = [...combatCTX.activeGuns];
       newActiveGuns.push({gun: gun, id: id});
-      setActiveGuns(newActiveGuns);
+      combatCTX.setActiveGuns(newActiveGuns);
     }
     else {
-      let temp = [...activeGuns];
+      let temp = [...combatCTX.activeGuns];
       const newActiveGuns = temp.filter(g => g.gun !== gun);
-      setActiveGuns(newActiveGuns);
+      combatCTX.setActiveGuns(newActiveGuns);
     }
+    combatCTX.setWaveData(newD);
   }
+
   return <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 0, paddingLeft: 8 }}>
-    {/* {elligibleGuns?.map((g, i)=> <Checkbox key={i} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)} */}
-    {elligibleGuns?.map((g, i) => <Gun 
+    {/* {elligibleGuns?.map((g, i)=> <Checkbox key={i} checked={g.checked} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)} */}
+    {waveData[fighter].guns?.map((g, i) => <Checkbox key={i} checked={g.checked} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)}
+
+    {/* {elligibleGuns?.map((g, i) => <Gun 
                                     key={i} 
                                     fighter={fighter}
                                     onGunSelect={onGunSelect}
                                     gun={g}
-                                    />)}
+                                    checked={g.checked}
+                                    />)} */}
   </div>
 }
 

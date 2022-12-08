@@ -3,6 +3,8 @@ import Select from 'react-select';
 import EnterGFAnglesLevels from './EnterGFAngleAndLevel'
 import { Row, Col, Divider, Radio, Button } from 'antd';
 import CombatContext from '../../Game/Context/CombatContext';
+import GameContext from '../../Game/GameContext';
+import { createGunList } from './GFHelpers';
 
 
 
@@ -14,8 +16,9 @@ const number = [
   { value: 5, label: 5 }
 ]
 
-const EnterGFNumber = ({setShowModal}) => {
+const EnterGFNumber = () => {
   const combatCTX = useContext(CombatContext);
+  const ctx = useContext(GameContext);
   const [fighterNumber, setFighterNumber] = useState(null);
   const [waveData, setWaveData] = useState(null);
   const [showNext, setShowNext] = useState(false)
@@ -26,23 +29,29 @@ const EnterGFNumber = ({setShowModal}) => {
     let fighters = [];
     for (let i = 0; i < number; i++) {
       fighters.push({
-        id: i + 1,
+        id: i,
         type: null,
         angle: null,
         level: null,
         skill: 'average',
         status: null,
-        targetedBy: [],
+        guns: [],
+        targetedByGuns: [],
         attacks: null,
-        drivenOff: false
       })
     }
     setWaveData(fighters);
   }
 
   const onClick = () => {
-    combatCTX.setWaveData(waveData);
-    // console.log(combatCTX.waveData);
+
+    //createGunList(waveData);
+    const newD = [...waveData]
+    newD.map(f => {
+      const guns = createGunList(ctx, f)
+      f.guns = guns;
+    })
+    combatCTX.setWaveData(newD);
   }
 
   // let fighters = [];
@@ -52,11 +61,11 @@ const EnterGFNumber = ({setShowModal}) => {
   //       <EnterAnglesLevels number={i + 1} />
   //     </Col>)
   // }
-  console.log(combatCTX.waveData);
-
+ 
   const wave = waveData?.map((f, i) => <Col key={f.id} span={24}>
     <EnterGFAnglesLevels number={i} waveData={waveData} setWaveData={setWaveData} />
   </Col>)
+
   return <div>
     <div>Select Number of Fighers rolled in the wave.</div>
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
