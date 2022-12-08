@@ -14,17 +14,13 @@ const GFTargeting = (props) => {
     const targetAndGun = combatCTX.activeGuns.find(g => g.gun === gun.gun);
     if (targetAndGun) {
       if (targetAndGun.id === id) {
-        // gun.inUse = false;
         return false
       }
       else {
         return true
-        // gun.inUse = true;
-        console.log(gun);
       }
     }
     return false;
-    // gun.inUse = false;
   }
 
   useMemo(() => {

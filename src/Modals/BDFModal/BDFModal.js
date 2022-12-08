@@ -9,12 +9,12 @@ import GFDrivenOff from './GFDrivenOff';
 import GFTargeting from './GFTargeting';
 import GFAssignSkill from './GFAssignSkill';
 
-const GFAModal = (props) => {
+const BDFModal = (props) => {
   // const ctx = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
   const { showModal, setShowModal, source, opacity } = props;
   const [current, setCurrent] = useState(0);
-  const {Step} = Steps;
+  const { Step } = Steps;
   const steps = [
     {
       title: 'German Fighter Appearance',
@@ -48,23 +48,23 @@ const GFAModal = (props) => {
     setShowModal(false);
   };
 
-const items = steps.map((item) => ({
-  key: item.title,
-  title: item.title
-}))
+  const items = steps.map((item) => ({
+    key: item.title,
+    title: item.title
+  }))
 
   return <>
     <Modal
       open={showModal}
       onOk={handleOk}
       onCancel={handleCancel} width={1200}>
-        
-      <Steps 
+
+      <Steps
         current={current}
         labelPlacement='vertical'
         onChange={(s) => setCurrent(s)}>
         <Step title='Fighter Appearance' content={<GFA source={source} opacity={0.9} />} />
-        <Step title='Number GF Driven Off' content={<GFDrivenOff />}/>
+        <Step title='Number GF Driven Off' content={<GFDrivenOff />} />
         <Step title='Target Fighters' content={<GFTargeting />} />
         <Step title='Fighter Skill' content={<GFAssignSkill />} />
       </Steps>
@@ -95,4 +95,4 @@ const items = steps.map((item) => ({
   </>
 }
 
-export default GFAModal;
+export default BDFModal;

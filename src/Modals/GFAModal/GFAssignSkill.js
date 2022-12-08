@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Popover, Row, Col } from 'antd';
-import TargetFighters from './TargetFighters';
+import FighterSkill from './FighterSkill';
 
 const GFAssignSkill = (props) => {
   const { opacity } = props;
-  const [activeGuns, setActiveGuns] = useState([]);
 
   return <>
     <Row>
       <Col span={24}>
-        <TargetFighters activeGuns={activeGuns} setActiveGuns={setActiveGuns} />
+        <FighterSkill />
       </Col>
     </Row>
   </>
