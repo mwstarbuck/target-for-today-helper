@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Popover, Row, Col } from 'antd';
-import DOFighters from './DOFighter';
+import DOFighter from './DOFighter';
 
 const GFDrivenOff = (props) => {
   const { opacity } = props;
@@ -8,7 +8,7 @@ const GFDrivenOff = (props) => {
   return <>
     <Row>
       <Col span={10}>
-        <DOFighters />
+        <DOFighter />
       </Col>
       <Col span={14}>
           <div>

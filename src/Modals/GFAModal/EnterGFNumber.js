@@ -6,8 +6,6 @@ import CombatContext from '../../Game/Context/CombatContext';
 import GameContext from '../../Game/GameContext';
 import { createGunList } from './GFHelpers';
 
-
-
 const number = [
   { value: 1, label: 1 },
   { value: 2, label: 2 },
@@ -38,6 +36,7 @@ const EnterGFNumber = () => {
         guns: [],
         targetedByGuns: [],
         attacks: null,
+        drivenOff: false
       })
     }
     setWaveData(fighters);
@@ -45,7 +44,6 @@ const EnterGFNumber = () => {
 
   const onClick = () => {
 
-    //createGunList(waveData);
     const newD = [...waveData]
     newD.map(f => {
       const guns = createGunList(ctx, f)
@@ -54,14 +52,6 @@ const EnterGFNumber = () => {
     combatCTX.setWaveData(newD);
   }
 
-  // let fighters = [];
-  // for (let i = 0; i < fighterNumber; i++) {
-  //   fighters.push(
-  //     <Col key={i} span={24}>
-  //       <EnterAnglesLevels number={i + 1} />
-  //     </Col>)
-  // }
- 
   const wave = waveData?.map((f, i) => <Col key={f.id} span={24}>
     <EnterGFAnglesLevels number={i} waveData={waveData} setWaveData={setWaveData} />
   </Col>)

@@ -23,22 +23,22 @@ const GFTargeting = (props) => {
     return false;
   }
 
-  useMemo(() => {
+  useEffect(() => {
     let newD = [...combatCTX.waveData]
-    newD.forEach(f => {
+    newD.forEach((f, i) => {
       f.guns.forEach(g => {
-        g.inUse = inUse(g, f.id);
+        g.inUse = inUse(g, i);
       })
     });
     combatCTX.setWaveData(newD);
     
-  }, [combatCTX.activeGuns])
+  }, [combatCTX?.activeGuns])
 
 
   return <>
     <Row>
       <Col span={24}>
-        <TargetFighters activeGuns={activeGuns} setActiveGuns={setActiveGuns} />
+        <TargetFighters />
       </Col>
     </Row>
   </>

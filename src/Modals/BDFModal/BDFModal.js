@@ -3,35 +3,35 @@ import { Modal, Popover, Divider, Row, Col, Steps, Button, message } from 'antd'
 import Select from 'react-select';
 // import GameContext from '../../Game/GameContext';
 import CombatContext from '../../Game/Context/CombatContext';
-import EnterGFNumber from './EnterGFNumber';
-import GFA from './GFA';
-import GFDrivenOff from './GFDrivenOff';
-import GFTargeting from './GFTargeting';
-import GFAssignSkill from './GFAssignSkill';
+// import EnterGFNumber from './EnterGFNumber';
+import BDF from './BDF';
+// import GFDrivenOff from './GFDrivenOff';
+// import GFTargeting from './GFTargeting';
+// import GFAssignSkill from './GFAssignSkill';
 
 const BDFModal = (props) => {
   // const ctx = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
-  const { showModal, setShowModal, source, opacity } = props;
+  const { showModal, setShowModal} = props;
   const [current, setCurrent] = useState(0);
   const { Step } = Steps;
   const steps = [
     {
-      title: 'German Fighter Appearance',
-      content: <GFA source={source} opacity={0.9} />
+      title: 'Bomber Defensive Fire',
+      content: <BDF />
     },
     {
-      title: 'Number GF Driven Off',
-      content: <GFDrivenOff />
+      title: 'Roll for GF Damage',
+      content: 'GF Damage'
     },
-    {
-      title: 'Target Fighters',
-      content: <GFTargeting current={current} />
-    },
-    {
-      title: 'Fighter Skill',
-      content: <GFAssignSkill current={current} />
-    },
+    // {
+    //   title: 'Target Fighters',
+    //   content: 'placeholder'
+    // },
+    // {
+    //   title: 'Fighter Skill',
+    //   content: 'placeholder'
+    // },
   ];
 
   const next = () => {
@@ -63,10 +63,10 @@ const BDFModal = (props) => {
         current={current}
         labelPlacement='vertical'
         onChange={(s) => setCurrent(s)}>
-        <Step title='Fighter Appearance' content={<GFA source={source} opacity={0.9} />} />
-        <Step title='Number GF Driven Off' content={<GFDrivenOff />} />
-        <Step title='Target Fighters' content={<GFTargeting />} />
-        <Step title='Fighter Skill' content={<GFAssignSkill />} />
+        <Step title='Bomber Defensive Fire'></Step>
+        <Step title='Roll for GF Damage'></Step>
+        {/* <Step title='Target Fighters' content={<GFTargeting />} />
+        <Step title='Fighter Skill' content={<GFAssignSkill />} /> */}
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
