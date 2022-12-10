@@ -5,9 +5,7 @@ import Select from 'react-select';
 import CombatContext from '../../Game/Context/CombatContext';
 // import EnterGFNumber from './EnterGFNumber';
 import BDF from './BDF';
-// import GFDrivenOff from './GFDrivenOff';
-// import GFTargeting from './GFTargeting';
-// import GFAssignSkill from './GFAssignSkill';
+import BDFHits from './BDFHits';
 
 const BDFModal = (props) => {
   // const ctx = useContext(GameContext);
@@ -22,7 +20,7 @@ const BDFModal = (props) => {
     },
     {
       title: 'Roll for GF Damage',
-      content: 'GF Damage'
+      content: <BDFHits />
     },
     // {
     //   title: 'Target Fighters',
@@ -57,7 +55,7 @@ const BDFModal = (props) => {
     <Modal
       open={showModal}
       onOk={handleOk}
-      onCancel={handleCancel} width={1200}>
+      onCancel={handleCancel} width={1300}>
 
       <Steps
         current={current}

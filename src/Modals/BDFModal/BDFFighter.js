@@ -3,12 +3,12 @@ import { Row, Col, Radio, Button } from 'antd';
 import CombatContext from '../../Game/Context/CombatContext';
 
 
-const BDFFighter = ({type, skill, status, angle, level, guns, id}) => {
+const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
   const combatCTX = useContext(CombatContext);
   const waveData = combatCTX.waveData;
   const activeGun = combatCTX.activeGun;
-  
-  
+
+
   const onStatusChange = (e) => {
     const status = e.target.value
     let newD = [...waveData];
@@ -23,13 +23,20 @@ const BDFFighter = ({type, skill, status, angle, level, guns, id}) => {
     combatCTX.setActiveGun(activeGun);
   }
 
+  const onRemove = (e, id) => {
+    let newD = [...waveData];
+    const newWaveData = newD.splice(id, 1);
+    combatCTX.setWaveData(newD);
+  }
+
   console.log(waveData);
   return (<>
-    <div style={{ width: 450, minWidth: 450, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
-      <Row gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6 }}>
-        <Col span={6} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{type}</p></Col>
+    <div id={id} style={{ width: 460, minWidth: 460, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
+      <Row id={id} gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6 }}>
+        <Col span={5} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{type}</p></Col>
         <Col span={4} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{skill}</p></Col>
-        <Col span={14} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{angle} {level}</p></Col>
+        <Col span={10} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{angle} {level}</p></Col>
+        <Col id={id} span={5}><div onClick={(e) => onRemove(e, id)}>Remove</div></Col>
         <Col span={4} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600, paddingTop: 4, }}>Status:</p></Col>
         <Col span={20} style={{ borderBottom: '1px solid lightgrey' }}>
           <Radio.Group name='status' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 4, paddingLeft: 8 }} onChange={onStatusChange} value={status} defaultValue='average'>
@@ -43,7 +50,7 @@ const BDFFighter = ({type, skill, status, angle, level, guns, id}) => {
         <Col span={12} style={{ marginTop: 5 }}>
           <Radio.Group name='gun' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }} onChange={onGunChange} value={activeGun?.gun}>
             {guns.map((g, i) => g.checked && <Radio id={i} value={g.gun}>{g.gun}</Radio>
-        )}
+            )}
           </Radio.Group>
         </Col>
       </Row>
