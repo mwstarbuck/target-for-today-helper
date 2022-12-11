@@ -1,6 +1,5 @@
 import React, { createContext } from 'react';
 import { Modal, Divider, Popover } from 'antd';
-import tableImageEnum from '../../Images/Tables/TableEnum';
 import AreaHitTabs from '../DamageModal/AreaHitTabs';
 import AreaDamageTabs from '../DamageModal/AreaDamageTabs';
 

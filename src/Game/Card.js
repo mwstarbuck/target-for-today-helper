@@ -27,6 +27,7 @@ import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
 import GFAModal from '../Modals/GFAModal/GFAModal';
 import BDFModal from '../Modals/BDFModal/BDFModal';
+import GOFModal from '../Modals/GOFModal/GOFModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -40,6 +41,7 @@ const Card = (props) => {
   const [showDamageModal, setShowDamageModal] = useState(false);
   const [showGFAModal, setShowGFAModal] = useState(false);
   const [showBDFModal, setShowBDFModal] = useState(false);
+  const [showGOFModal, setShowGOFModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [cardMods, setCardMods] = useState(null);
 
@@ -986,6 +988,10 @@ const Card = (props) => {
         <ModalCard setShowModal={setShowBDFModal} actionText={props.actionText} />
       </>
       }
+      {!props.isIncrement && props.actionType === 'tableModalGOF' && <>
+        <ModalCard setShowModal={setShowGOFModal} actionText={props.actionText} />
+      </>
+      }
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
         : <div>
@@ -1021,8 +1027,10 @@ const Card = (props) => {
     <BDFModal
       showModal={showBDFModal}
       setShowModal={setShowBDFModal}
-      // source={modalTableSrc}
-      // diceType={props.diceType}
+    />
+    <GOFModal
+      showModal={showGOFModal}
+      setShowModal={setShowGOFModal}
     />
   </div>
 }
