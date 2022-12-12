@@ -25,6 +25,10 @@ const BDFModal = (props) => {
       title: 'Bomber Damage Resolution',
       content: <GOFDamage />
     },
+    {
+      title: 'Check for Collision',
+      content: 'collison check'
+    },
   ];
 
   const next = () => {
@@ -59,6 +63,7 @@ const BDFModal = (props) => {
         <Step title='German Offensive Fire'></Step>
         <Step title='German Hit Resolution'></Step>
         <Step title='Bomber Damage Resolution'></Step>
+        <Step title='Check for Collision'></Step>
         {/* <Step title='Target Fighters' content={<GFTargeting />} />
         <Step title='Fighter Skill' content={<GFAssignSkill />} /> */}
       </Steps>

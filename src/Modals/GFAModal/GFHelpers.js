@@ -94,20 +94,20 @@ export const createGunList = (ctx, gf) => {
       if (gf.level === 'high') {
         guns.push({ gun: 'Top Turr', inoperable: pilotComp.tTurretInoperable, inUse: false, checked: false }, { gun: 'Right Wst', inoperable: 'todo', inUse: false, checked: false });
         if (bomber === 'B-17F' || bomber === 'B-17G')
-          guns.push({ gun: 'Radio Rm', inoperable: 'todo', inUse: false, checked: false }, { gun: 'Tail Gun', inoperable: 'todo', inUse: false, checked: false });
+          guns.push({ gun: 'Radio Rm', inoperable: 'todo', inUse: false, checked: false }, { gun: 'Tail Guns', inoperable: 'todo', inUse: false, checked: false });
         if (bomber === 'B-24D' || bomber === 'B-24J')
           guns.push({ gun: 'Tail Turr', inoperable: 'todo', inUse: false, checked: false });
       }
       if (gf.level === 'level') {
         if (bomber === 'B-17F' || bomber === 'B-17G')
-          guns.push({ gun: 'Tail Gun', inoperable: 'todo', inUse: false, checked: false });
+          guns.push({ gun: 'Tail Guns', inoperable: 'todo', inUse: false, checked: false });
         if (bomber === 'B-24D' || bomber === 'B-24J')
           guns.push({ gun: 'Tail Turr', inoperable: 'todo', inUse: false, checked: false });
       }
       if (gf.level === 'low') {
         guns.push({ gun: 'Ball Turr', inoperable: 'todo', inUse: false, checked: false });
         if (bomber === 'B-17F' || bomber === 'B-17G')
-          guns.push({ gun: 'Tail Gun', inoperable: 'todo', inUse: false, checked: false });
+          guns.push({ gun: 'Tail Guns', inoperable: 'todo', inUse: false, checked: false });
         if (bomber === 'B-24D' || bomber === 'B-24J')
           guns.push({ gun: 'Tail Turr', inoperable: 'todo', inUse: false, checked: false });
       }
