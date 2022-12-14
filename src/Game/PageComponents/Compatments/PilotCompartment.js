@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Checkbox, Row, Col } from 'antd';
-import GameContext from '../GameContext';
+import GameContext from '../../GameContext';
 
 const problems = {
   windowFirstHit: false,
   windowSecondHit: false,
-  tTurretInoperable: false,
+  tTurretInop: false,
   tTurretPowerOut: false,
   heatOut: false,
   pilotO2Out: false,
@@ -29,7 +29,7 @@ const PilotCompartment = () => {
         newPilotComp.windowSecondHit = checked
         break;
       case 'tTurretInoperable':
-        newPilotComp.tTurretInoperable = checked
+        newPilotComp.tTurretInop = checked
         break;
       case ' tTurretPowerOut':
         newPilotComp.tTurretPowerOut = checked

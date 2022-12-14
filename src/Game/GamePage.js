@@ -8,8 +8,8 @@ import { GameContext } from './GameContext';
 import { Row, Col } from 'antd';
 import Zone from './Zone';
 import b17f from '../Images/b17f-test.png'
-import NoseCompartment from './PageComponents/NoseCompartment';
-import PilotCompartment from './PageComponents/PilotCompartment';
+import NoseCompartment from './PageComponents/Compartments/NoseCompartment';
+import PilotCompartment from './PageComponents/Compartments/PilotCompartment';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
 

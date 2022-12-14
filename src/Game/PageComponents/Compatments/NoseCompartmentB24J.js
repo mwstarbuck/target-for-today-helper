@@ -1,21 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {Checkbox, Row, Col} from 'antd';
-import GameContext from '../GameContext';
+import GameContext from '../../GameContext';
 
 const problems = {
-  sight: false,
-  noseGun: false,
-  leftCheekGun: false,
-  rightCheekGun: false,
-  bombControls: false,
-  navEquipment: false,
-  bombHeat: false,
-  navHeat: false,
+  sightOut: false,//
+  noseGunInop: false,//
+  conTurrStuck: false,
+  conTurrHydrOut: false,
+  emmerElecOut: false,
+  emmerPowerOut: false,
+  bombCtrlInop: false,//
+  navEquipment: false,//
+  bombHeatOut: false,
+  navHeatOut: false,
+  nGunHeatOut: false,
   bombO2: false,
-  navO2: false
+  navO2: false,
+  nGunO2Out: false,
 }
 
-const NoseCompartment = () => {
+const NoseCompartmentB24J = () => {
   const ctx = useContext(GameContext);
   const [nose, setNose] = useState(ctx.nose || problems)
 
@@ -86,4 +90,4 @@ const NoseCompartment = () => {
   </div>
 }
 
-export default NoseCompartment
+export default NoseCompartmentB24J
