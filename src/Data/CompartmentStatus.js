@@ -30,11 +30,11 @@ export const noseCompB24JStatus = {
   emmerElecOut: false,
   emmerPowerOut: false,
   bombCtrlInop: false,//
-  navEquipment: false,//
+  navEquipInop: false,//
   bombHeatOut: false,
   navHeatOut: false,
   nGunHeatOut: false,
-  bombO2: false,
-  navO2: false,
+  bombO2Out: false,
+  navO2Out: false,
   nGunO2Out: false,
 }

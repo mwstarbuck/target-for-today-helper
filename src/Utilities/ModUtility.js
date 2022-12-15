@@ -3,29 +3,29 @@ import GameContext from '../Game/GameContext';
 
 // const ModUtility = () => {
 //   const ctx = useContext(GameContext);
-  const contextEnum = {
-    'setCampaign': ctx?.setCampaign,
-    'setStep': ctx?.setStep,
-    'setBomber': ctx?.setBomber,
-    'setTimePeriod': ctx?.setTimePeriod,
-    'setNoseTurret': ctx?.setNoseTurret,
-    'setCrew': ctx?.setCrew,
-    'setTargetType': ctx?.setTargetType,
-    'setTarget': ctx?.setTarget,
-    'setCell': ctx?.setCell,
-    'setBomberNumber': ctx?.setBomberNumber,
-    'setModifiers': ctx?.setModifiers,
-    'modifiers': ctx?.modifiers,
-    'setZones': ctx?.setZones,
-    'setCurrentZone': ctx?.setCurrentZone,
-    'currentZone': ctx?.currentZone,
-    'outbound': ctx?.outbound,
-    'aircraft': ctx?.bomber,
-    'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
-    'escort': ctx?.escort,
-    'period': ctx?.campaign.period,
-    'base': ctx?.campaign.base,
-  }
+  // const contextEnum = {
+  //   'setCampaign': ctx?.setCampaign,
+  //   'setStep': ctx?.setStep,
+  //   'setBomber': ctx?.setBomber,
+  //   'setTimePeriod': ctx?.setTimePeriod,
+  //   'setNoseTurret': ctx?.setNoseTurret,
+  //   'setCrew': ctx?.setCrew,
+  //   'setTargetType': ctx?.setTargetType,
+  //   'setTarget': ctx?.setTarget,
+  //   'setCell': ctx?.setCell,
+  //   'setBomberNumber': ctx?.setBomberNumber,
+  //   'setModifiers': ctx?.setModifiers,
+  //   'modifiers': ctx?.modifiers,
+  //   'setZones': ctx?.setZones,
+  //   'setCurrentZone': ctx?.setCurrentZone,
+  //   'currentZone': ctx?.currentZone,
+  //   'outbound': ctx?.outbound,
+  //   'aircraft': ctx?.bomber,
+  //   'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
+  //   'escort': ctx?.escort,
+  //   'period': ctx?.campaign.period,
+  //   'base': ctx?.campaign.base,
+  // }
   const thing = [{
     type: 'if',
     info: [
@@ -70,15 +70,15 @@ import GameContext from '../Game/GameContext';
         message: '+3 for missions flown in Mar or Oct'
       },   
     ],
-    type: 'ifThen',
-    info: [
-      {
-        this: gameCTX.targetedFighter.angle,
-        thisValue: 'Vertical Dive',
-        reuslt: -3,
-        message: ' for defensive fire against VERTICAL DIVE fighter position.'
-      },
-    ],
+    // type: 'ifThen',
+    // info: [
+    //   {
+    //     this: gameCTX.targetedFighter.angle,
+    //     thisValue: 'Vertical Dive',
+    //     reuslt: -3,
+    //     message: ' for defensive fire against VERTICAL DIVE fighter position.'
+    //   },
+    // ],
   }]
 
 export const makeMods = (mods, contextEnum) => {

@@ -3,7 +3,7 @@ import { Row, Col, Radio, Divider, Checkbox } from 'antd';
 import Select from 'react-select';
 import { fighters, angles } from '../../../Data/Options';
 import GameContext from '../../GameContext';
-import NoseCompartment from '../NoseCompartment';
+import NoseCompartment from '../Compartments/NoseCompartment';
 import { useEffect } from 'react';
 import Guns from './Guns';
 
