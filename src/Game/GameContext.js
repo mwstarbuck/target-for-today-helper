@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { pilotCompStatus, noseCompStatus } from '../Data/CompartmentStatus';
+import { pilotCompStatus, noseCompStatus, waistCompStatus, TTRCompStatus, radioCompStatus } from '../Data/CompartmentStatus';
 
 export const GameContext = createContext();
 
@@ -30,6 +30,9 @@ export const GameContextProvider = ({ children }) => {
   const [resistance, setResistance] = useState(null);
   const [nose, setNose] = useState(noseCompStatus);
   const [pilotComp, setPilotComp] = useState(pilotCompStatus);
+  const [waistComp, setWaistComp] = useState(waistCompStatus);
+  const [TTRComp, setTTRComp] = useState(TTRCompStatus);
+  const [radioComp, setRadioComp] = useState(radioCompStatus);
 
   
 
@@ -74,6 +77,9 @@ export const GameContextProvider = ({ children }) => {
       resistance, setResistance,
       nose, setNose,
       pilotComp, setPilotComp,
+      waistComp, setWaistComp,
+      TTRComp, setTTRComp,
+      radioComp, setRadioComp,
     }}
     >
       {children}

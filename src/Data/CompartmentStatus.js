@@ -38,3 +38,38 @@ export const noseCompB24JStatus = {
   navO2Out: false,
   nGunO2Out: false,
 }
+
+export const waistCompStatus = {
+  LWstGunInop: false,
+  RWstGunInop: false,
+  ballInop: false,
+  ballMechInop: false,
+  ballPwrOut: false,
+  ballElecOut: false,
+  ballAuxHydrOut: false,
+  LHeatOut: false,
+  RHeatOut: false,
+  ballHeatOut: false,
+  LO2Out: false,
+  RO2Out: false,
+  ballO2Out: false,
+  coPilotO2Out: false,
+}
+
+export const TTRCompStatus = {
+  tTurrInop: false,
+  tTurrElecOut: false,
+  tTurrPwrOut: false,
+  radioOut: false,
+  comsOut: false,
+  heatOut: false,
+  radioO2Out: false,
+  engO2Out: false,
+}
+
+export const radioCompStatus = {
+  radioGunInop: false,
+  radioOut: false,
+  heatOut: false,
+  O2Out: false,
+}

@@ -11,6 +11,9 @@ import b17f from '../Images/b17f-test.png'
 import NoseCompartment from './PageComponents/Compartments/NoseCompartment';
 import NoseCompartmentB24J from './PageComponents/Compartments/NoseCompartmentB24J';
 import PilotCompartment from './PageComponents/Compartments/PilotCompartment';
+import WaistCompartment from './PageComponents/Compartments/WaistCompartment';
+import TopTurretRadioCompartment from './PageComponents/Compartments/TopTurretRadioCompartment';
+import RadioCompartment from './PageComponents/Compartments/RadioCompartment';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
 
@@ -163,6 +166,34 @@ const GamePage = () => {
                   </Col>
                   <Col span={20} style={{ padding: 5 }}>
                     Pilot Compartment
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<WaistCompartment />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>Waist</Avatar>
+                  </Col>
+                  <Col span={20} style={{ padding: 5 }}>
+                    Waist Compartment
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={(ctx?.bomber === 'B-24D' || ctx?.bomber === 'B-24J') ? <TopTurretRadioCompartment /> : <RadioCompartment />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>{(ctx?.bomber === 'B-24D' || ctx?.bomber === 'B-24J') ? `TT & Radio` : `Radio`}</Avatar>
+                  </Col>
+                  <Col span={20} style={{ padding: 5 }}>
+                    {(ctx?.bomber === 'B-24D' || ctx?.bomber === 'B-24J') ? `Top Turret & Radio Room` : `Radio Compartment`}
                   </Col>
                 </Row>
               </span>
