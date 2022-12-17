@@ -37,6 +37,8 @@ export const GameContextProvider = ({ children }) => {
   const [bombBay, setBombBay] = useState(bombBayStatus);
   const [tailSection, setTailSection] = useState(tailSectionStatus);
   const [controlCables, setControlCables] = useState(controlCablesStatus);
+  const [landingGear, setlandingGear] = useState(controlCablesStatus);
+  const [systems, setSystems] = useState(controlCablesStatus);
 
   
 

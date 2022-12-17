@@ -3,36 +3,48 @@ import { Checkbox, Row, Col } from 'antd';
 import GameContext from '../../GameContext';
 
 const problems = {
-  firstHit: false,
-  secondHit: false,
+  LBrakeOut: false,
+  RBrakeOut: false,
+  LGearOut: false,
+  RGearOut: false,
+  tailWheelDamged: false,
 }
 
-const ControlCables = () => {
+const LandingGear = () => {
   const ctx = useContext(GameContext);
   // const {pilotComp,setPilotComp} = useContext(GameContext);
-  const [controlCables, setControlCables] = useState(ctx.controlCables || problems)
+  const [landingGear, setLandingGear] = useState(ctx.controlCables || problems)
 
   useEffect(() => {
-    setControlCables(ctx.controlCables);
+    setLandingGear(ctx.landingGear);
   }, [])
 
   const onChange = (e) => {
     const name = e.target.name;
     const checked = e.target.checked;
-    let newControlCables = { ...controlCables };
+    let newLandingGear = { ...landingGear };
     switch (name) {
       case 'firstHit':
-        newControlCables.firstHit = checked
+        newLandingGear.firstHit = checked
         break;
       case 'secondHit':
-        newControlCables.secondHit = checked
+        newLandingGear.secondHit = checked
+        break;
+      case 'secondHit':
+        newLandingGear.secondHit = checked
+        break;
+      case 'secondHit':
+        newLandingGear.secondHit = checked
+        break;
+      case 'secondHit':
+        newLandingGear.secondHit = checked
         break;
       default:
         break;
     }
     // setPilotComp(newPilotComp);
-    setControlCables(newControlCables);
-    ctx.setControlCables(newControlCables);
+    setControlCables(newLandingGear);
+    ctx.setControlCables(newLandingGear);
   }
 
   return <div style={{ width: 490, minWidth: 490, border: '1px solid black' }}>
@@ -45,4 +57,4 @@ const ControlCables = () => {
   </div>
 }
 
-export default ControlCables;
+export default LandingGear;
