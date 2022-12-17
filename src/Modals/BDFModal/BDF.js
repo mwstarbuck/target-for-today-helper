@@ -16,19 +16,19 @@ const BDF = (props) => {
     type: 'ifThen',
     info: [
       {
-        this: gameCTX.targetedFighter.angle,
+        this: combatCTX?.targetedFighter?.angle,
         thisValue: 'Vertical Dive',
         reuslt: -3,
         message: '-3 for defensive fire against VERTICAL DIVE fighter position.'
       },
       {
-        this: gameCTX?.targetedFighter?.type,
+        this: combatCTX?.targetedFighter?.type,
         thisValue: 'Me-163',
         reuslt: -2,
         message: '-2 for defensive fire against Me-163 Rocket Fighter.'
       },
       {
-        this: gameCTX?.targetedFighter?.skill,
+        this: combatCTX?.targetedFighter?.skill,
         thisValue: 'ace',
         reuslt: -1,
         message: '–1 for defensive fire versus Ace fighter pilot (See Table 5-5A)'

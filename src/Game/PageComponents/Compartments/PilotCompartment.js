@@ -78,4 +78,4 @@ const PilotCompartment = () => {
   </div>
 }
 
-export default PilotCompartment
+export default PilotCompartment;

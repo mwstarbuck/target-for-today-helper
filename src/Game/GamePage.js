@@ -13,7 +13,10 @@ import NoseCompartmentB24J from './PageComponents/Compartments/NoseCompartmentB2
 import PilotCompartment from './PageComponents/Compartments/PilotCompartment';
 import WaistCompartment from './PageComponents/Compartments/WaistCompartment';
 import TopTurretRadioCompartment from './PageComponents/Compartments/TopTurretRadioCompartment';
+import BombBay from './PageComponents/Compartments/BombBay';
 import RadioCompartment from './PageComponents/Compartments/RadioCompartment';
+import TailSection from './PageComponents/Compartments/TailSection';
+import ControlCables from './PageComponents/Compartments/ControlCables';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
 
@@ -86,6 +89,14 @@ const GamePage = () => {
     ctx.setStep(17);
   }
 
+  const reportDamage = (compartment) => {
+    for (const property in compartment) {
+      if (compartment[property])
+        return true;
+      }
+      return false;
+  }
+
   const nextStep = () => {
     ctx.setStep(ctx.step + 1);
   }
@@ -148,9 +159,9 @@ const GamePage = () => {
               <span style={{ cursor: 'pointer' }}>
                 <Row gutter={[16, 16]}>
                   <Col span={4}>
-                    <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>Nose</Avatar>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green'}}>Nose</Avatar>
                   </Col>
-                  <Col span={20} style={{padding: 5}}>
+                  <Col span={20} style={{ paddingTop: 5 }}>
                     Nose Compartment
                   </Col>
                 </Row>
@@ -164,7 +175,7 @@ const GamePage = () => {
                   <Col span={4}>
                     <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>Pilot</Avatar>
                   </Col>
-                  <Col span={20} style={{ padding: 5 }}>
+                  <Col span={20} style={{ paddingTop: 5 }}>
                     Pilot Compartment
                   </Col>
                 </Row>
@@ -178,7 +189,7 @@ const GamePage = () => {
                   <Col span={4}>
                     <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>Waist</Avatar>
                   </Col>
-                  <Col span={20} style={{ padding: 5 }}>
+                  <Col span={20} style={{ paddingTop: 5 }}>
                     Waist Compartment
                   </Col>
                 </Row>
@@ -192,8 +203,50 @@ const GamePage = () => {
                   <Col span={4}>
                     <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>{(ctx?.bomber === 'B-24D' || ctx?.bomber === 'B-24J') ? `TT & Radio` : `Radio`}</Avatar>
                   </Col>
-                  <Col span={20} style={{ padding: 5 }}>
+                  <Col span={20} style={{ paddingTop: 5 }}>
                     {(ctx?.bomber === 'B-24D' || ctx?.bomber === 'B-24J') ? `Top Turret & Radio Room` : `Radio Compartment`}
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<BombBay />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: 'green' }}>Bomb Bay</Avatar>
+                  </Col>
+                  <Col span={20} style={{ paddingTop: 5 }}>
+                    Bomb Bay
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<TailSection />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: reportDamage(ctx.tailSection) ? 'red' : 'green' }}>Tail</Avatar>
+                  </Col>
+                  <Col span={20} style={{ paddingTop: 5 }}>
+                    Tail Section
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<ControlCables />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: reportDamage(ctx.controlCables) ? 'red' : 'green' }}>Cables</Avatar>
+                  </Col>
+                  <Col span={20} style={{ paddingTop: 5 }}>
+                    Control Cables
                   </Col>
                 </Row>
               </span>

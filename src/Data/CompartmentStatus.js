@@ -73,3 +73,25 @@ export const radioCompStatus = {
   heatOut: false,
   O2Out: false,
 }
+
+export const bombBayStatus = {
+  releaseMechOut: false,
+  raftsDestroyed: false,
+  doorsInop: false,
+  fuelTranPumpInop: false,
+  hydrPumpOut: false
+}
+
+export const tailSectionStatus = {
+  tailGunsInop: false,
+  tailTurrInop: false,
+  auxHydrOut: false,
+  powerOut: false,
+  heatOut: false,
+  O2Out: false
+}
+
+export const controlCablesStatus = {
+  firstHit: false,
+  secondHit: false,
+}

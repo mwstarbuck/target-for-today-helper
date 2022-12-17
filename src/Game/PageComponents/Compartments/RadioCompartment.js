@@ -35,18 +35,6 @@ const RadioCompartment = () => {
       case 'O2Out':
         newRadioComp.O2Out = checked
         break;
-      case 'heatOut':
-        newRadioComp.heatOut = checked
-        break;
-      case 'pilotO2Out':
-        newRadioComp.pilotO2Out = checked
-        break;
-      case 'coPilotO2Out':
-        newRadioComp.coPilotO2Out = checked
-        break;
-      case 'EngO2Out':
-        newRadioComp.EngO2Out = checked
-        break;
       default:
         break;
     }
