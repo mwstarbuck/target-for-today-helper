@@ -17,6 +17,8 @@ import BombBay from './PageComponents/Compartments/BombBay';
 import RadioCompartment from './PageComponents/Compartments/RadioCompartment';
 import TailSection from './PageComponents/Compartments/TailSection';
 import ControlCables from './PageComponents/Compartments/ControlCables';
+import LandingGear from './PageComponents/Compartments/LandingGear';
+import Systems from './PageComponents/Compartments/Systems';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
 
@@ -38,7 +40,7 @@ const GamePage = () => {
       missions: 25,
       altMissions: null
     })
-    ctx.setBomber('B-17F');
+    ctx.setBomber('B-24J');
     ctx.setTimePeriod('2/1943');
     ctx.setTarget('Leone');
     ctx.setTargetType('Airfield');
@@ -247,6 +249,34 @@ const GamePage = () => {
                   </Col>
                   <Col span={20} style={{ paddingTop: 5 }}>
                     Control Cables
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<LandingGear />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: reportDamage(ctx.landingGear) ? 'red' : 'green' }}>LG</Avatar>
+                  </Col>
+                  <Col span={20} style={{ paddingTop: 5 }}>
+                    Landing Gear
+                  </Col>
+                </Row>
+              </span>
+            </Popover>
+          </List.Item>
+          <List.Item>
+            <Popover trigger='click' placement='left' content={<Systems />}>
+              <span style={{ cursor: 'pointer' }}>
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size='medium' shape='circle' style={{ backgroundColor: reportDamage(ctx.systems) ? 'red' : 'green' }}>Systems</Avatar>
+                  </Col>
+                  <Col span={20} style={{ paddingTop: 5 }}>
+                    Systems
                   </Col>
                 </Row>
               </span>

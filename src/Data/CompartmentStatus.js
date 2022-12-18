@@ -95,3 +95,22 @@ export const controlCablesStatus = {
   firstHit: false,
   secondHit: false,
 }
+
+export const landingGearStatus = {
+  LBrakeOut: false,
+  RBrakeOut: false,
+  LGearOut: false,
+  RGearOut: false,
+  tailWheelDamged: false,
+  noseWheelDamged: false,
+}
+
+export const systemsStatus = {
+  O2SysOut: false,
+  ElecSysOut: false,
+  propSystemOut: false,
+  fuelSysOut: false,
+  engineFireExtOut: false,
+  autoPilotOut: false,
+  comsSysOut: false,
+}

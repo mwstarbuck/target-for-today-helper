@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { pilotCompStatus, noseCompStatus, waistCompStatus, TTRCompStatus, 
-  radioCompStatus, bombBayStatus, tailSectionStatus, controlCablesStatus } from '../Data/CompartmentStatus';
+  radioCompStatus, bombBayStatus, tailSectionStatus, controlCablesStatus, landingGearStatus, systemsStatus } from '../Data/CompartmentStatus';
 
 export const GameContext = createContext();
 
@@ -37,8 +37,8 @@ export const GameContextProvider = ({ children }) => {
   const [bombBay, setBombBay] = useState(bombBayStatus);
   const [tailSection, setTailSection] = useState(tailSectionStatus);
   const [controlCables, setControlCables] = useState(controlCablesStatus);
-  const [landingGear, setlandingGear] = useState(controlCablesStatus);
-  const [systems, setSystems] = useState(controlCablesStatus);
+  const [landingGear, setLandingGear] = useState(landingGearStatus);
+  const [systems, setSystems] = useState(systemsStatus);
 
   
 
@@ -89,6 +89,8 @@ export const GameContextProvider = ({ children }) => {
       bombBay, setBombBay,
       tailSection, setTailSection,
       controlCables, setControlCables,
+      landingGear, setLandingGear,
+      systems, setSystems,
     }}
     >
       {children}
