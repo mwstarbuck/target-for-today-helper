@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Popover, Divider, Row, Col, Switch } from 'antd';
 import Select from 'react-select';
 import GameContext from '../../Game/GameContext';
@@ -11,6 +11,7 @@ const BDF = (props) => {
   const combatCTX = useContext(CombatContext);
   const { showModal, setShowModal, source, opacity } = props;
   const [checked, setChecked] = useState(true);
+  const [cardMods, setCardMods] = useState(null);
 
   const mods = [{
     type: 'ifThen',
@@ -110,6 +111,10 @@ fighter position.
   },
 ]
 
+  useEffect(() => {
+    const mods = makeMods();
+  })
+
   const onChange = () => {
     setChecked(!checked);
   }
@@ -121,11 +126,28 @@ fighter position.
         {/* Radio to select Gun & radio to enter Status */}
         <BDFFighters />
       </Col>
+      
       <Col span={12}>
         {/* Show table 5-6 use toggle to display spray fire table */}
         {/* Show cumulative modifiers here */}
+        <Row>
+        <Col span={12}>
         <Switch defaultChecked checked={checked} checkedChildren='Fire Table' unCheckedChildren='Spray Fire Table' onChange={onChange} />
-
+        </Col>
+        <Col span={12}>
+        <Popover 
+          color='white'
+          trigger='click'
+          overlayStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
+          overlayInnerStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
+          placement='bottom'
+          content={<div><ul>{cardMods?.modList?.map(m => <li style={{ color: 'red' }}>{m}</li>)}</ul>
+            <div>Roll Modifier: {cardMods?.result}</div>
+          </div>}>
+          Show Roll Modifiers
+        </Popover>
+        </Col>
+        </Row>
         {checked ? <div key='regular'>
           <div style={{ textAlign: 'center', marginBottom: -20 }}><p style={{ fontSize: 19, fontWeight: 600 }}>5-6 Bomber Defensive Fire Resolution</p><p style={{ fontSize: 16, fontWeight: 600 }}>(Roll 2D6)</p></div>
           <Popover trigger='click' placement='left' content={<><div style={{ fontWeight: 600, fontSize: 18 }}>5-6 Bomber Defensive Fire Resolution Notes</div><img src={require('../../Images/TableNotes/5-6-note.png')} style={{ opacity: 0.8, paddingTop: 10, alignSelf: 'baseline' }} /></>} ><a style={{ cursor: 'pointer', textAlign: 'right' }}>See Table Notes</a>

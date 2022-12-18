@@ -40,7 +40,7 @@ const GamePage = () => {
       missions: 25,
       altMissions: null
     })
-    ctx.setBomber('B-24J');
+    ctx.setBomber('B-17F');
     ctx.setTimePeriod('2/1943');
     ctx.setTarget('Leone');
     ctx.setTargetType('Airfield');
