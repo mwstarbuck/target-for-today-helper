@@ -21,16 +21,16 @@ const problems = {
 
 const NoseCompartmentB24J = () => {
   const ctx = useContext(GameContext);
-  const [nose, setNose] = useState(ctx.nose || problems)
-
+  const [noseB24J, setNoseB24J] = useState(ctx.noseB24J || problems);
+ 
   useEffect(() => {
-    setNose(ctx.nose);
+    setNoseB24J(ctx.noseB24J);
   }, [])
 
   const onChange = (e) => {
     const name = e.target.name;
     const checked = e.target.checked;
-    let newNose = { ...nose };
+    let newNose = { ...noseB24J };
     switch (name) {
       case 'sightOut':
         newNose.sightOut = checked
@@ -77,36 +77,36 @@ const NoseCompartmentB24J = () => {
       default:
         break;
     }
-    setNose(newNose);
-    ctx.setNose(newNose);
+    setNoseB24J(newNose);
+    ctx.setNoseB24J(newNose);
   }
 
   return <div style={{ width: 490, minWidth: 490, border: '1px solid black' }}>
     <Row style={{ paddingLeft: 5, textAlign: 'left' }}>
       <Col span={24}><div style={{ backgroundColor: 'rgb(226, 212, 201)', marginLeft: -5, borderBottom: '1px solid black' }}><h3 style={{ textAlign: 'center', margin: 0 }}>Nose Compartment</h3></div></Col>
-      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.nose.sightOutt} name='sightOut'>Norden Bomb Sight Out</Checkbox></Col>
-      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.nose.noseGunInop} name='noseGunInop'>Nose Gun Inoperable</Checkbox></Col>
+      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.noseB24J.sightOutt} name='sightOut'>Norden Bomb Sight Out</Checkbox></Col>
+      <Col span={12}><Checkbox onChange={onChange} checked={ctx?.noseB24J.noseGunInop} name='noseGunInop'>Nose Gun Inoperable</Checkbox></Col>
       {ctx.noseTurret === 'Consolidated Nose Turret' ?
         <>
         <Col span={10}>Consolidated Turrret:</Col>
-          <Col span={5}><Checkbox onChange={onChange} checked={ctx?.nose.conTurrStuck} name='conTurrStuck'>Stuck</Checkbox></Col>
-          <Col span={9}><Checkbox onChange={onChange} checked={ctx?.nose.conTurrHydrOut} name='conTurrHydrOut'>Hydraulics Out</Checkbox></Col></>
+          <Col span={5}><Checkbox onChange={onChange} checked={ctx?.noseB24J.conTurrStuck} name='conTurrStuck'>Stuck</Checkbox></Col>
+          <Col span={9}><Checkbox onChange={onChange} checked={ctx?.noseB24J.conTurrHydrOut} name='conTurrHydrOut'>Hydraulics Out</Checkbox></Col></>
         : <>
           <Col span={8}>Emmerson Turrret:</Col>
-          <Col span={8}><Checkbox onChange={onChange} checked={ctx?.nose.emmerElecOut} name='emmerElecOut'>Electic Out</Checkbox></Col>
-          <Col span={8}><Checkbox onChange={onChange} checked={ctx?.nose.emmerPowerOut} name='emmerPowerOut'>Power Out</Checkbox></Col>
+          <Col span={8}><Checkbox onChange={onChange} checked={ctx?.noseB24J.emmerElecOut} name='emmerElecOut'>Electic Out</Checkbox></Col>
+          <Col span={8}><Checkbox onChange={onChange} checked={ctx?.noseB24J.emmerPowerOut} name='emmerPowerOut'>Power Out</Checkbox></Col>
         </>
       }
-      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.nose.navEquipInop} name='navEquipInop'>Navigator Equipment Inoperable</Checkbox></Col>
-      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.nose.bombCtrlInop} name='bombCtrlInop'>Bombardier Controls Inoperable</Checkbox></Col>
+      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.noseB24J.navEquipInop} name='navEquipInop'>Navigator Equipment Inoperable</Checkbox></Col>
+      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.noseB24J.bombCtrlInop} name='bombCtrlInop'>Bombardier Controls Inoperable</Checkbox></Col>
       <Col span={4}>Heat Out:</Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.nose.bombHeatOut} name='bombHeatOut'>Bombardier</Checkbox></Col>
-      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.nose.navHeatOut} name='navHeatOut'>Navigator</Checkbox></Col>
-      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.nose.nGunHeatOut} name='nGunHeatOut'>Nose Gunner</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.noseB24J.bombHeatOut} name='bombHeatOut'>Bombardier</Checkbox></Col>
+      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.noseB24J.navHeatOut} name='navHeatOut'>Navigator</Checkbox></Col>
+      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.noseB24J.nGunHeatOut} name='nGunHeatOut'>Nose Gunner</Checkbox></Col>
       <Col span={5}>Oxygen Out:</Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.nose.bombO2Out} name='bombO2Out'>Bombardier</Checkbox></Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.nose.navO2Out} name='navO2Out'>Navigator</Checkbox></Col>
-      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.nose.nGunO2Out} name='nGunO2Out'>Nose Gunner</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.noseB24J.bombO2Out} name='bombO2Out'>Bombardier</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.noseB24J.navO2Out} name='navO2Out'>Navigator</Checkbox></Col>
+      <Col span={7}><Checkbox onChange={onChange} checked={ctx?.noseB24J.nGunO2Out} name='nGunO2Out'>Nose Gunner</Checkbox></Col>
     </Row>
   </div>
 }

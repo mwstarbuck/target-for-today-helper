@@ -12,6 +12,7 @@ export const pilotCompStatus = {
 export const noseCompStatus = {
   sightOut: false,
   noseGunInop: false,
+  chinGunPwrOut: false,
   LChkGunInop: false,
   RChkGunInop: false,
   bombCtrlInop: false,

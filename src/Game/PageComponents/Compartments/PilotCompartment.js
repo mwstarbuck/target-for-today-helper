@@ -63,17 +63,17 @@ const PilotCompartment = () => {
     <Row style={{ paddingLeft: 5, textAlign: 'left' }}>
       <Col span={24}><div style={{ backgroundColor: 'rgb(226, 212, 201)', marginLeft: -5, borderBottom: '1px solid black' }}><h3 style={{ textAlign: 'center', margin: 0 }}>Pilot Compartment</h3></div></Col>
       <Col span={4}>Window:</Col>
-      <Col span={5}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.windowFirstHit} name='windowFirstHit'>1st Hit</Checkbox></Col>
-      <Col span={15}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.windowSecondHit} name='windowSecondHit'>2nd Hit</Checkbox></Col>
+      <Col span={5}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.windowFirstHit} name='windowFirstHit'>1st Hit</Checkbox></Col>
+      <Col span={15}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.windowSecondHit} name='windowSecondHit'>2nd Hit</Checkbox></Col>
       {(ctx?.bomber === 'B-17F' || ctx?.bomber === 'B-17G' || ctx?.bomber === 'YB-40') && <><Col span={6}>Top Turret:</Col>
-      <Col span={8}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.tTurretInop} name='tTurretInop'>Guns Inoperable</Checkbox></Col>
-      <Col span={10}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.tTurretPowerOut} name='tTurretPowerOut'>Power Out</Checkbox></Col>
+        <Col span={8}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.tTurretInop} name='tTurretInop'>Guns Inoperable</Checkbox></Col>
+        <Col span={10}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.tTurretPowerOut} name='tTurretPowerOut'>Power Out</Checkbox></Col>
       </>}
-      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.heatOut} name='heatOut'>Heat Out</Checkbox></Col>
+      <Col span={24}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.heatOut} name='heatOut'>Heat Out</Checkbox></Col>
       <Col span={6}>Oxygen Out:</Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.pilotO2Out} name='pilotO2Out'>Pilot</Checkbox></Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.coPilotO2Out} name='coPilotO2Out'>Co-Pilot</Checkbox></Col>
-      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.piolotComp?.EngO2Out} name='EngO2Out'>Engineer</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.pilotO2Out} name='pilotO2Out'>Pilot</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.coPilotO2Out} name='coPilotO2Out'>Co-Pilot</Checkbox></Col>
+      <Col span={6}><Checkbox onChange={onChange} checked={ctx?.pilotComp?.EngO2Out} name='EngO2Out'>Engineer</Checkbox></Col>
     </Row>
   </div>
 }

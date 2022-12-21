@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { pilotCompStatus, noseCompStatus, waistCompStatus, TTRCompStatus, 
+import {
+  pilotCompStatus, noseCompStatus, noseCompB24JStatus, waistCompStatus, TTRCompStatus, 
   radioCompStatus, bombBayStatus, tailSectionStatus, controlCablesStatus, landingGearStatus, systemsStatus } from '../Data/CompartmentStatus';
 
 export const GameContext = createContext();
@@ -30,6 +31,7 @@ export const GameContextProvider = ({ children }) => {
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
   const [nose, setNose] = useState(noseCompStatus);
+  const [noseB24J, setNoseB24J] = useState(noseCompB24JStatus);
   const [pilotComp, setPilotComp] = useState(pilotCompStatus);
   const [waistComp, setWaistComp] = useState(waistCompStatus);
   const [TTRComp, setTTRComp] = useState(TTRCompStatus);
@@ -82,6 +84,7 @@ export const GameContextProvider = ({ children }) => {
       contrails, setContrails,
       resistance, setResistance,
       nose, setNose,
+      noseB24J, setNoseB24J,
       pilotComp, setPilotComp,
       waistComp, setWaistComp,
       TTRComp, setTTRComp,

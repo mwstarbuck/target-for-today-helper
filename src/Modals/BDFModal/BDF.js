@@ -19,31 +19,31 @@ const BDF = (props) => {
       {
         this: combatCTX?.targetedFighter?.angle,
         thisValue: 'Vertical Dive',
-        reuslt: -3,
+        result: -3,
         message: '-3 for defensive fire against VERTICAL DIVE fighter position.'
       },
       {
         this: combatCTX?.targetedFighter?.type,
         thisValue: 'Me-163',
-        reuslt: -2,
+        result: -2,
         message: '-2 for defensive fire against Me-163 Rocket Fighter.'
       },
       {
         this: combatCTX?.targetedFighter?.skill,
         thisValue: 'ace',
-        reuslt: -1,
+        result: -1,
         message: '–1 for defensive fire versus Ace fighter pilot (See Table 5-5A)'
       },
       {
         this: 'evasive action', //TODO
         thisValue: true,
-        reuslt: -1,
+        result: -1,
         message: '–1 for defensive fire if bomber is performing “Evasive Action” (See Rules Section 5.9)'
       },
       {
         this: 'Nose Turret Hydraulics out', //TODO
         thisValue: true,
-        reuslt: -1,
+        result: -1,
         message: '–1 for defensive fire, Nose Turret (B-24J) if Nose Turret Hydraulics out (Table 4-3C note “p”)'
       },
     ],
@@ -52,18 +52,58 @@ const BDF = (props) => {
     type: 'thisThenThat',
     info: [
       {
-        this: 'Intercom System Out',
+        this: (gameCTX.bomber === 'B-24D' || gameCTX.bomber === 'B-24J') ? gameCTX.TTRComp.comsOut : gameCTX?.systems.comsSysOut,
         thisValue: true,
-        that: combatCTX?.activeGun,
+        that: combatCTX?.activeGun?.gun,
         thatValue: ['Top Turr', 'Ball Turr', 'Right Chk', 'Left Chk', 'Right Wst', 'Left Wst', 'Nose Gun', 'Chin Turr', 'Nose Turr', 'Radio Rm'],
         result: -2,
         message: '–2 for defensive fire if Intercom System out for all guns firing except Tail Guns (B-17)/Tail Turret (B-24)'
       },
       {
-        this: 'Power Out', // TODO for each compartment
+        this: gameCTX.pilotComp.tTurretPowerOut,
         thisValue: true,
-        that: combatCTX?.activeGun,
-        thatValue: ['Top Turr', 'Ball Turr',  'Chin Turr', 'Nose Turr', 'Tail Turr'],
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Top Turr'],
+        result: -2,
+        message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
+      },
+      {
+        this: gameCTX.TTRComp.tTurrPwrOut,
+        thisValue: true,
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Top Turr'],
+        result: -2,
+        message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
+      },
+      {
+        this: gameCTX.waistComp.ballPwrOut,
+        thisValue: true,
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Ball Turr'],
+        result: -2,
+        message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
+      },
+      {
+        this: gameCTX.nose.chinGunPwrOut,
+        thisValue: true,
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Chin Turr'],
+        result: -2,
+        message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
+      },
+      {
+        this: gameCTX?.noseB24J?.emmerPowerOut,
+        thisValue: true,
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Nose Turr'],
+        result: -2,
+        message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
+      },
+      {
+        this: gameCTX?.tailSection?.powerOut,
+        thisValue: true,
+        that: combatCTX?.activeGun?.gun,
+        thatValue: ['Tail Turr'],
         result: -2,
         message: '–2 for defensive fire if Chin Turret (B-17G), Nose Turret (B-24J), Top Turret (B-17, B-24)/Ball Turret (B-17/B-24)Tail Turret(B- 24) Power failed(See Tables 4-3B, 4-3C)'
       },
@@ -90,14 +130,36 @@ const BDF = (props) => {
         thatValue: ['Tail Guns'],
         result: -1,
         message: '-1 for defensive fire by Tail Guns (B-17)/Tail Turret (B-24) if Intercom System out.'
-      },
-      
+      },    
     ]
-    //passing shot
-    //nose consolidated and engine 3 out
-    //gunner has frostbite
-    /*
-    -1 for defensive fire against Me-262 and He-162 Jet Fighters.
+  },
+  // {
+  //   type: 'ifThisAndThisThen',
+  //   info: [
+  //     {
+  //       this: (gameCTX.bomber === 'B-24D' || gameCTX.bomber === 'B-24J') ? gameCTX.TTRComp.comsOut : gameCTX?.systems.comsSysOut,
+  //       thisValue: ['B-24D'],
+  //       andThis:
+  //       that: combatCTX?.activeGun,
+  //       thatValue: ['Top Turr', 'Ball Turr', 'Right Chk', 'Left Chk', 'Right Wst', 'Left Wst', 'Nose Gun', 'Chin Turr', 'Nose Turr', 'Radio Rm'],
+  //       result: -2,
+  //       message: '–2 for defensive fire if Intercom System out for all guns firing except Tail Guns (B-17)/Tail Turret (B-24)'
+  //     },
+  //   ]
+  // }
+]
+/*
+–1 for defensive fire if bomber is performing “Evasive Action” (See Rules Section 5.9)
+–1 for defensive fire, Nose Turret (B-24J) if Nose Turret Hydraulics out (Table 4-3C note “p”)
+–1 for defensive fire if Nose Turret (B-24 Emerson turret)/Ball Turret/Top Turret if Electrical System out (Table 4-
+3C)
+–1 for defensive fire Tail Turret (B-24) if Auxiliary Hydraulic System out (Table 4-3C)
+-1 for defensive fire by Tail Guns (B-17)/Tail Turret (B-24) if Intercom System out.
+–1 for defensive fire for Tail Guns (B-17)/ Tail Turret (B-24) “Passing Shot” against a fighter attacking from 10:30, 
+12, or 1:30 positions (See Rules Section 5.5.2).
+-1 Nose (affects Consolidated type turret only) turret defensive fire if #3 engine is out on B-24: 
+-1 if the gunner is suffering from Frostbite
+-1 for defensive fire against Me-262 and He-162 Jet Fighters.
 +1 for defensive fire versus Green fighter pilot (See Table 5-5A)
 +1 for defensive fire by bomber Ace gunner (5+ credited kills)
 +1 for defensive fire versus Me-110, Me-210, Me-410, Ju88 C-6
@@ -107,13 +169,50 @@ const BDF = (props) => {
 fighter position.
 +2 for defensive fire against 6 o’clock fighter attack position (High/Level/Low).
 +3 for defensive fire against VERTICAL CLIMB fighter position.
- */
-  },
-]
+*/
+
+  const BDFMods = (mods) => {
+    let modDisplay = { result: 0, modList: [] };
+    console.log(mods);
+    mods?.forEach(mod => {
+      switch (mod.type) {
+        case 'thisThenThat':
+          mod.info?.forEach(check => {
+            if (check.this === check.thisValue) {
+              if (check.thatValue.includes(check.that)) {
+                modDisplay.modList.push(check.message);
+                // const sum = modDisplay.result + check.result
+                modDisplay.result +=check.result;
+              }
+            }
+          });
+          break;
+        case 'ifThen':
+          mod.info?.forEach(check => {
+            if (check.this === check.thisValue) {
+              modDisplay.modList.push(check.message);
+              // const sum = modDisplay.result +=check.result
+              modDisplay.result +=check.result;
+            }
+          })
+          break;
+        default:
+          break;
+      }
+    });
+
+    if (modDisplay.modList.length > 0) {
+      return modDisplay;
+    }
+    else {
+      modDisplay.reuslt = 'No modifiers for this table'
+      return modDisplay;
+    }
+  }
 
   useEffect(() => {
-    const mods = makeMods();
-  })
+      setCardMods(BDFMods(mods));
+  }, [gameCTX, combatCTX.targetedFighter, combatCTX.activeGun]);
 
   const onChange = () => {
     setChecked(!checked);
