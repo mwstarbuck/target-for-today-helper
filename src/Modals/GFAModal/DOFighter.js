@@ -5,14 +5,14 @@ import CombatContext from '../../Game/Context/CombatContext';
 
 const DOFighters = () => {
   const combatCTX = useContext(CombatContext);
-  const waveData = combatCTX.waveData
+  const waveData = combatCTX.waveData;
 
   const onChange = (e) => {
     const id = e.target.id;
     const checked = e.target.checked;
     let wDCopy = [...waveData]
     wDCopy[id].drivenOff = checked;
-    combatCTX.setWaveData(wDCopy);
+    combatCTX.setWaveData(wDCopy);  
   }
 
   const onRemoveFighters = () => {

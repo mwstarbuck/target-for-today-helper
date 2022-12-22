@@ -18,11 +18,11 @@ const FighterSkill = ({ activeGuns, setActiveGuns }) => {
     combatCTX.setWaveData(tempData);
   }
 
-  const onClick = () => {
-    let tempData = [...waveData];
-    activeGuns?.forEach(g => tempData[g.id].targetedBy.push(g.gun));
-    combatCTX.setWaveData(tempData);
-  }
+  // const onClick = () => {
+  //   let tempData = [...waveData];
+  //   activeGuns?.forEach(g => tempData[g.id].targetedBy.push(g.gun));
+  //   combatCTX.setWaveData(tempData);
+  // }
 
   return (<>
     {waveData?.map((f, i) => <div key={i} style={{ width: 450, minWidth: 450, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
@@ -46,7 +46,7 @@ const FighterSkill = ({ activeGuns, setActiveGuns }) => {
     </div>
     )}
     {/* </div> */}
-    <div style={{ marginLeft: 155, marginBottom: 25 }}><Button onClick={onClick}>Confirm Targets</Button></div>
+    {/* <div style={{ marginLeft: 155, marginBottom: 25 }}><Button onClick={onClick}>Confirm Targets</Button></div> */}
   </>
   )
 

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import b17 from '../Images/b17.jpeg';
 import { actionEnum } from '../Utilities/Utilities';
 import GameContext from './GameContext';
+import CombatContext from './Context/CombatContext';
 import { tableEnum } from "../Data/Tables";
 import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
@@ -26,10 +27,13 @@ import TableModalAndInput from './CardComponents/TableModalAndInput';
 import GameStepUtilities from '../Utilities/StepMethods';
 import {makeMods} from '../Utilities/ModUtility';
 import GFAModal from '../Modals/GFAModal/GFAModal';
+import BDFModal from '../Modals/BDFModal/BDFModal';
+import GOFModal from '../Modals/GOFModal/GOFModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
   const ctx = useContext(GameContext);
+  const combatCTX = useContext(CombatContext);
   const [advance, setAdvance] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
   const [inputValue, setInputValue] = useState(null);
@@ -38,6 +42,8 @@ const Card = (props) => {
   const [showTableModal, setShowTableModal] = useState(false);
   const [showDamageModal, setShowDamageModal] = useState(false);
   const [showGFAModal, setShowGFAModal] = useState(false);
+  const [showBDFModal, setShowBDFModal] = useState(false);
+  const [showGOFModal, setShowGOFModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [cardMods, setCardMods] = useState(null);
 
@@ -587,7 +593,7 @@ const Card = (props) => {
           }
           break;
         case 'waves':
-          console.log('wave count: ' + ctx.waveCount);
+          // console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
             if (ctx.targetZone === ctx.currentZone) {
               ctx.setStep(startBombingProcedure);
@@ -608,13 +614,14 @@ const Card = (props) => {
             else {
               ctx.setStep(zoneMove);
               ctx.setWaveCount(0);
+              combatCTX.setWaveData([]);
               setAdvance(false);
             }
           }
-          else if (ctx.round > 1) {
-            ctx.setStep(newAttackAngles);
-            setAdvance(false);
-          }
+          // else if (ctx.round > 1) {
+          //   ctx.setStep(newAttackAngles);
+          //   setAdvance(false);
+          // }
           else {
             ctx.setStep(ctx.step + 1);
             setAdvance(false);
@@ -824,7 +831,7 @@ const Card = (props) => {
       <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
     </Popover>
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} />
+      {/* <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} /> */}
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
       {props.subHeading && <h3>{props.subHeading}</h3>}
       <p style={{ paddingLeft: '1rem', paddingRight: '1rem' }} >{props.description}</p>
@@ -980,6 +987,14 @@ const Card = (props) => {
           radioQuestion={props.radioQuestion} />
       </>
       }
+      {!props.isIncrement && props.actionType === 'tableModalBDF' && <>
+        <ModalCard setShowModal={setShowBDFModal} actionText={props.actionText} />
+      </>
+      }
+      {!props.isIncrement && props.actionType === 'tableModalGOF' && <>
+        <ModalCard setShowModal={setShowGOFModal} actionText={props.actionText} />
+      </>
+      }
       {inputRequired === 'none' ? <span><button style={{ float: 'left' }} onClick={() => lastStep()} className='card__goback'>Go Back</button>
         <button style={{ float: 'right' }} onClick={() => nextStep()} className='card__advance'>Next Step</button></span>
         : <div>
@@ -1012,6 +1027,14 @@ const Card = (props) => {
       source={modalTableSrc}
       diceType={props.diceType}
       />
+    <BDFModal
+      showModal={showBDFModal}
+      setShowModal={setShowBDFModal}
+    />
+    <GOFModal
+      showModal={showGOFModal}
+      setShowModal={setShowGOFModal}
+    />
   </div>
 }
 

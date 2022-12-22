@@ -3,35 +3,35 @@ import GameContext from '../Game/GameContext';
 
 // const ModUtility = () => {
 //   const ctx = useContext(GameContext);
-//   const contextEnum = {
-//     'setCampaign': ctx?.setCampaign,
-//     'setStep': ctx?.setStep,
-//     'setBomber': ctx?.setBomber,
-//     'setTimePeriod': ctx?.setTimePeriod,
-//     'setNoseTurret': ctx?.setNoseTurret,
-//     'setCrew': ctx?.setCrew,
-//     'setTargetType': ctx?.setTargetType,
-//     'setTarget': ctx?.setTarget,
-//     'setCell': ctx?.setCell,
-//     'setBomberNumber': ctx?.setBomberNumber,
-//     'setModifiers': ctx?.setModifiers,
-//     'modifiers': ctx?.modifiers,
-//     'setZones': ctx?.setZones,
-//     'setCurrentZone': ctx?.setCurrentZone,
-//     'currentZone': ctx?.currentZone,
-//     'outbound': ctx?.outbound,
-//     'aircraft': ctx?.bomber,
-//     'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
-//     'escort': ctx?.escort,
-//     'period': ctx?.campaign.period,
-//     'base': ctx?.campaign.base
-//   }
+  // const contextEnum = {
+  //   'setCampaign': ctx?.setCampaign,
+  //   'setStep': ctx?.setStep,
+  //   'setBomber': ctx?.setBomber,
+  //   'setTimePeriod': ctx?.setTimePeriod,
+  //   'setNoseTurret': ctx?.setNoseTurret,
+  //   'setCrew': ctx?.setCrew,
+  //   'setTargetType': ctx?.setTargetType,
+  //   'setTarget': ctx?.setTarget,
+  //   'setCell': ctx?.setCell,
+  //   'setBomberNumber': ctx?.setBomberNumber,
+  //   'setModifiers': ctx?.setModifiers,
+  //   'modifiers': ctx?.modifiers,
+  //   'setZones': ctx?.setZones,
+  //   'setCurrentZone': ctx?.setCurrentZone,
+  //   'currentZone': ctx?.currentZone,
+  //   'outbound': ctx?.outbound,
+  //   'aircraft': ctx?.bomber,
+  //   'resistance': ctx?.zonesInfo?.find(z => z.zone === ctx.currentZone)?.resistance,
+  //   'escort': ctx?.escort,
+  //   'period': ctx?.campaign.period,
+  //   'base': ctx?.campaign.base,
+  // }
   const thing = [{
-    type: 'ifThisThenThat',
+    type: 'if',
     info: [
       {
-        this: 'base',
-        thisValue: '8th Airforce (England)',
+        this: 'angle',
+        thisValue: 'Vertical Dive',
         that: 'period',
         thatValue: ['12/1943', '1/1943', '2/1943', '12/1943', '1/1944', '2/1944', '12/1944', '1/1945', '2/1945'],
         reuslt: -2,
@@ -70,6 +70,15 @@ import GameContext from '../Game/GameContext';
         message: '+3 for missions flown in Mar or Oct'
       },   
     ],
+    // type: 'ifThen',
+    // info: [
+    //   {
+    //     this: gameCTX.targetedFighter.angle,
+    //     thisValue: 'Vertical Dive',
+    //     reuslt: -3,
+    //     message: ' for defensive fire against VERTICAL DIVE fighter position.'
+    //   },
+    // ],
   }]
 
 export const makeMods = (mods, contextEnum) => {
@@ -88,7 +97,15 @@ export const makeMods = (mods, contextEnum) => {
           }
         });
         break;
-
+      case 'ifThen':
+          mod.info?.forEach(check => {
+            if (check.this === check.thisValue) {
+              modDisplay.modList.push(check.message);
+              const sum = modDisplay.result + check.result
+              modDisplay.result = sum;
+            }
+          })
+        break;
       default:
         break;
     }
@@ -100,7 +117,6 @@ export const makeMods = (mods, contextEnum) => {
   else {
     modDisplay.reuslt = 'No modifiers for this table'
     return modDisplay;
-
   }
 }
 

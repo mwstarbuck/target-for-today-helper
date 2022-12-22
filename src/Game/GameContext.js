@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { pilotCompStatus, noseCompStatus } from '../Data/CompartmentStatus';
+import {
+  pilotCompStatus, noseCompStatus, noseCompB24JStatus, waistCompStatus, TTRCompStatus, 
+  radioCompStatus, bombBayStatus, tailSectionStatus, controlCablesStatus, landingGearStatus, systemsStatus } from '../Data/CompartmentStatus';
 
 export const GameContext = createContext();
 
@@ -23,13 +25,22 @@ export const GameContextProvider = ({ children }) => {
   const [outbound, setOutbound] = useState(true);
   const [waveTotal, setWaveTotal] = useState(null);
   const [waveCount, setWaveCount] = useState(0);
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(1);
   const [escort, setEscort] = useState(null);
   const [weather, setWeather] = useState(null);
   const [contrails, setContrails] = useState(null);
   const [resistance, setResistance] = useState(null);
   const [nose, setNose] = useState(noseCompStatus);
+  const [noseB24J, setNoseB24J] = useState(noseCompB24JStatus);
   const [pilotComp, setPilotComp] = useState(pilotCompStatus);
+  const [waistComp, setWaistComp] = useState(waistCompStatus);
+  const [TTRComp, setTTRComp] = useState(TTRCompStatus);
+  const [radioComp, setRadioComp] = useState(radioCompStatus);
+  const [bombBay, setBombBay] = useState(bombBayStatus);
+  const [tailSection, setTailSection] = useState(tailSectionStatus);
+  const [controlCables, setControlCables] = useState(controlCablesStatus);
+  const [landingGear, setLandingGear] = useState(landingGearStatus);
+  const [systems, setSystems] = useState(systemsStatus);
 
   
 
@@ -73,7 +84,16 @@ export const GameContextProvider = ({ children }) => {
       contrails, setContrails,
       resistance, setResistance,
       nose, setNose,
+      noseB24J, setNoseB24J,
       pilotComp, setPilotComp,
+      waistComp, setWaistComp,
+      TTRComp, setTTRComp,
+      radioComp, setRadioComp,
+      bombBay, setBombBay,
+      tailSection, setTailSection,
+      controlCables, setControlCables,
+      landingGear, setLandingGear,
+      systems, setSystems,
     }}
     >
       {children}
