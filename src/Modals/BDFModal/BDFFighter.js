@@ -29,6 +29,20 @@ const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
     combatCTX.setWaveData(newD);
   }
 
+  const showPS = (angle, gun) => {
+    if ((gun === 'Tail Turr' || gun === 'Tail Guns')
+      && (angle === '12:00' || angle === '1:30' || angle === '10:30'))
+      return '(PS)';
+  }
+
+
+  const disableForPS = (angle, gun) => {
+    if ((gun === 'Tail Turr' || gun === 'Tail Guns')
+      && (angle === '12:00' || angle === '1:30' || angle === '10:30'))
+      return true;
+    else return false;
+  }
+
   console.log(waveData);
   return (<>
     <div id={id} style={{ width: 480, minWidth: 480, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
@@ -49,7 +63,7 @@ const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
         <Col span={8} style={{ marginTop: 5 }}><p style={{ fontSize: 14, fontWeight: 600 }}>Tageted By:</p></Col>
         <Col span={12} style={{ marginTop: 5 }}>
           <Radio.Group name='gun' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }} onChange={onGunChange} value={activeGun?.gun}>
-            {guns.map((g, i) => g.checked && <Radio id={i} value={g.gun}>{g.gun}</Radio>
+            {guns.map((g, i) => g.checked && <Radio key={i} id={i} disabled={disableForPS(angle, g.gun)} value={g.gun}>{g.gun}{showPS(angle, g.gun)}</Radio>
             )}
           </Radio.Group>
         </Col>

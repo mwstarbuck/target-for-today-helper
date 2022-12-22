@@ -735,6 +735,7 @@ export const COMBAT_PROCEDURE = [
     // action: 'roll',
     // actionText: ''
   },
+  // Add Passing Shots yes or no
   {
     id: 33,  //Keep
     section: 'Combat',
@@ -753,6 +754,7 @@ export const COMBAT_PROCEDURE = [
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
     inputRequired: 'radio',
   },
+
   // {
   //   id: 39,
   //   section: 'Combat',

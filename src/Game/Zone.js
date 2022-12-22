@@ -160,9 +160,10 @@ const Zone = () => {
               <Radio.Group name='resistance' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}
                 onChange={onResistanceChange} value={resistance}>
                 <Radio value={'none'}><span style={{ fontWeight: resistance === 'none' ? 600 : 500 }}>None</span></Radio>
+                {ctx.campaign.campaign === 6 && <Radio value={'token'}><span style={{ fontWeight: resistance === 'token' ? 600 : 500 }}>Token</span></Radio>}
                 <Radio value={'light'}><span style={{ fontWeight: resistance === 'light' ? 600 : 500 }}>Light</span></Radio>
                 <Radio value={'moderate'}><span style={{ fontWeight: resistance === 'moderate' ? 600 : 500 }}>Moderate</span></Radio>
-                <Radio value={'heavy'}><span style={{ fontWeight: resistance === 'heavy' ? 600 : 500 }}>Heavy</span></Radio>
+                {ctx.campaign.campaign !== 6 && <Radio value={'heavy'}><span style={{ fontWeight: resistance === 'heavy' ? 600 : 500 }}>Heavy</span></Radio>}
               </Radio.Group>
             </div>
           </div>

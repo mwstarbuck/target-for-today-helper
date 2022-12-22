@@ -36,7 +36,8 @@ const EnterGFNumber = () => {
         guns: [],
         targetedByGuns: [],
         attacks: null,
-        drivenOff: false
+        drivenOff: false,
+        passingShot: false
       })
     }
     setWaveData(fighters);
