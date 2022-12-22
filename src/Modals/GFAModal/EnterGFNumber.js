@@ -57,12 +57,12 @@ const EnterGFNumber = () => {
   </Col>)
 
   return <div>
-    <div>Select Number of Fighers rolled in the wave.</div>
+    {ctx.round === 1 && <><div>Select Number of Fighers rolled in the wave.</div>
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div style={{ width: 400, alignSelf: 'center', padding: 10 }}>
         <Select options={number} onChange={onChange} value={fighterNumber} />
       </div>
-    </div>
+      </div></>}
     <Row gutter={[2, 5]}>
       {wave?.length > 0 && wave.map(f => f)}
       <Col span={24} style={{ textAlign: 'center'}}>

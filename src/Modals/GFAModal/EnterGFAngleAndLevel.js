@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Select from 'react-select';
 import GameContext from '../../Game/GameContext';
+import CombatContext from '../../Game/Context/CombatContext';
 import { Row, Col, Divider, Radio, Button } from 'antd';
 import { fighters, angles } from '../../Data/Options';
 import Guns from '../../Game/PageComponents/Combat/Guns';
@@ -8,6 +9,7 @@ import Guns from '../../Game/PageComponents/Combat/Guns';
 
 const EnterGFAnglesLevels = ({ number, waveData, setWaveData }) => {
   const ctx = useContext(GameContext);
+  const combatCTX = useContext(CombatContext);
   const angle = waveData[number].angle;
   const level = waveData[number].level
 
@@ -31,7 +33,6 @@ const EnterGFAnglesLevels = ({ number, waveData, setWaveData }) => {
     }
     setWaveData(temp)
     // setAngle(angle);
-    console.log(angle);
   }
 
   const onLevelChange = (e) => {
@@ -47,10 +48,11 @@ const EnterGFAnglesLevels = ({ number, waveData, setWaveData }) => {
     <Row gutter={[10, 5]} style={{ padding: 5}}>
       <Col span={4} style={{alignContent: 'center'}}>{number + 1}</Col>
       <Col span={24}>
-        <Select
+        {ctx.round === 1 ? <Select
           options={fighters}
           onChange={(e) => onFighterChange(e)}
-        />
+        /> : 
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}><div>type: {waveData[number].type}</div><div>skill: {waveData[number].skill}</div><div>status: {waveData[number].status}</div></div>}
       </Col>
       <Col span={12}>
         <Select

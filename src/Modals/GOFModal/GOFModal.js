@@ -5,6 +5,7 @@ import CombatContext from '../../Game/Context/CombatContext';
 import GOF from './GOF';
 import GOFHits from './GOFHits';
 import GOFDamage from './GOFDamage';
+import GOFCollision from './GOFCollision';
 
 const BDFModal = (props) => {
   // const ctx = useContext(GameContext);
@@ -27,7 +28,7 @@ const BDFModal = (props) => {
     },
     {
       title: 'Check for Collision',
-      content: 'collison check'
+      content: <GOFCollision />
     },
   ];
 

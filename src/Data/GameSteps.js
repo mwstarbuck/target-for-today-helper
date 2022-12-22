@@ -234,7 +234,7 @@ export const PRE_MISSION_STEPS = [
 
 export const TAKEOFF_PROCEDURE = [
   {
-    id: 15,
+    id: 15,  //takeoff
     section: 'Takeoff Procedure',
     heading: 'Weather over base',
     instruction: 'Roll 1D10 on Table 3-1',
@@ -318,7 +318,7 @@ export const TAKEOFF_PROCEDURE = [
 
 export const ZONES_PROCEDURE = [
   {
-    id: 17,
+    id: 17,   //zoneMove
     section: 'Movement in the Zones',
     heading: 'Movement to Next Zone',
     instruction: 'Click to move to next zone. Move your bomber on the tracker as well.',
@@ -457,7 +457,7 @@ export const ZONES_PROCEDURE = [
 
 export const COMBAT_PROCEDURE = [
   {
-    id: 25,
+    id: 25,  //startCombatProcedure
     section: 'Combat',
     heading: 'German Fighter Resistance in Zone',
     instruction: 'Roll on Table 5-1',
@@ -496,7 +496,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'waves'
   },
   {
-    id: 27,
+    id: 27,  //combatSummary
     section: 'Combat',
     heading: 'Combat Summary',
     instruction: 'Roll on Table 5-2',
@@ -576,7 +576,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 30,
+    id: 30,  //newAttackAngles
     section: 'Combat',
     heading: 'Roll for New Round Attack Levels and Angles',
     instruction: 'Roll on Table 5-9 & 5-9A for each elligible fighter',
@@ -695,7 +695,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 36,
+    id: 36, //Keep
     section: 'Combat',
     heading: 'Surviving Fighters?',
     instruction: 'Check the appropriate box',
@@ -736,7 +736,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 38,
+    id: 38,  //Keep
     section: 'Combat',
     heading: 'German Offensive Fighter Hits Rolled?',
     instruction: 'Check the appropriate box',
@@ -981,14 +981,14 @@ export const COMBAT_PROCEDURE = [
     tableImageDependency: null,
     modalTableDependency: null,
     cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: '5-16-note' }],
-    actionText: 'See Table 6-16',
+    actionText: 'See Table 5-16',
     diceType: '2D6',
     // nextCardTest: true,
     // cardTestName: 'resistance',
     inputRequired: 'none'
   },
   {
-    id: 43,
+    id: 43, //Keep
     section: 'Combat',
     heading: 'Continue German Offensive Fire?',
     instruction: 'Finished with German offensive fire?',
@@ -1006,7 +1006,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'radio',
   },
   {
-    id: 44,
+    id: 44, //Keep
     section: 'Combat',
     heading: 'Abort Or Bail Out?',
     instruction: 'Confirm answer below',
@@ -1027,7 +1027,7 @@ export const COMBAT_PROCEDURE = [
 
 export const TARGET_ZONE_PROCEDURE = [
   {
-    id: 45,
+    id: 45,  //startBombingProcedure
     section: 'Target Zone',
     heading: 'Check Target Visibility',
     instruction: 'Roll on Table 6-1 and select the result in the zone section',
@@ -1113,7 +1113,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 50,
+    id: 50, //bombRun
     section: 'Target Zone',
     heading: 'The Bomb Run',
     instruction: 'Roll on Table 6-6 to determine if bombs are "On Target".',
@@ -1228,11 +1228,11 @@ export const TARGET_ZONE_PROCEDURE = [
     nextCardTest: true,
     cardTestName: 'backToCombat',
   },
-]
+] 
 
 export const LANDING_PROCEDURE = [
   {
-    id: 57,
+    id: 57, //startLandingProcedure
     section: 'Landing Procedure',
     heading: 'Landing - Weather Over Base Check ',
     instruction: 'Roll 1D10 on Table 3-1 to determine weather over base for landing',

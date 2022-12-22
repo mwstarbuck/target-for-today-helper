@@ -25,7 +25,7 @@ export const GameContextProvider = ({ children }) => {
   const [outbound, setOutbound] = useState(true);
   const [waveTotal, setWaveTotal] = useState(null);
   const [waveCount, setWaveCount] = useState(0);
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(1);
   const [escort, setEscort] = useState(null);
   const [weather, setWeather] = useState(null);
   const [contrails, setContrails] = useState(null);

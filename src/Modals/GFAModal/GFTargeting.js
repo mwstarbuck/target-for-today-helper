@@ -5,8 +5,6 @@ import CombatContext from '../../Game/Context/CombatContext';
 
 const GFTargeting = (props) => {
   const combatCTX = useContext(CombatContext);
-  // const activeGuns = combatCTX.activeGuns;
-  // const setActiveGuns = combatCTX.setActiveGuns
   const { opacity} = props;
   const [activeGuns, setActiveGuns] = useState([]);
 

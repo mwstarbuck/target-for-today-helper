@@ -23,7 +23,7 @@ const BDFFighters = (props) => {
         {/* <TargetFighters activeGuns={activeGuns} setActiveGuns={setActiveGuns} /> */}
         <Radio.Group name='fighter' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', paddingTop: 8, paddingLeft: 8 }}  defaultValue='average'>
           {waveData.map((f, i) => (
-            <Radio value={i} id={f.type} name={f.type} onChange={onSelect}><BDFFighter
+            <Radio key={i} value={i} id={f.type} name={f.type} onChange={onSelect}><BDFFighter
                       id={i}
                       type={f.type}
                       skill={f.skill}

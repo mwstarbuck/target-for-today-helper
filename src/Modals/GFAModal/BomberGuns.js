@@ -206,14 +206,6 @@ const BomberGuns = ({ angle, level, fighter, guns}) => {
 
   return <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 0, paddingLeft: 8 }}>
     {waveData[fighter].guns?.map((g, i) => <Checkbox key={i} checked={g.checked} fighter={fighter} onChange={onGunSelect} disabled={g.inoperable || g.inUse} name={g.gun}>{g.gun}</Checkbox>)}
-
-    {/* {elligibleGuns?.map((g, i) => <Gun 
-                                    key={i} 
-                                    fighter={fighter}
-                                    onGunSelect={onGunSelect}
-                                    gun={g}
-                                    checked={g.checked}
-                                    />)} */}
   </div>
 }
 

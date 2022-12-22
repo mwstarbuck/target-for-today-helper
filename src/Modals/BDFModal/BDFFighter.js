@@ -31,7 +31,7 @@ const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
 
   console.log(waveData);
   return (<>
-    <div id={id} style={{ width: 460, minWidth: 460, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
+    <div id={id} style={{ width: 480, minWidth: 480, height: 125, border: '1px solid lightgrey', margin: 16, boxShadow: '2px 1px 1px grey', backgroundColor: '#ededed' }}>
       <Row id={id} gutter={5} style={{ paddingLeft: 8, marginBottom: -10, marginTop: 6 }}>
         <Col span={5} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{type}</p></Col>
         <Col span={4} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{skill}</p></Col>
