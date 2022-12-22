@@ -575,90 +575,90 @@ export const COMBAT_PROCEDURE = [
     // action: 'roll',
     // actionText: ''
   },
+  // {
+  //   id: 30,  //newAttackAngles
+  //   section: 'Combat',
+  //   heading: 'Roll for New Round Attack Levels and Angles',
+  //   instruction: 'Roll on Table 5-9 & 5-9A for each elligible fighter',
+  //   reference: 'Table 5-1 (1D10)',
+  //   additionalInfo: ['Roll on Table 5-9 & 5-9A for each elligible fighter.',
+  //     'Place fighteres in the clock position designated by the table.',
+  //     'Do not roll on pilot skill level table.'],
+  //   hasAction: false,
+  //   actionType: 'tableForCard',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   cardTable: [{ table: '5-9s', diceType: '1D10', title: '5-9(A) 2nd & 3rd Attack Angles and Levels', note: null }],
+  //   actionText: 'See Table 5-9(A)',
+  //   diceType: '1D6',
+  //   // nextCardTest: true,
+  //   // cardTestName: 'resistance',
+  //   inputRequired: 'none'
+  //   // action: 'roll',
+  //   // actionText: ''
+  // },
+  // {
+  //   id: 31,
+  //   section: 'Combat',
+  //   heading: 'Number of Fighters Driven Off By Escort',
+  //   instruction: 'Roll 2D6 on Table 5-4',
+  //   reference: 'Table 5-4 (2D6), Rule section 5.4, pg. 14',
+  //   additionalInfo: ['Determin how many fighters are driven off in each wave.', 'Do not roll on table if "no fighter escort was rolled non table 2-13', 'The first number is the number of fighters driven off in wave 1', 'The number in parentheses is the number drieven off in waves 2 and 3.', 'The player chooses the fighters to remove.', 'Fighters in vertical dive or jet fighters cnnot be removed.', 'Out of formation bomber recieves same level of escort as bombers in formation.'],
+  //   hasAction: false,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-4', diceType: '2D6', title: '5-4 Number of Fighters Driven Off By Escort', note: '5-4-note' }],
+  //   actionText: 'See Table 5-4',
+  //   diceType: '2D6',
+  //   skipBack: 2,
+  //   inputRequired: 'none'
+  //   // action: 'roll',
+  //   // actionText: ''
+  // },
+  // {
+  //   id: 32,
+  //   section: 'Combat',
+  //   heading: 'Bomber Defensive Fire',
+  //   instruction: 'Determine Bomber defensive Fire allocation on table 5-5.',
+  //   reference: 'See Table 5-5, Rule Section 5.5, pg.15',
+  //   additionalInfo: ['Bomber fires first in all rounds', 'All results against fighters is asseses before German offensive combat begins.', 'On table 5-5 allocate defensive fire', 'More than one gun or turret can be targeted at the same fighter', 'The gun or turret must be operational to fire.', 'Each gun may only fire at one target per round', 'Place target markers next to the chosen target', 'Mark off ammunition box on the mission log sheet', 'Next, determine German fighter pilot skill on table 5-5A', 'Twin Gund: B-17 chin turret, ball turret, B-24 Nose turret', 'Powered Turrets: Chin (B-17G), Nose (B-24J), Top Turret and Ball Turret (All models of B17 and B-24) and tail guns (B-24). The Tail Guns (B17) are not powered.', 'See special rules section 5.5.2.1 for tail gunner passing shots, nose section guns and Area spray fire (optional).'],
+  //   hasAction: false,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-5', diceType: null, title: 'Bomber Defensive Fire for Round', note: '5-5-note' }],
+  //   actionText: 'See Table 5-5',
+  //   diceType: null,
+  //   inputRequired: 'none',
+  //   nextCardTest: true,
+  //   cardTestName: 'skillRoll',
+  //   // action: 'roll',
+  //   // actionText: ''
+  // },
+  // {
+  //   id: 33,
+  //   section: 'Combat',
+  //   heading: 'German Fighter Skill',
+  //   instruction: 'Roll 1D6 on Table 5-5A for first round of combat only.',
+  //   reference: 'Table 5-5A, game section 5.5.1, pg 16',
+  //   additionalInfo: ['Only roll on table for first round of combat'],
+  //   hasAction: false,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-5A', diceType: '1D6', title: '5-5A German Fighter Skill', note: '5-5A-note' }],
+  //   actionText: 'See Table 5-5A',
+  //   diceType: '1D6',
+  //   inputRequired: 'none',
+  //   // contingencyStep: true,
+  //   // contingencyValue: 'round',
+  //   // contingentUpon: 1,
+  //   // action: 'roll',
+  //   // actionText: ''
+  // },
   {
-    id: 30,  //newAttackAngles
-    section: 'Combat',
-    heading: 'Roll for New Round Attack Levels and Angles',
-    instruction: 'Roll on Table 5-9 & 5-9A for each elligible fighter',
-    reference: 'Table 5-1 (1D10)',
-    additionalInfo: ['Roll on Table 5-9 & 5-9A for each elligible fighter.',
-      'Place fighteres in the clock position designated by the table.',
-      'Do not roll on pilot skill level table.'],
-    hasAction: false,
-    actionType: 'tableForCard',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    cardTable: [{ table: '5-9s', diceType: '1D10', title: '5-9(A) 2nd & 3rd Attack Angles and Levels', note: null }],
-    actionText: 'See Table 5-9(A)',
-    diceType: '1D6',
-    // nextCardTest: true,
-    // cardTestName: 'resistance',
-    inputRequired: 'none'
-    // action: 'roll',
-    // actionText: ''
-  },
-  {
-    id: 31,
-    section: 'Combat',
-    heading: 'Number of Fighters Driven Off By Escort',
-    instruction: 'Roll 2D6 on Table 5-4',
-    reference: 'Table 5-4 (2D6), Rule section 5.4, pg. 14',
-    additionalInfo: ['Determin how many fighters are driven off in each wave.', 'Do not roll on table if "no fighter escort was rolled non table 2-13', 'The first number is the number of fighters driven off in wave 1', 'The number in parentheses is the number drieven off in waves 2 and 3.', 'The player chooses the fighters to remove.', 'Fighters in vertical dive or jet fighters cnnot be removed.', 'Out of formation bomber recieves same level of escort as bombers in formation.'],
-    hasAction: false,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-4', diceType: '2D6', title: '5-4 Number of Fighters Driven Off By Escort', note: '5-4-note' }],
-    actionText: 'See Table 5-4',
-    diceType: '2D6',
-    skipBack: 2,
-    inputRequired: 'none'
-    // action: 'roll',
-    // actionText: ''
-  },
-  {
-    id: 32,
-    section: 'Combat',
-    heading: 'Bomber Defensive Fire',
-    instruction: 'Determine Bomber defensive Fire allocation on table 5-5.',
-    reference: 'See Table 5-5, Rule Section 5.5, pg.15',
-    additionalInfo: ['Bomber fires first in all rounds', 'All results against fighters is asseses before German offensive combat begins.', 'On table 5-5 allocate defensive fire', 'More than one gun or turret can be targeted at the same fighter', 'The gun or turret must be operational to fire.', 'Each gun may only fire at one target per round', 'Place target markers next to the chosen target', 'Mark off ammunition box on the mission log sheet', 'Next, determine German fighter pilot skill on table 5-5A', 'Twin Gund: B-17 chin turret, ball turret, B-24 Nose turret', 'Powered Turrets: Chin (B-17G), Nose (B-24J), Top Turret and Ball Turret (All models of B17 and B-24) and tail guns (B-24). The Tail Guns (B17) are not powered.', 'See special rules section 5.5.2.1 for tail gunner passing shots, nose section guns and Area spray fire (optional).'],
-    hasAction: false,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-5', diceType: null, title: 'Bomber Defensive Fire for Round', note: '5-5-note' }],
-    actionText: 'See Table 5-5',
-    diceType: null,
-    inputRequired: 'none',
-    nextCardTest: true,
-    cardTestName: 'skillRoll',
-    // action: 'roll',
-    // actionText: ''
-  },
-  {
-    id: 33,
-    section: 'Combat',
-    heading: 'German Fighter Skill',
-    instruction: 'Roll 1D6 on Table 5-5A for first round of combat only.',
-    reference: 'Table 5-5A, game section 5.5.1, pg 16',
-    additionalInfo: ['Only roll on table for first round of combat'],
-    hasAction: false,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-5A', diceType: '1D6', title: '5-5A German Fighter Skill', note: '5-5A-note' }],
-    actionText: 'See Table 5-5A',
-    diceType: '1D6',
-    inputRequired: 'none',
-    // contingencyStep: true,
-    // contingencyValue: 'round',
-    // contingentUpon: 1,
-    // action: 'roll',
-    // actionText: ''
-  },
-  {
-    id: 34,
+    id: 30,
     section: 'Combat',
     heading: 'Bomber Defensive Fire',
     instruction: 'Roll on Table 5-6',
@@ -676,26 +676,26 @@ export const COMBAT_PROCEDURE = [
     // action: 'roll',
     // actionText: ''
   },
+  // {
+  //   id: 35,
+  //   section: 'Combat',
+  //   heading: 'Hit Damage on German Fighters',
+  //   instruction: 'Roll on Table 5-7',
+  //   reference: 'Rules section 5.5.3. Table 5-7 (2D6) Tables 5.7',
+  //   additionalInfo: ['After each funs target marker has been placed, mark off 1 ammo for regular fire (3 ammo for spray fire).', 'Ammo maty be shifted from one gun to another by any crewman. See rule 5.5.3.', 'Roll on table 5-6 for each turret or gun.', '', '', ''],
+  //   hasAction: false,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }, { table: '5-7A', diceType: '2D6', title: '5-7A Fighter Damage for FCA and FBOA hits (optional)', note: '5-7A-note' }, { table: '5-7B', diceType: '2D6', title: '5-7B Hit Fighter Damage for Destroyed hits (optional)', note: '5-7B-note' }],
+  //   actionText: 'See Tables 5-7(A-B)',
+  //   diceType: '1D10',
+  //   inputRequired: 'none'
+  //   // action: 'roll',
+  //   // actionText: ''
+  // },
   {
-    id: 35,
-    section: 'Combat',
-    heading: 'Hit Damage on German Fighters',
-    instruction: 'Roll on Table 5-7',
-    reference: 'Rules section 5.5.3. Table 5-7 (2D6) Tables 5.7',
-    additionalInfo: ['After each funs target marker has been placed, mark off 1 ammo for regular fire (3 ammo for spray fire).', 'Ammo maty be shifted from one gun to another by any crewman. See rule 5.5.3.', 'Roll on table 5-6 for each turret or gun.', '', '', ''],
-    hasAction: false,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-7', diceType: '2D6', title: '5-7 Hit Damage Against German Fighter', note: '5-7-note' }, { table: '5-7A', diceType: '2D6', title: '5-7A Fighter Damage for FCA and FBOA hits (optional)', note: '5-7A-note' }, { table: '5-7B', diceType: '2D6', title: '5-7B Hit Fighter Damage for Destroyed hits (optional)', note: '5-7B-note' }],
-    actionText: 'See Tables 5-7(A-B)',
-    diceType: '1D10',
-    inputRequired: 'none'
-    // action: 'roll',
-    // actionText: ''
-  },
-  {
-    id: 36, //Keep
+    id: 31, //Keep
     section: 'Combat',
     heading: 'Surviving Fighters?',
     instruction: 'Check the appropriate box',
@@ -715,7 +715,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 37,
+    id: 32,
     section: 'Combat',
     heading: 'German Offensive Fire',
     instruction: 'Resolve possible hits on bomber.',
@@ -736,7 +736,7 @@ export const COMBAT_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 38,  //Keep
+    id: 33,  //Keep
     section: 'Combat',
     heading: 'German Offensive Fighter Hits Rolled?',
     instruction: 'Check the appropriate box',
@@ -753,242 +753,242 @@ export const COMBAT_PROCEDURE = [
     radioDetails: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
     inputRequired: 'radio',
   },
+  // {
+  //   id: 39,
+  //   section: 'Combat',
+  //   heading: 'Resolve Bomber Hits',
+  //   instruction: 'Resolve shell hits by area of attack.',
+  //   reference: 'Rules section 5.6 Table 5-10',
+  //   additionalInfo: ['', '', '', '', ''],
+  //   hasAction: true,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-10', diceType: '2D6', title: '5-10 Shell Hits By Area Of Attack', note: null },],
+  //   actionText: 'See Table 5-10',
+  //   diceType: '2D6',
+  //   inputRequired: 'none',
+  // },
+  // {
+  //   id: 40,
+  //   section: 'Combat',
+  //   heading: 'Resolve Bomber Hit Multiplier Effect',
+  //   instruction: 'Roll on hit effect multiplier table.',
+  //   reference: 'Rules section 5.6 Table 5-11',
+  //   additionalInfo: ['', '', '', '', ''],
+  //   hasAction: true,
+  //   actionType: 'tableModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   modalTable: [{ table: '5-11', diceType: '1D6', title: '5-11 Hit Effect Multiplier', note: '5-11-note' },],
+  //   actionText: 'See Table 5-11',
+  //   diceType: '1D6',
+  //   inputRequired: 'none',
+  // },
+  // {
+  //   id: 34,
+  //   section: 'Combat',
+  //   heading: 'Resolve Bomber Damage',
+  //   instruction: 'Enter answer to question.',
+  //   reference: 'Rules section 5.7',
+  //   additionalInfo: ['', '', '', '', ''],
+  //   hasAction: true,
+  //   actionType: 'damageModal',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   hitTables: [{
+  //     id: 'B-17F', areaHitTables: [
+  //       {
+  //         table: '5-12-B17-front',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17F) Attack from 10:30 / 12 / 1:30 O\'clock',
+  //         note: '5-12-B17-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-side',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17F) Attack from 9 / 3 O\'clock',
+  //         note: '5-12-B17-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-tail',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17F) Attack From: 6 O\'clock',
+  //         note: '5-12-B17-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-vert',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17F) Vertical Dive and Climb Attacks',
+  //         note: '5-12-B17-vert-note'
+  //       },
+  //     ],
+  //     areaDamageTables: [
+  //       {
+  //         table: '5-13A-1',
+  //         diceType: '2D6',
+  //         title: '5-13A-1 NOSE (B-17F)',
+  //         note: '5-13A-1-note'
+  //       },
+  //       {
+  //         table: '5-13A-2',
+  //         diceType: '2D6',
+  //         title: '5-13A-2 PILOT COMPARTMENT (B-17F)',
+  //         note: '5-13A-2-note'
+  //       },
+  //       {
+  //         table: '5-13A-3',
+  //         diceType: '2D6',
+  //         title: '5-13A-3 BOMB BAY (B-17F)',
+  //         note: '5-13A-3-note'
+  //       },
+  //       {
+  //         table: '5-13A-4',
+  //         diceType: '2D6',
+  //         title: '5-13A-4 RADIO ROOM (B-17F)',
+  //         note: '5-13A-4-note'
+  //       },
+  //       {
+  //         table: '5-13A-5',
+  //         diceType: '2D6',
+  //         title: '5-13A-5 WAIST (B-17F)',
+  //         note: '5-13A-5-note'
+  //       },
+  //       {
+  //         table: '5-13A-6',
+  //         diceType: '2D6',
+  //         title: '5-13A-6 TAIL SECTION (B-17F)',
+  //         note: '5-13A-6-note'
+  //       },
+  //       {
+  //         table: '5-13A-7',
+  //         diceType: '2D6',
+  //         title: '5-13A-7 WINGS (B-17F)',
+  //         note: '5-13A-7-note'
+  //       },
+  //       {
+  //         table: '5-13A-8',
+  //         diceType: '2D6',
+  //         title: '5-13A-8 INSTRUMENTS (B-17F)',
+  //         note: '5-13A-8-note'
+  //       },
+  //       {
+  //         table: '5-17',
+  //         diceType: '1D6',
+  //         title: '5-17 CREW (B-17F)',
+  //         note: '5-17-note'
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     id: 'B-17G', areaHitTables: [
+  //       {
+  //         table: '5-12-B17-front',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17G) Attack from 10:30 / 12 / 1:30 O\'clock',
+  //         note: '5-12-B17-front-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-side',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17G) Attack from 9 / 3 O\'clock',
+  //         note: '5-12_9-3-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-tail',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17G) Attack From: 6 O\'clock',
+  //         note: '5-12_6-note'
+  //       },
+  //       {
+  //         table: '5-12-B17-vert',
+  //         diceType: '2D6',
+  //         title: '5-12 (B-17G) Vertical Dive and Climb Attacks',
+  //         note: '5-12_VD-VC-note'
+  //       },
+  //     ],
+  //     areaDamageTables: [
+  //       {
+  //         table: '5-13A-1',
+  //         diceType: '2D6',
+  //         title: '5-13A-1 NOSE (B-17G)',
+  //         note: '5-13A-1-note'
+  //       },
+  //       {
+  //         table: '5-13A-2',
+  //         diceType: '2D6',
+  //         title: '5-13A-2 PILOT COMPARTMENT (B-17G)',
+  //         note: '5-13A-2-note'
+  //       },
+  //       {
+  //         table: '5-13A-3',
+  //         diceType: '2D6',
+  //         title: '5-13A-3 BOMB BAY (B-17G)',
+  //         note: '5-13A-3-note'
+  //       },
+  //       {
+  //         table: '5-13A-4',
+  //         diceType: '2D6',
+  //         title: '5-13A-4 RADIO ROOM (B-17G)',
+  //         note: '5-13A-4-note'
+  //       },
+  //       {
+  //         table: '5-13A-5',
+  //         diceType: '2D6',
+  //         title: '5-13A-5 WAIST (B-17G)',
+  //         note: '5-13A-5-note'
+  //       },
+  //       {
+  //         table: '5-13A-6',
+  //         diceType: '2D6',
+  //         title: '5-13A-6 TAIL SECTION (B-17G)',
+  //         note: '5-13A-6-note'
+  //       },
+  //       {
+  //         table: '5-13A-7',
+  //         diceType: '2D6',
+  //         title: '5-13A-7 WINGS (B-17G)',
+  //         note: '5-13A-7-note'
+  //       },
+  //       {
+  //         table: '5-13A-8',
+  //         diceType: '2D6',
+  //         title: '5-13A-8 INSTRUMENTS (B-17G)',
+  //         note: '5-13A-8-note'
+  //       },
+  //       {
+  //         table: '5-17',
+  //         diceType: '1D6',
+  //         title: '5-17 CREW (B-17G)',
+  //         note: '5-17-note'
+  //       },
+  //     ]
+  //   },],
+  //   actionText: 'Roll Damage',
+  //   // diceType: '2D6',
+  //   inputRequired: 'none',
+  //   // skipBack: 1
+  // },
+  // {
+  //   id: 42,
+  //   section: 'Combat',
+  //   heading: 'German Fighter Collision',
+  //   instruction: 'Roll on Table 5-16',
+  //   reference: 'Table 5-16 (2D6)',
+  //   additionalInfo: ['Roll on Table 5-16 to chrck for possible collision.',],
+  //   hasAction: false,
+  //   actionType: 'tableForCard',
+  //   tableImageDependency: null,
+  //   modalTableDependency: null,
+  //   cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: '5-16-note' }],
+  //   actionText: 'See Table 5-16',
+  //   diceType: '2D6',
+  //   // nextCardTest: true,
+  //   // cardTestName: 'resistance',
+  //   inputRequired: 'none'
+  // },
   {
-    id: 39,
-    section: 'Combat',
-    heading: 'Resolve Bomber Hits',
-    instruction: 'Resolve shell hits by area of attack.',
-    reference: 'Rules section 5.6 Table 5-10',
-    additionalInfo: ['', '', '', '', ''],
-    hasAction: true,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-10', diceType: '2D6', title: '5-10 Shell Hits By Area Of Attack', note: null },],
-    actionText: 'See Table 5-10',
-    diceType: '2D6',
-    inputRequired: 'none',
-  },
-  {
-    id: 40,
-    section: 'Combat',
-    heading: 'Resolve Bomber Hit Multiplier Effect',
-    instruction: 'Roll on hit effect multiplier table.',
-    reference: 'Rules section 5.6 Table 5-11',
-    additionalInfo: ['', '', '', '', ''],
-    hasAction: true,
-    actionType: 'tableModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    modalTable: [{ table: '5-11', diceType: '1D6', title: '5-11 Hit Effect Multiplier', note: '5-11-note' },],
-    actionText: 'See Table 5-11',
-    diceType: '1D6',
-    inputRequired: 'none',
-  },
-  {
-    id: 41,
-    section: 'Combat',
-    heading: 'Resolve Bomber Damage',
-    instruction: 'Enter answer to question.',
-    reference: 'Rules section 5.7',
-    additionalInfo: ['', '', '', '', ''],
-    hasAction: true,
-    actionType: 'damageModal',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    hitTables: [{
-      id: 'B-17F', areaHitTables: [
-        {
-          table: '5-12-B17-front',
-          diceType: '2D6',
-          title: '5-12 (B-17F) Attack from 10:30 / 12 / 1:30 O\'clock',
-          note: '5-12-B17-note'
-        },
-        {
-          table: '5-12-B17-side',
-          diceType: '2D6',
-          title: '5-12 (B-17F) Attack from 9 / 3 O\'clock',
-          note: '5-12-B17-note'
-        },
-        {
-          table: '5-12-B17-tail',
-          diceType: '2D6',
-          title: '5-12 (B-17F) Attack From: 6 O\'clock',
-          note: '5-12-B17-note'
-        },
-        {
-          table: '5-12-B17-vert',
-          diceType: '2D6',
-          title: '5-12 (B-17F) Vertical Dive and Climb Attacks',
-          note: '5-12-B17-vert-note'
-        },
-      ],
-      areaDamageTables: [
-        {
-          table: '5-13A-1',
-          diceType: '2D6',
-          title: '5-13A-1 NOSE (B-17F)',
-          note: '5-13A-1-note'
-        },
-        {
-          table: '5-13A-2',
-          diceType: '2D6',
-          title: '5-13A-2 PILOT COMPARTMENT (B-17F)',
-          note: '5-13A-2-note'
-        },
-        {
-          table: '5-13A-3',
-          diceType: '2D6',
-          title: '5-13A-3 BOMB BAY (B-17F)',
-          note: '5-13A-3-note'
-        },
-        {
-          table: '5-13A-4',
-          diceType: '2D6',
-          title: '5-13A-4 RADIO ROOM (B-17F)',
-          note: '5-13A-4-note'
-        },
-        {
-          table: '5-13A-5',
-          diceType: '2D6',
-          title: '5-13A-5 WAIST (B-17F)',
-          note: '5-13A-5-note'
-        },
-        {
-          table: '5-13A-6',
-          diceType: '2D6',
-          title: '5-13A-6 TAIL SECTION (B-17F)',
-          note: '5-13A-6-note'
-        },
-        {
-          table: '5-13A-7',
-          diceType: '2D6',
-          title: '5-13A-7 WINGS (B-17F)',
-          note: '5-13A-7-note'
-        },
-        {
-          table: '5-13A-8',
-          diceType: '2D6',
-          title: '5-13A-8 INSTRUMENTS (B-17F)',
-          note: '5-13A-8-note'
-        },
-        {
-          table: '5-17',
-          diceType: '1D6',
-          title: '5-17 CREW (B-17F)',
-          note: '5-17-note'
-        },
-      ]
-    },
-    {
-      id: 'B-17G', areaHitTables: [
-        {
-          table: '5-12-B17-front',
-          diceType: '2D6',
-          title: '5-12 (B-17G) Attack from 10:30 / 12 / 1:30 O\'clock',
-          note: '5-12-B17-front-note'
-        },
-        {
-          table: '5-12-B17-side',
-          diceType: '2D6',
-          title: '5-12 (B-17G) Attack from 9 / 3 O\'clock',
-          note: '5-12_9-3-note'
-        },
-        {
-          table: '5-12-B17-tail',
-          diceType: '2D6',
-          title: '5-12 (B-17G) Attack From: 6 O\'clock',
-          note: '5-12_6-note'
-        },
-        {
-          table: '5-12-B17-vert',
-          diceType: '2D6',
-          title: '5-12 (B-17G) Vertical Dive and Climb Attacks',
-          note: '5-12_VD-VC-note'
-        },
-      ],
-      areaDamageTables: [
-        {
-          table: '5-13A-1',
-          diceType: '2D6',
-          title: '5-13A-1 NOSE (B-17G)',
-          note: '5-13A-1-note'
-        },
-        {
-          table: '5-13A-2',
-          diceType: '2D6',
-          title: '5-13A-2 PILOT COMPARTMENT (B-17G)',
-          note: '5-13A-2-note'
-        },
-        {
-          table: '5-13A-3',
-          diceType: '2D6',
-          title: '5-13A-3 BOMB BAY (B-17G)',
-          note: '5-13A-3-note'
-        },
-        {
-          table: '5-13A-4',
-          diceType: '2D6',
-          title: '5-13A-4 RADIO ROOM (B-17G)',
-          note: '5-13A-4-note'
-        },
-        {
-          table: '5-13A-5',
-          diceType: '2D6',
-          title: '5-13A-5 WAIST (B-17G)',
-          note: '5-13A-5-note'
-        },
-        {
-          table: '5-13A-6',
-          diceType: '2D6',
-          title: '5-13A-6 TAIL SECTION (B-17G)',
-          note: '5-13A-6-note'
-        },
-        {
-          table: '5-13A-7',
-          diceType: '2D6',
-          title: '5-13A-7 WINGS (B-17G)',
-          note: '5-13A-7-note'
-        },
-        {
-          table: '5-13A-8',
-          diceType: '2D6',
-          title: '5-13A-8 INSTRUMENTS (B-17G)',
-          note: '5-13A-8-note'
-        },
-        {
-          table: '5-17',
-          diceType: '1D6',
-          title: '5-17 CREW (B-17G)',
-          note: '5-17-note'
-        },
-      ]
-    },],
-    actionText: 'Roll Damage',
-    // diceType: '2D6',
-    inputRequired: 'none',
-    // skipBack: 1
-  },
-  {
-    id: 42,
-    section: 'Combat',
-    heading: 'German Fighter Collision',
-    instruction: 'Roll on Table 5-16',
-    reference: 'Table 5-16 (2D6)',
-    additionalInfo: ['Roll on Table 5-16 to chrck for possible collision.',],
-    hasAction: false,
-    actionType: 'tableForCard',
-    tableImageDependency: null,
-    modalTableDependency: null,
-    cardTable: [{ table: '5-16', diceType: '2D6', title: '5-16 Collision Table', note: '5-16-note' }],
-    actionText: 'See Table 5-16',
-    diceType: '2D6',
-    // nextCardTest: true,
-    // cardTestName: 'resistance',
-    inputRequired: 'none'
-  },
-  {
-    id: 43, //Keep
+    id: 34, //Keep
     section: 'Combat',
     heading: 'Continue German Offensive Fire?',
     instruction: 'Finished with German offensive fire?',
@@ -1006,7 +1006,7 @@ export const COMBAT_PROCEDURE = [
     inputRequired: 'radio',
   },
   {
-    id: 44, //Keep
+    id: 35, //Keep
     section: 'Combat',
     heading: 'Abort Or Bail Out?',
     instruction: 'Confirm answer below',
@@ -1027,7 +1027,7 @@ export const COMBAT_PROCEDURE = [
 
 export const TARGET_ZONE_PROCEDURE = [
   {
-    id: 45,  //startBombingProcedure
+    id: 36,  //startBombingProcedure
     section: 'Target Zone',
     heading: 'Check Target Visibility',
     instruction: 'Roll on Table 6-1 and select the result in the zone section',
@@ -1046,7 +1046,7 @@ export const TARGET_ZONE_PROCEDURE = [
     // actionText: ''
   },
   {
-    id: 46,
+    id: 37,
     section: 'Target Zone',
     heading: 'Check For Flak Over Target',
     instruction: 'Roll on Table 6-2',
@@ -1065,7 +1065,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'radio',
   },
   {
-    id: 47,
+    id: 38,
     section: 'Target Zone',
     heading: 'Check For Flak To Hit Bomber',
     instruction: 'Roll 3 times on Table 6-3',
@@ -1081,7 +1081,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 48,
+    id: 39,
     section: 'Target Zone',
     heading: 'Roll for Flak Shell Hits',
     instruction: 'For each hit on table 6-3, roll once on table 6-4.',
@@ -1097,7 +1097,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 49,
+    id: 40,
     section: 'Target Zone',
     heading: 'Roll for Area Affected by Flak',
     instruction: 'Roll once on Table 6-5 for each shell hit on the bomber.',
@@ -1113,7 +1113,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 50, //bombRun
+    id: 41, //bombRun
     section: 'Target Zone',
     heading: 'The Bomb Run',
     instruction: 'Roll on Table 6-6 to determine if bombs are "On Target".',
@@ -1129,7 +1129,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 51,
+    id: 42,
     section: 'Target Zone',
     heading: 'Bombing Accuracy',
     instruction: 'Roll on Table 6-7 to determine the bombing accuracy".',
@@ -1145,7 +1145,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 52,
+    id: 43,
     section: 'Target Zone',
     heading: 'Head For Home',
     instruction: 'Click on the Next Step button below to have the pilot head for the base.',
@@ -1160,7 +1160,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 53,
+    id: 44,
     section: 'Target Zone',
     heading: '6-2 Flak Over Target On Return',
     instruction: 'Roll on Table 6-2',
@@ -1179,7 +1179,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'radio',
   },
   {
-    id: 54,
+    id: 45,
     section: 'Target Zone',
     heading: 'Check For Flak To Hit Bomber',
     instruction: 'Roll 3 times on Table 6-3',
@@ -1195,7 +1195,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 55,
+    id: 46,
     section: 'Target Zone',
     heading: 'Roll for Flak Shell Hits',
     instruction: 'For each hit on table 6-3, roll once on table 6-4.',
@@ -1211,7 +1211,7 @@ export const TARGET_ZONE_PROCEDURE = [
     inputRequired: 'none',
   },
   {
-    id: 56,
+    id: 47,
     section: 'Target Zone',
     heading: 'Roll for Area Affected by Flak',
     instruction: 'Roll once on Table 6-5 for each shell hit on the bomber.',
@@ -1232,7 +1232,7 @@ export const TARGET_ZONE_PROCEDURE = [
 
 export const LANDING_PROCEDURE = [
   {
-    id: 57, //startLandingProcedure
+    id: 48, //startLandingProcedure
     section: 'Landing Procedure',
     heading: 'Landing - Weather Over Base Check ',
     instruction: 'Roll 1D10 on Table 3-1 to determine weather over base for landing',
@@ -1248,7 +1248,7 @@ export const LANDING_PROCEDURE = [
     inputRequired: 'none'
   },
   {
-    id: 58,
+    id: 49,
     section: 'Landing Procedure',
     heading: 'Landing at Base',
     instruction: 'Roll 2D6 on Table 7-1 for Landing',
