@@ -28,7 +28,7 @@ const GOFHits = (props) => {
   return <>
     <Row>
       <Col span={11}>
-        <GOFFighters />
+        <GOFFighters fId={combatCTX?.targetedFighter?.id} />
       </Col>
       <Col span={13}>
         <Switch defaultChecked checked={checked} checkedChildren='DamageTable' unCheckedChildren='Detailed Damage' onChange={onChange} />

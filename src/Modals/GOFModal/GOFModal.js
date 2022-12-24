@@ -6,6 +6,8 @@ import GOF from './GOF';
 import GOFHits from './GOFHits';
 import GOFDamage from './GOFDamage';
 import GOFCollision from './GOFCollision';
+import GOFPassingShot from './GOFPassingShot';
+
 
 const BDFModal = (props) => {
   // const ctx = useContext(GameContext);
@@ -29,6 +31,10 @@ const BDFModal = (props) => {
     {
       title: 'Check for Collision',
       content: <GOFCollision />
+    },
+    {
+      title: 'Passing Shot',
+      content: <GOFPassingShot/>
     },
   ];
 
@@ -65,17 +71,18 @@ const BDFModal = (props) => {
         <Step title='German Hit Resolution'></Step>
         <Step title='Bomber Damage Resolution'></Step>
         <Step title='Check for Collision'></Step>
+        <Step title='Passing Shot' disable={!combatCTX?.targetedFighter?.passingShot}></Step>
         {/* <Step title='Target Fighters' content={<GFTargeting />} />
         <Step title='Fighter Skill' content={<GFAssignSkill />} /> */}
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
-        {current < 2 && (
+        {current < 4 && (
           <Button type="primary" onClick={() => next()}>
             Next
           </Button>
         )}
-        {current === 2 && ( //add a condition to return to step 0 if fighters remain?
+        {current === 4 && ( //add a condition to return to step 0 if fighters remain?
           <Button type="primary" onClick={() => message.success('Processing complete!')}>
             Done
           </Button>
