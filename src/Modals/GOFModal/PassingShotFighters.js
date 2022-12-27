@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import { Popover, Row, Col, Radio } from 'antd';
 import CombatContext from '../../Game/Context/CombatContext';
-import BDFFighter from './BDFFighter';
+import PassingShotFighter from './PassingShotFighter';
 
-const BDFFighters = ({ fId }) => {
+const PassingShotFighters = ({ fId }) => {
   const combatCTX = useContext(CombatContext);
   const waveData = combatCTX.waveData;
-  const [checked, setChecked] = useState(combatCTX?.targetedFighter?.id); 
+  const [checked, setChecked] = useState(combatCTX?.targetedFighter?.id);
 
   const onSelect = (e) => {
     const type = e.target.id;
@@ -24,15 +24,15 @@ const BDFFighters = ({ fId }) => {
         {/* <TargetFighters activeGuns={activeGuns} setActiveGuns={setActiveGuns} /> */}
         <Radio.Group name='fighter' defaultValue={fId} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', paddingTop: 8, paddingLeft: 8 }}>
           {waveData.map((f, i) => (
-            <Radio key={i} isChecked={f.id === fId} value={f.id} id={f.type} name={f.type} onChange={onSelect}><BDFFighter
-                      id={i}
-                      type={f.type}
-                      skill={f.skill}
-                      status={f.status}
-                      angle={f.angle}
-                      level={f.level}
-                      guns={f.guns}
-                      /></Radio>))}
+            <Radio key={i} isChecked={f.id === fId} value={f.id} id={f.type} name={f.type} onChange={onSelect}><PassingShotFighter
+              id={i}
+              type={f.type}
+              skill={f.skill}
+              status={f.status}
+              angle={f.angle}
+              level={f.level}
+              guns={f.guns}
+            /></Radio>))}
 
           {/* <Radio value={'FCA'}>FCA</Radio>
           <Radio value={'2 FCA'}>2FCA</Radio>
@@ -44,4 +44,4 @@ const BDFFighters = ({ fId }) => {
   </>
 }
 
-export default BDFFighters;
+export default PassingShotFighters;

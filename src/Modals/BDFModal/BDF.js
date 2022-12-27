@@ -382,14 +382,10 @@ const BDF = (props) => {
   return <>
     <Row>
       <Col span={12}>
-        {/* Fighers go herer type, Skill, angle level */}
-        {/* Radio to select Gun & radio to enter Status */}
-        <BDFFighters />
+        <BDFFighters fId={combatCTX?.targetedFighter?.id} />
       </Col>
       
       <Col span={12}>
-        {/* Show table 5-6 use toggle to display spray fire table */}
-        {/* Show cumulative modifiers here */}
         <Row>
         <Col span={12}>
         <Switch defaultChecked checked={checked} checkedChildren='Fire Table' unCheckedChildren='Spray Fire Table' onChange={onChange} />
