@@ -101,6 +101,12 @@ const GOFPassingShot = (props) => {
         result: 1,
         message: '+1 for defensive fire versus Green fighter pilot (See Table 5-5A)'
       },
+      {
+        this: combatCTX?.targetedFighter?.passingShot,
+        thisValue: true,
+        result: -1,
+        message: '–1 for defensive fire for Tail Guns (B-17)/ Tail Turret (B-24) “Passing Shot” against a fighter attacking from 10:30, 12:00 and 1:30'
+      },
     ],
   },
   {
