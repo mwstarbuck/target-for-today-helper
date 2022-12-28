@@ -120,10 +120,10 @@ const Zone = () => {
     <Col span={2}><div className='zoneCellText'>{ctx.zonesInfo && ctx.zonesInfo[ctx.currentZone - 1]?.zone}</div></Col>
     <Col span={3}><div className='zoneCellText'>{ctx.zonesInfo && `${ctx.zonesInfo[ctx.currentZone - 1]?.drm} / ${ctx.zonesInfo[ctx.currentZone - 1]?.location}`}</div></Col>
     <Col span={10}>
-      <div className='zoneCell'>
+      <div className={ctx?.step === 19 ? 'zoneCellActive' : 'zoneCell'}>
         <Col>
-          <Radio.Group name='weather' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }} onChange={onWeatherChange} value={weatherValue}>
-            <Radio value={'clear'}><span style={{ fontWeight: weatherValue === 'clear' ? 600 : 500 }}>Clear</span></Radio>
+          <Radio.Group name='weather' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}} onChange={onWeatherChange} value={weatherValue}>
+            <Radio value={'clear'}><span style={{ fontWeight: weatherValue === 'clear' ? 600 : 500}}>Clear</span></Radio>
             <Radio value={'haze'}><span style={{ fontWeight: weatherValue === 'haze' ? 600 : 500 }}>Haze</span></Radio>
             <Radio value={'50% clouds'}><span style={{ fontWeight: weatherValue === '50% clouds' ? 600 : 500 }}>50% Clouds</span></Radio>
             <Radio value={'100% clouds'}><span style={{ fontWeight: weatherValue === '100% clouds' ? 600 : 500 }}>100% Clouds</span></Radio>
@@ -143,7 +143,7 @@ const Zone = () => {
     <Col span={12}>
       <Row>
         <Col span={10}>
-          <div className='zoneCell'>
+          <div className={ctx?.step === 22 ? 'zoneCellActive' : 'zoneCell'}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               Contrails:
               <Radio.Group name='contrails' onChange={onContrailsChange} value={contrails}>
