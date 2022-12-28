@@ -364,10 +364,10 @@ const Card = (props) => {
     if (messageType) {
       switch (messageType) {
         case 'fighterNumberTable':
-          cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
+          cardMessage = props.message.find(t => t.match.includes(ctx?.timePeriod)).message;
           break;
         case 'combatStatus':
-          cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
+          cardMessage = props.message.find(t => t.match.includes(ctx?.waveCount)).message;
           break;
         default:
           break;
@@ -595,7 +595,7 @@ const Card = (props) => {
         case 'waves':
           // console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
-            if (ctx.targetZone === ctx.currentZone) {
+            if (ctx.targetZone === ctx.currentZone && ctx.outbound === true) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }

@@ -534,7 +534,7 @@ export const COMBAT_PROCEDURE = [
     cardTableDependency: null,
     modalTableDependency: 'campaign',
     cardMessage: [{
-      message: 'See Table 5-3A in the Tables Reference Tab', match: ['11/1942', '12/1942', '1/1943', '2/1943',
+      message: 'See Table 5-3A in the Tables Reference Tab', match: ['8/1942', '9/1942', '10/1942', '11/1942', '12/1942', '1/1943', '2/1943',
         '3/1943', '4/1943', '5/1943', '6/1943', '7/1943', '8/1943', '9/1943', '10/1943', '11/1943']
     },
     {
