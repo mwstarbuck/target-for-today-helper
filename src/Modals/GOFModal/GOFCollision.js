@@ -18,7 +18,7 @@ const GOFCollision = (props) => {
   return <>
     <Row>
       <Col span={12}>
-        <GOFFighters />
+        <GOFFighters fId={combatCTX?.targetedFighter?.id} />
       </Col>
       <Col span={12}>
         {/* Show cumulative modifiers here */}

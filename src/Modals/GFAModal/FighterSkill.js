@@ -12,12 +12,17 @@ const FighterSkill = ({ activeGuns, setActiveGuns }) => {
   const onSkillChange = (e) => {
     const skill = e.target.value;
     const id = e.target.id;
-    // setSkill(skill);
     let tempData = [...waveData];
     tempData[id].skill = skill;
     combatCTX.setWaveData(tempData);
   }
 
+  const showPS = (f, g) => {
+    if ((f.angle === '12:00' || f.angle === '1:30' || f.angle === '10:30')
+      && (g.gun === 'Tail Turr' || g.gun === 'Tail Guns')) {
+      return '(PS)'
+    }
+  }
   // const onClick = () => {
   //   let tempData = [...waveData];
   //   activeGuns?.forEach(g => tempData[g.id].targetedBy.push(g.gun));
@@ -31,7 +36,7 @@ const FighterSkill = ({ activeGuns, setActiveGuns }) => {
         <Col span={18} style={{ borderBottom: '1px solid lightgrey' }}><p style={{ fontSize: 14, fontWeight: 600 }}>{f.angle} {f.level}</p></Col>
         <Col span={24} style={{ marginTop: 5 }}><p style={{ fontSize: 14, fontWeight: 600 }}>Tageted By: {f.guns.map( g => {
           if (g.checked)
-            return `${g.gun} | `;
+            return `${g.gun} ${showPS(f, g)} | `;
         }
         )}</p></Col>
         <Col span={9}><p style={{ fontSize: 14, fontWeight: 600 }}>Assign Pilot Skill:</p></Col>

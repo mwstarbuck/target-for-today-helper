@@ -3,10 +3,11 @@ import { Popover, Divider, Row, Col, Switch } from 'antd';
 import Select from 'react-select';
 import GameContext from '../../Game/GameContext';
 import CombatContext from '../../Game/Context/CombatContext';
-import BDFFighters from './BDFFighters';
+// import BDFFighters from '../BDFModal/BDFFighters';
+import PassingShotFighters from './PassingShotFighters'
 import { makeMods } from '../../Utilities/ModUtility';
 
-const BDF = (props) => {
+const GOFPassingShot = (props) => {
   const gameCTX = useContext(GameContext);
   const combatCTX = useContext(CombatContext);
   const { showModal, setShowModal, source, opacity } = props;
@@ -99,6 +100,12 @@ const BDF = (props) => {
         thisValue: 'green',
         result: 1,
         message: '+1 for defensive fire versus Green fighter pilot (See Table 5-5A)'
+      },
+      {
+        this: combatCTX?.targetedFighter?.passingShot,
+        thisValue: true,
+        result: -1,
+        message: '–1 for defensive fire for Tail Guns (B-17)/ Tail Turret (B-24) “Passing Shot” against a fighter attacking from 10:30, 12:00 and 1:30'
       },
     ],
   },
@@ -300,30 +307,30 @@ const BDF = (props) => {
       },
     ]
   }
-]
-/*
-  X–1 for defensive fire, Nose Turret (B-24J) if Nose Turret Hydraulics out (Table 4-3C note “p”)
-  X–1 for defensive fire if Nose Turret (B-24 Emerson turret)/Ball Turret/Top Turret if Electrical System out (Table 4-
-  3C)
-  X–1 for defensive fire Tail Turret (B-24) if Auxiliary Hydraulic System out (Table 4-3C)
-  X-1 for defensive fire by Tail Guns (B-17)/Tail Turret (B-24) if Intercom System out.
-  X-1 for defensive fire against Me-262 and He-162 Jet Fighters.
-  X+1 for defensive fire versus Green fighter pilot (See Table 5-5A)
-  X+1 for defensive fire versus Me-110, Me-210, Me-410, Ju88 C-6
-  X+1 for defensive fire against 3 or 9 o’clock fighter attack positions (High/Level/Low).
-  X+1 for defensive fire by a functioning power turret (electrical power, hydraulic)
-  X+1 for defensive fire for Chin Turret (B-17G)/Nose Turret (B-24J)/Top Turret defensive fire against 12 o’clock level 
-    fighter position.
-  X+2 for defensive fire against 6 o’clock fighter attack position (High/Level/Low).
-  X+3 for defensive fire against VERTICAL CLIMB fighter position.
-  TODO
-  –1 for defensive fire if bomber is performing “Evasive Action” (See Rules Section 5.9)
-  –1 for defensive fire for Tail Guns (B-17)/ Tail Turret (B-24) “Passing Shot” against a fighter attacking from 10:30, 
-    12, or 1:30 positions (See Rules Section 5.5.2).
-  -1 Nose (affects Consolidated type turret only) turret defensive fire if #3 engine is out on B-24: 
-  -1 if the gunner is suffering from Frostbite
-  +1 for defensive fire by bomber Ace gunner (5+ credited kills)
-  */
+  ]
+  /*
+    X–1 for defensive fire, Nose Turret (B-24J) if Nose Turret Hydraulics out (Table 4-3C note “p”)
+    X–1 for defensive fire if Nose Turret (B-24 Emerson turret)/Ball Turret/Top Turret if Electrical System out (Table 4-
+    3C)
+    X–1 for defensive fire Tail Turret (B-24) if Auxiliary Hydraulic System out (Table 4-3C)
+    X-1 for defensive fire by Tail Guns (B-17)/Tail Turret (B-24) if Intercom System out.
+    X-1 for defensive fire against Me-262 and He-162 Jet Fighters.
+    X+1 for defensive fire versus Green fighter pilot (See Table 5-5A)
+    X+1 for defensive fire versus Me-110, Me-210, Me-410, Ju88 C-6
+    X+1 for defensive fire against 3 or 9 o’clock fighter attack positions (High/Level/Low).
+    X+1 for defensive fire by a functioning power turret (electrical power, hydraulic)
+    X+1 for defensive fire for Chin Turret (B-17G)/Nose Turret (B-24J)/Top Turret defensive fire against 12 o’clock level 
+      fighter position.
+    X+2 for defensive fire against 6 o’clock fighter attack position (High/Level/Low).
+    X+3 for defensive fire against VERTICAL CLIMB fighter position.
+    TODO
+    –1 for defensive fire if bomber is performing “Evasive Action” (See Rules Section 5.9)
+    –1 for defensive fire for Tail Guns (B-17)/ Tail Turret (B-24) “Passing Shot” against a fighter attacking from 10:30, 
+      12, or 1:30 positions (See Rules Section 5.5.2).
+    -1 Nose (affects Consolidated type turret only) turret defensive fire if #3 engine is out on B-24: 
+    -1 if the gunner is suffering from Frostbite
+    +1 for defensive fire by bomber Ace gunner (5+ credited kills)
+    */
 
   const BDFMods = (mods) => {
     let modDisplay = { result: 0, modList: [] };
@@ -335,7 +342,7 @@ const BDF = (props) => {
             if (check.this === check.thisValue) {
               if (check.thatValue.includes(check.that)) {
                 modDisplay.modList.push(check.message);
-                modDisplay.result +=check.result;
+                modDisplay.result += check.result;
               }
             }
           });
@@ -344,7 +351,7 @@ const BDF = (props) => {
           mod.info?.forEach(check => {
             if (check.this === check.thisValue) {
               modDisplay.modList.push(check.message);
-              modDisplay.result +=check.result;
+              modDisplay.result += check.result;
             }
           })
           break;
@@ -372,7 +379,7 @@ const BDF = (props) => {
   }
 
   useEffect(() => {
-      setCardMods(BDFMods(mods));
+    setCardMods(BDFMods(mods));
   }, [gameCTX, combatCTX.targetedFighter, combatCTX.activeGun]);
 
   const onChange = () => {
@@ -382,27 +389,27 @@ const BDF = (props) => {
   return <>
     <Row>
       <Col span={12}>
-        <BDFFighters fId={combatCTX?.targetedFighter?.id} />
+        <PassingShotFighters fId={combatCTX?.targetedFighter?.id} />
       </Col>
-      
+
       <Col span={12}>
         <Row>
-        <Col span={12}>
-        <Switch defaultChecked checked={checked} checkedChildren='Fire Table' unCheckedChildren='Spray Fire Table' onChange={onChange} />
-        </Col>
-        <Col span={12}>
-        <Popover 
-          color='white'
-          trigger='click'
-          overlayStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
-          overlayInnerStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
-          placement='bottom'
-          content={<div><ul>{cardMods?.modList?.map(m => <li style={{ color: 'red' }}>{m}</li>)}</ul>
-            <div>Roll Modifier: {cardMods?.result}</div>
-          </div>}>
-          Show Roll Modifiers
-        </Popover>
-        </Col>
+          <Col span={12}>
+            <Switch defaultChecked checked={checked} checkedChildren='Fire Table' unCheckedChildren='Spray Fire Table' onChange={onChange} />
+          </Col>
+          <Col span={12}>
+            <Popover
+              color='white'
+              trigger='click'
+              overlayStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
+              overlayInnerStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
+              placement='bottom'
+              content={<div><ul>{cardMods?.modList?.map(m => <li style={{ color: 'red' }}>{m}</li>)}</ul>
+                <div>Roll Modifier: {cardMods?.result}</div>
+              </div>}>
+              Show Roll Modifiers
+            </Popover>
+          </Col>
         </Row>
         {checked ? <div key='regular'>
           <div style={{ textAlign: 'center', marginBottom: -20 }}><p style={{ fontSize: 19, fontWeight: 600 }}>5-6 Bomber Defensive Fire Resolution</p><p style={{ fontSize: 16, fontWeight: 600 }}>(Roll 2D6)</p></div>
@@ -422,5 +429,5 @@ const BDF = (props) => {
   </>
 }
 
-export default BDF;
+export default GOFPassingShot;
 

@@ -3,14 +3,15 @@ import { Popover, Row, Col, Radio } from 'antd';
 import CombatContext from '../../Game/Context/CombatContext';
 import BDFFighter from './BDFFighter';
 
-const BDFFighters = (props) => {
+const BDFFighters = ({ fId }) => {
   const combatCTX = useContext(CombatContext);
   const waveData = combatCTX.waveData;
-  const [checked, setChecked] = useState(false); 
+  const [checked, setChecked] = useState(combatCTX?.targetedFighter?.id); 
 
   const onSelect = (e) => {
     const type = e.target.id;
     const id = e.target.value;
+    setChecked(id);
     const targetedFighter = waveData[id];
     combatCTX.setTargetedFighter(targetedFighter);
   }
@@ -21,9 +22,9 @@ const BDFFighters = (props) => {
     <Row>
       <Col span={24}>
         {/* <TargetFighters activeGuns={activeGuns} setActiveGuns={setActiveGuns} /> */}
-        <Radio.Group name='fighter' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', paddingTop: 8, paddingLeft: 8 }}  defaultValue='average'>
+        <Radio.Group name='fighter' defaultValue={fId} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', paddingTop: 8, paddingLeft: 8 }}>
           {waveData.map((f, i) => (
-            <Radio key={i} value={i} id={f.type} name={f.type} onChange={onSelect}><BDFFighter
+            <Radio key={i} isChecked={f.id === fId} value={f.id} id={f.type} name={f.type} onChange={onSelect}><BDFFighter
                       id={i}
                       type={f.type}
                       skill={f.skill}

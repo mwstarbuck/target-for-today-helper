@@ -113,6 +113,11 @@ html {
   opacity: .7;
 }
 
+.zoneCellActive {
+  border: 1px solid black;
+    box-shadow: 0 0 10px rgb(255, 78, 78)
+}
+
 .zoneCellHeader {
   border: 1px solid black;
   height: 25px;

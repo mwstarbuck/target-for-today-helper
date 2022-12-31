@@ -54,9 +54,9 @@ const Card = (props) => {
   const startCombatProcedure = 25;
   const combatSummary = 27;
   const newAttackAngles = 30;
-  const startBombingProcedure = 45;
-  const bombRun = 50;
-  const startLandingProcedure = 57;
+  const startBombingProcedure = 36;
+  const bombRun = 41;
+  const startLandingProcedure = 48;
 
   const selectRef = useRef();
 
@@ -364,10 +364,10 @@ const Card = (props) => {
     if (messageType) {
       switch (messageType) {
         case 'fighterNumberTable':
-          cardMessage = props.message.find(t => t.match.includes(ctx.timePeriod)).message;
+          cardMessage = props.message.find(t => t.match.includes(ctx?.timePeriod)).message;
           break;
         case 'combatStatus':
-          cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
+          cardMessage = props.message.find(t => t.match.includes(ctx?.waveCount)).message;
           break;
         default:
           break;
@@ -393,16 +393,16 @@ const Card = (props) => {
             setAdvance(false);
           }
           else {
-            if (ctx.round === 1) {
-              ctx.setStep(ctx.step + 3); //skips new attack angles card
-              setGoToNextCard(null);
-              setAdvance(false);
-            }
-            else {
+            // if (ctx.round === 1) {
+            //   ctx.setStep(ctx.step + 3); //skips new attack angles card
+            //   setGoToNextCard(null);
+            //   setAdvance(false);
+            // }
+            // else {
               ctx.setStep(ctx.step + 2); //skips new attack angles card
               setGoToNextCard(null);
               setAdvance(false);
-            }
+            // }
           }
           break;
         case 'survivingFighters':
@@ -595,7 +595,7 @@ const Card = (props) => {
         case 'waves':
           // console.log('wave count: ' + ctx.waveCount);
           if (ctx.waveCount === 0) {
-            if (ctx.targetZone === ctx.currentZone) {
+            if (ctx.targetZone === ctx.currentZone && ctx.outbound === true) {
               ctx.setStep(startBombingProcedure);
               setAdvance(false);
             }

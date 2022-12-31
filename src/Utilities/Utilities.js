@@ -114,7 +114,8 @@ const rollCrew = (setter) => {
       name: `${last}, ${first}`,
       age: coAge,
       state: homeState,
-      status: 'Good'
+      status: 'Good',
+      // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);
   }
@@ -152,7 +153,8 @@ const rollCrew = (setter) => {
       name: `${last}, ${first}`,
       age: coAge,
       state: homeState,
-      status: 'Good'
+      status: 'Good',
+      // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);
   }

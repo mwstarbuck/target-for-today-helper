@@ -3,7 +3,7 @@ import { Row, Col, Radio, Button } from 'antd';
 import CombatContext from '../../Game/Context/CombatContext';
 
 
-const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
+const PassingShotFighter = ({ type, skill, status, angle, level, guns, id }) => {
   const combatCTX = useContext(CombatContext);
   const waveData = combatCTX.waveData;
   const activeGun = combatCTX.activeGun;
@@ -39,8 +39,8 @@ const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
   const disableForPS = (angle, gun) => {
     if ((gun === 'Tail Turr' || gun === 'Tail Guns')
       && (angle === '12:00' || angle === '1:30' || angle === '10:30'))
-      return true;
-    else return false;
+      return false;
+    else return true;
   }
 
   console.log(waveData);
@@ -74,4 +74,4 @@ const BDFFighter = ({ type, skill, status, angle, level, guns, id }) => {
 
 }
 
-export default BDFFighter;
+export default PassingShotFighter;
