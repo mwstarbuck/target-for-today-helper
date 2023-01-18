@@ -2,37 +2,27 @@ import React, {createContext, useContext, useState} from 'react';
 import NumberAnglesAndLevels from './NumberAnglesAndLevels';
 import { Steps, Button } from 'antd';
 import GameContext from '../GameContext';
+import { getNewFileHandle, saveToFile, writeFile, chooseFile } from '../../Utilities/UseFileSystem';
 
 const Test = () => {
   const ctx = useContext(GameContext);
-  let fileHandle;
-  
+
+  //methods
   const onSave = async () => {
-    const fileData = JSON.stringify(ctx, null, '\t');
-    const blob = new Blob([fileData], { type: 'text/plain' });
-    const newHandle = await window.showSaveFilePicker();
-    const writableStream = await newHandle.createWritable();
-    await writableStream.write(blob);
-    await writableStream.close();
 
-    // const blob = new Blob([fileData], {type: 'text/plain'});
-    // const url = URL.createObjectURL(blob);
-    // const link = document.createElement('a');
-    // link.download = 'tft-saves/tftsave01';
-    // link.href = url;
-    // link.click();
+      const file = await saveToFile(ctx);
+      console.log(file);
   }
   
-  const onLoad = () => {
-
-    const saveData = JSON.parse();
-    // const url = URL.createObjectURL(blob);
-    // const link = document.createElement('a');
-    // link.download = 'tft-saves/tftsave01';
-    // link.href = url;
-    // link.click();
+  const onLoad = async () => {
+    const fileHandle = await chooseFile();
+    const file = await fileHandle.getFile();
+    const fileContents = JSON.parse(await file.text());
+    console.log(fileContents);
+    // TODO all the context setting
   }
-  
+ 
+  // UI
   return <>
   <Button onClick={onSave}>Save</Button>
   <Button onClick={onLoad}>Load</Button>
