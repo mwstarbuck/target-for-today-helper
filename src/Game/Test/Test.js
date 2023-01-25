@@ -20,6 +20,8 @@ const Test = () => {
     const fileContents = JSON.parse(await file.text());
     console.log(fileContents);
     // TODO all the context setting
+    // ctx.setStep(fileContents.step)
+
   }
  
   // UI
