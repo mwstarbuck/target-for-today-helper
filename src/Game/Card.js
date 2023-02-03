@@ -7,7 +7,7 @@ import { tableEnum } from "../Data/Tables";
 import { optionsEnum as options } from "../Data/Options";
 import Select from 'react-select';
 import './GamePage.css'
-import { Popover, Radio } from 'antd';
+import { Popover, Row, Col, Radio } from 'antd';
 import tableImageEnum from '../Images/Tables/TableEnum';
 import tableNoteEnum from '../Images/TableNotes/TableNoteEnum';
 import ZonesModal from '../Modals/ZonesModal';
@@ -29,6 +29,8 @@ import {makeMods} from '../Utilities/ModUtility';
 import GFAModal from '../Modals/GFAModal/GFAModal';
 import BDFModal from '../Modals/BDFModal/BDFModal';
 import GOFModal from '../Modals/GOFModal/GOFModal';
+import AbortModal from '../Modals/AbortModal';
+import BailOutModal from '../Modals/BailOutModal';
 
 const Card = (props) => {
   const { actionType, tableImageDependency, cardTableDependency, modalTableDependency, cardTable, modalTable, messageType, inputRequired } = props;
@@ -46,6 +48,8 @@ const Card = (props) => {
   const [showGOFModal, setShowGOFModal] = useState(false);
   const [goToNextCard, setGoToNextCard] = useState('');
   const [cardMods, setCardMods] = useState(null);
+  const [showAbortModal, setShowAbortModal] = useState(false);
+  const [showBailOutModal, setShowBailOutModal] = useState(false);
 
   const startStep = 0;
   const preMission = 1;
@@ -794,31 +798,16 @@ const Card = (props) => {
     setAdvance(true);
   }
 
-  // if (props.mods) {
-  //   setCardMods(makeMods(props.mods, contextEnum));
-  // }
-
-  // const updateCombat = () => {
-  //   if (ctx.waveCount < ctx.waveTotal) {
-  //     //Elligible fighters?
-  //     //Round < 3?
-  //   }
-  // }
-
-  // const getRound = () => {
-  //   if (messageType) {
-  //     switch (messageType) {
-  //       case 'combatStatus':
-  //         cardMessage = props.message.find(t => t.match.includes(ctx.waveCount)).message;
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   }
-  // }
-
   return <div className='card'>
-    <Popover open={showMods}
+    <Row gutter={[16, 16]}>
+      <Col span={12}>
+        <button onClick={() => setShowAbortModal(true)}>Abort Mission</button>
+      </Col>
+      <Col span={12}>
+        <button onClick={() => setShowBailOutModal(true)}>Bail Out</button>
+      </Col>
+    </Row>
+    {/* <Popover open={showMods}
       color='white'
       trigger='click'
       overlayStyle={{ width: 500, border: '2 solid grey', opacity: 1 }}
@@ -829,7 +818,7 @@ const Card = (props) => {
         <div>Roll Modifier: {cardMods?.result}</div>
       </div>}>
       <button onClick={() => setShowMods(!showMods)}>Roll Mods</button>
-    </Popover>
+    </Popover> */}
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       {/* <img src={b17} style={{ opacity: 0.6, paddingTop: 30, paddingLeft: 75, paddingRight: 75 }} /> */}
       <h2 style={{ marginBottom: -5 }}>{props.heading}</h2>
@@ -1035,6 +1024,16 @@ const Card = (props) => {
       showModal={showGOFModal}
       setShowModal={setShowGOFModal}
     />
+    <AbortModal 
+      showModal={showAbortModal}
+      setShowModal={setShowAbortModal}
+      setOutbound={ctx.setOutbound}
+      />
+      <BailOutModal 
+        showModal={showBailOutModal}
+        setShowModal={setShowBailOutModal}
+        opacity={0.8}
+      />
   </div>
 }
 

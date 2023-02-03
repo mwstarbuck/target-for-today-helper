@@ -1,70 +1,35 @@
-import React, {useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import NumberAnglesAndLevels from './NumberAnglesAndLevels';
-import { Steps, Button, message } from 'antd';
-
-const steps = [
-  {
-    title: 'First',
-    content: <NumberAnglesAndLevels />,
-  },
-  {
-    title: 'Second',
-    content: 'Second-content',
-  },
-  {
-    title: 'Last',
-    content: 'Last-content',
-  },
-];
+import { Steps, Button } from 'antd';
+import GameContext from '../GameContext';
+import { getNewFileHandle, saveToFile, writeFile, chooseFile } from '../../Utilities/UseFileSystem';
 
 const Test = () => {
-  const [current, setCurrent] = useState(0);
+  const ctx = useContext(GameContext);
 
-  const {Step} = Steps
-  const next = () => {
-    setCurrent(current + 1);
-  };
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-  const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-  }));
-  return (
-    <>
-    <br/>
-      <br />
-      <br />
-      {/* <Steps direction='vertical' current={current} items={items} /> */}
-      <Steps>
-        <Step title="first" />
-      </Steps>
-      <div>{steps[current].content}</div>
-      <div className="steps-action">
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button type="primary" onClick={() => message.success('Processing complete!')}>
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button
-            style={{
-              margin: '0 8px',
-            }}
-            onClick={() => prev()}
-          >
-            Previous
-          </Button>
-        )}
-      </div>
+  //methods
+  const onSave = async () => {
+
+      const file = await saveToFile(ctx);
+      console.log(file);
+  }
+  
+  const onLoad = async () => {
+    const fileHandle = await chooseFile();
+    const file = await fileHandle.getFile();
+    const fileContents = JSON.parse(await file.text());
+    console.log(fileContents);
+    // TODO all the context setting
+    // ctx.setStep(fileContents.step)
+
+  }
+ 
+  // UI
+  return <>
+  <Button onClick={onSave}>Save</Button>
+  <Button onClick={onLoad}>Load</Button>
     </>
-  );
+
 }
 
 export default Test;

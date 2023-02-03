@@ -36,7 +36,7 @@ const MainPage = () => {
     {
       label: 'Test',
       key: 'test',
-      children: <Test />
+      children: <Test/>
     },
   ]
 
