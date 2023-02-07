@@ -753,83 +753,83 @@ export const hitTables = [{
   {
     id: 'B-24D', areaHitTables: [
       {
-        table: '5-12-B17-front',
+        table: '5-14-B24-front',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack from 10:30 / 12 / 1:30 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24D) Attack from 10:30 / 12 / 1:30 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-side',
+        table: '5-14-B24-side',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack from 9 / 3 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24D) Attack from 9 / 3 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-tail',
+        table: '5-14-B24-tail',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack From: 6 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24D) Attack From: 6 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-vert',
+        table: '5-14-B24-vert',
         diceType: '2D6',
-        title: '5-12 (B-17F) Vertical Dive and Climb Attacks',
-        note: '5-12-B17-vert-note'
+        title: '5-14 (B-24D) Vertical Dive and Climb Attacks',
+        note: '5-14-B24-vert-note'
       },
     ],
     areaDamageTables: [
       {
-        table: '5-13A-1',
+        table: '5-15B-1-B24D',
         diceType: '2D6',
-        title: '5-13A-1 NOSE (B-17F)',
-        note: '5-13A-1-note'
+        title: '5-15B-1 NOSE (B-24D)',
+        note: '5-15B-1-B24D-note'
       },
       {
-        table: '5-13A-2',
+        table: '5-15B-2-B24D',
         diceType: '2D6',
-        title: '5-13A-2 PILOT COMPARTMENT (B-17F)',
-        note: '5-13A-2-note'
+        title: '5-15B-2 FLIGHT DECK-PILOT/CO-PILOT COMPARTMENT (B-24D)',
+        note: '5-15B-2-B24D-note'
       },
       {
-        table: '5-13A-3',
+        table: '5-15B-3-B24D',
         diceType: '2D6',
-        title: '5-13A-3 BOMB BAY (B-17F)',
-        note: '5-13A-3-note'
+        title: '5-15B-3 FLIGHT DECK-TOP TURRET & RADIO ROOM (B-24D)',
+        note: '5-15B-3-B24D-note'
       },
       {
-        table: '5-13A-4',
+        table: '5-15B-4',
         diceType: '2D6',
-        title: '5-13A-4 RADIO ROOM (B-17F)',
-        note: '5-13A-4-note'
+        title: '5-15B-4 BOMB BAY (B-24D)',
+        note: '5-15B-4-note'
       },
       {
-        table: '5-13A-5',
+        table: '5-15B-5',
         diceType: '2D6',
-        title: '5-13A-5 WAIST (B-17F)',
-        note: '5-13A-5-note'
+        title: '5-15B-5 WAIST (B-24D)',
+        note: '5-15B-5-note'
       },
       {
-        table: '5-13A-6',
+        table: '5-15B-6',
         diceType: '2D6',
-        title: '5-13A-6 TAIL SECTION (B-17F)',
-        note: '5-13A-6-note'
+        title: '5-15B-6 TAIL SECTION (B-24D)',
+        note: '5-15B-6-note'
       },
       {
-        table: '5-13A-7',
+        table: '5-15B-7',
         diceType: '2D6',
-        title: '5-13A-7 WINGS (B-17F)',
-        note: '5-13A-7-note'
+        title: '5-15B-7 WINGS (B-24D)',
+        note: '5-15B-7-note'
       },
       {
-        table: '5-13A-8',
+        table: '5-15B-8',
         diceType: '2D6',
-        title: '5-13A-8 INSTRUMENTS (B-17F)',
-        note: '5-13A-8-note'
+        title: '5-15B-8 INSTRUMENTS (B-24D)',
+        note: '5-15B-8-note'
       },
       {
         table: '5-17',
         diceType: '1D6',
-        title: '5-17 CREW (B-17F)',
+        title: '5-17 CREW (B-24D)',
         note: '5-17-note'
       },
     ]
@@ -837,83 +837,83 @@ export const hitTables = [{
   {
     id: 'B-24J', areaHitTables: [
       {
-        table: '5-12-B17-front',
+        table: '5-14-B24-front',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack from 10:30 / 12 / 1:30 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24J) Attack from 10:30 / 12 / 1:30 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-side',
+        table: '5-14-B24-side',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack from 9 / 3 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24J) Attack from 9 / 3 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-tail',
+        table: '5-14-B24-tail',
         diceType: '2D6',
-        title: '5-12 (B-17F) Attack From: 6 O\'clock',
-        note: '5-12-B17-note'
+        title: '5-14 (B-24J) Attack From: 6 O\'clock',
+        note: '5-14-B24-note'
       },
       {
-        table: '5-12-B17-vert',
+        table: '5-14-B24-vert',
         diceType: '2D6',
-        title: '5-12 (B-17F) Vertical Dive and Climb Attacks',
-        note: '5-12-B17-vert-note'
+        title: '5-14 (B-24J) Vertical Dive and Climb Attacks',
+        note: '5-14-B24-vert-note'
       },
     ],
     areaDamageTables: [
       {
-        table: '5-13A-1',
+        table: '5-15B-1-B24J',
         diceType: '2D6',
-        title: '5-13A-1 NOSE (B-17F)',
-        note: '5-13A-1-note'
+        title: '5-15B-1 NOSE (B-24J)',
+        note: '5-15B-1-B24J-note'
       },
       {
-        table: '5-13A-2',
+        table: '5-15B-2-B24J',
         diceType: '2D6',
-        title: '5-13A-2 PILOT COMPARTMENT (B-17F)',
-        note: '5-13A-2-note'
+        title: '5-15B-2 FLIGHT DECK-PILOT/CO-PILOT COMPARTMENT (B-24J)',
+        note: '5-15B-2-B24J-note'
       },
       {
-        table: '5-13A-3',
+        table: '5-15B-3-B24J',
         diceType: '2D6',
-        title: '5-13A-3 BOMB BAY (B-17F)',
-        note: '5-13A-3-note'
+        title: '5-15B-3 FLIGHT DECK-TOP TURRET & RADIO ROOM (B-24J)',
+        note: '5-15B-3-B24J-note'
       },
       {
-        table: '5-13A-4',
+        table: '5-15B-4',
         diceType: '2D6',
-        title: '5-13A-4 RADIO ROOM (B-17F)',
-        note: '5-13A-4-note'
+        title: '5-15B-4 BOMB BAY (B-24J)',
+        note: '5-15B-4-note'
       },
       {
-        table: '5-13A-5',
+        table: '5-15B-5',
         diceType: '2D6',
-        title: '5-13A-5 WAIST (B-17F)',
-        note: '5-13A-5-note'
+        title: '5-15B-5 WAIST (B-24J)',
+        note: '5-15B-5-note'
       },
       {
-        table: '5-13A-6',
+        table: '5-15B-6',
         diceType: '2D6',
-        title: '5-13A-6 TAIL SECTION (B-17F)',
-        note: '5-13A-6-note'
+        title: '5-15B-6 TAIL SECTION (B-24J)',
+        note: '5-15B-6-note'
       },
       {
-        table: '5-13A-7',
+        table: '5-15B-7',
         diceType: '2D6',
-        title: '5-13A-7 WINGS (B-17F)',
-        note: '5-13A-7-note'
+        title: '5-15B-7 WINGS (B-24J)',
+        note: '5-15B-7-note'
       },
       {
-        table: '5-13A-8',
+        table: '5-15B-8',
         diceType: '2D6',
-        title: '5-13A-8 INSTRUMENTS (B-17F)',
-        note: '5-13A-8-note'
+        title: '5-15B-8 INSTRUMENTS (B-24J)',
+        note: '5-15B-8-note'
       },
       {
         table: '5-17',
         diceType: '1D6',
-        title: '5-17 CREW (B-17F)',
+        title: '5-17 CREW (B-24D)',
         note: '5-17-note'
       },
     ]
