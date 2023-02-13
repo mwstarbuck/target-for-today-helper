@@ -21,6 +21,7 @@ import LandingGear from './PageComponents/Compartments/LandingGear';
 import Systems from './PageComponents/Compartments/Systems';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
+import BomberInfo from './PageComponents/BomberInfo';
 
 
 const GamePage = () => {
@@ -154,6 +155,7 @@ const GamePage = () => {
         }
         {ctx.zonesInfo && <Zone />}
         {/* {ctx.zonesInfo && <img src={b17f} style={{ width: 700 }} />} */}
+        {ctx.zonesInfo && <BomberInfo />}
         {ctx.zonesInfo && <List>
           <div style={{textAlign: 'left'}}>Compartment Status</div>
           <List.Item>
