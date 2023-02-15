@@ -10,7 +10,7 @@ const ctx = useContext(GameContext);
   return <div>
     <img src={b17f} style={{ width: 700 }} />
     <Popover trigger='click' placement='left' content={ctx.bomber === 'B-24J' ? <NoseCompartmentB24J /> : <NoseCompartment />}>
-            <div style={{ cursor: 'pointer', position: 'relative', top: '-520px', left: '470px', width: 100 }}>Nose ---</div>
+            <div style={{ cursor: 'pointer', position: 'relative', top: '-520px', left: '380px', width: 100 }}>Nose ---</div>
     </Popover>
   </div>
 }

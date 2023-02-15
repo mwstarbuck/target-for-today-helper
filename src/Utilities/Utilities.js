@@ -65,6 +65,35 @@ const processResult = (stepInfo) => {
   setResult(result, stepInfo.setter);
 }
 
+const getLocatiom = (id) => {
+  switch (id) {
+    case 0:
+      return 'Pilot Comp.'
+    case 1:
+      return 'Pilot Comp.'
+    case 2:
+      return 'Nose Comp.'
+    case 3:
+      return 'Nose Comp.'
+    case 4:
+      return 'Pilot Comp.'
+    case 5:
+      return 'Radio Comp.'
+    case 6:
+      return 'Waist Comp.'
+    case 7:
+      return 'Waist Comp.'
+    case 8:
+      return 'Waist Comp.'
+    case 9:
+      return 'Tail Comp.'
+    case 10:
+      return 'Radio Comp.'
+    default:
+      break;
+  }
+}
+
 const rollCrew = (setter) => {
   const crew = [];
 
@@ -75,10 +104,11 @@ const rollCrew = (setter) => {
     3: 'Navigator',
     4: 'Engineer',
     5: 'Radio Operator',
-    6: 'Pt Waist Gunner',
-    7: "Stb. Waist Gunner",
-    8: "Ball Gunner",
-    9: 'Tail Gunner'
+    6: 'Left Waist Gunner',
+    7: 'Right Waist Gunner',
+    8: 'Ball Gunner',
+    9: 'Tail Gunner',
+    10: 'Ammo Stocker'
   };
 
   for (let i = 0; i < 4; i++) {
@@ -110,16 +140,20 @@ const rollCrew = (setter) => {
       tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
     const homeState = tempState;
     const member = {
+      id: i,
       position: crewEnum[i],
       name: `${last}, ${first}`,
       age: coAge,
       state: homeState,
-      status: 'Good',
+      status: 'Healthy', // 1 light wound, 2 lw, 1 serious wound, kia
+      location: null, // compartment
+      frostbite: null, // none, frostbite, severe frostbite
+      ace: false
       // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);
   }
-
+  
   for (let i = 4; i < 10; i++) {
     let roll = rollDice(100) - 1;
     const last = tableEnum['last_name'][roll];
@@ -133,8 +167,35 @@ const rollCrew = (setter) => {
 
     const rollSum = ageRoll1 + ageRoll2;
     let tempAge;
-    if (rollSum === 11) {
-      tempAge = (rollDice(6) < 4 ? 27 : 28);
+    if (rollSum === 2) {
+      tempAge = (rollDice(6) < 4 ? 18 : 19);
+    }
+    else if (rollSum === 3) {
+      let roll = rollDice(6)
+      if (roll < 3)
+        tempAge = 27
+      else if (roll < 5)
+        tempAge = 28
+      else 
+        tempAge = 29
+    }
+    else if (rollSum === 4) {
+      tempAge = (rollDice(6) < 4 ? 30 : 31);
+    }
+    else if (rollSum === 10) {
+      tempAge = (rollDice(6) < 4 ? 25 : 26);
+    }
+    else if (rollSum === 11) {
+      tempAge = (rollDice(6) < 4 ? 32 : 33);
+    }
+    else if (rollSum === 12) {
+      let roll = rollDice(6)
+      if (roll < 3)
+        tempAge = 34
+      else if (roll < 5)
+        tempAge = 35
+      else
+        tempAge = 36
     }
     else
       tempAge = tableEnum['nco_age'].find(a => a.value === rollSum).age;
@@ -149,11 +210,15 @@ const rollCrew = (setter) => {
       tempState = tableEnum['home_state'].find(hs => hs.value.includes(roll)).state;
     const homeState = tempState;
     const member = {
+      id: i,
       position: crewEnum[i],
       name: `${last}, ${first}`,
       age: coAge,
       state: homeState,
-      status: 'Good',
+      status: 'Healthy', // 1 light wound, 2 lw, 1 serious wound, kia
+      location: null, // compartment
+      frostbite: null, // none, frostbite, severe frostbite
+      ace: false
       // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);

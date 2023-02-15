@@ -451,17 +451,11 @@ const CO_AGE = [  //2d6
 ]
 
 const NCO_AGE = [ //2d6
-  { value: 2, age: 20 }, //Roll Again 1 - 3(18) 4 - 6(19)
-  { value: 3, age: 25 }, //Roll Again 1-2 (27) 3-4 (28) 5-6 (29)
-  { value: 4, age: 21 }, //Roll Again 1 - 3(30) 4 - 6(31)
   { value: 5, age: 21 },
   { value: 6, age: 20 },
   { value: 7, age: 22 },
   { value: 8, age: 23 },
   { value: 9, age: 24 },
-  { value: 10, age: 26 }, //Roll Again 1-3 (25) 4-6 (26)
-  { value: 11, age: 20 }, //Roll Again 1-3 (32) 4-6 (33)
-  { value: 12, age: 29 }, //Roll Again 1-2 (34) 3-4 (35) 5-6 (36
 ]
 
 const HOME_STATE = [
