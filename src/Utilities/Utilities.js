@@ -65,7 +65,7 @@ const processResult = (stepInfo) => {
   setResult(result, stepInfo.setter);
 }
 
-const getLocatiom = (id) => {
+const getCrewLocation = (id, bomber) => {
   switch (id) {
     case 0:
       return 'Pilot Comp.'
@@ -78,7 +78,10 @@ const getLocatiom = (id) => {
     case 4:
       return 'Pilot Comp.'
     case 5:
-      return 'Radio Comp.'
+      if (bomber === 'B-24D' || bomber === 'B-24J')
+        return 'Pilot Comp.';
+      else
+        return 'Radio Comp.';
     case 6:
       return 'Waist Comp.'
     case 7:
@@ -94,7 +97,7 @@ const getLocatiom = (id) => {
   }
 }
 
-const rollCrew = (setter) => {
+const rollCrew = (param) => {
   const crew = [];
 
   const crewEnum = {
@@ -104,8 +107,8 @@ const rollCrew = (setter) => {
     3: 'Navigator',
     4: 'Engineer',
     5: 'Radio Operator',
-    6: 'Left Waist Gunner',
-    7: 'Right Waist Gunner',
+    6: 'L. Waist Gunner',
+    7: 'R. Waist Gunner',
     8: 'Ball Gunner',
     9: 'Tail Gunner',
     10: 'Ammo Stocker'
@@ -146,15 +149,18 @@ const rollCrew = (setter) => {
       age: coAge,
       state: homeState,
       status: 'Healthy', // 1 light wound, 2 lw, 1 serious wound, kia
-      location: null, // compartment
-      frostbite: null, // none, frostbite, severe frostbite
-      ace: false
+      location: getCrewLocation(i, param.bomber), // compartment
+      frostbite: 'None', // none, frostbite, severe frostbite
+      ace: false,
+      kills: 0,
+      missions: 0,
+      notes: ''
       // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);
   }
-  
-  for (let i = 4; i < 10; i++) {
+  const ncoNum = param.bomber === 'YB-40' ? 11 : 10;
+  for (let i = 4; i < ncoNum; i++) {
     let roll = rollDice(100) - 1;
     const last = tableEnum['last_name'][roll];
 
@@ -216,14 +222,17 @@ const rollCrew = (setter) => {
       age: coAge,
       state: homeState,
       status: 'Healthy', // 1 light wound, 2 lw, 1 serious wound, kia
-      location: null, // compartment
-      frostbite: null, // none, frostbite, severe frostbite
-      ace: false
+      location: getCrewLocation(i, param.bomber), // compartment
+      frostbite: 'None', // none, frostbite, severe frostbite
+      ace: false,
+      kills: 0,
+      missions: 0,
+      notes: ''
       // compartment (string or enum), gun (string or enum), frostbite (bool), skill, awards
     }
     crew.push(member);
   }
-  setter(crew);
+  param.setter(crew);
 }
 
 const getBomberPosition = (setters) => {

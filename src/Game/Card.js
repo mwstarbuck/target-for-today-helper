@@ -101,11 +101,6 @@ const Card = (props) => {
 
   const action = actionEnum[props.action];
 
-  // useEffect(() => {
-  //   if (inputRequired === 'none') {
-  //     setAdvance(true);
-  //   }
-  // }, []);
   useEffect(() => {
     if (inputRequired === 'weather') {
       setAdvance(true);
@@ -152,7 +147,10 @@ const Card = (props) => {
         return pRParams;
         break;
       case 'rollCrew':
-        const crewInfo = contextEnum[props.setter.setterA];
+        const crewInfo = {
+          bomber: ctx?.bomber,
+          setter: contextEnum[props.setter.setterA]
+        }
         return crewInfo;
         break;
       case 'getBomberPosition':
