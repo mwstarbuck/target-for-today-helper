@@ -88,96 +88,126 @@
 // export default Test;
 
 
+// 
 import React, { useState } from 'react';
-import { Row, Col, Card } from 'antd';
+import { Card } from 'antd';
+const theCards = [
+  { id: 'card1', content: 'Card 1', location: 'start' },
+  { id: 'card2', content: 'Card 2', location: 'start' },
+  { id: 'card3', content: 'Card 3', location: 'start' },
+]
 
-const DraggableElement = ({ id, onDrop }) => {
-  const [currentTool, setCurrentTool] = useState(null);
+const App = () => {
+  const [cards, setCards] = useState([
+    { id: 'card1', content: 'Card 1', location: 'start' },
+    { id: 'card2', content: 'Card 2', location: 'start' },
+    { id: 'card3', content: 'Card 3', location: 'start' },
+  ]);
+  const [leftCards, setLeftCards] = useState([]);
+  const [rightCards, setRightCards] = useState([]);
 
-  const handleDragStart = (e) => {
-    e.dataTransfer.setData('text/plain', id);
+  const DragStart = (event, card) => {
+    event.dataTransfer.setData('card_id', card.id);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
+  const DragOver = (event) => {
+    event.preventDefault();
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const containerId = e.target.id;
-    setCurrentTool(containerId);
-    onDrop(id, containerId);
+  const getPrevLoc = (card_id) => {
+    if (cards.some(c => c.id === card_id))
+      return cards.find((c) => c.id === card_id);
+    if (leftCards.some(c => c.id === card_id))
+      return leftCards.find((c) => c.id === card_id);
+    if (rightCards.some(c => c.id === card_id))
+      return rightCards.find((c) => c.id === card_id);
+  }
+  const Drop = (event, container) => {
+    const card_id = event.dataTransfer.getData('card_id');
+
+    // const card = cards.find((c) => c.id === card_id);
+    const card = getPrevLoc(card_id);
+    const newCards = cards.filter((c) => c.id !== card_id);
+
+    if (container === 'left') {
+      if (rightCards.find((c) => c.id === card.id)) {
+        setRightCards(rightCards.filter((c) => c.id !== card.id));
+      }
+      setLeftCards([...leftCards, card]);
+    } else {
+      if (leftCards.find((c) => c.id === card.id)) {
+        setLeftCards(leftCards.filter((c) => c.id !== card.id));
+      }
+      setRightCards([...rightCards, card]);
+    }
+
+    setCards(newCards);
+  };
+
+  const getCards = (cardList) => {
+    return cardList.map((card) => (
+      <Card
+        key={card.id}
+        draggable
+        onDragStart={(event) => DragStart(event, card)}
+        style={{ marginBottom: '10px' }}
+      >
+        {card.content}
+      </Card>
+    ));
   };
 
   return (
-    <Card
-      draggable
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      <p>Element {id}</p>
-      {currentTool && <p>Current Tool: {currentTool}</p>}
-    </Card>
-  );
-};
-
-const Container = ({ id, elementsInContainer, onDrop }) => {
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const elementId = e.dataTransfer.getData('text/plain');
-    onDrop(elementId, id);
-  };
-
-  return (
-    <div className="container" id={id} onDragOver={handleDragOver} onDrop={handleDrop}>
-      <h2>Container {id}</h2>
-      {elementsInContainer.map((id) => (
-        <div key={id}>{`Element ${id}`}</div>
-      ))}
+    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <div
+      id='left'
+        onDragOver={(event) => DragOver(event)}
+        onDrop={(event) => Drop(event, 'left')}
+        style={{
+          border: '1px solid black',
+          padding: '10px',
+          width: '40%',
+        }}
+      >
+        <h3>Left Container</h3>
+        {getCards(leftCards)}
+      </div>
+      <div
+      id='right'
+        onDragOver={(event) => DragOver(event)}
+        onDrop={(event) => Drop(event, 'right')}
+        style={{
+          border: '1px solid black',
+          padding: '10px',
+          width: '40%',
+        }}
+      >
+        <h3>Right Container</h3>
+        {getCards(rightCards)}
+      </div>
+      <div
+        style={{
+          marginTop: '10px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <h3>Draggable Elements</h3>
+      </div>
+      <div
+      id='start'
+        style={{
+          marginTop: '10px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        {getCards(cards)}
+      </div>
     </div>
   );
 };
 
-const DragAndDrop = () => {
-  const [locations, setLocations] = useState({});
-
-  const handleDrop = (elementId, containerId) => {
-    setLocations((prevLocations) => ({
-      ...prevLocations,
-      [elementId]: containerId,
-    }));
-  };
-
-  const getElementsInContainer = (containerId) => {
-    return Object.entries(locations)
-      .filter(([_, id]) => id === containerId)
-      .map(([id]) => id);
-  };
-
-  return (
-    <Row gutter={[16, 16]}>
-      {[0, 1, 2, 3, 4].map((containerId) => (
-        <Col span={4} key={containerId}>
-          <Container id={containerId} elementsInContainer={getElementsInContainer(containerId)} onDrop={handleDrop} />
-        </Col>
-      ))}
-      <Col span={24}>
-        <h2>Draggable Elements</h2>
-        <Row gutter={[16, 16]}>
-          {[...Array(10)].map((_, index) => (
-            <Col span={4} key={index}>
-              <DraggableElement id={index} onDrop={handleDrop} />
-            </Col>
-          ))}
-        </Row>
-      </Col>
-    </Row>
-  );
-};
-
-export default DragAndDrop;
+export default App;
