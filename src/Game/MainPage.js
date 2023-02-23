@@ -5,6 +5,7 @@ import ZonesPage from './ZonesPage';
 import Crew from './Crew';
 import TablesReference from './TablesReference';
 import Test from './Test/Test';
+import SaveLoad from './SaveLoad';
 // import "antd/dist/antd.css";
 
 const { TabPane } = Tabs;
@@ -34,9 +35,14 @@ const MainPage = () => {
       children: <TablesReference />
     },
     {
+      label: 'Save & Load',
+      key: 'saveLoad',
+      children: <SaveLoad/>
+    },
+    {
       label: 'Test',
       key: 'test',
-      children: <Test/>
+      children: <Test />
     },
   ]
 
