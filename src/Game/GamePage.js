@@ -22,6 +22,7 @@ import Systems from './PageComponents/Compartments/Systems';
 import CombatComponent from './PageComponents/Combat/CombatComponent';
 import Fighter from './PageComponents/Combat/Fighter';
 import BomberInfo from './PageComponents/BomberInfo';
+import { rollCrew } from '../Utilities/Utilities';
 
 
 const GamePage = () => {
@@ -48,6 +49,7 @@ const GamePage = () => {
     ctx.setCell('middle');
     ctx.setBomberNumber(3);
     ctx.setZones(5);
+    rollCrew({bomber: ctx.bomber, setter: ctx.setCrew});
     ctx.setZonesInfo([{
       zone: 1,
       targetZone: false,

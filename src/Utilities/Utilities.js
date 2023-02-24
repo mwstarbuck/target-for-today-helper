@@ -97,7 +97,7 @@ const getCrewLocation = (id, bomber) => {
   }
 }
 
-const rollCrew = (param) => {
+export const rollCrew = (param) => {
   const crew = [];
 
   const crewEnum = {
