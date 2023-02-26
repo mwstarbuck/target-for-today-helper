@@ -29,7 +29,16 @@ const Test = () => {
   const [tail, setTail] = useState([]);
 
   const DragStart = (event, card) => {
+    //1. ORIGINAL 
+    // event.dataTransfer.setData('card_id', card.id);
+
+    // 2. TRANSFER 2 PROPERTIES
     event.dataTransfer.setData('card_id', card.id);
+    event.dataTransfer.setData('location', card.location);
+
+    //3. TRANSFER ENTIRE OBJECT USING JSON STRINGIFY
+    const cardObj = JSON.stringify(card);
+    event.dataTransfer.setData('card', cardObj);
   };
 
   const DragOver = (event) => {
@@ -60,8 +69,19 @@ const Test = () => {
     }
   }
   const Drop = (event, container) => {
+    // 1. GETTING ONE PROPERTY -- ORIGINAL
     const card_id = event.dataTransfer.getData('card_id');
 
+    //2.  JUST GET 2 PROPERTIES
+    // const cardObj = {
+    //   id: event.dataTransfer.getData('card_id'),
+    //   prevLoc: event.dataTransfer.getData('location'),
+    // }
+  
+    // 3. GETTING ENTIRE OBJECT
+    const cardObj = JSON.parse(event.dataTransfer.getData('card'));
+
+    
     // const card = cards.find((c) => c.id === card_id);
     const card = getPrevLoc(card_id, container);
     const newCards = cards.filter((c) => c.id !== card_id);
@@ -77,6 +97,7 @@ const Test = () => {
       }
       setRightCards([...rightCards, card]);
     }
+    console.log(cardObj);
     setCards(newCards);
   };
 
@@ -92,7 +113,6 @@ const Test = () => {
       </Card>
     ));
   };
-
   return (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
       <div
