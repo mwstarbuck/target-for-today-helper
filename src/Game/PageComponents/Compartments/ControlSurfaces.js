@@ -37,7 +37,6 @@ const RadioCompartment = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setRadioComp(newRadioComp);
     ctx.setRadioComp(newRadioComp);
   }

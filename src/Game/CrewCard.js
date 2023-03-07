@@ -23,7 +23,7 @@ const CrewCard = ({ crewman }) => {
       </Col>
       <Col span={12}>
         <Col span={24}><p>Status: {crewman.status}</p></Col>
-        <Col span={24}><p>Location: {crewman.location}</p></Col>
+        <Col span={24}><p>Location: {crewman.location} Comp.</p></Col>
       </Col>
     </Row>
   </Card>

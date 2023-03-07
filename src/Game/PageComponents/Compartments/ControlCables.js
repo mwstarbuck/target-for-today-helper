@@ -9,7 +9,6 @@ const problems = {
 
 const ControlCables = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [controlCables, setControlCables] = useState(ctx.controlCables || problems)
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const ControlCables = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setControlCables(newControlCables);
     ctx.setControlCables(newControlCables);
   }

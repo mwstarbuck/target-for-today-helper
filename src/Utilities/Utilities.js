@@ -68,30 +68,30 @@ const processResult = (stepInfo) => {
 const getCrewLocation = (id, bomber) => {
   switch (id) {
     case 0:
-      return 'Pilot Comp.'
+      return 'Pilot'
     case 1:
-      return 'Pilot Comp.'
+      return 'Pilot'
     case 2:
-      return 'Nose Comp.'
+      return 'Nose'
     case 3:
-      return 'Nose Comp.'
+      return 'Nose'
     case 4:
-      return 'Pilot Comp.'
+      return 'Pilot'
     case 5:
       if (bomber === 'B-24D' || bomber === 'B-24J')
-        return 'Pilot Comp.';
+        return 'Pilot';
       else
-        return 'Radio Comp.';
+        return 'Radio';
     case 6:
-      return 'Waist Comp.'
+      return 'Waist'
     case 7:
-      return 'Waist Comp.'
+      return 'Waist'
     case 8:
-      return 'Waist Comp.'
+      return 'Waist'
     case 9:
-      return 'Tail Comp.'
+      return 'Tail'
     case 10:
-      return 'Radio Comp.'
+      return 'Radio'
     default:
       break;
   }
@@ -341,6 +341,10 @@ const zoneMovement = (stepInfo) => {
       stepInfo.setWaveCount(null);
     }
   }
+}
+
+export const toUpperCase = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 export const actionEnum = {

@@ -13,7 +13,6 @@ const problems = {
 
 const TailSection = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [tailSection, setTailSection] = useState(ctx.setTailSection || problems)
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const TailSection = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setTailSection(newTailSection);
     ctx.setTailSection(newTailSection);
   }

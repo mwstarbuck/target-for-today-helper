@@ -13,7 +13,6 @@ const problems = {
 
 const LandingGear = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [landingGear, setLandingGear] = useState(ctx.landingGear || problems)
 
   useEffect(() => {
@@ -46,7 +45,6 @@ const LandingGear = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setLandingGear(newLandingGear);
     ctx.setLandingGear(newLandingGear);
   }

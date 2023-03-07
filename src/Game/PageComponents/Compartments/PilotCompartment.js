@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Checkbox, Row, Col } from 'antd';
 import GameContext from '../../GameContext';
 
@@ -15,7 +15,6 @@ const problems = {
 
 const PilotCompartment = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [pilotComp, setPilotComp] = useState(ctx.pilotComp || problems)
 
   useEffect(() => {
@@ -54,7 +53,6 @@ const PilotCompartment = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setPilotComp(newPilotComp);
     ctx.setPilotComp(newPilotComp);
   }

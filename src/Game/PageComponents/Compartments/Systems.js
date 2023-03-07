@@ -14,7 +14,6 @@ const problems = {
 
 const Systems = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [systems, setSystems] = useState(ctx.systems || problems)
 
   useEffect(() => {
@@ -50,7 +49,6 @@ const Systems = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setSystems(newSystems);
     ctx.setSystems(newSystems);
   }

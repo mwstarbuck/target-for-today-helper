@@ -11,7 +11,6 @@ const problems = {
 
 const RadioCompartment = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [radioComp, setRadioComp] = useState(ctx.radioComp || problems)
 
   useEffect(() => {
@@ -38,7 +37,6 @@ const RadioCompartment = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setRadioComp(newRadioComp);
     ctx.setRadioComp(newRadioComp);
   }

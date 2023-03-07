@@ -20,7 +20,6 @@ const problems = {
 
 const WaistCompartment = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [waistComp, setWaistComp] = useState(ctx.waistComp || problems)
 
   useEffect(() => {
@@ -74,7 +73,6 @@ const WaistCompartment = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setWaistComp(newWaistComp);
     ctx.setWaistComp(newWaistComp);
   }

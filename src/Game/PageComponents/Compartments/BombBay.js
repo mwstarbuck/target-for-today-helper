@@ -12,7 +12,6 @@ const problems = {
 
 const BombBay = () => {
   const ctx = useContext(GameContext);
-  // const {pilotComp,setPilotComp} = useContext(GameContext);
   const [bombBay, setBombBay] = useState(ctx.bombBay || problems)
 
   useEffect(() => {
@@ -42,7 +41,6 @@ const BombBay = () => {
       default:
         break;
     }
-    // setPilotComp(newPilotComp);
     setBombBay(newBombBay);
     ctx.setBombBay(newBombBay);
   }
